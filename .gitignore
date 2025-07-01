@@ -1,0 +1,12 @@
+# Ignore node modules everywhere
+**/node_modules/
+
+# Ignore all .env files in any folder
+**/.env
+**/.env.*
+
+# Optional: macOS system files
+.DS_Store
+
+# Optional: log files
+*.log
