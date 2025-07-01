@@ -1,27 +1,49 @@
-.dark-theme {
-  --color-text: #ffffff;
-  --color-background: #2c3e50;
-  --color-link: #ffa07a;
-  --color-link-hover: #ff6b6b;
-  --color-button-bg: #9b59b6;
-  --color-button-border: #ff6b6b;
+.light-theme {
+  --color-background: #f4edc8;
+  --color-text: #333333;
+  --color-heading: #ff7f50;
+  --color-heading2: #ec961e;
+  --color-link: #ff7f50;
+  --color-link-hover: #ff4500;
+
+  --color-button-bg: #ffb347;
+  --color-button-border: #ff7f50;
+  --color-button-text: #ffffff;
+
+  --color-card-bg: #ffffff;
+  --color-card-border: #ffd699;
+
+  --color-navbar-bg: #ffb347;
+  --color-navbar-text: #ffffff;
 }
 
-.light-theme {
-  --color-text: #2c3e50;
-  --color-background: #fff8dc;
-  --color-link: #1e90ff;
+.dark-theme {
+  --color-background: #2c3e50;
+  --color-text: #ffffff;
+  --color-heading: #ffa07a;
+  --color-heading2: #ff6b6b;
+  --color-link: #ffa07a;
   --color-link-hover: #ff6b6b;
-  --color-button-bg: #ff6b6b;
+
+  --color-button-bg: #9b59b6;
   --color-button-border: #ff6b6b;
+  --color-button-text: #ffffff;
+
+  --color-card-bg: #34495e;
+  --color-card-border: #9b59b6;
+
+  --color-navbar-bg: #9b59b6;
+  --color-navbar-text: #ffffff;
 }
 
 :root {
   font-family: "Comic Sans MS", cursive, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+
   color: var(--color-text);
   background-color: var(--color-background);
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -48,12 +70,12 @@ body {
 
 h1 {
   font-size: 3em;
-  color: var(--color-button-bg);
+  color: var(--color-heading);
   margin-bottom: 0.5em;
 }
 
 h2 {
-  color: var(--color-link);
+  color: var(--color-heading2);
   margin-bottom: 0.5em;
 }
 
@@ -65,18 +87,75 @@ button {
   font-weight: 600;
   font-family: inherit;
   background-color: var(--color-button-bg);
-  color: #fff;
+  color: var(--color-button-text);
   cursor: pointer;
   transition: background-color 0.25s, color 0.25s, transform 0.2s;
 }
 
 button:hover {
   background-color: var(--color-link);
-  color: #fff;
+  color: var(--color-button-text);
   transform: scale(1.05);
 }
 
 button:focus,
 button:focus-visible {
-  outline: 4px auto #9b59b6;
+  outline: 4px auto var(--color-button-border);
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-navbar-bg);
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.navbar .logo {
+  font-size: 1.8em;
+  color: var(--color-navbar-text);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: var(--color-navbar-text);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.nav-links li a:hover {
+  color: var(--color-link-hover);
+}
+
+/* Card styles (GameCard) */
+.game-card {
+  background-color: var(--color-card-bg);
+  border: 2px solid var(--color-card-border);
+  border-radius: 12px;
+  padding: 1em;
+  width: 200px;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+.game-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
 }

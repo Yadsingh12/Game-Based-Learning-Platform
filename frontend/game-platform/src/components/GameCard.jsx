@@ -12,16 +12,14 @@ export default function GameCard({ imagePath, title, alt, link }) {
   };
 
   return (
-    <div className="game-card">
-      <a href={link}>
-        <img
-          src={imgSrc}
-          alt={alt || "Game Logo"}
-          className="game-image"
-          onError={handleError}
-        />
-        <h3>{title}</h3>
-      </a>
-    </div>
+    <a href={link} className="game-card">
+      <img
+        src={imgSrc}
+        alt={alt || "Game Logo"}
+        className="game-image"
+        onError={handleError}
+      />
+      <h3>{title}</h3>
+    </a>
   );
 }
