@@ -111,7 +111,6 @@ button:focus-visible {
   background-color: var(--color-navbar-bg);
   padding: 10px 20px;
   border-radius: 8px;
-  margin-bottom: 30px;
 }
 
 .navbar .logo {

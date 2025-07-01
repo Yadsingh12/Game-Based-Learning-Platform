@@ -1,0 +1,36 @@
+/* src/pages/GamePlay.css */
+
+.gameplay-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.gameplay-title {
+  margin-bottom: 20px;
+  color: var(--color-heading);
+}
+
+.gameplay-toolbar {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.gameplay-toolbar button {
+  background-color: var(--color-button-bg);
+  border: 2px solid var(--color-button-border);
+  color: var(--color-button-text);
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.gameplay-toolbar button:hover {
+  background-color: var(--color-link);
+  transform: scale(1.1);
+}

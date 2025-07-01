@@ -1,14 +1,15 @@
-// src/components/Navbar.jsx
-
 import React, { useState, useEffect } from "react";
-import "./Navbar.css";
 
 export default function Navbar() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(() => {
+    // Get saved theme from localStorage or fallback to light
+    return localStorage.getItem("theme") || "light";
+  });
 
   useEffect(() => {
     document.body.classList.remove("light-theme", "dark-theme");
     document.body.classList.add(`${theme}-theme`);
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const toggleTheme = () => {
