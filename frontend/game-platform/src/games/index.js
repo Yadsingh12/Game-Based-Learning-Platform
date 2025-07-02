@@ -1,11 +1,13 @@
 // src/games/index.js
 
-import NumberKingdom from "./NumberKingdom";
+import NumberKingdom from "./NumberKingdom/NumberKingdom";
+import "./NumberKingdom/MapScene"; // Ensure MapScene is loaded
+import MapScene from "./NumberKingdom/MapScene";
 
 export const gamesMap = {
   "number-kingdom": {
     name: "Number Kingdom",
-    scene: NumberKingdom,
+    scene: MapScene,//NumberKingdom,
     logoPath: "/assets/images/math-game-logo.png",
     alt: "Number Kingdom Game Logo",
     category: "Math Games"
