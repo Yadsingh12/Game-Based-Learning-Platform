@@ -8,8 +8,8 @@ import "./GamePlay.css";
 
 export default function GamePlay() {
   const { gameId } = useParams();
-  const gameRef = useRef(null);
-  const [phaserInstance, setPhaserInstance] = useState(null);
+  const gameContainerRef = useRef(null);
+  const [gameInstance, setGameInstance] = useState(null);
 
   useEffect(() => {
     if (!gameId || !gamesMap[gameId]) {
@@ -19,46 +19,61 @@ export default function GamePlay() {
 
     const config = {
       type: Phaser.AUTO,
-      width: 800,
-      height: 600,
-      parent: gameRef.current,
-      scene: gamesMap[gameId].scene
+      parent: gameContainerRef.current,
+      backgroundColor: "#ffffff",
+      scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 1600,
+        height: 900,
+      },
+      scene: gamesMap[gameId].scene,
     };
 
     const game = new Phaser.Game(config);
-    setPhaserInstance(game);
+    setGameInstance(game);
 
     return () => {
       game.destroy(true);
     };
   }, [gameId]);
 
-  if (!gameId || !gamesMap[gameId]) {
-    return <h2>Game not found! Try our games by going to Home page</h2>;
-  }
-
-  const handleFullScreen = () => {
+  const handleFullScreen = async () => {
     if (!document.fullscreenElement) {
-      gameRef.current?.requestFullscreen().catch((err) => {
-        console.error("Error trying to enable full-screen mode:", err);
-      });
+      try {
+        await gameContainerRef.current.requestFullscreen();
+        if (screen.orientation && screen.orientation.lock) {
+          await screen.orientation.lock("landscape");
+        }
+      } catch (err) {
+        console.error("Error requesting fullscreen or locking orientation:", err);
+      }
     } else {
       document.exitFullscreen();
     }
   };
 
+  if (!gameId || !gamesMap[gameId]) {
+    return <p>Game not found!</p>;
+  }
+
   return (
     <div className="gameplay-container">
-      <h2 className="gameplay-title">
-        {gamesMap[gameId].name}
-      </h2>
-
+      <h2 className="gameplay-title">{gamesMap[gameId].name}</h2>
       <div className="gameplay-toolbar">
         <button onClick={handleFullScreen}>Toggle Fullscreen</button>
-        {/* Add other game options here later */}
       </div>
-
-      <div ref={gameRef}></div>
+      <div
+        ref={gameContainerRef}
+        style={{
+          width: "100%",
+          margin: "0 auto",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#000",
+        }}
+      ></div>
     </div>
   );
 }
