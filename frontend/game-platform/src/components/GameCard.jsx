@@ -1,7 +1,7 @@
 // src/components/GameCard.jsx
 
 import React, { useState } from "react";
-import placeholder from "../assets/images/placeholder.png";
+import placeholder from "../assets/images/logos/placeholder.png";
 import "./GameCard.css";
 
 export default function GameCard({ imagePath, title, alt, link }) {
