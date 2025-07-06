@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { levelData } from "./data/LevelData.js";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
@@ -6,7 +7,7 @@ export default class MapScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("meadow", "/assets/images/backgrounds/meadow.png");
+    this.load.image("meadow", "/assets/NumberKingdom/backgrounds/meadow.png");
   }
 
   create() {
@@ -17,7 +18,8 @@ export default class MapScene extends Phaser.Scene {
     const pathWidth = 160;
     const mapHeight = numLevels * verticalSpacing;
 
-    this.maxLevel = parseInt(localStorage.getItem("maxLevel")) || 1;
+    this.maxLevel =
+      parseInt(localStorage.getItem("NumberKigdom_maxLevel")) || 1;
 
     this.cameras.main.setBounds(0, 0, this.scale.width, mapHeight);
 
@@ -72,8 +74,14 @@ export default class MapScene extends Phaser.Scene {
 
       levelNode.on("pointerup", () => {
         if (i + 1 <= this.maxLevel) {
-          console.log(`Start level ${i + 1}`);
-          // TODO: launch level scene
+          this.scene.start("DialogueScene", {
+            dialogues: levelData[i + 1].scenes.map((scene) => ({
+              background: scene.background,
+              text: scene.text,
+            })),
+            nextScene: "MiniGameScene",
+            levelNumber: i + 1,
+          });
         }
       });
     }
