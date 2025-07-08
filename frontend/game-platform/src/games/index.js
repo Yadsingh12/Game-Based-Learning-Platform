@@ -4,6 +4,7 @@ import MapScene from "./NumberKingdom/MapScene";
 import DialogueScene from "./NumberKingdom/DialogueScene"; // Ensure levelScene is loaded
 import recognitionScene from "./NumberKingdom/miniGames/recognitionScene";
 import SignMatchScene from "./SignMatch/SignMatchScene";
+import StartMenuScene from "./SignMatch/StartMenuScene"; 
 
 export const gamesMap = {
   "number-kingdom": {
@@ -22,7 +23,7 @@ export const gamesMap = {
   },
   "sign-match": {
     name: "Sign Match",
-    scene: [SignMatchScene], 
+    scene: [StartMenuScene, SignMatchScene], 
     logoPath: "/assets/images/color-game-logo.png",
     alt: "Color Explorer Game Logo",
     category: "Matching Games"
