@@ -41,7 +41,7 @@ export default class StartMenuScene extends Phaser.Scene {
     const storedStars =
       JSON.parse(localStorage.getItem("SignMatchStars")) || {};
 
-    const defaultLabels = ["2×2", "3×3", "4×4", "Card\nRush"];
+    const defaultLabels = ["2×2", "2×4", "4×4", "Card\nRush"];
     const savedStars = {};
 
     defaultLabels.forEach((label) => {
