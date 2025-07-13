@@ -3,8 +3,8 @@
 import MapScene from "./NumberKingdom/MapScene";
 import DialogueScene from "./NumberKingdom/DialogueScene"; // Ensure levelScene is loaded
 import recognitionScene from "./NumberKingdom/miniGames/recognitionScene";
-import SignMatchScene from "./SignMatch/SignMatchScene";
-import StartMenuScene from "./SignMatch/StartMenuScene"; 
+import SignMatchScene from "./SignMatch/scenes/SignMatchScene";
+import StartMenuScene from "./SignMatch/scenes/StartMenuScene"; 
 
 export const gamesMap = {
   "number-kingdom": {
