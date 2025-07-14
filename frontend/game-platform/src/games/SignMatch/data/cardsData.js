@@ -1,4 +1,3 @@
-// Prepare card data
 export const cardsData = [
   {
     id: 1,
@@ -32,8 +31,9 @@ export const cardsData = [
     id: 2,
     type: "sign",
     value: "apple",
-    videoKey: "apple_sign",
+    textureKey: "apple",
   },
+
   {
     id: 3,
     type: "image",
@@ -66,42 +66,23 @@ export const cardsData = [
     id: 4,
     type: "sign",
     value: "banana",
-    videoKey: "banana_sign",
+    textureKey: "banana",
   },
+
   {
     id: 5,
     type: "image",
     value: "broccoli",
     textureKey: "broccoli_image",
-    questions: [
-      {
-        question: "Broccoli belongs to which vegetable family?",
-        options: ["Root", "Brassica", "Leafy", "Nightshade"],
-        correct: "Brassica",
-      },
-      {
-        question: "Broccoli is mostly which color?",
-        options: ["Red", "Green", "Orange", "Purple"],
-        correct: "Green",
-      },
-      {
-        question: "Which vitamin is abundant in broccoli?",
-        options: ["Vitamin E", "Vitamin C", "Vitamin B12", "Vitamin D"],
-        correct: "Vitamin C",
-      },
-      {
-        question: "What part of broccoli do we eat?",
-        options: ["Stem", "Roots", "Flowers", "Seeds"],
-        correct: "Flowers",
-      },
-    ],
+    questions: [ /* ... */ ],
   },
   {
     id: 6,
     type: "sign",
     value: "broccoli",
-    videoKey: "broccoli_sign",
+    textureKey: "broccoli",
   },
+
   {
     id: 7,
     type: "image",
@@ -134,8 +115,9 @@ export const cardsData = [
     id: 8,
     type: "sign",
     value: "cake",
-    videoKey: "cake_sign",
+    textureKey: "cake",
   },
+
   {
     id: 9,
     type: "image",
@@ -168,8 +150,9 @@ export const cardsData = [
     id: 10,
     type: "sign",
     value: "carrot",
-    videoKey: "carrot_sign",
+    textureKey: "carrot",
   },
+
   {
     id: 11,
     type: "image",
@@ -202,8 +185,9 @@ export const cardsData = [
     id: 12,
     type: "sign",
     value: "donut",
-    videoKey: "donut_sign",
+    textureKey: "donut",
   },
+
   {
     id: 13,
     type: "image",
@@ -236,8 +220,9 @@ export const cardsData = [
     id: 14,
     type: "sign",
     value: "orange",
-    videoKey: "orange_sign",
+    textureKey: "orange",
   },
+
   {
     id: 15,
     type: "image",
@@ -270,6 +255,6 @@ export const cardsData = [
     id: 16,
     type: "sign",
     value: "pizza",
-    videoKey: "pizza_sign",
+    textureKey: "pizza",
   },
 ];

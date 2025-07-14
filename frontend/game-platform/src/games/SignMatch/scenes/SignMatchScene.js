@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { cardsData } from "../data/cardsData.js";
-import { images, videos } from "../data/assetList.js";
+import { images, spritesheets } from "../data/assetList.js";
 
 import { UIPanel } from "../ui/UIPanel.js";
 import { QuestionPopup } from "../ui/QuestionPopup.js";
@@ -13,11 +13,12 @@ export default class SignMatchScene extends Phaser.Scene {
   }
 
   preload() {
-    images.forEach(img => {
+    images.forEach((img) => {
       this.load.image(img.key, img.path);
     });
-    videos.forEach(vid => {
-      this.load.video(vid.key, vid.path, true);
+
+    spritesheets.forEach((sheet) => {
+      this.load.atlas(sheet.key, sheet.texture, sheet.atlasJSON);
     });
   }
 
@@ -27,6 +28,34 @@ export default class SignMatchScene extends Phaser.Scene {
     this.mode = data.mode || "matchAll";
     this.gridCols = data.gridCol || 4;
     this.gridRows = data.gridRow || 4;
+
+    spritesheets.forEach((sheet) => {
+      const textureData = this.textures.get(sheet.key);
+      if (!textureData) {
+        console.warn(`No texture data found for ${sheet.key}`);
+        return;
+      }
+
+      const frameNames = Object.keys(textureData.frames);
+      if (frameNames.length === 0) {
+        console.warn(`No frames found in atlas for ${sheet.key}`);
+        return;
+      }
+
+      this.anims.create({
+        key: `${sheet.key}_anim`,
+        frames: frameNames
+          .slice(1) // skip the base frame at index 0
+          .map((name) => ({
+            key: sheet.key,
+            frame: name,
+          })),
+        repeat: -1,
+        frameRate: 24, // Natural fps in which the videos were recorded
+      });
+
+      console.log(`Created animation for ${sheet.key}:`, frameNames);
+    });
 
     this.uiPanelHeight = 100;
 
@@ -57,7 +86,10 @@ export default class SignMatchScene extends Phaser.Scene {
       repeat: -1,
     });
     this.timerText = this.add
-      .text(20, 20, `Time: ${this.remainingTime}`, { fontSize: "48px", color: "#333" })
+      .text(20, 20, `Time: ${this.remainingTime}`, {
+        fontSize: "48px",
+        color: "#333",
+      })
       .setOrigin(0, 0);
 
     const exitButton = this.add
@@ -83,7 +115,6 @@ export default class SignMatchScene extends Phaser.Scene {
         fontStyle: "bold",
       })
       .setOrigin(0.5, 0);
-
 
     if (this.mode === "matchAll") {
       const pairCount = (this.gridCols * this.gridRows) / 2;
@@ -154,8 +185,12 @@ export default class SignMatchScene extends Phaser.Scene {
       const y = startY + row * (this.cardHeight + spacingY);
 
       const container = createCardContainer(
-        this, x, y, cardData,
-        this.cardWidth, this.cardHeight
+        this,
+        x,
+        y,
+        cardData,
+        this.cardWidth,
+        this.cardHeight
       );
 
       this.cards.push(container);
@@ -185,14 +220,15 @@ export default class SignMatchScene extends Phaser.Scene {
       card.add(frontImage);
       card.frontImage = frontImage;
     } else if (type === "sign") {
-      const video = this.add.video(0, 0, videoKey);
-      video.setDisplaySize(this.cardWidth, this.cardHeight);
-      video.once("play", () => {
-        video.setDisplaySize(this.cardWidth, this.cardHeight);
+      const sprite = this.add
+        .sprite(0, 0, textureKey)
+        .setDisplaySize(this.cardWidth, this.cardHeight);
+      sprite.play({
+        key: `${textureKey}_anim`,
       });
-      video.play(true);
-      card.add(video);
-      card.frontVideo = video;
+
+      card.add(sprite);
+      card.frontSprite = sprite;
     }
 
     if (!this.firstCard) {
@@ -255,9 +291,9 @@ export default class SignMatchScene extends Phaser.Scene {
       card.frontImage = null;
     }
 
-    if (card.frontVideo) {
-      card.frontVideo.destroy();
-      card.frontVideo = null;
+    if (card.frontSprite) {
+      card.frontSprite.destroy();
+      card.frontSprite = null;
     }
   }
 

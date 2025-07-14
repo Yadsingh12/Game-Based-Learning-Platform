@@ -20,3 +20,46 @@ export const videos = [
   { key: "orange_sign", path: "/assets/SignMatch/videos/orange.mp4" },
   { key: "pizza_sign", path: "/assets/SignMatch/videos/pizza.mp4" },
 ];
+
+export const spritesheets = [
+  { 
+    key: "apple", 
+    atlasJSON: "/assets/SignMatch/spritesheets/apple/apple.json", 
+    texture: "/assets/SignMatch/spritesheets/apple/apple.png" 
+  },
+  { 
+    key: "banana", 
+    atlasJSON: "/assets/SignMatch/spritesheets/banana/banana.json", 
+    texture: "/assets/SignMatch/spritesheets/banana/banana.png" 
+  },
+  { 
+    key: "broccoli", 
+    atlasJSON: "/assets/SignMatch/spritesheets/broccoli/broccoli.json", 
+    texture: "/assets/SignMatch/spritesheets/broccoli/broccoli.png" 
+  },
+  { 
+    key: "cake", 
+    atlasJSON: "/assets/SignMatch/spritesheets/cake/cake.json", 
+    texture: "/assets/SignMatch/spritesheets/cake/cake.png" 
+  },
+  { 
+    key: "carrot", 
+    atlasJSON: "/assets/SignMatch/spritesheets/carrot/carrot.json", 
+    texture: "/assets/SignMatch/spritesheets/carrot/carrot.png" 
+  },
+  { 
+    key: "donut", 
+    atlasJSON: "/assets/SignMatch/spritesheets/donut/donut.json", 
+    texture: "/assets/SignMatch/spritesheets/donut/donut.png" 
+  },
+  { 
+    key: "orange", 
+    atlasJSON: "/assets/SignMatch/spritesheets/orange/orange.json", 
+    texture: "/assets/SignMatch/spritesheets/orange/orange.png" 
+  },
+  { 
+    key: "pizza", 
+    atlasJSON: "/assets/SignMatch/spritesheets/pizza/pizza.json", 
+    texture: "/assets/SignMatch/spritesheets/pizza/pizza.png" 
+  },
+];
