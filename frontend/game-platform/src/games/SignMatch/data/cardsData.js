@@ -74,7 +74,28 @@ export const cardsData = [
     type: "image",
     value: "broccoli",
     textureKey: "broccoli_image",
-    questions: [ /* ... */ ],
+    questions: [
+      {
+        question: "Broccoli belongs to which vegetable family?",
+        options: ["Root", "Brassica", "Leafy", "Nightshade"],
+        correct: "Brassica",
+      },
+      {
+        question: "Broccoli is mostly which color?",
+        options: ["Red", "Green", "Orange", "Purple"],
+        correct: "Green",
+      },
+      {
+        question: "Which vitamin is abundant in broccoli?",
+        options: ["Vitamin E", "Vitamin C", "Vitamin B12", "Vitamin D"],
+        correct: "Vitamin C",
+      },
+      {
+        question: "What part of broccoli do we eat?",
+        options: ["Stem", "Roots", "Flowers", "Seeds"],
+        correct: "Flowers",
+      },
+    ],
   },
   {
     id: 6,

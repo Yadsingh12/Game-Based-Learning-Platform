@@ -51,7 +51,7 @@ export default class SignMatchScene extends Phaser.Scene {
             frame: name,
           })),
         repeat: -1,
-        frameRate: 24, // Natural fps in which the videos were recorded
+        frameRate: 9,
       });
 
       console.log(`Created animation for ${sheet.key}:`, frameNames);

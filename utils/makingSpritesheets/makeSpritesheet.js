@@ -7,15 +7,23 @@ const texPacker = require("free-tex-packer-core");
 const videoDir = `C:/Users/yadau/Desktop/coding/Game-Based-Learning-Platform/frontend/game-platform/public/assets/SignMatch/videos`;
 const tempRoot = `C:/Users/yadau/Desktop/coding/Game-Based-Learning-Platform/frontend/game-platform/public/assets/SignMatch/frames`;
 const outputDir = `C:/Users/yadau/Desktop/coding/Game-Based-Learning-Platform/frontend/game-platform/public/assets/SignMatch/spritesheets`;
-const fps = 10;
 
-function extractFrames(videoPath, framesDir, fps) {
+// optimization parameters
+const fps = 6;               // lower fps
+const maxFrames = 60;        // limit number of frames
+const targetWidth = 320;     // lower resolution
+const targetHeight = 180;
+
+function extractFrames(videoPath, framesDir, fps, maxFrames, width, height) {
     if (!fs.existsSync(framesDir)) {
         fs.mkdirSync(framesDir, { recursive: true });
     }
 
-    const command = `ffmpeg -i "${videoPath}" -vf fps=${fps} "${framesDir}/frame_%04d.png" -hide_banner -loglevel error`;
-    console.log(`Extracting frames: ${command}`);
+    let vfFilters = [`fps=${fps}`, `scale=${width}:${height}`];
+    const vfString = vfFilters.join(",");
+
+    const command = `ffmpeg -i "${videoPath}" -vf "${vfString}" -frames:v ${maxFrames} "${framesDir}/frame_%04d.png" -hide_banner -loglevel error`;
+    console.log(`Extracting frames:\n${command}`);
     execSync(command);
 }
 
@@ -36,8 +44,8 @@ function createSpritesheet(framesDir, outputSubDir, sheetName) {
         files,
         {
             textureName: sheetName,
-            width: 8192,
-            height: 8192,
+            width: 2048,
+            height: 2048,
             fixedSize: false,
             padding: 2,
             allowRotation: false,
@@ -84,7 +92,7 @@ function processAllVideos() {
         const framesDir = path.join(tempRoot, baseName);
         const outputSubDir = path.join(outputDir, baseName);
 
-        extractFrames(videoPath, framesDir, fps);
+        extractFrames(videoPath, framesDir, fps, maxFrames, targetWidth, targetHeight);
         createSpritesheet(framesDir, outputSubDir, baseName);
         deleteTemp(framesDir);
 
