@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
 .light-theme {
   --color-background: #f4edc8;
   --color-text: #333333;
@@ -37,9 +39,10 @@
 }
 
 :root {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Dancing Script", cursive, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-size: 20px;
 
   color: var(--color-text);
   background-color: var(--color-background);

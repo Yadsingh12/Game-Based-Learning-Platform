@@ -18,7 +18,7 @@
   display: none;
   background: none;
   border: none;
-  font-size: 2em;
+  font-size: 1.5em;
   color: var(--color-navbar-text);
   cursor: pointer;
 }
@@ -41,7 +41,6 @@
   color: var(--color-navbar-text);
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.1em;
 }
 
 .nav-links li a:hover {
@@ -52,7 +51,6 @@
   border-radius: 8px;
   border: 2px solid var(--color-button-border);
   padding: 0.6em 1.2em;
-  font-size: 1em;
   font-weight: 600;
   font-family: inherit;
   background-color: var(--color-button-bg);
@@ -82,7 +80,6 @@
     border-radius: 0 0 8px 8px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
   }
 
   .nav-container.open {
