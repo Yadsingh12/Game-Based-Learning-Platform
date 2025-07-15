@@ -1,5 +1,3 @@
-// /src/ui/Popup.js
-
 export class QuestionPopup {
   constructor(scene) {
     this.scene = scene;
@@ -96,15 +94,42 @@ export class QuestionPopup {
           this.scene.score += 5;
           this.scene.scoreText.setText(`Score: ${this.scene.score}`);
           optionButton.setBackgroundColor("#00ff00");
-          this.scene.time.delayedCall(1000, () => {
-            this.hideQuestionPopup();
-            onClose();
+
+          // ✅ Fade out entire popup
+          this.scene.tweens.add({
+            targets: [
+              this.popupBg,
+              this.popupBox,
+              this.popupQuestion,
+              this.popupImage,
+              ...this.optionTexts
+            ],
+            alpha: 0,
+            duration: 800,
+            onComplete: () => {
+              this.hideQuestionPopup();
+              onClose();
+            }
           });
+
         } else {
           optionButton.setBackgroundColor("#ff6666");
-          this.scene.time.delayedCall(1000, () => {
-            optionButton.setBackgroundColor("#dddddd");
+
+          // ✅ Shake the popup box
+          this.scene.tweens.add({
+            targets: this.popupBox,
+            x: {
+              from: this.popupBox.x - 10,
+              to: this.popupBox.x + 10
+            },
+            yoyo: true,
+            repeat: 4,
+            duration: 50,
+            onComplete: () => {
+              optionButton.setBackgroundColor("#dddddd");
+            }
           });
+
           this.scene.score -= 5;
           this.scene.scoreText.setText(`Score: ${this.scene.score}`);
         }
