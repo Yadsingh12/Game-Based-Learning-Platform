@@ -140,9 +140,7 @@ export default class StartMenuScene extends Phaser.Scene {
 
       circle.on("pointerup", () => {
         if (data.mode === "cardRush") {
-          this.scene.start("SignMatchScene", {
-            mode: "cardRush",
-          });
+          this.scene.start("CardRushScene");
         } else {
           this.scene.start("SignMatchScene", {
             mode: "matchAll",

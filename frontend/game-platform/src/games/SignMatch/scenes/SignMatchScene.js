@@ -1,11 +1,15 @@
 import Phaser from "phaser";
 import { cardsData } from "../data/cardsData.js";
 import { images, spritesheets } from "../data/assetList.js";
+import { createAnimations } from "../helpers/AnimationHelper.js";
 
 import { UIPanel } from "../ui/UIPanel.js";
+import { startCountdown } from "../helpers/TimerHelper.js";
 import { QuestionPopup } from "../ui/QuestionPopup.js";
+import { calculateCardLayout } from "../helpers/GridHelper.js";
 import { createCardContainer } from "../helpers/CardHelper.js";
-import { calculateStars, saveStars } from "../helpers/StarHelper.js";
+import { animateCardDistribution } from "../helpers/CardDistributionHelper.js";
+import { showEndGamePopup } from "../helpers/EndGameHelper.js";
 
 export default class SignMatchScene extends Phaser.Scene {
   constructor() {
@@ -29,68 +33,25 @@ export default class SignMatchScene extends Phaser.Scene {
     this.gridCols = data.gridCol || 4;
     this.gridRows = data.gridRow || 4;
 
-    spritesheets.forEach((sheet) => {
-      const textureData = this.textures.get(sheet.key);
-      if (!textureData) {
-        console.warn(`No texture data found for ${sheet.key}`);
-        return;
-      }
-
-      const frameNames = Object.keys(textureData.frames);
-      if (frameNames.length === 0) {
-        console.warn(`No frames found in atlas for ${sheet.key}`);
-        return;
-      }
-
-      this.anims.create({
-        key: `${sheet.key}_anim`,
-        frames: frameNames
-          .slice(1) // skip the base frame at index 0
-          .map((name) => ({
-            key: sheet.key,
-            frame: name,
-          })),
-        repeat: -1,
-        frameRate: 9,
-      });
-
-      console.log(`Created animation for ${sheet.key}:`, frameNames);
-    });
+    createAnimations(this, spritesheets);
 
     this.uiPanelHeight = 100;
 
-    // UI Panel
     this.uiPanel = new UIPanel(this, this.uiPanelHeight);
     this.questionPopup = new QuestionPopup(this);
 
-    // Timer setup
-    this.maxTime = 60; // default max time for matchAll mode
+    this.maxTime = 60;
     if (this.mode === "matchAll") {
-      // Adjust maxTime based on grid size
       if (this.gridCols === 2 && this.gridRows === 2) {
         this.maxTime = 10;
       } else if (this.gridCols === 4 && this.gridRows === 2) {
         this.maxTime = 30;
       }
     }
-    this.remainingTime = this.maxTime;
-    this.time.addEvent({
-      delay: 1000,
-      callback: () => {
-        this.remainingTime--;
-        this.timerText.setText(`Time: ${this.remainingTime}`);
-        if (this.remainingTime <= 0) {
-          this.showEndGamePopup();
-        }
-      },
-      repeat: -1,
+
+    startCountdown(this, this.maxTime, () => {
+      showEndGamePopup(this, this.score);
     });
-    this.timerText = this.add
-      .text(20, 20, `Time: ${this.remainingTime}`, {
-        fontSize: "48px",
-        color: "#333",
-      })
-      .setOrigin(0, 0);
 
     const exitButton = this.add
       .text(this.scale.width - 20, 20, "Exit", {
@@ -106,7 +67,6 @@ export default class SignMatchScene extends Phaser.Scene {
       this.scene.start("StartMenuScene");
     });
 
-    // Score setup
     this.score = 0;
     this.scoreText = this.add
       .text(this.scale.width / 2, 20, "Score: 0", {
@@ -122,13 +82,12 @@ export default class SignMatchScene extends Phaser.Scene {
       const selectedValues = Phaser.Utils.Array.Shuffle([
         ...new Set(cardsData.map((c) => c.value)),
       ]).slice(0, pairCount);
+
       console.log("Selected values for matchAll mode: ", selectedValues);
 
       this.cardsData = selectedValues.flatMap((value) =>
         cardsData.filter((c) => c.value === value)
       );
-    } else if (this.mode === "cardRush") {
-      this.cardsData = Phaser.Utils.Array.Shuffle(cardsData).slice(0, 8);
     } else {
       this.cardsData = cardsData;
     }
@@ -136,42 +95,30 @@ export default class SignMatchScene extends Phaser.Scene {
     const shuffledCards = Phaser.Utils.Array.Shuffle(this.cardsData);
     console.log("Shuffled cards: ", shuffledCards);
 
-    const availableWidth = this.scale.width;
     const availableHeight = this.scale.height - this.uiPanelHeight;
 
-    let spacingX = 20;
-    let spacingY = 20;
+    const { cardWidth, cardHeight, spacingX, spacingY } = calculateCardLayout(
+      this,
+      this.gridCols,
+      this.gridRows,
+      this.scale.width,
+      availableHeight,
+      this.uiPanelHeight
+    );
 
-    this.cardOriginalWidth = 640;
-    this.cardOriginalHeight = 360;
-
-    const idealTotalWidth =
-      this.gridCols * this.cardOriginalWidth + (this.gridCols + 1) * spacingX;
-    const idealTotalHeight =
-      this.gridRows * this.cardOriginalHeight + (this.gridRows + 1) * spacingY;
-
-    let scaleFactor = 1;
-
-    if (
-      idealTotalWidth > availableWidth ||
-      idealTotalHeight > availableHeight
-    ) {
-      const scaleX = availableWidth / idealTotalWidth;
-      const scaleY = availableHeight / idealTotalHeight;
-      scaleFactor = Math.min(scaleX, scaleY);
-    }
-    console.log("Scale factor: ", scaleFactor);
-
-    this.cardWidth = this.cardOriginalWidth * scaleFactor;
-    this.cardHeight = this.cardOriginalHeight * scaleFactor;
-    spacingX *= scaleFactor;
-    spacingY *= scaleFactor;
+    this.cardWidth = cardWidth;
+    this.cardHeight = cardHeight;
 
     const totalWidth =
       this.gridCols * this.cardWidth + (this.gridCols - 1) * spacingX;
-    const startX = (availableWidth - totalWidth) / 2 + this.cardWidth / 2;
-    console.log(this.uiPanelHeight);
-    const startY = this.uiPanelHeight + spacingY;
+
+    const totalHeight =
+      this.gridRows * this.cardHeight + (this.gridRows - 1) * spacingY;
+
+    const startX = (this.scale.width - totalWidth) / 2 + cardWidth / 2;
+
+    const startY =
+      this.uiPanelHeight + (availableHeight - totalHeight) / 2 + cardHeight / 2;
 
     this.cards = [];
     this.firstCard = null;
@@ -180,20 +127,32 @@ export default class SignMatchScene extends Phaser.Scene {
     let row = 0;
     let col = 0;
 
+    const cardEntries = [];
+
     shuffledCards.forEach((cardData) => {
-      const x = startX + col * (this.cardWidth + spacingX);
-      const y = startY + row * (this.cardHeight + spacingY);
+      const targetX = startX + col * (this.cardWidth + spacingX);
+      const targetY = startY + row * (this.cardHeight + spacingY);
 
       const container = createCardContainer(
         this,
-        x,
-        y,
+        this.scale.width / 2,
+        this.uiPanelHeight + 50,
         cardData,
         this.cardWidth,
         this.cardHeight
       );
 
+      container.setAlpha(0);
+      container.setInteractive();
+      container.on("pointerup", () => this.flipCard(container));
+
       this.cards.push(container);
+
+      cardEntries.push({
+        card: container,
+        targetX: targetX,
+        targetY: targetY,
+      });
 
       col++;
       if (col >= this.gridCols) {
@@ -201,17 +160,22 @@ export default class SignMatchScene extends Phaser.Scene {
         row++;
       }
     });
+
+    animateCardDistribution(
+      this,
+      cardEntries,
+      this.scale.width / 2,
+      this.scale.height / 2
+    );
   }
 
   flipCard(card) {
-    if (card.isFlipped || this.secondCard) {
-      return;
-    }
+    if (card.isFlipped || this.secondCard) return;
 
     card.isFlipped = true;
     card.backImage.setVisible(false);
 
-    const { type, textureKey, videoKey } = card.cardData;
+    const { type, textureKey } = card.cardData;
 
     if (type === "image") {
       const frontImage = this.add
@@ -226,7 +190,6 @@ export default class SignMatchScene extends Phaser.Scene {
       sprite.play({
         key: `${textureKey}_anim`,
       });
-
       card.add(sprite);
       card.frontSprite = sprite;
     }
@@ -256,7 +219,6 @@ export default class SignMatchScene extends Phaser.Scene {
       cardA.setVisible(false);
       cardB.setVisible(false);
 
-      // Show the question popup, and after it's closed, check for game end
       this.questionPopup.showQuestion(imageCard, () => {
         cardA.destroy();
         cardB.destroy();
@@ -264,11 +226,10 @@ export default class SignMatchScene extends Phaser.Scene {
         this.firstCard = null;
         this.secondCard = null;
 
-        // Check if all cards are matched
         const anyRemaining = this.cards.some((card) => card.active);
         if (!anyRemaining) {
           this.time.delayedCall(500, () => {
-            this.showEndGamePopup(); // you must already have this method from earlier
+            showEndGamePopup(this, this.score);
           });
         }
       });
@@ -295,121 +256,5 @@ export default class SignMatchScene extends Phaser.Scene {
       card.frontSprite.destroy();
       card.frontSprite = null;
     }
-  }
-
-  showEndGamePopup() {
-    // Dark background overlay
-    this.endBg = this.add
-      .rectangle(
-        this.scale.width / 2,
-        this.scale.height / 2,
-        this.scale.width,
-        this.scale.height,
-        0x000000,
-        0.6
-      )
-      .setDepth(2000);
-
-    // Popup box
-    const boxWidth = 800;
-    const boxHeight = 500;
-
-    this.endBox = this.add
-      .rectangle(
-        this.scale.width / 2,
-        this.scale.height / 2,
-        boxWidth,
-        boxHeight,
-        0xffffff
-      )
-      .setStrokeStyle(4, 0x333333)
-      .setOrigin(0.5, 0.5)
-      .setDepth(2001);
-
-    // Title text
-    this.add
-      .text(
-        this.scale.width / 2,
-        this.scale.height / 2 - boxHeight / 2 + 50,
-        "Game Over",
-        {
-          fontSize: "48px",
-          color: "#333",
-          fontStyle: "bold",
-        }
-      )
-      .setOrigin(0.5, 0.5)
-      .setDepth(2001);
-
-    // Display score
-    this.add
-      .text(
-        this.scale.width / 2,
-        this.scale.height / 2 - 50,
-        `Your Score: ${this.score}`,
-        {
-          fontSize: "36px",
-          color: "#333",
-        }
-      )
-      .setOrigin(0.5, 0.5)
-      .setDepth(2001);
-
-    // Calculate stars
-    const stars = calculateStars(this);
-
-    // Draw stars
-    const starSpacing = 80;
-    const startX =
-      this.scale.width / 2 - (starSpacing * (stars.length - 1)) / 2;
-    stars.forEach((isFilled, index) => {
-      const starColor = isFilled ? 0xffd700 : 0xcccccc;
-      this.add
-        .star(
-          startX + index * starSpacing,
-          this.scale.height / 2 + 50,
-          5,
-          20,
-          40,
-          starColor
-        )
-        .setDepth(2001);
-    });
-
-    // Save stars to localStorage if better
-    saveStars(this, stars.filter((s) => s).length);
-
-    // Buttons
-    const buttonY = this.scale.height / 2 + 150;
-
-    const menuButton = this.add
-      .text(this.scale.width / 2 - 150, buttonY, "Main Menu", {
-        fontSize: "32px",
-        backgroundColor: "#dddddd",
-        color: "#333",
-        padding: { left: 30, right: 30, top: 15, bottom: 15 },
-      })
-      .setOrigin(0.5, 0.5)
-      .setDepth(2001)
-      .setInteractive({ useHandCursor: true });
-
-    menuButton.on("pointerup", () => {
-      this.scene.start("StartMenuScene");
-    });
-
-    const restartButton = this.add
-      .text(this.scale.width / 2 + 150, buttonY, "Restart", {
-        fontSize: "32px",
-        backgroundColor: "#dddddd",
-        color: "#333",
-        padding: { left: 30, right: 30, top: 15, bottom: 15 },
-      })
-      .setOrigin(0.5, 0.5)
-      .setDepth(2001)
-      .setInteractive({ useHandCursor: true });
-
-    restartButton.on("pointerup", () => {
-      this.scene.restart();
-    });
   }
 }
