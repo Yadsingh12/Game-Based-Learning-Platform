@@ -19,7 +19,7 @@ function extractFrames(videoPath, framesDir, fps, maxFrames, width, height) {
         fs.mkdirSync(framesDir, { recursive: true });
     }
 
-    let vfFilters = [`fps=${fps}`, `scale=${width}:${height}`];
+    let vfFilters = [`fps=${fps}`, `scale=${width}:${height}, edgedetect, boxblur=2:1`];
     const vfString = vfFilters.join(",");
 
     const command = `ffmpeg -i "${videoPath}" -vf "${vfString}" -frames:v ${maxFrames} "${framesDir}/frame_%04d.png" -hide_banner -loglevel error`;
@@ -68,13 +68,6 @@ function createSpritesheet(framesDir, outputSubDir, sheetName) {
     );
 }
 
-function deleteTemp(framesDir) {
-    if (fs.existsSync(framesDir)) {
-        fs.rmSync(framesDir, { recursive: true, force: true });
-        console.log(`Deleted temp folder: ${framesDir}`);
-    }
-}
-
 function processAllVideos() {
     const files = fs.readdirSync(videoDir)
         .filter(f => f.toLowerCase().endsWith(".mp4"));
@@ -94,8 +87,7 @@ function processAllVideos() {
 
         extractFrames(videoPath, framesDir, fps, maxFrames, targetWidth, targetHeight);
         createSpritesheet(framesDir, outputSubDir, baseName);
-        deleteTemp(framesDir);
-
+        
         console.log(`✅ Finished: ${baseName}`);
         console.log("-------------------------------------------");
     });
