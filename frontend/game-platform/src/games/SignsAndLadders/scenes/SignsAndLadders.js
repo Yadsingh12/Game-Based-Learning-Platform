@@ -73,7 +73,7 @@ export default class SignsAndLaddersScene extends Phaser.Scene {
     this.checkBotTurn();
   }
 
-  update() {}
+  update() { }
 
   // Utility: returns a color-based label
   getPlayerLabel(i) {
@@ -305,8 +305,8 @@ export default class SignsAndLaddersScene extends Phaser.Scene {
       d === "easy"
         ? easyQuestions
         : d === "medium"
-        ? mediumQuestions
-        : hardQuestions;
+          ? mediumQuestions
+          : hardQuestions;
     const q = Phaser.Utils.Array.GetRandom(pool);
 
     const bg = this.add
@@ -371,7 +371,7 @@ export default class SignsAndLaddersScene extends Phaser.Scene {
           // Choose a wrong answer (but not the correct one)
           const wrongOptions = q.options
             .map((_, idx) => idx)
-            .filter((idx) => idx !== q.answer);
+            .filter(idx => idx !== q.answer);
 
           choice = Phaser.Utils.Array.GetRandom(wrongOptions);
         }
@@ -379,6 +379,7 @@ export default class SignsAndLaddersScene extends Phaser.Scene {
         buttons[choice].btn.emit("pointerdown");
       });
     }
+
   }
 
   showGameOver() {

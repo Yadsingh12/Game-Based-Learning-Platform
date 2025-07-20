@@ -1,8 +1,8 @@
 import Phaser from "phaser";
 
-export default class SetupScene extends Phaser.Scene {
+export default class SetUpScene extends Phaser.Scene {
   constructor() {
-    super("SetupScene");
+    super("SetUpScene");
   }
 
   init() {

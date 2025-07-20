@@ -9,7 +9,7 @@ import SignMatchScene from "./SignMatch/scenes/SignMatchScene";
 import StartMenuScene from "./SignMatch/scenes/StartMenuScene"; 
 import CardRushScene from "./SignMatch/scenes/CardRushScene";
 
-import SetupScene from "./SignsAndLadders/scenes/SetUpScene";
+import SetUpScene from "./SignsAndLadders/scenes/SetUpScene";
 import SignsAndLaddersScene from "./SignsAndLadders/scenes/SignsAndLadders";
 
 export const gamesMap = {
@@ -40,7 +40,7 @@ export const gamesMap = {
   },
   "Signs And ladders": {
     name: "Signs and Ladders",
-    scene: [SetupScene, SignsAndLaddersScene],
+    scene: [SetUpScene, SignsAndLaddersScene],
     logoPath: "/assets/images/color-game-logo.png",
     alt: "Game Logo",
     category: "Board Games"
