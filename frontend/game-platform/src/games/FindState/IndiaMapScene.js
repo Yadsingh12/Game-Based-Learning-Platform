@@ -1,43 +1,50 @@
-class IndiaMapScene extends Phaser.Scene {
+import Phaser from "phaser";
+
+export default class IndiaMapScene extends Phaser.Scene {
+  constructor() {
+    super({ key: "IndiaMapScene" });
+  }
+
   preload() {
-    this.load.image('indiaMap', 'assets/india_map.png');
-    this.load.image('hitmap', 'assets/india_hitmap.png');
+    this.load.svg("india", "assetsRecognizeState/india.svg"); // place india.svg in public/assets
   }
 
   create() {
-    this.add.image(0, 0, 'indiaMap').setOrigin(0);
-    const hitSrc = this.textures.get('hitmap').getSourceImage();
-    const hitCanvas = this.textures.createCanvas('hitmapCanvas', hitSrc.width, hitSrc.height);
-    hitCanvas.draw(0, 0, hitSrc);
+    // Add SVG
+    this.add.svg(this.cameras.main.centerX, this.cameras.main.centerY, "india")
+      .setOrigin(0.5)
+      .setInteractive()
+      .setScale(1.5) // scale to fit your canvas
+      .eachPath((path) => {
+        const id = path.node.getAttribute("id");
+        const title = path.node.getElementsByTagName("title")[0]?.textContent;
 
-    // Map of hitmap hex colors → state names
-    const stateColorMap = {
-      '#010101': 'Andhra Pradesh',
-      '#020202': 'Arunachal Pradesh',
-      // ...each state
-    };
+        if (stateData[id]) {
+          const color = stateData[id].color;
 
-    this.input.on('pointerdown', pointer => {
-      const x = Phaser.Math.Clamp(pointer.x, 0, hitCanvas.width - 1);
-      const y = Phaser.Math.Clamp(pointer.y, 0, hitCanvas.height - 1);
-      const px = hitCanvas.getPixel(x, y);
-      const hex = Phaser.Display.Color.RGBToString(px.r, px.g, px.b, 0, '#');
-      const st = stateColorMap[hex];
-      if (st) {
-        console.log('Clicked state:', st);
-        // TODO: trigger state-specific logic here
-      } else {
-        console.log('Clicked outside any state');
-      }
-    });
+          path.setFillStyle(Phaser.Display.Color.HexStringToColor(color).color);
+          path.setInteractive();
+
+          path.on("pointerover", () => {
+            path.setAlpha(0.8);
+          });
+          path.on("pointerout", () => {
+            path.setAlpha(1);
+          });
+
+          path.on("pointerdown", () => {
+            this.showStateClicked(id, title || stateData[id].name);
+          });
+        }
+      });
+  }
+
+  showStateClicked(id, name) {
+    console.log("Clicked:", id, name);
+    this.add.text(20, 20, `You clicked: ${name}`, {
+      font: "24px Arial",
+      fill: "#000",
+      backgroundColor: "#fff"
+    }).setDepth(100);
   }
 }
-
-const config = {
-  type: Phaser.AUTO,
-  width: 800,
-  height: 900,
-  scene: [IndiaMapScene]
-};
-
-new Phaser.Game(config);
