@@ -1,0 +1,150 @@
+/* IndiaMap.css */
+
+/* Global box-sizing for consistent layout behavior */
+* {
+  box-sizing: border-box;
+}
+
+/* Use a new class to manage the vertical layout with CSS Grid */
+.quiz-layout {
+  display: grid;
+  grid-template-rows: auto 1fr; 
+  height: 100vh; /* Make sure the container fills the entire viewport height */
+  overflow-y: auto; /* Allow vertical scrolling if content is too tall */
+  background-color: #f0f4f8;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #333;
+}
+
+/* Style the top section of the grid, which holds the UI elements */
+.quiz-header-section {
+  padding: 2vmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Info box for score and question progress */
+.game-info-box {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 2vmin;
+  font-size: clamp(0.9rem, 2vmin, 1.2rem); /* Responsive font size */
+  font-weight: bold;
+  color: #007bff;
+  padding: 0 1vmin;
+}
+
+/* Question box styling */
+.question-box {
+  background-color: #ffffff;
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  padding: 2vmin 3vmin;
+  margin-bottom: 2vmin;
+  width: 100%; /* Change to 100% to fill the parent width */
+  max-width: 900px;
+  text-align: center;
+  font-size: clamp(1.2rem, 3vmin, 1.5rem); /* Responsive font size */
+  font-weight: 500;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+/* Specific styling for the game over box */
+.game-over-box {
+  flex-direction: column;
+  justify-content: center;
+  font-size: clamp(1.4rem, 4vmin, 1.8rem); /* Larger responsive font size */
+  color: #333;
+}
+
+.game-over-box p {
+  margin: 1vmin 0;
+}
+
+/* Animation for incorrect guesses */
+.shake {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  background-color: #ffebeb;
+  border-color: #dc3545;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* Animation for correct guesses */
+.correct-pulse {
+  animation: correct-pulse 0.8s;
+  background-color: #e6f7e9;
+  border-color: #28a745;
+}
+
+@keyframes correct-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* Styling for the play again button */
+.play-again-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 1.5vmin 3vmin;
+  font-size: clamp(0.9rem, 2vmin, 1rem); /* Responsive font size */
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1.5vmin;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.play-again-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Main content area for the map */
+.map-viewer-container {
+  width: 100%; 
+  height: 100%;
+  padding: 4vmin;
+  box-sizing: border-box;
+}
+
+/* Adjust the inner pan-zoom container to be responsive */
+.map-viewer-container .react-svg-pan-zoom_container {
+    width: 100% !important;
+    height: 100% !important;
+    border: 2px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Base styles for the map states */
+.map-state {
+  fill: #e6e6e6;
+  stroke: #000000;
+  stroke-width: 0.5;
+  transition: fill 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+/* Hover effect for map states */
+.map-state:hover {
+  fill: #a39f9f !important;
+}
