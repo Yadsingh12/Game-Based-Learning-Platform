@@ -11,15 +11,25 @@ import CardRushScene from "./SignMatch/scenes/CardRushScene";
 import SetUpScene from "./SignsAndLadders/scenes/SetUpScene";
 import SignsAndLaddersScene from "./SignsAndLadders/scenes/SignsAndLadders";
 
-import FindStateReactGame from "./FindState/scenes/ReactIndiaMapGame"; // React based game
+import FindStateReactGame from "./FindState/scenes/ReactIndiaMapGame";
 
 import BreakoutGame from "./BreakoutGame/breakout";
 
+import RecognizeQuiz from "./RecognizeSign/RecognizeQuiz";
+
+import VideoOptionQuiz from "./RecognizeImage/VideoOptionQuiz";
+
+import ColumnMatch from "./ColumnMatch/ColumnMatch.jsx";
+
+import ISLClockGame from "./SetTime/ISLClockGame.jsx";
+
+import WordSearchGame from "./FindWord/WordSearchGame.jsx";
 
 export const gamesMap = {
   "number-kingdom": {
     name: "Number Kingdom",
     type: "phaser",
+    orientation: "landscape",
     scene: [MapScene, DialogueScene, recognitionScene],
     logoPath: "/assets/images/math-game-logo.png",
     alt: "Game Logo",
@@ -28,6 +38,7 @@ export const gamesMap = {
   "breakout-game": {
     name: "Breakout Game",
     type: "react", 
+    orientation: "landscape",
     component: BreakoutGame,
     logoPath: "/assets/images/breakout-game-logo.png",
     alt: "Breakout Game Logo",
@@ -36,6 +47,7 @@ export const gamesMap = {
   "sign-match": {
     name: "Sign Match",
     type: "phaser",
+    orientation: "landscape",
     scene: [StartMenuScene, SignMatchScene, CardRushScene],
     logoPath: "/assets/images/color-game-logo.png",
     alt: "Game Logo",
@@ -44,6 +56,7 @@ export const gamesMap = {
   "Signs And ladders": {
     name: "Signs and Ladders",
     type: "phaser",
+    orientation: "landscape",
     scene: [SetUpScene, SignsAndLaddersScene],
     logoPath: "/assets/images/color-game-logo.png",
     alt: "Game Logo",
@@ -51,10 +64,56 @@ export const gamesMap = {
   },
   "find-state": {
     name: "Find State",
-    type: "react", // 👈 mark this as React-based
-    component: FindStateReactGame, // 👈 point to the React component
+    type: "react", 
+    orientation: "landscape",
+    component: FindStateReactGame, 
     logoPath: "/assets/images/find-state-logo.png",
     alt: "Game Logo",
     category: "Geography Games"
   },
+  "recognize-sign": {
+    name: "Recognize Sign",
+    type: "react", 
+    orientation: "portrait",
+    component: RecognizeQuiz,
+    logoPath: "/assets/images/recognize-sign-logo.png",
+    alt: "Game Logo",
+    category: "Quiz Games"
+  },
+  "video-option-quiz": {
+    name: "Video Option Quiz",
+    type: "react", 
+    orientation: "portrait",
+    component: VideoOptionQuiz, 
+    logoPath: "/assets/images/video-option-quiz-logo.png",
+    alt: "Game Logo",
+    category: "Quiz Games"
+  },
+  "column-match": {
+    name: "Column Match",
+    type: "react", 
+    orientation: "landscape",
+    component: ColumnMatch, 
+    logoPath: "/assets/images/column-match-logo.png",
+    alt: "Game Logo",
+    category: "Matching Games"
+  },
+  "isl-clock-game": {
+    name: "ISL Clock Game",
+    type: "react", 
+    orientation: "portrait",
+    component: ISLClockGame, 
+    logoPath: "/assets/images/isl-clock-game-logo.png",
+    alt: "ISL Clock Game Logo",
+    category: "Time Games"
+  },
+  "word-search-game": {
+    name: "Word Search Game",
+    type: "react", 
+    orientation: "landscape",
+    component: WordSearchGame,
+    logoPath: "/assets/images/word-search-game-logo.png",
+    alt: "Word Search Game Logo",
+    category: "Word Games"
+  }
 };
