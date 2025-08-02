@@ -13,27 +13,38 @@ import SignsAndLaddersScene from "./SignsAndLadders/scenes/SignsAndLadders";
 
 import FindStateReactGame from "./FindState/scenes/ReactIndiaMapGame"; // React based game
 
+import BreakoutGame from "./BreakoutGame/breakout";
+
+
 export const gamesMap = {
   "number-kingdom": {
     name: "Number Kingdom",
-    scene: [MapScene, DialogueScene, recognitionScene],
     type: "phaser",
+    scene: [MapScene, DialogueScene, recognitionScene],
     logoPath: "/assets/images/math-game-logo.png",
     alt: "Game Logo",
     category: "Math Games"
   },
+  "breakout-game": {
+    name: "Breakout Game",
+    type: "react", 
+    component: BreakoutGame,
+    logoPath: "/assets/images/breakout-game-logo.png",
+    alt: "Breakout Game Logo",
+    category: "Math Games"
+  },
   "sign-match": {
     name: "Sign Match",
-    scene: [StartMenuScene, SignMatchScene, CardRushScene],
     type: "phaser",
+    scene: [StartMenuScene, SignMatchScene, CardRushScene],
     logoPath: "/assets/images/color-game-logo.png",
     alt: "Game Logo",
     category: "Matching Games"
   },
   "Signs And ladders": {
     name: "Signs and Ladders",
-    scene: [SetUpScene, SignsAndLaddersScene],
     type: "phaser",
+    scene: [SetUpScene, SignsAndLaddersScene],
     logoPath: "/assets/images/color-game-logo.png",
     alt: "Game Logo",
     category: "Board Games"

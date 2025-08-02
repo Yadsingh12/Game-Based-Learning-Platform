@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breakout Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #1a202c; /* Dark background */
+            font-family: 'Inter', sans-serif;
+            color: #e2e8f0; /* Light text color */
+            /* Removed overflow: hidden to ensure buttons are visible if content exceeds viewport */
+        }
+
+        .game-container {
+            background-color: #2d3748; /* Slightly lighter dark background for container */
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 95vw; /* More flexible max width */
+            width: 600px; /* Desired width, but max-width takes precedence */
+            box-sizing: border-box;
+            position: relative; /* Needed for absolute positioning of ISL signs */
+            min-height: 70vh; /* Ensure container has a minimum height */
+            justify-content: space-between; /* Distribute space between elements */
+        }
+
+        h1 {
+            color: #63b3ed; /* Blueish header */
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        canvas {
+            background-color: #000; /* Game area background */
+            border: 2px solid #4a5568; /* Border for canvas */
+            border-radius: 8px;
+            display: block;
+            touch-action: none; /* Prevent default touch actions like scrolling */
+            width: 100%; /* Make canvas responsive within its container */
+            aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+            max-height: 60vh; /* Limit canvas height to ensure other elements are visible */
+            margin-bottom: 15px; /* Space below canvas */
+        }
+
+        .game-info-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 15px;
+            font-size: 1.2em;
+            color: #a0aec0; /* Lighter grey for info */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .game-info-item {
+            flex: 1;
+            min-width: 120px; /* Minimum width for each item */
+            text-align: center;
+            padding: 5px;
+        }
+
+        .isl-target-display {
+            background-color: #4a5568;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            text-align: center;
+            color: #e2e8f0;
+            font-size: 1.1em;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .isl-target-display .label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #9f7aea; /* Purpleish label */
+        }
+
+        .isl-target-display .isl-sign {
+            width: 60px; /* Size for the ISL number SVG */
+            height: 60px;
+            background-color: #2d3748;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+        }
+        .isl-target-display .isl-sign svg {
+            display: block;
+            width: 80%;
+            height: 80%;
+        }
+
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            background: linear-gradient(145deg, #4a5568, #2d3748);
+            color: #e2e8f0;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4), -3px -3px 6px rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease-in-out;
+            outline: none;
+        }
+
+        button:hover {
+            background: linear-gradient(145deg, #5a67d8, #434190); /* Purpleish hover */
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6), -5px -5px 10px rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5), inset -2px -2px 5px rgba(255, 255, 255, 0.1);
+            transform: translateY(0);
+        }
+
+        .message-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid #63b3ed;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #e2e8f0;
+            z-index: 100;
+            display: none; /* Hidden by default */
+            box-shadow: 0 0 20px rgba(99, 179, 237, 0.7);
+        }
+
+        .message-box button {
+            margin-top: 20px;
+            font-size: 1.2em;
+            padding: 10px 20px;
+        }
+
+        /* Styles for ISL Sign Container (for event cues) */
+        .isl-sign-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 101; /* Above message box */
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none; /* Allow clicks to pass through */
+            display: none; /* Hidden by default, will be set to flex when active */
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            border-radius: 10px;
+            padding: 15px;
+            min-width: 80px; /* Ensure it has some size */
+            min-height: 80px;
+        }
+        .isl-sign-container svg {
+            display: block; /* Remove extra space below SVG */
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .game-container {
+                padding: 15px;
+                width: 95vw;
+                min-height: unset; /* Allow height to adjust on small screens */
+            }
+            .game-info-item {
+                flex-basis: 50%; /* Two items per row on small screens */
+            }
+            .game-info-row {
+                justify-content: center;
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+            .message-box {
+                font-size: 1.5em;
+                padding: 20px;
+            }
+            .isl-sign-container {
+                min-width: 60px;
+                min-height: 60px;
+                padding: 10px;
+            }
+            .isl-target-display .isl-sign {
+                width: 50px;
+                height: 50px;
+            }
+            canvas {
+                max-height: 50vh; /* Adjust max-height for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Breakout Game</h1>
+        <canvas id="gameCanvas"></canvas>
+        <div class="game-info-row">
+            <span id="scoreDisplay" class="game-info-item">Score: 0</span>
+            <span id="livesDisplay" class="game-info-item">Lives: 3</span>
+        </div>
+        <div class="isl-target-display">
+            <div class="label">Target ISL Number:</div>
+            <div id="islTargetNumberDisplay" class="isl-sign"></div>
+        </div>
+        <div class="controls">
+            <button id="startButton">Start Game</button>
+            <button id="resetButton">Reset Game</button>
+        </div>
+
+        <!-- ISL Sign Container (for event cues like hit, win, game over) -->
+        <div id="islSignContainer" class="isl-sign-container"></div>
+    </div>
+
+    <div id="messageBox" class="message-box">
+        <p id="messageText"></p>
+        <button id="messageButton">Play Again</button>
+    </div>
+
+    <script>
+        // Get the canvas element and its 2D rendering context
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Get display elements
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const livesDisplay = document.getElementById('livesDisplay');
+        const startButton = document.getElementById('startButton');
+        const resetButton = document.getElementById('resetButton');
+        const messageBox = document.getElementById('messageBox');
+        const messageText = document.getElementById('messageText');
+        const messageButton = document.getElementById('messageButton');
+
+        // Get ISL sign containers
+        const islSignContainer = document.getElementById('islSignContainer'); // For event cues
+        const islTargetNumberDisplay = document.getElementById('islTargetNumberDisplay'); // For target number
+
+        // Game variables
+        let gameRunning = false;
+        let score = 0;
+        let lives = 3;
+        let currentISLTargetNumber = 0; // The number player needs to catch
+
+        // Base dimensions for scaling
+        const BASE_CANVAS_WIDTH = 600;
+        const BASE_CANVAS_HEIGHT = 337.5; // 16:9 aspect ratio of 600
+
+        // Ball properties (defined as ratios of base dimensions)
+        let ballRadiusRatio = 10 / BASE_CANVAS_WIDTH; // ~0.0167
+        let dxRatio = 2 / BASE_CANVAS_WIDTH; // ~0.0033
+        let dyRatio = -2 / BASE_CANVAS_HEIGHT; // ~ -0.0059
+
+        // Paddle properties (defined as ratios of base dimensions)
+        let paddleHeightRatio = 10 / BASE_CANVAS_HEIGHT; // ~0.0296
+        let paddleWidthRatio = 75 / BASE_CANVAS_WIDTH; // ~0.125
+
+        // Brick properties (defined as ratios of base dimensions)
+        let brickRowCount = 5;
+        let brickColumnCount = 8;
+        let brickWidthRatio = 75 / BASE_CANVAS_WIDTH; // ~0.125
+        let brickHeightRatio = 20 / BASE_CANVAS_HEIGHT; // ~0.059
+        let brickPaddingRatio = 10 / BASE_CANVAS_WIDTH; // ~0.0167
+        let brickOffsetTopRatio = 10 / BASE_CANVAS_HEIGHT; // ~0.0167
+        let brickOffsetLeftRatio = 10 / BASE_CANVAS_WIDTH; // ~0.0167
+
+        // Falling Numbers properties (defined as ratios of base dimensions)
+        let FALLING_NUMBER_SPEED_RATIO = 1.5 / BASE_CANVAS_HEIGHT; // ~0.0044
+        let FALLING_NUMBER_RADIUS_RATIO = 15 / BASE_CANVAS_WIDTH; // ~0.025
+        const NUM_FALLING_ITEMS_PER_BRICK = 3; // How many numbers fall per brick hit
+
+        // Actual calculated dimensions (will be updated in initGame and resize)
+        let ballRadius, x, y, dx, dy, paddleHeight, paddleWidth, paddleX,
+            brickWidth, brickHeight, brickPadding, brickOffsetTop, brickOffsetLeft,
+            FALLING_NUMBER_SPEED, FALLING_NUMBER_RADIUS;
+
+        let bricks = []; // Array to hold brick objects
+        let fallingNumbers = []; // Array to hold falling number objects
+
+        // Input tracking
+        let rightPressed = false;
+        let leftPressed = false;
+
+        // ISL Sign SVGs - Simple symbolic representations for events
+        const ISL_SVG_EVENTS = {
+            // A starburst/explosion for a "hit" or "break"
+            hit: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f6ad55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" />
+                </svg>`,
+            // A circle with an 'X' for "Game Over" or "End" (like a stop sign)
+            gameOver: `<svg width="60" height="60" viewBox="0 0 24 24" fill="#e53e3e" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="8" y1="8" x2="16" y2="16" />
+                    <line x1="16" y1="8" x2="8" y2="16" />
+                </svg>`,
+            // A checkmark for "You Win" or "Success"
+            win: `<svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#48bb78" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>`
+        };
+
+        // ISL Sign SVGs - Abstracted finger counts for numbers 1-5
+        const ISL_SVG_NUMBERS = {
+            1: `<svg viewBox="0 0 100 100" fill="none" stroke="#63b3ed" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M50 80 V20" />
+                </svg>`,
+            2: `<svg viewBox="0 0 100 100" fill="none" stroke="#63b3ed" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M40 80 V30 M60 80 V30" />
+                </svg>`,
+            3: `<svg viewBox="0 0 100 100" fill="none" stroke="#63b3ed" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M30 80 V40 M50 80 V20 M70 80 V40" />
+                </svg>`,
+            4: `<svg viewBox="0 0 100 100" fill="none" stroke="#63b3ed" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M25 80 V45 M40 80 V25 M60 80 V25 M75 80 V45" />
+                </svg>`,
+            5: `<svg viewBox="0 0 100 100" fill="none" stroke="#63b3ed" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 80 V30 M35 80 V20 M50 80 V10 M65 80 V20 M80 80 V30" />
+                </svg>`
+        };
+
+        // Function to display ISL-related visual cues for events (hit, win, game over)
+        function showISLSign(type) {
+            islSignContainer.innerHTML = ISL_SVG_EVENTS[type]; // Set the SVG content
+            islSignContainer.style.display = 'flex'; // Make it visible
+            islSignContainer.style.opacity = 1; // Fade in
+
+            // Hide after a short delay
+            setTimeout(() => {
+                islSignContainer.style.opacity = 0; // Fade out
+                // After fade out, hide completely to ensure pointer-events: none works consistently
+                setTimeout(() => {
+                    islSignContainer.style.display = 'none';
+                }, 300); // Match CSS transition duration
+            }, 700); // Display for 700ms
+        }
+
+        // Function to set and display the current ISL target number
+        function setNewISLTargetNumber() {
+            currentISLTargetNumber = Math.floor(Math.random() * 5) + 1; // Random number between 1 and 5
+            islTargetNumberDisplay.innerHTML = ISL_SVG_NUMBERS[currentISLTargetNumber];
+        }
+
+        // Function to initialize or reset game state and calculate dimensions
+        function initGame() {
+            // Set canvas dimensions dynamically based on container
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+
+            // Calculate actual dimensions based on current canvas size
+            ballRadius = ballRadiusRatio * canvas.width;
+            paddleHeight = paddleHeightRatio * canvas.height;
+            paddleWidth = paddleWidthRatio * canvas.width;
+            dx = dxRatio * canvas.width;
+            dy = dyRatio * canvas.height;
+            FALLING_NUMBER_SPEED = FALLING_NUMBER_SPEED_RATIO * canvas.height;
+            FALLING_NUMBER_RADIUS = FALLING_NUMBER_RADIUS_RATIO * canvas.width;
+
+            brickWidth = brickWidthRatio * canvas.width;
+            brickHeight = brickHeightRatio * canvas.height;
+            brickPadding = brickPaddingRatio * canvas.width;
+            brickOffsetTop = brickOffsetTopRatio * canvas.height;
+            brickOffsetLeft = brickOffsetLeftRatio * canvas.width;
+
+
+            // Initialize ball position to center of paddle
+            x = canvas.width / 2;
+            y = canvas.height - paddleHeight - ballRadius; // Position above paddle
+            paddleX = (canvas.width - paddleWidth) / 2;
+
+            // Initialize bricks array
+            bricks = [];
+            for (let c = 0; c < brickColumnCount; c++) {
+                bricks[c] = [];
+                for (let r = 0; r < brickRowCount; r++) {
+                    bricks[c][r] = { x: 0, y: 0, status: 1 }; // status 1 means brick is active
+                }
+            }
+
+            // Clear falling numbers
+            fallingNumbers = [];
+
+            score = 0;
+            lives = 3;
+            scoreDisplay.textContent = `Score: ${score}`;
+            livesDisplay.textContent = `Lives: ${lives}`;
+            messageBox.style.display = 'none'; // Hide any messages
+            islSignContainer.style.display = 'none'; // Hide ISL event sign container
+            islSignContainer.style.opacity = 0; // Ensure it's faded out
+            gameRunning = false; // Game starts paused
+
+            setNewISLTargetNumber(); // Set initial ISL target number
+        }
+
+        // --- Drawing Functions ---
+
+        // Draw the ball
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+            ctx.fillStyle = "#63b3ed"; // Blueish ball
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        // Draw the paddle
+        function drawPaddle() {
+            ctx.beginPath();
+            ctx.roundRect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight, 5); // Rounded corners
+            ctx.fillStyle = "#a0aec0"; // Greyish paddle
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        // Draw the bricks
+        function drawBricks() {
+            for (let c = 0; c < brickColumnCount; c++) {
+                for (let r = 0; r < brickRowCount; r++) {
+                    if (bricks[c][r].status === 1) { // Only draw active bricks
+                        // Recalculate brick positions based on current canvas size
+                        let brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+                        let brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+                        bricks[c][r].x = brickX;
+                        bricks[c][r].y = brickY;
+                        ctx.beginPath();
+                        ctx.roundRect(brickX, brickY, brickWidth, brickHeight, 3); // Rounded corners
+                        // Alternate brick colors for visual appeal
+                        if (r % 2 === 0) {
+                            ctx.fillStyle = "#f6ad55"; // Orange
+                        } else {
+                            ctx.fillStyle = "#9f7aea"; // Purple
+                        }
+                        ctx.fill();
+                        ctx.closePath();
+                    }
+                }
+            }
+        }
+
+        // Draw falling numbers
+        function drawFallingNumbers() {
+            for (let i = 0; i < fallingNumbers.length; i++) {
+                const num = fallingNumbers[i];
+                if (num.status === 1) { // Only draw active falling numbers
+                    ctx.beginPath();
+                    ctx.arc(num.x, num.y, FALLING_NUMBER_RADIUS, 0, Math.PI * 2);
+                    // Differentiate correct number visually (e.g., a different color)
+                    ctx.fillStyle = (num.value === currentISLTargetNumber) ? "#48bb78" : "#e0e0e0"; // Green for target, light grey for others
+                    ctx.fill();
+                    ctx.closePath();
+
+                    // Draw the number value inside the circle
+                    ctx.font = `${FALLING_NUMBER_RADIUS * 1.2}px Inter`; // Font size scales with radius
+                    ctx.fillStyle = (num.value === currentISLTargetNumber) ? "#e2e8f0" : "#333"; // White text for target, dark for others
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+                    ctx.fillText(num.value, num.x, num.y + 1); // Adjust y for better centering
+                }
+            }
+        }
+
+        // Draw score and lives
+        function drawText() {
+            scoreDisplay.textContent = `Score: ${score}`;
+            livesDisplay.textContent = `Lives: ${lives}`;
+        }
+
+        // --- Collision Detection ---
+
+        // Check for ball-brick collision
+        function collisionDetection() {
+            for (let c = 0; c < brickColumnCount; c++) {
+                for (let r = 0; r < brickRowCount; r++) {
+                    let b = bricks[c][r];
+                    if (b.status === 1) { // Check only active bricks
+                        if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+                            dy = -dy; // Reverse ball direction
+                            b.status = 0; // Mark brick as broken
+                            score += 10; // Base score for breaking a brick
+                            showISLSign('hit'); // Show hit sign when a brick is broken
+
+                            // Generate multiple falling numbers
+                            let numbersToFall = [];
+
+                            // Ensure the correct target number is among them
+                            numbersToFall.push(currentISLTargetNumber);
+
+                            // Add other random, incorrect numbers
+                            while (numbersToFall.length < NUM_FALLING_ITEMS_PER_BRICK) {
+                                let randomNum = Math.floor(Math.random() * 5) + 1;
+                                // Ensure the random number is not the target and not already in the list
+                                if (randomNum !== currentISLTargetNumber && !numbersToFall.includes(randomNum)) {
+                                    numbersToFall.push(randomNum);
+                                }
+                            }
+
+                            // Shuffle the array to randomize their horizontal positions
+                            for (let i = numbersToFall.length - 1; i > 0; i--) {
+                                const j = Math.floor(Math.random() * (i + 1));
+                                [numbersToFall[i], numbersToFall[j]] = [numbersToFall[j], numbersToFall[i]];
+                            }
+
+                            // Spawn each number
+                            for (let i = 0; i < numbersToFall.length; i++) {
+                                // Distribute them horizontally around the brick's center
+                                // Adjust spacing based on scaled radius
+                                const spacing = FALLING_NUMBER_RADIUS * 2.5; // Space between centers
+                                const totalWidth = (NUM_FALLING_ITEMS_PER_BRICK - 1) * spacing;
+                                const startX = b.x + brickWidth / 2 - totalWidth / 2;
+
+                                const spawnX = startX + i * spacing;
+                                const spawnY = b.y + brickHeight / 2;
+
+                                fallingNumbers.push({
+                                    x: spawnX,
+                                    y: spawnY,
+                                    value: numbersToFall[i],
+                                    dy: FALLING_NUMBER_SPEED, // Use scaled speed
+                                    status: 1 // Active
+                                });
+                            }
+
+                            if (score >= (brickRowCount * brickColumnCount * 10) && allBricksBroken()) { // Win condition: all bricks broken
+                                showISLSign('win'); // Show win sign
+                                showMessage("YOU WIN!", "Congratulations!");
+                                gameRunning = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Check if all bricks are broken
+        function allBricksBroken() {
+            for (let c = 0; c < brickColumnCount; c++) {
+                for (let r = 0; r < brickRowCount; r++) {
+                    if (bricks[c][r].status === 1) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        // Check for paddle-falling number collision
+        function catchFallingNumbers() {
+            for (let i = 0; i < fallingNumbers.length; i++) {
+                const num = fallingNumbers[i];
+                if (num.status === 1) {
+                    // Check if the center of the falling number is within the paddle's bounds
+                    if (num.x > paddleX && num.x < paddleX + paddleWidth &&
+                        num.y + FALLING_NUMBER_RADIUS > canvas.height - paddleHeight &&
+                        num.y - FALLING_NUMBER_RADIUS < canvas.height) {
+
+                        num.status = 0; // Mark as caught
+
+                        if (num.value === currentISLTargetNumber) {
+                            score += 100; // Big bonus for catching the correct ISL number
+                            setNewISLTargetNumber(); // Set a new target
+                        }
+                        // No points are added for incorrect numbers
+                    }
+                }
+            }
+            // Remove caught or fallen numbers from the array to keep it clean
+            fallingNumbers = fallingNumbers.filter(num => num.status === 1 && num.y < canvas.height + FALLING_NUMBER_RADIUS);
+        }
+
+
+        // --- Game Logic ---
+
+        // Update game state (movement, collisions)
+        function update() {
+            if (!gameRunning) return;
+
+            // Ball movement
+            x += dx;
+            y += dy;
+
+            // Ball-wall collision detection
+            if (x + ballRadius > canvas.width || x - ballRadius < 0) {
+                dx = -dx; // Reverse horizontal direction
+            }
+            if (y - ballRadius < 0) {
+                dy = -dy; // Reverse vertical direction (top wall)
+            } else if (y + ballRadius > canvas.height - paddleHeight) {
+                // Ball hits bottom (misses paddle)
+                if (x > paddleX && x < paddleX + paddleWidth) {
+                    // Ball hits paddle
+                    dy = -dy; // Reverse vertical direction
+                    // Adjust horizontal direction based on where it hit the paddle
+                    let hitPoint = x - (paddleX + paddleWidth / 2);
+                    dx = hitPoint * (0.1 * (canvas.width / BASE_CANVAS_WIDTH)); // Scale bounce intensity
+                } else {
+                    // Ball falls off screen
+                    lives--;
+                    if (lives === 0) {
+                        showISLSign('gameOver'); // Show game over sign
+                        showMessage("GAME OVER", "Try again!");
+                        gameRunning = false;
+                    } else {
+                        // Reset ball and paddle for next life, using scaled initial positions
+                        x = canvas.width / 2;
+                        y = canvas.height - paddleHeight - ballRadius;
+                        dx = dxRatio * canvas.width;
+                        dy = dyRatio * canvas.height;
+                        paddleX = (canvas.width - paddleWidth) / 2;
+                    }
+                }
+            }
+
+            // Paddle movement (if using keyboard, though we'll primarily use mouse/touch)
+            const paddleSpeed = 7 * (canvas.width / BASE_CANVAS_WIDTH); // Scale paddle speed
+            if (rightPressed && paddleX < canvas.width - paddleWidth) {
+                paddleX += paddleSpeed;
+            } else if (leftPressed && paddleX > 0) {
+                paddleX -= paddleSpeed;
+            }
+
+            // Update falling numbers positions
+            for (let i = 0; i < fallingNumbers.length; i++) {
+                if (fallingNumbers[i].status === 1) {
+                    fallingNumbers[i].y += fallingNumbers[i].dy;
+                }
+            }
+
+            collisionDetection(); // Check for brick collisions
+            catchFallingNumbers(); // Check for falling number collisions with paddle
+
+            draw(); // Redraw everything
+            requestAnimationFrame(update); // Loop the game
+        }
+
+        // Main drawing function
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+            drawBricks();
+            drawBall();
+            drawPaddle();
+            drawFallingNumbers(); // Draw falling numbers
+            drawText();
+        }
+
+        // --- Event Listeners ---
+
+        // Keyboard input (optional, primarily for testing)
+        document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
+
+        function keyDownHandler(e) {
+            if (e.key === "Right" || e.key === "ArrowRight") {
+                rightPressed = true;
+            } else if (e.key === "Left" || e.key === "ArrowLeft") {
+                leftPressed = true;
+            }
+        }
+
+        function keyUpHandler(e) {
+            if (e.key === "Right" || e.key === "ArrowRight") {
+                rightPressed = false;
+            } else if (e.key === "Left" || e.key === "ArrowLeft") {
+                leftPressed = false;
+            }
+        }
+
+        // Mouse input for paddle movement
+        canvas.addEventListener("mousemove", mouseMoveHandler, false);
+        function mouseMoveHandler(e) {
+            if (!gameRunning) return; // Only move paddle if game is running
+            let relativeX = e.clientX - canvas.getBoundingClientRect().left;
+            if (relativeX > 0 && relativeX < canvas.width) {
+                paddleX = relativeX - paddleWidth / 2;
+                // Keep paddle within canvas bounds
+                if (paddleX < 0) paddleX = 0;
+                if (paddleX > canvas.width - paddleWidth) paddleX = canvas.width - paddleWidth;
+            }
+        }
+
+        // Touch input for paddle movement (for mobile)
+        canvas.addEventListener("touchmove", touchMoveHandler, false);
+        function touchMoveHandler(e) {
+            if (!gameRunning) return; // Only move paddle if game is running
+            e.preventDefault(); // Prevent scrolling
+            let touch = e.touches[0];
+            let relativeX = touch.clientX - canvas.getBoundingClientRect().left;
+            if (relativeX > 0 && relativeX < canvas.width) {
+                paddleX = relativeX - paddleWidth / 2;
+                // Keep paddle within canvas bounds
+                if (paddleX < 0) paddleX = 0;
+                if (paddleX > canvas.width - paddleWidth) paddleX = canvas.width - paddleWidth;
+            }
+        }
+
+        // Resize handler to make canvas responsive
+        window.addEventListener('resize', () => {
+            const oldCanvasWidth = canvas.width;
+            const oldCanvasHeight = canvas.height;
+
+            // Update canvas dimensions
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+
+            // Calculate scaling ratios
+            const scaleX = canvas.width / oldCanvasWidth;
+            const scaleY = canvas.height / oldCanvasHeight;
+
+            // Scale current game element positions and speeds
+            x *= scaleX;
+            y *= scaleY;
+            dx *= scaleX;
+            dy *= scaleY;
+            paddleX *= scaleX;
+
+            // Scale falling numbers positions and speeds
+            for (let i = 0; i < fallingNumbers.length; i++) {
+                fallingNumbers[i].x *= scaleX;
+                fallingNumbers[i].y *= scaleY;
+                fallingNumbers[i].dy *= scaleY;
+            }
+
+            // Re-initialize game parameters based on new canvas size (dimensions, not positions)
+            ballRadius = ballRadiusRatio * canvas.width;
+            paddleHeight = paddleHeightRatio * canvas.height;
+            paddleWidth = paddleWidthRatio * canvas.width;
+            FALLING_NUMBER_SPEED = FALLING_NUMBER_SPEED_RATIO * canvas.height;
+            FALLING_NUMBER_RADIUS = FALLING_NUMBER_RADIUS_RATIO * canvas.width;
+
+            brickWidth = brickWidthRatio * canvas.width;
+            brickHeight = brickHeightRatio * canvas.height;
+            brickPadding = brickPaddingRatio * canvas.width;
+            brickOffsetTop = brickOffsetTopRatio * canvas.height;
+            brickOffsetLeft = brickOffsetLeftRatio * canvas.width;
+
+            draw(); // Redraw everything with new scaled dimensions
+        });
+
+
+        // --- Game State Control ---
+
+        function startGame() {
+            if (!gameRunning) {
+                gameRunning = true;
+                messageBox.style.display = 'none'; // Hide message box if visible
+                islSignContainer.style.display = 'none'; // Hide ISL event sign container
+                update(); // Start the game loop
+            }
+        }
+
+        function resetGame() {
+            initGame(); // Re-initialize all game variables and dimensions
+            draw(); // Draw the initial state
+        }
+
+        function showMessage(title, text) {
+            messageText.innerHTML = `<strong>${title}</strong><br>${text}`;
+            messageBox.style.display = 'block';
+        }
+
+        // Button event listeners
+        startButton.addEventListener('click', startGame);
+        resetButton.addEventListener('click', resetGame);
+        messageButton.addEventListener('click', resetGame); // Play Again button
+
+        // Initial setup when the window loads
+        window.onload = function() {
+            initGame(); // Initialize game state and draw initial elements
+            draw(); // Draw the initial game state
+        };
+
+    </script>
+</body>
+</html>

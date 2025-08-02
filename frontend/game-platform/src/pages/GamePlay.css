@@ -1,36 +1,41 @@
-/* src/pages/GamePlay.css */
-
 .gameplay-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
 }
 
 .gameplay-title {
-  margin-bottom: 20px;
-  color: var(--color-heading);
+  text-align: center;
+  font-size: 2rem;
+  margin: 1rem 0;
 }
 
-.gameplay-toolbar {
+.game-display {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  background: white;
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-bottom: 20px;
+  align-items: center;
 }
 
-.gameplay-toolbar button {
-  background-color: var(--color-button-bg);
-  border: 2px solid var(--color-button-border);
-  color: var(--color-button-text);
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 8px;
+.overlay-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  font-size: 1.5rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
 }
 
-.gameplay-toolbar button:hover {
-  background-color: var(--color-link);
-  transform: scale(1.1);
+.overlay-button:hover {
+  transform: translate(-50%, -50%);
 }
