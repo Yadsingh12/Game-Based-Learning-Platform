@@ -1,0 +1,154 @@
+.column-match {
+  font-family: "Inter", sans-serif;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.column-match .game-area {
+  width: 100%;
+  background-color: #f0f0f0;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.column-match .sections {
+  flex: 1;
+  display: flex;
+  flex-direction: row; /* ➤ columns layout: side-by-side */
+  gap: 1rem;
+  height: 100%;
+  overflow: hidden;
+}
+
+.column-match .grid-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.5rem;
+  align-content: start;
+  justify-items: center;
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.column-match h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.column-match img,
+.column-match video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  border: 2px solid transparent;
+  transition: transform 0.3s ease;
+  max-height: 100%;
+  height: auto;
+}
+
+.column-match video {
+  pointer-events: none;
+}
+
+.column-match .drop-target {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 2px dashed #ccc;
+  border-radius: 0.5rem;
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.column-match .matched {
+  opacity: 0.4;
+  pointer-events: none;
+  border-color: green;
+}
+
+.column-match .result {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.column-match .difficulty-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.column-match .difficulty-buttons button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.column-match .difficulty-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.column-match .instructions {
+  max-width: 600px;
+  margin: 1rem auto;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* ✅ Mobile responsiveness */
+@media (max-width: 768px) {
+  .column-match .game-area {
+    padding: 0.5rem;
+  }
+
+  .column-match .sections {
+    flex-direction: column; /* stack sections vertically */
+    gap: 1rem;
+  }
+
+  .column-match .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+    max-height: unset;
+  }
+
+  .column-match img,
+  .column-match video,
+  .column-match .drop-target {
+    width: 100%;
+    height: auto;
+    max-height: unset;
+  }
+
+  .column-match h2 {
+    font-size: 0.9rem;
+  }
+
+  .column-match .instructions {
+    font-size: 0.85rem;
+    padding: 0 0.5rem;
+  }
+}
