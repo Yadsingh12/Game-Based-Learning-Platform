@@ -1,0 +1,132 @@
+/* General styling for the game component */
+.game-wrapper {
+  position: relative;
+  min-height: 100vh;
+  background-color: #f3f4f6; /* bg-gray-100 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Container for the main game content */
+.game-container {
+  padding: 1rem;
+  height: 100%;
+  max-height: 100vh; /* max-w-md */
+  border-radius: 0.5rem; /* rounded-lg */
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
+  background-color: #ffffff; /* bg-white */
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Title styling */
+.game-title {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 700; /* font-bold */
+  margin-bottom: 1rem; /* mb-4 */
+  text-align: center; /* text-center */
+}
+
+/* Video styling */
+.game-video {
+  width: 100%;
+  margin-bottom: 1rem; /* mb-4 */
+  border-radius: 0.375rem; /* rounded-md */
+}
+
+/* Interactive clock section */
+.clock-interactive {
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+/* Check Answer button */
+.btn {
+  width: 100%;
+  padding: 0.5rem 1rem; /* py-2 px-4 */
+  font-weight: 600; /* font-semibold */
+  border-radius: 0.25rem; /* rounded */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.btn-check {
+  background-color: #2563eb; /* bg-blue-600 */
+  color: #ffffff; /* text-white */
+}
+
+.btn-check:hover {
+  background-color: #1d4ed8; /* hover:bg-blue-700 */
+}
+
+/* Result overlay and card styling */
+.result-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* bg-black bg-opacity-50 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  padding: 1rem
+}
+
+.result-card {
+  width: 100%;
+  max-width: 28rem; /* max-w-md */
+  padding: 1rem; /* p-4 */
+  border-radius: 0.25rem; /* rounded */
+  background-color: #ffffff; /* bg-white */
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
+  text-align: center; /* text-center */
+  border: 1px solid #e5e7eb; /* border */
+}
+
+/* Result status text */
+.result-status {
+  font-weight: 700; /* font-bold */
+  font-size: 1.125rem; /* text-lg */
+}
+
+.result-status.correct {
+  color: #16a34a; /* text-green-600 */
+}
+
+.result-status.incorrect {
+  color: #dc2626; /* text-red-600 */
+}
+
+/* Result sections */
+.result-section {
+  margin-top: 1rem; /* mt-4 */
+}
+
+.result-label {
+  font-size: 1rem; /* text-base */
+  font-weight: 500; /* font-medium */
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.clock-display {
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.digital-time {
+  margin-top: 0.5rem; /* mt-2 */
+}
+
+/* Next button */
+.btn-next {
+  margin-top: 1.5rem; /* mt-6 */
+  background-color: #16a34a; /* bg-green-600 */
+  color: #ffffff; /* text-white */
+}
+
+.btn-next:hover {
+  background-color: #15803d; /* hover:bg-green-700 */
+}
