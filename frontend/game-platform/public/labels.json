@@ -1,0 +1,562 @@
+[
+  {
+    "name": "person",
+    "description": "A human being, typically walking, running, or standing.",
+    "sample_video": "/videos/person.mp4",
+    "image": "/images/person.jpg",
+    "enabled": true
+  },
+  {
+    "name": "bicycle",
+    "description": "A two-wheeled vehicle that is powered by pedaling.",
+    "sample_video": "/videos/bicycle.mp4",
+    "image": "/images/bicycle.jpg",
+    "enabled": true
+  },
+  {
+    "name": "car",
+    "description": "A four-wheeled motor vehicle used for transportation.",
+    "sample_video": "/videos/car.mp4",
+    "image": "/images/car.jpg",
+    "enabled": true
+  },
+  {
+    "name": "motorcycle",
+    "description": "A two-wheeled motor vehicle that is faster than a bicycle.",
+    "sample_video": "/videos/motorcycle.mp4",
+    "image": "/images/motorcycle.jpg",
+    "enabled": true
+  },
+  {
+    "name": "airplane",
+    "description": "A powered flying vehicle with fixed wings.",
+    "sample_video": "/videos/airplane.mp4",
+    "image": "/images/airplane.jpg",
+    "enabled": true
+  },
+  {
+    "name": "bus",
+    "description": "A large motor vehicle carrying passengers.",
+    "sample_video": "/videos/bus.mp4",
+    "image": "/images/bus.jpg",
+    "enabled": true
+  },
+  {
+    "name": "train",
+    "description": "A connected series of railway cars moving on tracks.",
+    "sample_video": "/videos/train.mp4",
+    "image": "/images/train.jpg",
+    "enabled": true
+  },
+  {
+    "name": "truck",
+    "description": "A large motor vehicle designed for transporting goods.",
+    "sample_video": "/videos/truck.mp4",
+    "image": "/images/truck.jpg",
+    "enabled": true
+  },
+  {
+    "name": "boat",
+    "description": "A watercraft of various sizes used for transportation on water.",
+    "sample_video": "/videos/boat.mp4",
+    "image": "/images/boat.jpg",
+    "enabled": true
+  },
+  {
+    "name": "traffic light",
+    "description": "A signaling device at road intersections controlling traffic flow.",
+    "sample_video": "/videos/traffic_light.mp4",
+    "image": "/images/traffic_light.jpg",
+    "enabled": true
+  },
+  {
+    "name": "fire hydrant",
+    "description": "A water source for firefighters in case of emergency.",
+    "sample_video": "/videos/fire_hydrant.mp4",
+    "image": "/images/fire_hydrant.jpg",
+    "enabled": false
+  },
+  {
+    "name": "stop sign",
+    "description": "A road sign indicating vehicles must stop before proceeding.",
+    "sample_video": "/videos/stop_sign.mp4",
+    "image": "/images/stop_sign.jpg",
+    "enabled": true
+  },
+  {
+    "name": "parking meter",
+    "description": "A device that collects fees for vehicle parking.",
+    "sample_video": "/videos/parking_meter.mp4",
+    "image": "/images/parking_meter.jpg",
+    "enabled": false
+  },
+  {
+    "name": "bench",
+    "description": "A long seat for multiple people, usually found in public places.",
+    "sample_video": "/videos/bench.mp4",
+    "image": "/images/bench.jpg",
+    "enabled": false
+  },
+  {
+    "name": "bird",
+    "description": "A warm-blooded vertebrate animal with feathers and wings.",
+    "sample_video": "/videos/bird.mp4",
+    "image": "/images/bird.jpg",
+    "enabled": true
+  },
+  {
+    "name": "cat",
+    "description": "A small domesticated carnivorous mammal with soft fur.",
+    "sample_video": "/videos/cat.mp4",
+    "image": "/images/cat.jpg",
+    "enabled": true
+  },
+  {
+    "name": "dog",
+    "description": "A domesticated carnivorous mammal known for loyalty and companionship.",
+    "sample_video": "/videos/dog.mp4",
+    "image": "/images/dog.jpg",
+    "enabled": true
+  },
+  {
+    "name": "horse",
+    "description": "A large domesticated animal used for riding and work.",
+    "sample_video": "/videos/horse.mp4",
+    "image": "/images/horse.jpg",
+    "enabled": true
+  },
+  {
+    "name": "sheep",
+    "description": "A domesticated ruminant animal known for its woolly coat.",
+    "sample_video": "/videos/sheep.mp4",
+    "image": "/images/sheep.jpg",
+    "enabled": true
+  },
+  {
+    "name": "cow",
+    "description": "A large domesticated animal raised for milk and meat.",
+    "sample_video": "/videos/cow.mp4",
+    "image": "/images/cow.jpg",
+    "enabled": true
+  },
+  {
+    "name": "elephant",
+    "description": "A large land mammal with a trunk, native to Africa and Asia.",
+    "sample_video": "/videos/elephant.mp4",
+    "image": "/images/elephant.jpg",
+    "enabled": true
+  },
+  {
+    "name": "bear",
+    "description": "A large, heavy mammal with thick fur, found in forests and mountains.",
+    "sample_video": "/videos/bear.mp4",
+    "image": "/images/bear.jpg",
+    "enabled": true
+  },
+  {
+    "name": "zebra",
+    "description": "An African wild horse with distinctive black-and-white stripes.",
+    "sample_video": "/videos/zebra.mp4",
+    "image": "/images/zebra.jpg",
+    "enabled": true
+  },
+  {
+    "name": "giraffe",
+    "description": "A tall African mammal with a very long neck and spotted coat.",
+    "sample_video": "/videos/giraffe.mp4",
+    "image": "/images/giraffe.jpg",
+    "enabled": true
+  },
+  {
+    "name": "backpack",
+    "description": "A bag worn on the back to carry items.",
+    "sample_video": "/videos/backpack.mp4",
+    "image": "/images/backpack.jpg",
+    "enabled": true
+  },
+  {
+    "name": "umbrella",
+    "description": "A device used to protect against rain or sun.",
+    "sample_video": "/videos/umbrella.mp4",
+    "image": "/images/umbrella.jpg",
+    "enabled": true
+  },
+  {
+    "name": "handbag",
+    "description": "A small bag carried by hand for personal items.",
+    "sample_video": "/videos/handbag.mp4",
+    "image": "/images/handbag.jpg",
+    "enabled": true
+  },
+  {
+    "name": "tie",
+    "description": "A neck accessory worn with formal shirts.",
+    "sample_video": "/videos/tie.mp4",
+    "image": "/images/tie.jpg",
+    "enabled": false
+  },
+  {
+    "name": "suitcase",
+    "description": "A portable container for carrying clothes and personal items.",
+    "sample_video": "/videos/suitcase.mp4",
+    "image": "/images/suitcase.jpg",
+    "enabled": true
+  },
+  {
+    "name": "frisbee",
+    "description": "A lightweight disc thrown and caught in a game.",
+    "sample_video": "/videos/frisbee.mp4",
+    "image": "/images/frisbee.jpg",
+    "enabled": true
+  },
+  {
+    "name": "skis",
+    "description": "Narrow strips attached to boots for gliding over snow.",
+    "sample_video": "/videos/skis.mp4",
+    "image": "/images/skis.jpg",
+    "enabled": true
+  },
+  {
+    "name": "snowboard",
+    "description": "A flat board used for gliding down snowy slopes.",
+    "sample_video": "/videos/snowboard.mp4",
+    "image": "/images/snowboard.jpg",
+    "enabled": false
+  },
+  {
+    "name": "sports ball",
+    "description": "A spherical object used in various sports.",
+    "sample_video": "/videos/sports_ball.mp4",
+    "image": "/images/sports_ball.jpg",
+    "enabled": true
+  },
+  {
+    "name": "kite",
+    "description": "A lightweight frame covered with material flown in the wind.",
+    "sample_video": "/videos/kite.mp4",
+    "image": "/images/kite.jpg",
+    "enabled": true
+  },
+  {
+    "name": "baseball bat",
+    "description": "A wooden or metal bat used to hit a baseball.",
+    "sample_video": "/videos/baseball_bat.mp4",
+    "image": "/images/baseball_bat.jpg",
+    "enabled": true
+  },
+  {
+    "name": "baseball glove",
+    "description": "A padded leather glove used for catching baseballs.",
+    "sample_video": "/videos/baseball_glove.mp4",
+    "image": "/images/baseball_glove.jpg",
+    "enabled": true
+  },
+  {
+    "name": "skateboard",
+    "description": "A board mounted on wheels used for skating.",
+    "sample_video": "/videos/skateboard.mp4",
+    "image": "/images/skateboard.jpg",
+    "enabled": true
+  },
+  {
+    "name": "surfboard",
+    "description": "A long board used to ride on ocean waves.",
+    "sample_video": "/videos/surfboard.mp4",
+    "image": "/images/surfboard.jpg",
+    "enabled": false
+  },
+  {
+    "name": "tennis racket",
+    "description": "A racket used to hit a tennis ball.",
+    "sample_video": "/videos/tennis_racket.mp4",
+    "image": "/images/tennis_racket.jpg",
+    "enabled": true
+  },
+  {
+    "name": "bottle",
+    "description": "A container for holding liquids.",
+    "sample_video": "/videos/bottle.mp4",
+    "image": "/images/bottle.jpg",
+    "enabled": true
+  },
+  {
+    "name": "wine glass",
+    "description": "A stemmed glass designed for drinking wine.",
+    "sample_video": "/videos/wine_glass.mp4",
+    "image": "/images/wine_glass.jpg",
+    "enabled": false
+  },
+  {
+    "name": "cup",
+    "description": "A small open container for drinking liquids.",
+    "sample_video": "/videos/cup.mp4",
+    "image": "/images/cup.jpg",
+    "enabled": true
+  },
+  {
+    "name": "fork",
+    "description": "A utensil with prongs for eating food.",
+    "sample_video": "/videos/fork.mp4",
+    "image": "/images/fork.jpg",
+    "enabled": true
+  },
+  {
+    "name": "knife",
+    "description": "A tool with a blade used for cutting.",
+    "sample_video": "/videos/knife.mp4",
+    "image": "/images/knife.jpg",
+    "enabled": true
+  },
+  {
+    "name": "spoon",
+    "description": "A utensil with a round bowl for scooping food.",
+    "sample_video": "/videos/spoon.mp4",
+    "image": "/images/spoon.jpg",
+    "enabled": true
+  },
+  {
+    "name": "bowl",
+    "description": "A round deep dish used for holding food or liquid.",
+    "sample_video": "/videos/bowl.mp4",
+    "image": "/images/bowl.jpg",
+    "enabled": true
+  },
+  {
+    "name": "banana",
+    "description": "A long curved fruit with a yellow peel.",
+    "sample_video": "/videos/banana.mp4",
+    "image": "/images/banana.jpg",
+    "enabled": true
+  },
+  {
+    "name": "apple",
+    "description": "A round fruit with red, green, or yellow skin.",
+    "sample_video": "/videos/apple.mp4",
+    "image": "/images/apple.jpg",
+    "enabled": true
+  },
+  {
+    "name": "sandwich",
+    "description": "Two slices of bread with filling in between.",
+    "sample_video": "/videos/sandwich.mp4",
+    "image": "/images/sandwich.jpg",
+    "enabled": false
+  },
+  {
+    "name": "orange",
+    "description": "A citrus fruit with a tough bright orange skin.",
+    "sample_video": "/videos/orange.mp4",
+    "image": "/images/orange.jpg",
+    "enabled": true
+  },
+  {
+    "name": "broccoli",
+    "description": "A green vegetable with a tree-like structure.",
+    "sample_video": "/videos/broccoli.mp4",
+    "image": "/images/broccoli.jpg",
+    "enabled": true
+  },
+  {
+    "name": "carrot",
+    "description": "An orange root vegetable often used in salads.",
+    "sample_video": "/videos/carrot.mp4",
+    "image": "/images/carrot.jpg",
+    "enabled": true
+  },
+  {
+    "name": "hot dog",
+    "description": "A cooked sausage served in a sliced bun.",
+    "sample_video": "/videos/hot_dog.mp4",
+    "image": "/images/hot_dog.jpg",
+    "enabled": false
+  },
+  {
+    "name": "pizza",
+    "description": "A baked dish with toppings on a dough base.",
+    "sample_video": "/videos/pizza.mp4",
+    "image": "/images/pizza.jpg",
+    "enabled": true
+  },
+  {
+    "name": "donut",
+    "description": "A fried dough confection, typically ring-shaped.",
+    "sample_video": "/videos/donut.mp4",
+    "image": "/images/donut.jpg",
+    "enabled": true
+  },
+  {
+    "name": "cake",
+    "description": "A sweet baked dessert, often with frosting.",
+    "sample_video": "/videos/cake.mp4",
+    "image": "/images/cake.jpg",
+    "enabled": true
+  },
+  {
+    "name": "chair",
+    "description": "A piece of furniture for sitting, typically with a back.",
+    "sample_video": "/videos/chair.mp4",
+    "image": "/images/chair.jpg",
+    "enabled": true
+  },
+  {
+    "name": "couch",
+    "description": "A long upholstered seat with a back and arms.",
+    "sample_video": "/videos/couch.mp4",
+    "image": "/images/couch.jpg",
+    "enabled": true
+  },
+  {
+    "name": "potted plant",
+    "description": "A plant grown in a container, usually for decoration.",
+    "sample_video": "/videos/potted_plant.mp4",
+    "image": "/images/potted_plant.jpg",
+    "enabled": true
+  },
+  {
+    "name": "bed",
+    "description": "Furniture for sleeping, usually a mattress on a frame.",
+    "sample_video": "/videos/bed.mp4",
+    "image": "/images/bed.jpg",
+    "enabled": true
+  },
+  {
+    "name": "dining table",
+    "description": "A table used for serving and eating meals.",
+    "sample_video": "/videos/dining_table.mp4",
+    "image": "/images/dining_table.jpg",
+    "enabled": true
+  },
+  {
+    "name": "toilet",
+    "description": "A plumbing fixture for human waste disposal.",
+    "sample_video": "/videos/toilet.mp4",
+    "image": "/images/toilet.jpg",
+    "enabled": true
+  },
+  {
+    "name": "tv",
+    "description": "An electronic device for viewing video content.",
+    "sample_video": "/videos/tv.mp4",
+    "image": "/images/tv.jpg",
+    "enabled": true
+  },
+  {
+    "name": "laptop",
+    "description": "A portable personal computer.",
+    "sample_video": "/videos/laptop.mp4",
+    "image": "/images/laptop.jpg",
+    "enabled": true
+  },
+  {
+    "name": "mouse",
+    "description": "A pointing device used with computers.",
+    "sample_video": "/videos/mouse.mp4",
+    "image": "/images/mouse.jpg",
+    "enabled": true
+  },
+  {
+    "name": "remote",
+    "description": "A handheld device for controlling electronics wirelessly.",
+    "sample_video": "/videos/remote.mp4",
+    "image": "/images/remote.jpg",
+    "enabled": true
+  },
+  {
+    "name": "keyboard",
+    "description": "A panel of keys used to input text and commands.",
+    "sample_video": "/videos/keyboard.mp4",
+    "image": "/images/keyboard.jpg",
+    "enabled": true
+  },
+  {
+    "name": "cell phone",
+    "description": "A portable telephone that connects via cellular network.",
+    "sample_video": "/videos/cell_phone.mp4",
+    "image": "/images/cell_phone.jpg",
+    "enabled": true
+  },
+  {
+    "name": "microwave",
+    "description": "An appliance that heats food using microwave radiation.",
+    "sample_video": "/videos/microwave.mp4",
+    "image": "/images/microwave.jpg",
+    "enabled": true
+  },
+  {
+    "name": "oven",
+    "description": "An appliance used for baking or roasting food.",
+    "sample_video": "/videos/oven.mp4",
+    "image": "/images/oven.jpg",
+    "enabled": true
+  },
+  {
+    "name": "toaster",
+    "description": "An appliance that browns slices of bread.",
+    "sample_video": "/videos/toaster.mp4",
+    "image": "/images/toaster.jpg",
+    "enabled": true
+  },
+  {
+    "name": "sink",
+    "description": "A bowl with a faucet for washing hands or dishes.",
+    "sample_video": "/videos/sink.mp4",
+    "image": "/images/sink.jpg",
+    "enabled": true
+  },
+  {
+    "name": "refrigerator",
+    "description": "An appliance that keeps food and drinks cold.",
+    "sample_video": "/videos/refrigerator.mp4",
+    "image": "/images/refrigerator.jpg",
+    "enabled": true
+  },
+  {
+    "name": "book",
+    "description": "A set of printed pages bound together containing information.",
+    "sample_video": "/videos/book.mp4",
+    "image": "/images/book.jpg",
+    "enabled": true
+  },
+  {
+    "name": "clock",
+    "description": "A device for measuring and displaying time.",
+    "sample_video": "/videos/clock.mp4",
+    "image": "/images/clock.jpg",
+    "enabled": true
+  },
+  {
+    "name": "vase",
+    "description": "A container used for holding flowers or decoration.",
+    "sample_video": "/videos/vase.mp4",
+    "image": "/images/vase.jpg",
+    "enabled": true
+  },
+  {
+    "name": "scissors",
+    "description": "A cutting instrument with two blades joined together.",
+    "sample_video": "/videos/scissors.mp4",
+    "image": "/images/scissors.jpg",
+    "enabled": true
+  },
+  {
+    "name": "teddy bear",
+    "description": "A soft stuffed toy bear often used as a comforting companion for children.",
+    "sample_video": "/videos/teddy_bear.mp4",
+    "image": "/images/teddy_bear.jpg",
+    "enabled": true
+  },
+  {
+    "name": "hair drier",
+    "description": "An electric device that blows hot air to dry and style hair after washing.",
+    "sample_video": "/videos/hair_drier.mp4",
+    "image": "/images/hair_drier.jpg",
+    "enabled": true
+  },
+  {
+    "name": "toothbrush",
+    "description": "A small brush with a handle, used for cleaning teeth and maintaining oral hygiene.",
+    "sample_video": "/videos/toothbrush.mp4",
+    "image": "/images/toothbrush.jpg",
+    "enabled": true
+  }  
+]
