@@ -19,11 +19,6 @@ const InteractiveClock = ({
   const [dragging, setDragging] = useState(null);
   const svgRef = useRef();
 
-  useEffect(() => {
-    setTime(initialTime);
-    onTimeChange?.(initialTime);
-  }, [resetKey, initialTime, onTimeChange]);
-
   const updateTime = (newTime) => {
     setTime(newTime);
     onTimeChange?.(newTime);
