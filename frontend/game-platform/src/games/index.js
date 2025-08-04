@@ -11,13 +11,13 @@ import CardRushScene from "./SignMatch/scenes/CardRushScene";
 import SetUpScene from "./SignsAndLadders/scenes/SetUpScene";
 import SignsAndLaddersScene from "./SignsAndLadders/scenes/SignsAndLadders";
 
-import FindStateReactGame from "./FindState/scenes/ReactIndiaMapGame";
+import FindStateReactGame from "./FindState/scenes/ReactIndiaMapGame.jsx";
 
-import BreakoutGame from "./BreakoutGame/breakout";
+import BreakoutGame from "./BreakoutGame/breakout.jsx";
 
-import RecognizeQuiz from "./RecognizeSign/RecognizeQuiz";
+import RecognizeQuiz from "./RecognizeSign/RecognizeQuiz.jsx";
 
-import VideoOptionQuiz from "./RecognizeImage/VideoOptionQuiz";
+import VideoOptionQuiz from "./RecognizeImage/VideoOptionQuiz.jsx";
 
 import ColumnMatch from "./ColumnMatch/ColumnMatch.jsx";
 
