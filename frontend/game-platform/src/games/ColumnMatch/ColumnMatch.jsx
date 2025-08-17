@@ -126,6 +126,8 @@ const ColumnMatch = () => {
                 alt={item.name}
                 draggable={!matched.includes(item.name)}
                 onDragStart={(e) => handleDragStart(e, item.name)}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => handleDrop(e, item.name)}
                 className={matched.includes(item.name) ? "matched" : ""}
               />
             ))}
@@ -138,6 +140,8 @@ const ColumnMatch = () => {
             {videos.map((item) => (
               <div
                 key={item.name}
+                draggable={!matched.includes(item.name)}
+                onDragStart={(e) => handleDragStart(e, item.name)}
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={(e) => handleDrop(e, item.name)}
                 className={`drop-target ${matched.includes(item.name) ? "matched" : ""}`}
