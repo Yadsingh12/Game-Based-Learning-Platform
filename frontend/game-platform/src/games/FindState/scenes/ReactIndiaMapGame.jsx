@@ -4,7 +4,7 @@ import stateData from "../data/stateData";
 import "./IndiaMap.css";
 
 // A small, reusable component for rendering a single path
-const MapState = ({ id, d, onClick, fill }) => {
+const MapState = ({ id, d, onClick, fill, onHover }) => {
   return (
     <path
       id={id}
@@ -12,6 +12,8 @@ const MapState = ({ id, d, onClick, fill }) => {
       d={d}
       onClick={onClick}
       style={{ fill }}
+      onMouseEnter={(e) => onHover(id, e)}
+      onMouseLeave={() => onHover(null)}
     />
   );
 };
@@ -24,10 +26,13 @@ const IndiaMap = () => {
   const [score, setScore] = useState(0);
   const [gameCompleted, setGameCompleted] = useState(false);
   const [showCorrect, setShowCorrect] = useState(false);
-  
+
   const [stateColors, setStateColors] = useState({});
   const [svgPaths, setSvgPaths] = useState([]);
   const [svgViewBox, setSvgViewBox] = useState("-50 -50 700 800");
+
+  const [hoveredState, setHoveredState] = useState(null);
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 
   const [viewerSize, setViewerSize] = useState({ width: 0, height: 0 });
   const mapContainerRef = useRef(null);
@@ -45,6 +50,18 @@ const IndiaMap = () => {
 
     if (Viewer.current) {
       Viewer.current.fitToViewer();
+    }
+  };
+
+  const handleHover = (id, e) => {
+    if (id) {
+      const stateInfo = stateData[id];
+      setHoveredState(stateInfo ? stateInfo.name : id);
+
+      // Position tooltip near the mouse
+      setTooltipPos({ x: e.clientX, y: e.clientY });
+    } else {
+      setHoveredState(null);
     }
   };
 
@@ -69,7 +86,7 @@ const IndiaMap = () => {
         const parser = new DOMParser();
         const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
         const svgElement = svgDoc.querySelector("svg");
-        
+
         const viewBox = svgElement.getAttribute("viewBox");
         if (viewBox) {
           setSvgViewBox(viewBox);
@@ -184,9 +201,8 @@ const IndiaMap = () => {
 
         {!gameCompleted ? (
           <div
-            className={`question-box ${showError ? "shake" : ""} ${
-              showCorrect ? "correct-pulse" : ""
-            }`}
+            className={`question-box ${showError ? "shake" : ""} ${showCorrect ? "correct-pulse" : ""
+              }`}
           >
             {currentQuestion ? currentQuestion.question : "Loading..."}
           </div>
@@ -203,27 +219,39 @@ const IndiaMap = () => {
 
       <div ref={mapContainerRef} className="map-viewer-container">
         {viewerSize.width > 0 && viewerSize.height > 0 && (
-            <UncontrolledReactSVGPanZoom
-                ref={Viewer}
-                width={viewerSize.width}
-                height={viewerSize.height}
-                onDoubleClick={(e) => e.preventDefault()}
-                tool="auto"
-                scaleFactorMin={0.5} 
-                scaleFactorMax={4}
-            >
-                <svg viewBox={svgViewBox}>
-                    {svgPaths.map((path) => (
-                    <MapState
-                        key={path.id}
-                        id={path.id}
-                        d={path.d}
-                        onClick={() => handleMapClick(path.id)}
-                        fill={stateColors[path.id] || "#e6e6e6"}
-                    />
-                    ))}
-                </svg>
-            </UncontrolledReactSVGPanZoom>
+          <UncontrolledReactSVGPanZoom
+            ref={Viewer}
+            width={viewerSize.width}
+            height={viewerSize.height}
+            disableDoubleClickZoomWithToolAuto={true} // disables double click zoom
+            tool="auto"
+            scaleFactorMin={0.5}
+            scaleFactorMax={4}
+          >
+            <svg viewBox={svgViewBox}>
+              {svgPaths.map((path) => (
+                <MapState
+                  key={path.id}
+                  id={path.id}
+                  d={path.d}
+                  onClick={() => handleMapClick(path.id)}
+                  fill={stateColors[path.id] || "#e6e6e6"}
+                  onHover={handleHover}
+                />
+              ))}
+            </svg>
+          </UncontrolledReactSVGPanZoom>
+        )}
+        {hoveredState && (
+          <div
+            className="map-tooltip"
+            style={{
+              top: tooltipPos.y + 10,
+              left: tooltipPos.x + 10,
+            }}
+          >
+            {hoveredState}
+          </div>
         )}
       </div>
     </div>
