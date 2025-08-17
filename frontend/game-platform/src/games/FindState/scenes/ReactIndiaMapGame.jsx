@@ -26,6 +26,7 @@ const IndiaMap = () => {
   const [score, setScore] = useState(0);
   const [gameCompleted, setGameCompleted] = useState(false);
   const [showCorrect, setShowCorrect] = useState(false);
+  const [feedback, setFeedback] = useState({ type: "start", text: "Click on The Correct State" });
 
   const [stateColors, setStateColors] = useState({});
   const [svgPaths, setSvgPaths] = useState([]);
@@ -41,6 +42,7 @@ const IndiaMap = () => {
     setGameCompleted(false);
     setScore(0);
     setCurrentIndex(0);
+    setFeedback({ type: "start", text: "Click on The Correct State" });
     setQuestions((questions) => {
       const shuffled = [...questions].sort(() => 0.5 - Math.random());
       return shuffled;
@@ -153,6 +155,7 @@ const IndiaMap = () => {
         [id]: currentQuestion.color,
       }));
       setScore((prev) => prev + 1);
+      setFeedback({ type: "correct", text: `✅ Correct! ${currentQuestion.name}` });
       setShowCorrect(true);
       setTimeout(() => setShowCorrect(false), 800);
 
@@ -163,6 +166,7 @@ const IndiaMap = () => {
       }
     } else {
       setShowError(true);
+      setFeedback({ type: "wrong", text: `❌ Wrong! Correct answer: ${currentQuestion.name}` });
       setStateColors((prevColors) => ({
         ...prevColors,
         [id]: "#ff6b6b",
@@ -200,11 +204,16 @@ const IndiaMap = () => {
         </div>
 
         {!gameCompleted ? (
-          <div
-            className={`question-box ${showError ? "shake" : ""} ${showCorrect ? "correct-pulse" : ""
-              }`}
-          >
-            {currentQuestion ? currentQuestion.question : "Loading..."}
+          <div>
+            <div
+              className={`question-box ${showError ? "shake" : ""} ${showCorrect ? "correct-pulse" : ""
+                }`}
+            >
+              {currentQuestion ? currentQuestion.question : "Loading..."}
+            </div>
+            <div className={`feedback-box ${feedback.type}`}>
+              {feedback.text}
+            </div>
           </div>
         ) : (
           <div className="question-box game-over-box">

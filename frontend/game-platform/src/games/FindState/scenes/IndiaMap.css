@@ -63,6 +63,34 @@
   box-sizing: border-box;
 }
 
+.feedback-box {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: inline-block;
+  animation: fadeIn 0.3s ease;
+}
+
+.feedback-box.start {
+  background: #e9ecef;
+  color: #6c757d;
+  border: 1px solid #ced4da;
+}
+
+.feedback-box.correct {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.feedback-box.wrong {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
 /* Specific styling for the game over box */
 .game-over-box {
   flex-direction: column;
