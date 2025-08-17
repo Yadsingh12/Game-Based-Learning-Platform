@@ -25,6 +25,8 @@ import ISLClockGame from "./SetTime/ISLClockGame.jsx";
 
 import WordSearchGame from "./FindWord/WordSearchGame.jsx";
 
+import CrosswordGame from "./CrossWordGame/CrosswordGame.jsx";
+
 export const gamesMap = {
   "number-kingdom": {
     name: "Number Kingdom",
@@ -114,6 +116,15 @@ export const gamesMap = {
     component: WordSearchGame,
     logoPath: "/assets/images/word-search-game-logo.png",
     alt: "Word Search Game Logo",
+    category: "Word Games"
+  },
+  "crossword-game": {
+    name: "Crossword Game",
+    type: "react", 
+    orientation: "portrait",
+    component: CrosswordGame,
+    logoPath: "/assets/images/crossword-game-logo.png",
+    alt: "Crossword Game Logo",
     category: "Word Games"
   }
 };
