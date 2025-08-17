@@ -11,7 +11,7 @@ import CardRushScene from "./SignMatch/scenes/CardRushScene";
 import SetUpScene from "./SignsAndLadders/scenes/SetUpScene";
 import SignsAndLaddersScene from "./SignsAndLadders/scenes/SignsAndLadders";
 
-import FindStateReactGame from "./FindState/scenes/ReactIndiaMapGame.jsx";
+import FindStateReactGame from "./FindState/ReactIndiaMapGame.jsx";
 
 import BreakoutGame from "./BreakoutGame/breakout.jsx";
 
@@ -26,6 +26,8 @@ import ISLClockGame from "./SetTime/ISLClockGame.jsx";
 import WordSearchGame from "./FindWord/WordSearchGame.jsx";
 
 import CrosswordGame from "./CrossWordGame/CrosswordGame.jsx";
+
+import StateCapitalMatch from "./StatesAndCapitals/StateCapitalMatch.jsx";
 
 export const gamesMap = {
   "number-kingdom": {
@@ -70,6 +72,15 @@ export const gamesMap = {
     orientation: "landscape",
     component: FindStateReactGame, 
     logoPath: "/assets/images/find-state-logo.png",
+    alt: "Game Logo",
+    category: "Geography Games"
+  },
+  "state-capital-match": {
+    name: "State-Capital Match",
+    type: "react",
+    orientation: "landscape",
+    component: StateCapitalMatch,
+    logoPath: "/assets/images/state-capital-match-logo.png",
     alt: "Game Logo",
     category: "Geography Games"
   },
