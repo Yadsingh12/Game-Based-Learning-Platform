@@ -11,7 +11,7 @@ import CardRushScene from "./SignMatch/scenes/CardRushScene";
 import SetUpScene from "./SignsAndLadders/scenes/SetUpScene";
 import SignsAndLaddersScene from "./SignsAndLadders/scenes/SignsAndLadders";
 
-import FindStateReactGame from "./FindState/ReactIndiaMapGame.jsx";
+import FindStateReactGame from "./FindState/scenes/ReactIndiaMapGame.jsx";
 
 import BreakoutGame from "./BreakoutGame/breakout.jsx";
 

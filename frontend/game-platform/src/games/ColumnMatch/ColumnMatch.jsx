@@ -61,17 +61,6 @@ const ColumnMatch = () => {
     setGameState("playing");
   };
 
-  const resetGame = () => {
-    setMatched([]);
-    setItems([]);
-    setImages([]);
-    setVideos([]);
-    setStartTime(null);
-    setEndTime(null);
-    setDifficulty(null);
-    setGameState("start");
-  };
-
   const DifficultyButtons = () => (
     <div className="difficulty-buttons">
       {Object.keys(difficulties).map((level) => (
@@ -116,45 +105,47 @@ const ColumnMatch = () => {
     <div className="column-match">
       <h2>Match the Videos and Images</h2>
       <div className="game-area">
-        <div className="section">
-          <h2>Images</h2>
-          <div className="grid-container">
-            {images.map((item) => (
-              <img
-                key={item.name}
-                src={item.image}
-                alt={item.name}
-                draggable={!matched.includes(item.name)}
-                onDragStart={(e) => handleDragStart(e, item.name)}
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => handleDrop(e, item.name)}
-                className={matched.includes(item.name) ? "matched" : ""}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="section">
-          <h2>Videos</h2>
-          <div className="grid-container">
-            {videos.map((item) => (
-              <div
-                key={item.name}
-                draggable={!matched.includes(item.name)}
-                onDragStart={(e) => handleDragStart(e, item.name)}
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => handleDrop(e, item.name)}
-                className={`drop-target ${matched.includes(item.name) ? "matched" : ""}`}
-              >
-                <video
-                  src={item.sample_video}
-                  muted
-                  loop
-                  autoPlay
-                  playsInline
+        <div className="sections">
+          <div className="section">
+            <h2>Images</h2>
+            <div className="grid-container">
+              {images.map((item) => (
+                <img
+                  key={item.name}
+                  src={item.image}
+                  alt={item.name}
+                  draggable={!matched.includes(item.name)}
+                  onDragStart={(e) => handleDragStart(e, item.name)}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => handleDrop(e, item.name)}
+                  className={`grid-item ${matched.includes(item.name) ? "matched" : ""}`}
                 />
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+          <div className="section">
+            <h2>Videos</h2>
+            <div className="grid-container">
+              {videos.map((item) => (
+                <div
+                  key={item.name}
+                  // Add draggable and onDragStart attributes here
+                  draggable={!matched.includes(item.name)}
+                  onDragStart={(e) => handleDragStart(e, item.name)}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => handleDrop(e, item.name)}
+                  className={`grid-item drop-target ${matched.includes(item.name) ? "matched" : ""}`}
+                >
+                  <video
+                    src={item.sample_video}
+                    muted
+                    loop
+                    autoPlay
+                    playsInline
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
