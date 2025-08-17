@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { UncontrolledReactSVGPanZoom } from "react-svg-pan-zoom";
-import stateData from "../data/stateData";
 import "./IndiaMap.css";
 
 // A small, reusable component for rendering a single path
@@ -20,6 +19,7 @@ const MapState = ({ id, d, onClick, fill, onHover }) => {
 
 const IndiaMap = () => {
   const Viewer = useRef(null);
+  const [stateData, setStateData] = useState({});
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showError, setShowError] = useState(false);
@@ -67,7 +67,18 @@ const IndiaMap = () => {
     }
   };
 
+  // Load stateData from public folder
   useEffect(() => {
+    fetch("/stateData.json")
+      .then((res) => res.json())
+      .then((data) => setStateData(data))
+      .catch((err) => console.error("Error loading stateData:", err));
+  }, []);
+
+  // Only generate questions when stateData is loaded
+  useEffect(() => {
+    if (Object.keys(stateData).length === 0) return;
+
     const shuffled = Object.entries(stateData)
       .filter(([_, data]) => data.questions && data.questions.length)
       .map(([id, data]) => ({
@@ -78,9 +89,11 @@ const IndiaMap = () => {
           data.questions[Math.floor(Math.random() * data.questions.length)],
       }))
       .sort(() => 0.5 - Math.random());
-    setQuestions(shuffled);
-  }, []);
 
+    setQuestions(shuffled);
+  }, [stateData]);
+
+  // Load SVG paths and viewBox from the SVG file
   useEffect(() => {
     fetch("/assets/RecognizeState/india.svg")
       .then((res) => res.text())
