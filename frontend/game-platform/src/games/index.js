@@ -29,6 +29,8 @@ import CrosswordGame from "./CrossWordGame/CrosswordGame.jsx";
 
 import StateCapitalMatch from "./StatesAndCapitals/StateCapitalMatch.jsx";
 
+import VideoOptionQuizNumbers from "./FindNumberOFObjects/VideoOptionQuizNumbers.jsx";
+
 export const gamesMap = {
   "number-kingdom": {
     name: "Number Kingdom",
@@ -47,6 +49,15 @@ export const gamesMap = {
     logoPath: "/assets/images/breakout-game-logo.png",
     alt: "Breakout Game Logo",
     category: "Math Games"
+  },
+  "video-option-quiz-numbers": {
+    name: "Find Number of Objects",
+    type: "react",
+    orientation: "landscape",
+    component: VideoOptionQuizNumbers,
+    logoPath: "/assets/images/video-option-quiz-numbers-logo.png",
+    alt: "Find Number of Objects Logo",
+    category: "Quiz Games"
   },
   "sign-match": {
     name: "Sign Match",
