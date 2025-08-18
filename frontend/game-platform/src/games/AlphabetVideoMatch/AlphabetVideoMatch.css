@@ -1,0 +1,140 @@
+.alphabet-match {
+  font-family: "Inter", sans-serif;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.alphabet-match .game-area {
+  width: 100%;
+  max-height: 100vh;
+  background-color: #f0f0f0;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* Use a fixed height that accounts for padding and other elements, like the h2 */
+  height: calc(100vh - 2rem - 2.5rem); /* Adjust 2.5rem as needed to fit the h2 and any other top content */
+}
+
+.alphabet-match .sections {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  min-height: 0;
+}
+
+.alphabet-match .section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Crucial for scrollable flex children */
+  overflow-y: auto;
+  padding-bottom: 1rem;
+}
+
+.alphabet-match .grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Use auto-fit to create a flexible number of columns */
+  gap: 0.5rem;
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  justify-items: center; /* Center the items within their grid cells */
+}
+
+.alphabet-match h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+/* Letters styled like video tiles */
+.alphabet-match .letter {
+  width: 100%;
+  aspect-ratio: 16 / 9; /* same as videos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: #007bff;
+  color: white;
+  border-radius: 0.5rem;
+  border: 2px solid transparent;
+  cursor: grab;
+  transition: transform 0.3s ease;
+}
+
+.alphabet-match .letter:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+}
+
+.alphabet-match video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  border: 2px solid transparent;
+  pointer-events: none;
+}
+
+.alphabet-match .drop-target {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 2px dashed #ccc;
+  border-radius: 0.5rem;
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alphabet-match .matched {
+  opacity: 0.4;
+  pointer-events: none;
+  border-color: green;
+}
+
+.alphabet-match .result {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.alphabet-match .difficulty-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.alphabet-match .difficulty-buttons button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.alphabet-match .difficulty-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.alphabet-match .instructions {
+  max-width: 600px;
+  margin: 1rem auto;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #444;
+}

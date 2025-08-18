@@ -31,6 +31,8 @@ import StateCapitalMatch from "./StatesAndCapitals/StateCapitalMatch.jsx";
 
 import VideoOptionQuizNumbers from "./FindNumberOFObjects/VideoOptionQuizNumbers.jsx";
 
+import AlphabetVideoMatch from "./AlphabetVideoMatch/AlphabetVideoMatch.jsx";
+
 export const gamesMap = {
   "number-kingdom": {
     name: "Number Kingdom",
@@ -66,6 +68,24 @@ export const gamesMap = {
     scene: [StartMenuScene, SignMatchScene, CardRushScene],
     logoPath: "/assets/images/color-game-logo.png",
     alt: "Game Logo",
+    category: "Matching Games"
+  },
+  "column-match": {
+    name: "Column Match",
+    type: "react", 
+    orientation: "landscape",
+    component: ColumnMatch, 
+    logoPath: "/assets/images/column-match-logo.png",
+    alt: "Game Logo",
+    category: "Matching Games"
+  },
+  "alphabet-video-match": {
+    name: "Alphabet Video Match",
+    type: "react",
+    orientation: "landscape",
+    component: AlphabetVideoMatch,
+    logoPath: "/assets/images/alphabet-video-match-logo.png",
+    alt: "Alphabet Match Logo",
     category: "Matching Games"
   },
   "Signs And ladders": {
@@ -112,15 +132,6 @@ export const gamesMap = {
     logoPath: "/assets/images/video-option-quiz-logo.png",
     alt: "Game Logo",
     category: "Quiz Games"
-  },
-  "column-match": {
-    name: "Column Match",
-    type: "react", 
-    orientation: "landscape",
-    component: ColumnMatch, 
-    logoPath: "/assets/images/column-match-logo.png",
-    alt: "Game Logo",
-    category: "Matching Games"
   },
   "isl-clock-game": {
     name: "ISL Clock Game",
