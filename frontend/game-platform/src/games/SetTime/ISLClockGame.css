@@ -1,132 +1,158 @@
-/* General styling for the game component */
-.game-wrapper {
-  position: relative;
+/* Overall wrapper */
+.clock-game .game-wrapper {
   min-height: 100vh;
-  background-color: #f3f4f6; /* bg-gray-100 */
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 1rem;
+  align-items: flex-start;
+  background: #f9fafb;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
-
-/* Container for the main game content */
-.game-container {
-  padding: 1rem;
-  height: 100%;
-  max-height: 100vh; /* max-w-md */
-  border-radius: 0.5rem; /* rounded-lg */
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
-  background-color: #ffffff; /* bg-white */
-  position: relative;
-  z-index: 10;
+ 
+/* Main container */
+.clock-game .game-container {
+  width: 100%;
+  max-width: 500px;       /* prevents huge stretching */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Title styling */
-.game-title {
-  font-size: 1.25rem; /* text-xl */
-  font-weight: 700; /* font-bold */
-  margin-bottom: 1rem; /* mb-4 */
-  text-align: center; /* text-center */
+/* Title */
+.clock-game .game-title {
+  font-size: 1.5rem;
+  text-align: center;
 }
 
-/* Video styling */
-.game-video {
+/* Video */
+.clock-game .game-video {
   width: 100%;
-  margin-bottom: 1rem; /* mb-4 */
-  border-radius: 0.375rem; /* rounded-md */
+  max-width: 400px;
+  aspect-ratio: 16 / 9;   /* keeps video proportional */
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-bottom: 1rem;
+  object-fit: contain;    /* ensures no cropping */
+  background: black;      /* fills empty space if video doesn’t */
 }
 
-/* Interactive clock section */
-.clock-interactive {
-  margin-bottom: 1rem; /* mb-4 */
-}
-
-/* Check Answer button */
-.btn {
-  width: 100%;
-  padding: 0.5rem 1rem; /* py-2 px-4 */
-  font-weight: 600; /* font-semibold */
-  border-radius: 0.25rem; /* rounded */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  border: none;
-}
-
-.btn-check {
-  background-color: #2563eb; /* bg-blue-600 */
-  color: #ffffff; /* text-white */
-}
-
-.btn-check:hover {
-  background-color: #1d4ed8; /* hover:bg-blue-700 */
-}
-
-/* Result overlay and card styling */
-.result-overlay {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* bg-black bg-opacity-50 */
+/* Clock + AM/PM selector */
+.clock-game .clock-interactive {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  z-index: 20;
-  padding: 1rem
+  gap: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.result-card {
+/* AM/PM Toggle Switch */
+.clock-game .ampm-toggle {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #2563eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+}
+
+.clock-game .ampm-option {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-weight: 600;
+  background: white;
+  color: #2563eb;
+  transition: all 0.2s;
+}
+
+.clock-game .ampm-option.active {
+  background: #2563eb;
+  color: white;
+}
+
+
+/* Buttons */
+.clock-game .btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+
+.clock-game .btn-check {
+  background: #2563eb;
+  color: white;
+}
+
+.clock-game .btn-check:hover {
+  background: #1d4ed8;
+}
+
+.clock-game .btn-next {
+  background: #10b981;
+  color: white;
+}
+
+.clock-game .btn-next:hover {
+  background: #059669;
+}
+
+/* Result inline card */
+.clock-game .result-card-inline {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 400px;
   width: 100%;
-  max-width: 28rem; /* max-w-md */
-  padding: 1rem; /* p-4 */
-  border-radius: 0.25rem; /* rounded */
-  background-color: #ffffff; /* bg-white */
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
-  text-align: center; /* text-center */
-  border: 1px solid #e5e7eb; /* border */
 }
 
-/* Result status text */
-.result-status {
-  font-weight: 700; /* font-bold */
-  font-size: 1.125rem; /* text-lg */
+.clock-game .result-headline {
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-.result-status.correct {
-  color: #16a34a; /* text-green-600 */
+.clock-game .result-status {
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-.result-status.incorrect {
-  color: #dc2626; /* text-red-600 */
+.clock-game .result-status.correct {
+  color: green;
 }
 
-/* Result sections */
-.result-section {
-  margin-top: 1rem; /* mt-4 */
+.clock-game .result-status.incorrect {
+  color: red;
 }
 
-.result-label {
-  font-size: 1rem; /* text-base */
-  font-weight: 500; /* font-medium */
-  margin-bottom: 0.5rem; /* mb-2 */
+.clock-game .result-text {
+  font-size: 0.95rem;
 }
 
-.clock-display {
-  margin-bottom: 0.5rem; /* mb-2 */
+/* ================= CLOCK FLASH FEEDBACK ================= */
+.clock-game .game-clock-svg.flash-correct {
+  animation: flashGreen 0.8s ease;
 }
 
-.digital-time {
-  margin-top: 0.5rem; /* mt-2 */
+.clock-game .game-clock-svg.flash-incorrect {
+  animation: flashRed 0.8s ease;
 }
 
-/* Next button */
-.btn-next {
-  margin-top: 1.5rem; /* mt-6 */
-  background-color: #16a34a; /* bg-green-600 */
-  color: #ffffff; /* text-white */
+@keyframes flashGreen {
+  0%   { background-color: #bbf7d0; }
+  50%  { background-color: #ffffff; }
+  100% { background-color: #bbf7d0; }
 }
 
-.btn-next:hover {
-  background-color: #15803d; /* hover:bg-green-700 */
+@keyframes flashRed {
+  0%   { background-color: #fecaca; }
+  50%  { background-color: #ffffff; }
+  100% { background-color: #fecaca; }
 }
