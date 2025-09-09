@@ -33,6 +33,12 @@ import VideoOptionQuizNumbers from "./FindNumberOFObjects/VideoOptionQuizNumbers
 
 import AlphabetVideoMatch from "./AlphabetVideoMatch/AlphabetVideoMatch.jsx";
 
+import VideoOptionQuizColors from "./GuessColor/VideoOptionQuizColors.jsx";
+
+import WordScrambleGame from "./WordScramble/WordScramble.jsx";
+
+import FruitGame from "./FindFruit/FindFruit.jsx";
+
 export const gamesMap = {
   "number-kingdom": {
     name: "Number Kingdom",
@@ -159,5 +165,32 @@ export const gamesMap = {
     logoPath: "/assets/images/crossword-game-logo.png",
     alt: "Crossword Game Logo",
     category: "Word Games"
+  },
+  "word-scramble-game": {
+    name: "Word Scramble Game",
+    type: "react",
+    orientation: "portrait",
+    component: WordScrambleGame,
+    logoPath: "/assets/images/word-scramble-game-logo.png",
+    alt: "Word Scramble Game Logo",
+    category: "Word Games"
+  },
+  "video-option-quiz-colors": {
+    name: "Guess the Color",
+    type: "react",
+    orientation: "portrait",
+    component: VideoOptionQuizColors,
+    logoPath: "/assets/images/video-option-quiz-colors-logo.png",
+    alt: "Guess the Color Logo",
+    category: "Color Games"
+  },
+  "find-fruit": {
+    name: "Find the Fruit",
+    type: "react",
+    orientation: "landscape",
+    component: FruitGame,
+    logoPath: "/assets/images/find-fruit-logo.png",
+    alt: "Find the Fruit Logo",
+    category: "Searching Games"
   }
 };

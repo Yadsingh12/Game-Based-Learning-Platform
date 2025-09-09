@@ -1,7 +1,7 @@
 [
   {
     "name": "person",
-    "description": "A human being, typically walking, running, or standing.",
+    "description": "A human being, regarded as an individual.",
     "sample_video": "/videos/person.mp4",
     "image": "/images/person.jpg",
     "enabled": true
