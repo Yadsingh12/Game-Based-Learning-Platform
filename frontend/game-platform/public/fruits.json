@@ -1,0 +1,92 @@
+[
+    {
+        "name": "Apple",
+        "color": "red",
+        "taste": "sweet",
+        "video": "/videos/Fruits/apple.mp4"
+    },
+    {
+        "name": "Banana",
+        "color": "yellow",
+        "taste": "sweet",
+        "video": "/videos/Fruits/banana.mp4"
+    },
+    {
+        "name": "Grapes",
+        "color": "Purple",
+        "taste": "Sweet",
+        "video": "/videos/Fruits/grapes.mp4"
+    },
+    {
+        "name": "Guava",
+        "color": "green",
+        "taste": "sweet",
+        "video": "/videos/Fruits/guava.mp4"
+    },
+    {
+        "name": "Lychee",
+        "color": "white",
+        "taste": "sweet",
+        "video": "/videos/Fruits/lychee(litchi).mp4"
+    },
+    {
+        "name": "Mango",
+        "color": "Yellow/Orange",
+        "taste": "Sweet",
+        "video": "/videos/Fruits/mango.mp4"
+    },
+    {
+        "name": "Orange",
+        "color": "orange",
+        "taste": "citrus",
+        "video": "/videos/Fruits/orange.mp4"
+    },
+    {
+        "name": "Papaya",
+        "color": "orange",
+        "taste": "sweet",
+        "video": "/videos/Fruits/papaya.mp4"
+    },
+    {
+        "name": "Pear",
+        "color": "green",
+        "taste": "sweet",
+        "video": "/videos/Fruits/pear.mp4"
+    },
+    {
+        "name": "Pineapple",
+        "color": "yellow",
+        "taste": "tart",
+        "video": "/videos/Fruits/pineapple.mp4"
+    },
+    {
+        "name": "Plum",
+        "color": "purple",
+        "taste": "sweet",
+        "video": "/videos/Fruits/plum.mp4"
+    },
+    {
+        "name": "Pomegranate",
+        "color": "red",
+        "taste": "tart",
+        "video": "/videos/Fruits/pomegranate.mp4"
+    },
+    {
+        "name": "Sapodilla",
+        "color": "brown",
+        "taste": "sweet",
+        "video": "/videos/Fruits/sapodilla(cheeku).mp4"
+    },
+    {
+        "name": "Strawberry",
+        "color": "Red",
+        "taste": "Sweet",
+        "video": "/videos/Fruits/strawberry.mp4"
+    },
+    {
+        "name": "Watermelon",
+        "color": "Green/Red",
+        "taste": "Sweet",
+        "video": "/videos/Fruits/watermelon.mp4"
+    }
+]
