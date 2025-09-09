@@ -63,6 +63,7 @@ const IndiaMap = () => {
       });
   }, []);
 
+  /* ---------------- Resize observer ---------------- */
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       for (let entry of entries) {
@@ -75,6 +76,14 @@ const IndiaMap = () => {
     if (mapContainerRef.current) resizeObserver.observe(mapContainerRef.current);
     return () => resizeObserver.disconnect();
   }, []);
+
+  // Force update viewer size when map becomes visible
+  useEffect(() => {
+    if ((mode === "learn" || mode === "test") && mapContainerRef.current) {
+      const rect = mapContainerRef.current.getBoundingClientRect();
+      setViewerSize({ width: rect.width, height: rect.height });
+    }
+  }, [mode]);
 
   /* ---------------- Helper: generate questions ---------------- */
   const generateQuestions = () => {
@@ -153,7 +162,7 @@ const IndiaMap = () => {
   };
 
   const startTest = () => {
-    setQuestions(generateQuestions()); // ✅ refresh questions
+    setQuestions(generateQuestions());
     setMode("test");
     setCurrentIndex(0);
     setScore(0);
@@ -166,98 +175,115 @@ const IndiaMap = () => {
   return (
     <div className="quiz-layout">
       {!mode && (
-        <div className="mode-select">
-          <h2>Choose a mode:</h2>
-          <button onClick={() => setMode("learn")}>Learn</button>
-          <button onClick={startTest}>Test</button>
-        </div>
-      )}
-
-      {(mode === "learn" || mode === "test") && (
-        <>
-          <div className="quiz-header-section">
-            <button className="back-button" onClick={resetGame}>🏠 Back</button>
-            {mode === "test" && (
-              <div className="game-info-box">
-                <p>
-                  Question {currentIndex + 1} of {questions.length}
-                </p>
-                <p>
-                  Score: {score} / {questions.length}
-                </p>
-              </div>
-            )}
-            <div className="question-box">
-              {mode === "learn"
-                ? "Click on a state to see its video"
-                : questions[currentIndex]?.question}
-            </div>
-            {feedback && <div className="feedback-box">{feedback}</div>}
-          </div>
-        </>
-      )}
-
-      <div className="quiz-main">
-        <div ref={mapContainerRef} className="map-viewer-container">
-          {viewerSize.width > 0 && viewerSize.height > 0 && (
-            <UncontrolledReactSVGPanZoom
-              ref={Viewer}
-              width={viewerSize.width}
-              height={viewerSize.height}
-              tool="auto"
-              scaleFactorMin={0.5}
-              scaleFactorMax={4}
-            >
-              <svg viewBox={svgViewBox}>
-                {svgPaths.map((path) => {
-                  const isDisabled =
-                    stateData[path.id] && stateData[path.id].type !== "state";
-                  return (
-                    <MapState
-                      key={path.id}
-                      id={path.id}
-                      d={path.d}
-                      onClick={() => handleMapClick(path.id)}
-                      fill={stateColors[path.id] || "#e6e6e6"}
-                      onHover={handleHover}
-                      isDisabled={isDisabled}
-                    />
-                  );
-                })}
-              </svg>
-            </UncontrolledReactSVGPanZoom>
-          )}
-          {hoveredState && (
+        <div className="mode-select-container">
+          <h2 className="mode-select-title">Choose a mode:</h2>
+          <div className="mode-options">
             <div
-              className="map-tooltip"
-              style={{ top: tooltipPos.y + 10, left: tooltipPos.x + 10 }}
+              className="mode-card learn-mode"
+              onClick={() => setMode("learn")}
             >
-              {hoveredState}
+              <h3>Learn</h3>
+              <p>Click on states to see their videos and learn at your own pace.</p>
             </div>
-          )}
+            <div
+              className="mode-card test-mode"
+              onClick={startTest}
+            >
+              <h3>Test</h3>
+              <p>Test your knowledge with random questions about Indian states.</p>
+            </div>
+          </div>
         </div>
+      )}
 
-        <div className="video-container">
-          {(mode === "learn" && selectedState) && (
-            <video
-              key={selectedState.name}
-              src={selectedState.video_path}
-              controls
-              autoPlay
-              className="state-video"
-            />
-          )}
-          {(mode === "test" && questions[currentIndex]) && (
-            <video
-              key={questions[currentIndex].name}
-              src={questions[currentIndex].video_path}
-              controls
-              autoPlay
-              className="state-video"
-            />
-          )}
+      {/* ---------------- Header / Feedback ---------------- */}
+{(mode === "learn" || mode === "test") && (
+  <>
+    <div className="quiz-header-section">
+      <button className="back-button" onClick={resetGame}>🏠 Back</button>
+      
+      {mode === "test" && (
+        <div className="game-info-box">
+          <p>
+            Question {currentIndex + 1} of {questions.length}
+          </p>
+          <p>
+            Score: {score} / {questions.length}
+          </p>
         </div>
+      )}
+
+      <div className="question-box">
+        {mode === "learn"
+          ? "Click on a state to see its video"
+          : questions[currentIndex]?.question}
       </div>
+
+      {/* Fixed space for feedback / clicked state */}
+      <div className="feedback-box" style={{ minHeight: "40px" }}>
+        {mode === "learn" && selectedState && (
+          <span>clicked on '{selectedState.name}'</span>
+        )}
+        {mode === "test" && feedback && <span>{feedback}</span>}
+      </div>
+    </div>
+
+    <div className="quiz-main">
+      <div ref={mapContainerRef} className="map-viewer-container">
+        {viewerSize.width > 0 && viewerSize.height > 0 && (
+          <UncontrolledReactSVGPanZoom
+            ref={Viewer}
+            width={viewerSize.width}
+            height={viewerSize.height}
+            tool="auto"
+            scaleFactorMin={0.5}
+            scaleFactorMax={4}
+          >
+            <svg viewBox={svgViewBox}>
+              {svgPaths.map((path) => {
+                const isDisabled =
+                  stateData[path.id] && stateData[path.id].type !== "state";
+                return (
+                  <MapState
+                    key={path.id}
+                    id={path.id}
+                    d={path.d}
+                    onClick={() => handleMapClick(path.id)}
+                    fill={stateColors[path.id] || "#e6e6e6"}
+                    onHover={handleHover}
+                    isDisabled={isDisabled}
+                  />
+                );
+              })}
+            </svg>
+          </UncontrolledReactSVGPanZoom>
+        )}
+      </div>
+
+      <div className="video-container">
+        {(mode === "learn" && selectedState) && (
+          <video
+            key={selectedState.name}
+            src={selectedState.video_path}
+            controls
+            autoPlay
+            className="state-video"
+          />
+        )}
+        {(mode === "test" && questions[currentIndex]) && (
+          <video
+            key={questions[currentIndex].name}
+            src={questions[currentIndex].video_path}
+            controls
+            autoPlay
+            className="state-video"
+          />
+        )}
+      </div>
+    </div>
+  </>
+)}
+
 
       {mode === "result" && (
         <div className="result-screen">
