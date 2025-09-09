@@ -1,0 +1,172 @@
+{
+    "comment": "Done till green",
+    "black": {
+        "video": "/videos/Colors/black.mp4",
+        "images":[
+            {
+                "question": "What color is the cat?",
+                "image": "/images/Colors/black-1.jpg"
+            },
+            {
+                "question": "What color is the car?",
+                "image": "/images/Colors/black-2.jpg"
+            }
+        ]
+    },
+    "blue": {
+        "video": "/videos/Colors/blue.mp4",
+        "images":[
+            {
+                "question": "What color is the sky?",
+                "image": "/images/Colors/blue-1.jpg"
+            },
+            {
+                "question": "What color is the ocean?",
+                "image": "/images/Colors/blue-2.jpg"
+            }
+        ]
+    },
+    "brown": {
+        "video": "/videos/Colors/brown.mp4",
+        "images":[
+            {
+                "question": "What color is the teddy bear?",
+                "image": "/images/Colors/brown-1.jpg"
+            },
+            {
+                "question": "What color is the wooden table?",
+                "image": "/images/Colors/brown-2.jpg"
+            }
+        ]
+    },
+    "golden": {
+        "video": "/videos/Colors/golden.mp4",
+        "images":[
+            {
+                "question": "What color is the trophy?",
+                "image": "/images/Colors/golden-1.jpg"
+            },
+            {
+                "question": "What color is the wheat field?",
+                "image": "/images/Colors/golden-2.jpg"
+            }
+        ]
+    },
+    "gray": {
+        "video": "/videos/Colors/gray.mp4",
+        "images":[
+            {
+                "question": "What color is the elephant?",
+                "image": "/images/Colors/gray-1.jpg"
+            },
+            {
+                "question": "What color are the rocks?",
+                "image": "/images/Colors/gray-2.jpg"
+            }
+        ]
+    },
+    "green": {
+        "video": "/videos/Colors/green.mp4",
+        "images":[
+            {
+                "question": "What color are the leaves?",
+                "image": "/images/Colors/green-1.jpg"
+            },
+            {
+                "question": "What color is the grass?",
+                "image": "/images/Colors/green-2.jpg"
+            }
+        ]
+    },
+    "orange": {
+        "video": "/videos/Colors/orange.mp4",
+        "images":[
+            {
+                "question": "What color is the pumpkin?",
+                "image": "/images/Colors/orange-1.jpg"
+            },
+            {
+                "question": "What color is the carrot?",
+                "image": "/images/Colors/orange-2.jpg"
+            }
+        ]
+    },
+    "pink": {
+        "video": "/videos/Colors/pink.mp4",
+        "images":[
+            {
+                "question": "What color is the rose?",
+                "image": "/images/Colors/pink-1.jpg"
+            },
+            {
+                "question": "What color is the ice cream?",
+                "image": "/images/Colors/pink-2.jpg"
+            }
+        ]
+    },
+    "purple": {
+        "video": "/videos/Colors/purple.mp4",
+        "images":[
+            {
+                "question": "What color are the grapes?",
+                "image": "/images/Colors/purple-1.jpg"
+            },
+            {
+                "question": "What color is the lavender?",
+                "image": "/images/Colors/purple-2.jpg"
+            }
+        ]
+    },
+    "red": {
+        "video": "/videos/Colors/red.mp4",
+        "images":[
+            {
+                "question": "What color are the apples?",
+                "image": "/images/Colors/red-1.jpg"
+            },
+            {
+                "question": "What color is the fire truck?",
+                "image": "/images/Colors/red-2.jpg"
+            }
+        ]
+    },
+    "silver": {
+        "video": "/videos/Colors/silver.mp4",
+        "images":[
+            {
+                "question": "What color is the coin?",
+                "image": "/images/Colors/silver-1.jpg"
+            },
+            {
+                "question": "What color is the chain?",
+                "image": "/images/Colors/silver-2.jpg"
+            }
+        ]
+    },
+    "white": {
+        "video": "/videos/Colors/white.mp4",
+        "images":[
+            {
+                "question": "What color is the snow?",
+                "image": "/images/Colors/white-1.jpg"
+            },
+            {
+                "question": "What color is the milk?",
+                "image": "/images/Colors/white-2.jpg"
+            }
+        ]
+    },
+    "yellow": {
+        "video": "/videos/Colors/yellow.mp4",
+        "images":[
+            {
+                "question": "What color are the bananas?",
+                "image": "/images/Colors/yellow-1.jpg"
+            },
+            {
+                "question": "What color is the sunflower?",
+                "image": "/images/Colors/yellow-2.jpg"
+            }
+        ]
+    }
+}
