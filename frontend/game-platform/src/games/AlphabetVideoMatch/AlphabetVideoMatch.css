@@ -1,3 +1,4 @@
+/* ------------------- Base ------------------- */
 .alphabet-match {
   font-family: "Inter", sans-serif;
   width: 100%;
@@ -7,17 +8,202 @@
   box-sizing: border-box;
 }
 
+/* ------------------- Start & Result ------------------- */
+.alphabet-match.start-screen,
+.alphabet-match.end-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 70vh;
+}
+
+.alphabet-match.end-screen h1 {
+  font-size: 2.5rem;
+}
+
+.alphabet-match.end-screen p {
+  font-size: 1.2rem;
+}
+
+.alphabet-match.end-screen .difficulty-buttons {
+  margin-top: 1.5rem;
+}
+
+/* ------------------- Difficulty Buttons ------------------- */
+.alphabet-match .difficulty-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.alphabet-match .difficulty-buttons button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.alphabet-match .difficulty-buttons button:hover {
+  background-color: #0056b3;
+}
+
+/* ------------------- Quiz Screen ------------------- */
+.alphabet-match.quiz-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  height: 100vh;
+  box-sizing: border-box;
+  background: #f9f9f9;
+}
+
+/* Instructions at top */
+.alphabet-match .quiz-instruction {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  background-color: #e0f0ff;
+  color: #007bff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  width: 90%;
+  max-width: 900px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Top info row: question number, score, timer */
+.alphabet-match .quiz-info {
+  display: flex;
+  width: 90%;
+  max-width: 900px;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Container holding video and letter */
+.alphabet-match .quiz-content {
+  display: flex;
+  width: 90%;
+  max-width: 900px;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  min-height: 350px;
+  background: #ffffff;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Video and letter */
+.alphabet-match .quiz-content video,
+.alphabet-match .quiz-content h1 {
+  flex: 1;
+  width: 50%;
+  height: 100%;
+  border-radius: 0.5rem;
+}
+
+.alphabet-match .quiz-content video {
+  border: 2px solid #007bff;
+  object-fit: contain;
+  background-color: #000;
+}
+
+.alphabet-match .quiz-content h1 {
+  font-size: 6rem;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: #007bff;
+}
+
+/* Feedback area */
+.alphabet-match .answer-feedback {
+  font-size: 2rem;
+  height: 2.5rem; /* reserved space */
+  text-align: center;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  min-height: 2.5rem;
+}
+
+.alphabet-match .answer-feedback.correct {
+  color: #28a745;
+}
+
+.alphabet-match .answer-feedback.wrong {
+  color: #dc3545;
+}
+
+/* Buttons */
+.alphabet-match .quiz-buttons {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.alphabet-match .quiz-buttons button {
+  padding: 0.75rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.alphabet-match .quiz-buttons button:first-child {
+  background-color: #28a745;
+  color: white;
+}
+
+.alphabet-match .quiz-buttons button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+.alphabet-match .quiz-buttons button:first-child:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.alphabet-match .quiz-buttons button:last-child:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+/* ------------------- Alphabet Match Game ------------------- */
 .alphabet-match .game-area {
   width: 100%;
   max-height: 100vh;
   background-color: #f0f0f0;
   border-radius: 1rem;
   padding: 1rem;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  /* Use a fixed height that accounts for padding and other elements, like the h2 */
-  height: calc(100vh - 2rem - 2.5rem); /* Adjust 2.5rem as needed to fit the h2 and any other top content */
+  height: calc(100vh - 2rem - 2.5rem);
 }
 
 .alphabet-match .sections {
@@ -32,20 +218,20 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 0; /* Crucial for scrollable flex children */
+  min-height: 0;
   overflow-y: auto;
   padding-bottom: 1rem;
 }
 
 .alphabet-match .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Use auto-fit to create a flexible number of columns */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 0.5rem;
   background: #ffffff;
   border-radius: 1rem;
   padding: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  justify-items: center; /* Center the items within their grid cells */
+  justify-items: center;
 }
 
 .alphabet-match h2 {
@@ -55,10 +241,9 @@
   word-wrap: break-word;
 }
 
-/* Letters styled like video tiles */
 .alphabet-match .letter {
   width: 100%;
-  aspect-ratio: 16 / 9; /* same as videos */
+  aspect-ratio: 16/9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,7 +264,7 @@
 
 .alphabet-match video {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16/9;
   object-fit: contain;
   border-radius: 0.5rem;
   border: 2px solid transparent;
@@ -88,7 +273,7 @@
 
 .alphabet-match .drop-target {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16/9;
   border: 2px dashed #ccc;
   border-radius: 0.5rem;
   background-color: #fafafa;
@@ -101,40 +286,4 @@
   opacity: 0.4;
   pointer-events: none;
   border-color: green;
-}
-
-.alphabet-match .result {
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  text-align: center;
-}
-
-.alphabet-match .difficulty-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin: 1rem 0;
-  flex-wrap: wrap;
-}
-
-.alphabet-match .difficulty-buttons button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.alphabet-match .difficulty-buttons button:hover {
-  background-color: #0056b3;
-}
-
-.alphabet-match .instructions {
-  max-width: 600px;
-  margin: 1rem auto;
-  text-align: center;
-  font-size: 0.95rem;
-  color: #444;
 }
