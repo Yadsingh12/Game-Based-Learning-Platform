@@ -1,58 +1,46 @@
 /* IndiaMap.css */
 
-/* Global box-sizing for consistent layout behavior */
+/* Global box-sizing */
 * {
   box-sizing: border-box;
 }
 
-/* Use a new class to manage the vertical layout with CSS Grid */
 .quiz-layout {
-  display: grid;
-  grid-template-rows: auto 1fr;
+  display: flex;
+  flex-direction: column; /* Top (header) + bottom (map+video) */
   height: 100vh;
-  /* Make sure the container fills the entire viewport height */
-  overflow-y: auto;
-  /* Allow vertical scrolling if content is too tall */
+  overflow: hidden;
   background-color: #f0f4f8;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: #333;
 }
 
-/* Style the top section of the grid, which holds the UI elements */
+/* ---------------- HEADER (TOP) ---------------- */
 .quiz-header-section {
-  padding: 2vmin;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex: 0 0 auto;
+  padding: 1rem 2rem;
+  background: #ffffff;
+  border-bottom: 2px solid #ccc;
+  text-align: center;
 }
 
-/* Info box for score and question progress */
 .game-info-box {
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  max-width: 900px;
-  margin-bottom: 2vmin;
+  margin-bottom: 1rem;
   font-size: clamp(0.9rem, 2vmin, 1.2rem);
-  /* Responsive font size */
   font-weight: bold;
   color: #007bff;
-  padding: 0 1vmin;
 }
 
-/* Question box styling */
 .question-box {
   background-color: #ffffff;
   border: 2px solid #007bff;
   border-radius: 10px;
-  padding: 2vmin 3vmin;
-  margin-bottom: 2vmin;
-  width: 100%;
-  /* Change to 100% to fill the parent width */
-  max-width: 900px;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
   text-align: center;
   font-size: clamp(1.2rem, 3vmin, 1.5rem);
-  /* Responsive font size */
   font-weight: 500;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   min-height: 80px;
@@ -60,23 +48,16 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease-in-out;
-  box-sizing: border-box;
 }
 
 .feedback-box {
-  margin-top: 10px;
-  font-size: 16px;
+  margin-top: 0.5rem;
+  font-size: 1rem;
   font-weight: bold;
-  padding: 8px 12px;
+  padding: 0.5rem 1rem;
   border-radius: 6px;
   display: inline-block;
   animation: fadeIn 0.3s ease;
-}
-
-.feedback-box.start {
-  background: #e9ecef;
-  color: #6c757d;
-  border: 1px solid #ced4da;
 }
 
 .feedback-box.correct {
@@ -91,101 +72,23 @@
   border: 1px solid #f5c6cb;
 }
 
-/* Specific styling for the game over box */
-.game-over-box {
-  flex-direction: column;
-  justify-content: center;
-  font-size: clamp(1.4rem, 4vmin, 1.8rem);
-  /* Larger responsive font size */
-  color: #333;
+/* ---------------- MAIN CONTENT (BOTTOM) ---------------- */
+.quiz-main {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
 }
 
-.game-over-box p {
-  margin: 1vmin 0;
-}
-
-/* Animation for incorrect guesses */
-.shake {
-  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  transform: translate3d(0, 0, 0);
-  background-color: #ffebeb;
-  border-color: #dc3545;
-}
-
-@keyframes shake {
-
-  10%,
-  90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-
-  20%,
-  80% {
-    transform: translate3d(2px, 0, 0);
-  }
-
-  30%,
-  50%,
-  70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-
-  40%,
-  60% {
-    transform: translate3d(4px, 0, 0);
-  }
-}
-
-/* Animation for correct guesses */
-.correct-pulse {
-  animation: correct-pulse 0.8s;
-  background-color: #e6f7e9;
-  border-color: #28a745;
-}
-
-@keyframes correct-pulse {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.03);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* Styling for the play again button */
-.play-again-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 1.5vmin 3vmin;
-  font-size: clamp(0.9rem, 2vmin, 1rem);
-  /* Responsive font size */
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 1.5vmin;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.play-again-button:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-}
-
-/* Main content area for the map */
+/* Map left */
 .map-viewer-container {
-  width: 100%;
-  height: 100%;
-  padding: 4vmin;
-  box-sizing: border-box;
+  flex: 2;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Adjust the inner pan-zoom container to be responsive */
 .map-viewer-container .react-svg-pan-zoom_container {
   width: 100% !important;
   height: 100% !important;
@@ -195,7 +98,6 @@
   overflow: hidden;
 }
 
-/* Base styles for the map states */
 .map-state {
   fill: #e6e6e6;
   stroke: #000000;
@@ -204,18 +106,95 @@
   cursor: pointer;
 }
 
-/* Hover effect for map states */
 .map-state:hover {
   fill: #a39f9f !important;
 }
 
+/* Tooltip */
 .map-tooltip {
   position: fixed;
-  background: rgba(256, 256, 256, 0.7);
+  background: rgba(255, 255, 255, 0.7);
   color: #0056b3;
   padding: 5px 10px;
   border-radius: 5px;
-  font-size: 16;
-  pointer-events: none; /* so it doesn't block mouse */
+  font-size: 16px;
+  pointer-events: none;
   z-index: 1000;
+}
+
+/* Video right */
+.video-container {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-left: 2px solid #ccc;
+}
+
+.video-container video {
+  max-width: 100%;
+  max-height: 100%;
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------------- RESULT + BUTTONS ---------------- */
+.result-screen {
+  padding: 2rem;
+  text-align: center;
+}
+
+.play-again-button,
+.result-screen button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: clamp(0.9rem, 2vmin, 1rem);
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0.5rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.play-again-button:hover,
+.result-screen button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* ---------------- ANIMATIONS ---------------- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.shake {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  background-color: #ffebeb;
+  border-color: #dc3545;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+.correct-pulse {
+  animation: correct-pulse 0.8s;
+  background-color: #e6f7e9;
+  border-color: #28a745;
+}
+
+@keyframes correct-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
 }
