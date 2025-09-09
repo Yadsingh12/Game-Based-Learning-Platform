@@ -1,0 +1,140 @@
+.color-quiz-game {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'Inter', sans-serif;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.color-quiz-game h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 0.5rem 0;
+  flex-shrink: 0;
+}
+
+.color-quiz-game .question-image-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  max-height: 35vh;
+}
+
+.color-quiz-game .question-image {
+  width: 100%;
+  max-width: 600px;
+  max-height: 100%;
+  object-fit: contain;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  background: #f9f9f9;
+}
+
+.color-quiz-game .score {
+  margin: 0.3rem 0;
+  display: flex;
+  gap: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.color-quiz-game .feedback {
+  font-size: 1.1rem;
+  text-align: center;
+  margin: 0.3rem 0;
+  font-weight: bold;
+  height: 3.5em;
+  flex-shrink: 0;
+  transition: opacity 0.3s ease;
+}
+
+.color-quiz-game .video-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.8rem;
+  width: 100%;
+  max-width: 800px;
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 0.5rem;
+}
+
+.color-quiz-game .option-video {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.3s ease;
+  border: 3px solid transparent;
+  object-fit: cover;
+  background: #000;
+}
+
+.color-quiz-game .option-video:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(0, 150, 255, 0.4);
+  border-color: #007bff;
+}
+
+.color-quiz-game .option-video.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.color-quiz-game .start-button {
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.color-quiz-game .start-button:hover {
+  background-color: #0056b3;
+}
+
+.color-quiz-game .congrats-animation {
+  font-size: 1.3rem;
+  color: #ff9800;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .color-quiz-game h2 {
+    font-size: 1.1rem;
+  }
+
+  .color-quiz-game .question-image-wrapper {
+    max-height: 25vh;
+  }
+
+  .color-quiz-game .video-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .color-quiz-game .feedback {
+    font-size: 0.9rem;
+  }
+
+  .color-quiz-game .score {
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.9rem;
+  }
+}
