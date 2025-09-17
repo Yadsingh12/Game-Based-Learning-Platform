@@ -258,6 +258,17 @@ const IndiaMap = () => {
             </svg>
           </UncontrolledReactSVGPanZoom>
         )}
+        {hoveredState && (
+          <div
+            className="map-tooltip"
+            style={{
+              top: tooltipPos.y + 10,
+              left: tooltipPos.x + 10,
+            }}
+          >
+            {hoveredState}
+          </div>
+        )}
       </div>
 
       <div className="video-container">
