@@ -75,11 +75,23 @@ export default function ShapesGame() {
     const [message, setMessage] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [videoSrc, setVideoSrc] = useState(null);
+    const [testOptions, setTestOptions] = useState([]);
 
     const startTest = () => {
         const shapeNames = Object.keys(shapes);
         const randomShape = shapeNames[Math.floor(Math.random() * shapeNames.length)];
         setCurrentTestShape(randomShape);
+
+        // build pool of 6
+        const pool = [randomShape];
+        const others = shapeNames.filter(s => s !== randomShape);
+        while (pool.length < 6) {
+            const r = others.splice(Math.floor(Math.random() * others.length), 1)[0];
+            pool.push(r);
+        }
+
+        setCurrentTestShape(randomShape);
+        setTestOptions(pool);
     };
 
     const handleClick = (shapeName) => {
@@ -92,9 +104,8 @@ export default function ShapesGame() {
         } else if (mode === "test") {
             if (shapeName === currentTestShape) {
                 setMessage("Correct! 🎉");
-                setVideoSrc(`/videos/Shapes/${currentTestShape}.mp4`); // replay the test video
+                setVideoSrc(videoPath);
                 setIsModalVisible(true);
-                startTest();
             } else {
                 setMessage("Try again ❌");
                 setVideoSrc(null);
@@ -107,6 +118,11 @@ export default function ShapesGame() {
         setIsModalVisible(false);
         setMessage("");
         setVideoSrc(null);
+
+        // Move next test shape selection here
+        if (mode === "test") {
+            startTest();
+        }
     };
 
     useEffect(() => {
@@ -126,7 +142,9 @@ export default function ShapesGame() {
             {/* Show video in Test Mode */}
             {mode === "test" && currentTestShape && (
                 <div className="test-video">
-                    <video width="320" controls autoPlay loop>
+                    <video  width="320" controls autoPlay loop
+                        key={currentTestShape} // key to force reload on shape change
+                    >
                         <source src={`/videos/Shapes/${currentTestShape}.mp4`} type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
@@ -138,17 +156,8 @@ export default function ShapesGame() {
             <div className={`grid-container ${mode}`}>
                 {Object.entries(shapes)
                     .filter(([name]) => {
-                        if (mode === "learn") return true; // all shapes
-                        if (mode === "test") {
-                            // only show a subset: correct + random few
-                            const pool = [currentTestShape];
-                            const others = Object.keys(shapes).filter(s => s !== currentTestShape);
-                            while (pool.length < 6) {
-                                const r = others.splice(Math.floor(Math.random() * others.length), 1)[0];
-                                pool.push(r);
-                            }
-                            return pool.includes(name);
-                        }
+                        if (mode === "learn") return true;
+                        if (mode === "test") return testOptions.includes(name);
                         return true;
                     })
                     .map(([name, shapeObj]) => (
