@@ -13,7 +13,7 @@ import SignsAndLaddersScene from "./SignsAndLadders/scenes/SignsAndLadders";
 
 import FindStateReactGame from "./FindState/ReactIndiaMapGame.jsx";
 
-import BreakoutGame from "./BreakoutGame/breakout.jsx";
+import BreakoutGame from "./BreakoutGame/Breakout.jsx";
 
 import RecognizeQuiz from "./RecognizeSign/RecognizeQuiz.jsx";
 
@@ -39,6 +39,8 @@ import WordScrambleGame from "./WordScramble/WordScramble.jsx";
 
 import FruitGame from "./FindFruit/FindFruit.jsx";
 
+import FindShape from "./FindShapes/FindShapes.jsx";
+
 export const gamesMap = {
   "number-kingdom": {
     name: "Number Kingdom",
@@ -56,6 +58,15 @@ export const gamesMap = {
     component: BreakoutGame,
     logoPath: "/assets/images/breakout-game-logo.png",
     alt: "Breakout Game Logo",
+    category: "Math Games"
+  },
+  "find-shapes": {
+    name: "Find Shapes",
+    type: "react",
+    orientation: "landscape",
+    component: FindShape,
+    logoPath: "/assets/images/find-shapes-logo.png",
+    alt: "Find Shapes Logo",
     category: "Math Games"
   },
   "video-option-quiz-numbers": {
