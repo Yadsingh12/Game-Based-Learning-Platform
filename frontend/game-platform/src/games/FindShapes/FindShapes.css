@@ -1,0 +1,202 @@
+#findshapegame {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;             /* Lock viewport height */
+  box-sizing: border-box;
+  overflow: hidden;          /* Prevent page scrollbars */
+}
+
+/* Title area */
+#findshapegame .main-title {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+#findshapegame .subtitle {
+  text-align: center;
+  color: #555;
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+#findshapegame .button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+#findshapegame button {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#findshapegame button:disabled {
+  background-color: #2e7d32;
+  transform: scale(1.05);
+  cursor: default;
+}
+
+#findshapegame button:hover:not(:disabled) {
+  background-color: #43a047;
+  transform: translateY(-2px);
+}
+
+#findshapegame .test-video {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Test message */
+#findshapegame .test-message {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#findshapegame .test-message strong {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+#findshapegame .test-shape-name {
+  color: #d32f2f;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* Shapes Grid */
+#findshapegame .grid-container {
+  flex: 1; /* take all remaining height */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  gap: 0.75rem;
+  max-width: 1000px;
+  width: 100%;
+  align-content: start;   /* keep items from overflowing */
+  overflow: auto;         /* scroll only inside grid if needed */
+}
+
+#findshapegame .grid-container {
+  display: grid;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+#findshapegame .grid-container.learn {
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  max-width: 1100px;
+}
+
+#findshapegame .grid-container.test {
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  max-width: 100%;
+}
+
+#findshapegame .grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+#findshapegame .grid-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+#findshapegame .grid-item svg {
+  width: 80px;
+  height: 80px;
+}
+
+#findshapegame .shape-name {
+  margin-top: 0.25rem;
+  font-size: clamp(0.7rem, 1vw, 1rem);
+  font-weight: 600;
+  color: #444;
+  text-transform: capitalize;
+  transition: color 0.2s ease;
+}
+
+#findshapegame .grid-item:hover .shape-name {
+  color: #3b82f6;
+}
+
+/* Modal Styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.modal-message {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.modal-content video {
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.modal-close-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: #3b82f6;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: #2563eb;
+}
