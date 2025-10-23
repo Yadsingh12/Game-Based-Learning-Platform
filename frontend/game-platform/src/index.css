@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
 
+/*----------------------*/
+/* Theme Variables */
+/*----------------------*/
 .light-theme {
   --color-background: #f4edc8;
   --color-text: #333333;
@@ -11,9 +14,12 @@
   --color-button-bg: #ffb347;
   --color-button-border: #ff7f50;
   --color-button-text: #ffffff;
+  --color-button-hover: #ff9e5b;
 
   --color-card-bg: #ffffff;
-  --color-card-border: #ffd699;
+  --color-card-border: #ffb347;
+  --color-card-hover-bg: #ffe4b5;
+  --color-card-title: #2c3e50;
 
   --color-navbar-bg: #ffb347;
   --color-navbar-text: #ffffff;
@@ -30,16 +36,25 @@
   --color-button-bg: #9b59b6;
   --color-button-border: #ff6b6b;
   --color-button-text: #ffffff;
+  --color-button-hover: #d46bff;
 
   --color-card-bg: #34495e;
   --color-card-border: #9b59b6;
+  --color-card-hover-bg: #703c70;
+  --color-card-title: #ffffff;
 
   --color-navbar-bg: #9b59b6;
   --color-navbar-text: #ffffff;
 }
 
+/*----------------------*/
+/* Global Settings */
+/*----------------------*/
 :root {
-  font-family: "Dancing Script", cursive, sans-serif;
+  --font-primary: "Dancing Script", cursive, sans-serif;
+  --font-secondary: "Comic Sans MS", cursive, sans-serif;
+
+  font-family: var(--font-primary);
   line-height: 1.5;
   font-weight: 400;
   font-size: 20px;
@@ -53,15 +68,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 600;
-  color: var(--color-link);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-a:hover {
-  color: var(--color-link-hover);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
@@ -71,18 +81,35 @@ body {
   background-color: var(--color-background);
 }
 
+a {
+  font-weight: 600;
+  color: var(--color-link);
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+}
+
+/*----------------------*/
+/* Headings */
+/*----------------------*/
 h1 {
-  font-size: 3em;
+  font-size: clamp(2rem, 5vw, 3em);
   color: var(--color-heading);
   margin-bottom: 0.5em;
 }
 
 h2 {
+  font-size: clamp(1.5rem, 4vw, 2em);
   color: var(--color-heading2);
   margin-bottom: 0.5em;
 }
 
-button {
+/*----------------------*/
+/* Buttons */
+/*----------------------*/
+.button-style {
   border-radius: 8px;
   border: 2px solid var(--color-button-border);
   padding: 0.6em 1.2em;
@@ -95,13 +122,12 @@ button {
   transition: background-color 0.25s, color 0.25s, transform 0.2s;
 }
 
-button:hover {
-  background-color: var(--color-link);
-  color: var(--color-button-text);
+.button-style:hover {
+  background-color: var(--color-button-hover);
   transform: scale(1.05);
 }
 
-button:focus,
-button:focus-visible {
+.button-style:focus,
+.button-style:focus-visible {
   outline: 4px auto var(--color-button-border);
 }

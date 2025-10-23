@@ -1,19 +1,3 @@
-/* src/components/GameCard.css */
-
-.light-theme {
-  --color-card-bg: #ffffff;
-  --color-card-border: #ffb347;
-  --color-card-hover-bg: #ffe4b5;
-  --color-card-title: #2c3e50;
-}
-
-.dark-theme {
-  --color-card-bg: #34495e;
-  --color-card-border: #9b59b6;
-  --color-card-hover-bg: #703c70;
-  --color-card-title: #ffffff;
-}
-
 .game-card {
   border: 3px solid var(--color-card-border);
   border-radius: 12px;
@@ -26,6 +10,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   text-decoration: none;
   color: inherit;
+  will-change: transform, background-color;
 }
 
 .game-card:hover {
@@ -43,5 +28,5 @@
   margin-top: 10px;
   font-size: 18px;
   color: var(--color-card-title);
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: var(--font-secondary);
 }
