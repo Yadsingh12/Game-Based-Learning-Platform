@@ -41,7 +41,7 @@ const BucketGameWithConfirm = ({ maxNumber = 10 }) => {
   const waterHeight = (waterLevel / maxNumber) * 100;
 
   return (
-    <div className="bucket-game">
+    <div id="bucket-game">
       <h2>Match the ISL Number</h2>
 
       {/* ISL number video */}
