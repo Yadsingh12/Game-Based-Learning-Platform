@@ -43,6 +43,8 @@ import FindShape from "./FindShapes/FindShapes.jsx";
 
 import BucketGame from "./WaterVolume/BucketGame.jsx";
 
+import DaysOfWeekGame from "./DaysOfTheWeek/DaysOfWeekGame.jsx";
+
 export const gamesMap = {
   "number-kingdom": {
     name: "Number Kingdom",
@@ -168,6 +170,15 @@ export const gamesMap = {
     component: ISLClockGame, 
     logoPath: "/assets/images/isl-clock-game-logo.png",
     alt: "ISL Clock Game Logo",
+    category: "Time Games"
+  },
+  "Days of the Week": {
+    name: "Days of the Week Game",
+    type: "react",  
+    orientation: "landscape",
+    component: DaysOfWeekGame,
+    logoPath: "/assets/images/days-of-the-week-logo.png",
+    alt: "Days of the Week Game Logo",
     category: "Time Games"
   },
   "word-search-game": {
