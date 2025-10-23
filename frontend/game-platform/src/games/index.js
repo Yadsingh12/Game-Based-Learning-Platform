@@ -41,6 +41,8 @@ import FruitGame from "./FindFruit/FindFruit.jsx";
 
 import FindShape from "./FindShapes/FindShapes.jsx";
 
+import BucketGame from "./WaterVolume/BucketGame.jsx";
+
 export const gamesMap = {
   "number-kingdom": {
     name: "Number Kingdom",
@@ -67,6 +69,15 @@ export const gamesMap = {
     component: FindShape,
     logoPath: "/assets/images/find-shapes-logo.png",
     alt: "Find Shapes Logo",
+    category: "Math Games"
+  },
+  "water-volume": {
+    name: "Water Volume",
+    type: "react",
+    orientation: "portrait",
+    component: BucketGame,
+    logoPath: "/assets/images/water-volume-logo.png",
+    alt: "Water Volume Logo",
     category: "Math Games"
   },
   "video-option-quiz-numbers": {
