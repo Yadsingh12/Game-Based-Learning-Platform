@@ -53,7 +53,7 @@ const Shape = ({ shape, color = "#4CAF50", onClick }) => {
     );
 };
 
-// Modal for feedback in Learn Mode
+// Modal for feedback
 const MessageModal = ({ message, onClose, video }) => (
     <div className="modal-overlay">
         <div className="modal-content">
@@ -69,31 +69,97 @@ const MessageModal = ({ message, onClose, video }) => (
     </div>
 );
 
+// Confirmation Modal
+const ConfirmModal = ({ message, onConfirm, onCancel }) => (
+    <div className="modal-overlay">
+        <div className="modal-content">
+            <p className="modal-message">{message}</p>
+            <div className="confirm-buttons">
+                <button className="modal-close-btn" onClick={onConfirm}>Yes</button>
+                <button className="modal-close-btn" onClick={onCancel}>Cancel</button>
+            </div>
+        </div>
+    </div>
+);
+
 export default function ShapesGame() {
+    // keep default "learn" mode
     const [mode, setMode] = useState("learn");
-    const [currentTestShape, setCurrentTestShape] = useState(null);
+
+    // test sequencing & options
+    const [testOrder, setTestOrder] = useState([]); // full randomized order of shapes
+    const [testIndex, setTestIndex] = useState(0); // current index in testOrder
+    const [currentTestShape, setCurrentTestShape] = useState(null); // name string
+    const [testOptions, setTestOptions] = useState([]); // array of 4 names (correct + 3 distractors)
+
+    // scoring & storage
+    const [score, setScore] = useState(0);
+    const [bestScore, setBestScore] = useState(() => Number(localStorage.getItem("best_shape_score") || 0));
+    const [previousScore, setPreviousScore] = useState(() => Number(localStorage.getItem("previous_shape_score") || 0));
+
+    // modal / feedback
     const [message, setMessage] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [videoSrc, setVideoSrc] = useState(null);
-    const [testOptions, setTestOptions] = useState([]);
 
-    const startTest = () => {
-        const shapeNames = Object.keys(shapes);
-        const randomShape = shapeNames[Math.floor(Math.random() * shapeNames.length)];
-        setCurrentTestShape(randomShape);
+    // to decide what happens on closing the modal
+    // true => last answer was correct, false => last was wrong
+    const [lastAnswerCorrect, setLastAnswerCorrect] = useState(null);
 
-        // build pool of 6
-        const pool = [randomShape];
-        const others = shapeNames.filter(s => s !== randomShape);
-        while (pool.length < 6) {
-            const r = others.splice(Math.floor(Math.random() * others.length), 1)[0];
-            pool.push(r);
-        }
+    // Confirmation modal
+    const [pendingMode, setPendingMode] = useState(null);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-        setCurrentTestShape(randomShape);
-        setTestOptions(pool);
+    // helper: build 4-option pool (correct + 3 random others)
+    const buildOptionsFor = (correctName) => {
+        const all = Object.keys(shapes).filter(n => n !== correctName);
+        // shuffle all and take 3
+        const shuffled = all.sort(() => Math.random() - 0.5).slice(0, 3);
+        const pool = [correctName, ...shuffled].sort(() => Math.random() - 0.5);
+        return pool;
     };
 
+    // start the full test (random order of all shapes)
+    const startTest = () => {
+        const shapeNames = Object.keys(shapes);
+        // shuffle full order
+        const order = [...shapeNames].sort(() => Math.random() - 0.5);
+        setTestOrder(order);
+        setTestIndex(0);
+        setScore(0);
+
+        const first = order[0];
+        setCurrentTestShape(first);
+        setTestOptions(buildOptionsFor(first));
+
+        // switch mode to test (if not already)
+        setMode("test");
+    };
+
+    // end test: save previous & best, return to learn (start) page
+    const endTest = (finalScore) => {
+        localStorage.setItem("previous_shape_score", finalScore);
+        setPreviousScore(finalScore);
+
+        if (finalScore > bestScore) {
+            localStorage.setItem("best_shape_score", finalScore);
+            setBestScore(finalScore);
+        }
+        // reset test state
+        setTestOrder([]);
+        setTestIndex(0);
+        setCurrentTestShape(null);
+        setTestOptions([]);
+        setScore(0);
+        setLastAnswerCorrect(null);
+        // go back to learn 
+        setMode("learn");
+        setIsModalVisible(false);
+        setMessage("");
+        setVideoSrc(null);
+    };
+
+    // what happens when a shape tile is clicked
     const handleClick = (shapeName) => {
         const videoPath = `/videos/Shapes/${shapeName}.mp4`;
 
@@ -101,32 +167,119 @@ export default function ShapesGame() {
             setVideoSrc(videoPath);
             setMessage(`This is a ${shapeName}`);
             setIsModalVisible(true);
-        } else if (mode === "test") {
+            setLastAnswerCorrect(null);
+            return;
+        }
+
+        if (mode === "test") {
+            if (!currentTestShape) return; // safety
             if (shapeName === currentTestShape) {
+                // correct
+                const newScore = score + 1;
+                setScore(newScore);
                 setMessage("Correct! 🎉");
                 setVideoSrc(videoPath);
                 setIsModalVisible(true);
+                setLastAnswerCorrect(true);
+
+                // if this was the last item in testOrder, we still show modal and then end on close
+                return;
             } else {
+                // wrong -> show modal and mark wrong; on close we end test
                 setMessage("Try again ❌");
                 setVideoSrc(null);
                 setIsModalVisible(true);
+                setLastAnswerCorrect(false);
+                return;
             }
         }
     };
 
+    // close modal handler — decides whether to advance test or finish test
     const handleCloseModal = () => {
         setIsModalVisible(false);
         setMessage("");
         setVideoSrc(null);
 
-        // Move next test shape selection here
         if (mode === "test") {
-            startTest();
+            if (lastAnswerCorrect === true) {
+                // move to next test item or finish if done
+                const nextIndex = testIndex + 1;
+                if (nextIndex >= testOrder.length) {
+                    // finished all correctly
+                    endTest(score);
+                } else {
+                    const nextShape = testOrder[nextIndex];
+                    setTestIndex(nextIndex);
+                    setCurrentTestShape(nextShape);
+                    setTestOptions(buildOptionsFor(nextShape));
+                    setLastAnswerCorrect(null);
+                    // modal closed and next question now visible (video will autoplay from test video area)
+                }
+            } else if (lastAnswerCorrect === false) {
+                // wrong answer -> immediate end
+                endTest(score);
+            } else {
+                // neutral (e.g., learn modal) — do nothing extra
+            }
         }
     };
 
+    // request mode change with confirmation if leaving/entering test
+    const requestModeChange = (newMode) => {
+        if (mode === newMode) return;
+        if (mode === "test" || newMode === "test") {
+            setPendingMode(newMode);
+            setShowConfirmModal(true);
+        } else {
+            setMode(newMode);
+        }
+    };
+
+    const confirmModeChange = () => {
+        setShowConfirmModal(false);
+
+        if (mode === "test") {
+            setTestOrder([]);
+            setTestIndex(0);
+            setCurrentTestShape(null);
+            setTestOptions([]);
+            setScore(0);
+            setLastAnswerCorrect(null);
+        }
+
+        if (pendingMode === "test") startTest();
+        else setMode(pendingMode);
+
+        setPendingMode(null);
+    };
+
+    const cancelModeChange = () => {
+        setShowConfirmModal(false);
+        setPendingMode(null);
+    };
+
+    const getConfirmMessage = () => {
+        if (mode === "learn" && pendingMode === "test") {
+            return "You are about to start a test. Are you ready?";
+        }
+        if (mode === "test" && pendingMode === "learn") {
+            return "You are leaving the test. Your current score will be lost. Continue?";
+        }
+        return "";
+    };
+
+    // when user toggles to test mode via button (keeps buttons visible)
     useEffect(() => {
-        if (mode === "test") startTest();
+        if (mode === "test") {
+            // if testOrder empty, start a fresh test
+            if (!testOrder || testOrder.length === 0) {
+                startTest();
+            } else {
+                // else resume current test state (rare)
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mode]);
 
     return (
@@ -134,25 +287,31 @@ export default function ShapesGame() {
             <h1 className="main-title">Shapes Game</h1>
             <p className="subtitle">Learn with sign videos or test your knowledge!</p>
 
-            <div className="button-container">
-                <button onClick={() => setMode("learn")} disabled={mode === "learn"}>Learn Mode</button>
-                <button onClick={() => setMode("test")} disabled={mode === "test"}>Test Mode</button>
+            {/* Score box */}
+            <div className="score-box">
+                <div className="score-item">Previous Score: {previousScore}</div>
+                <div className="separator">|</div>
+                <div className="score-item">Best Score: {bestScore}</div>
             </div>
 
-            {/* Show video in Test Mode */}
+            <div className="button-container">
+                <button onClick={() => requestModeChange("learn")} disabled={mode === "learn"}>Learn Mode</button>
+                <button onClick={() => requestModeChange("test")} disabled={mode === "test"}>Test Mode</button>
+            </div>
+
+            {/* Show video in Test Mode (autoplay the current test shape's video) */}
             {mode === "test" && currentTestShape && (
                 <div className="test-video">
-                    <video  width="320" controls autoPlay loop
-                        key={currentTestShape} // key to force reload on shape change
-                    >
+                    <video width="320" controls autoPlay loop key={currentTestShape}>
                         <source src={`/videos/Shapes/${currentTestShape}.mp4`} type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                     <p className="test-instruction">Watch the sign and click the correct shape below!</p>
+                    <p className="test-instruction">Score: {score} / {testOrder.length || Object.keys(shapes).length}</p>
                 </div>
             )}
 
-            {/* Shapes Grid */}
+            {/* Shapes Grid — layout remains same as original. In test mode we only render testOptions (4 names). In learn mode, render all. */}
             <div className={`grid-container ${mode}`}>
                 {Object.entries(shapes)
                     .filter(([name]) => {
@@ -167,7 +326,10 @@ export default function ShapesGame() {
                         </div>
                     ))}
             </div>
+
             {isModalVisible && <MessageModal message={message} onClose={handleCloseModal} video={videoSrc} />}
+
+            {showConfirmModal && <ConfirmModal message={getConfirmMessage()} onConfirm={confirmModeChange} onCancel={cancelModeChange} />}
         </div>
     );
 }

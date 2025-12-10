@@ -132,6 +132,12 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+#daysofweekgame .confirm-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 #daysofweekgame .modal-close-btn {
   background: #f57c00;
   color: white;
