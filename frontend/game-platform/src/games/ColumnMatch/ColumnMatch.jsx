@@ -1,3 +1,4 @@
+// ColumnMatch.jsx
 import React, { useEffect, useState } from "react";
 import "./ColumnMatch.css";
 
@@ -15,7 +16,11 @@ const ColumnMatch = () => {
   const [difficulty, setDifficulty] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
-  const [gameState, setGameState] = useState("start"); // "start", "playing", "end"
+  const [gameState, setGameState] = useState("start"); // start, playing, end
+
+  const [wrongDropTarget, setWrongDropTarget] = useState(null); // ❌ wrong drop highlight
+
+  const shuffleArray = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
   useEffect(() => {
     if (difficulty && gameState === "playing") {
@@ -23,35 +28,55 @@ const ColumnMatch = () => {
         const res = await fetch("/labels.json");
         const data = await res.json();
         const filtered = data.filter((item) => item.enabled);
+
         const selected = shuffleArray(filtered).slice(0, difficulties[difficulty]);
 
         setItems(selected);
-        setImages(shuffleArray([...selected]));
-        setVideos(shuffleArray([...selected]));
-        setStartTime(Date.now());
+        setImages(shuffleArray([...selected])); // draggable images
+        setVideos(shuffleArray([...selected])); // drop targets videos
         setMatched([]);
+        setStartTime(Date.now());
         setEndTime(null);
       };
       fetchData();
     }
   }, [difficulty, gameState]);
 
-  const shuffleArray = (arr) => [...arr].sort(() => Math.random() - 0.5);
+  // 🔥 Force consistent drag ghost image
+  const handleDragStart = (e, name, imgSrc) => {
+    e.dataTransfer.setData("name", name);
+
+    const dragImg = document.createElement("img");
+    dragImg.src = imgSrc;
+    dragImg.style.width = "120px";
+    dragImg.style.height = "120px";
+    dragImg.style.objectFit = "contain";
+
+    document.body.appendChild(dragImg);
+    e.dataTransfer.setDragImage(dragImg, 60, 60);
+
+    setTimeout(() => document.body.removeChild(dragImg), 0);
+  };
 
   const handleDrop = (e, targetName) => {
+    e.preventDefault();
     const draggedName = e.dataTransfer.getData("name");
+
+    // ✅ Correct match
     if (draggedName === targetName && !matched.includes(draggedName)) {
       const newMatched = [...matched, draggedName];
       setMatched(newMatched);
+
       if (newMatched.length === items.length) {
         setEndTime(Date.now());
         setGameState("end");
       }
+      return;
     }
-  };
 
-  const handleDragStart = (e, name) => {
-    e.dataTransfer.setData("name", name);
+    // ❌ Wrong match → Flash red border
+    setWrongDropTarget(targetName);
+    setTimeout(() => setWrongDropTarget(null), 700);
   };
 
   const formatTime = (ms) => `${Math.floor(ms / 1000)}s`;
@@ -76,11 +101,13 @@ const ColumnMatch = () => {
       <div className="column-match start-screen">
         <h1>🎯 Column Match</h1>
         <p>Select a difficulty level to start the game:</p>
+
         <DifficultyButtons />
+
         <div className="instructions">
           <h3>How to Play:</h3>
           <ul>
-            <li>Drag the correct image to the corresponding video (or vice versa).</li>
+            <li>Drag the correct image and drop it onto the matching video.</li>
             <li>Match all pairs as fast as you can.</li>
             <li>The game ends when all pairs are correctly matched.</li>
           </ul>
@@ -96,6 +123,7 @@ const ColumnMatch = () => {
         <p>Difficulty: {difficulty}</p>
         <p>Time taken: {formatTime(endTime - startTime)}</p>
         <p>Want to play again? Choose a new difficulty:</p>
+
         <DifficultyButtons />
       </div>
     );
@@ -104,8 +132,11 @@ const ColumnMatch = () => {
   return (
     <div className="column-match">
       <h2>Match the Videos and Images</h2>
+
       <div className="game-area">
         <div className="sections">
+
+          {/* IMAGES */}
           <div className="section">
             <h2>Images</h2>
             <div className="grid-container">
@@ -115,29 +146,30 @@ const ColumnMatch = () => {
                   src={item.image}
                   alt={item.name}
                   draggable={!matched.includes(item.name)}
-                  onDragStart={(e) => handleDragStart(e, item.name)}
-                  onDragOver={(e) => e.preventDefault()}
-                  onDrop={(e) => handleDrop(e, item.name)}
+                  onDragStart={(e) => handleDragStart(e, item.name, item.image)}
                   className={`grid-item ${matched.includes(item.name) ? "matched" : ""}`}
                 />
               ))}
             </div>
           </div>
+
+          {/* VIDEOS */}
           <div className="section">
             <h2>Videos</h2>
+
             <div className="grid-container">
               {videos.map((item) => (
                 <div
                   key={item.name}
-                  // Add draggable and onDragStart attributes here
-                  draggable={!matched.includes(item.name)}
-                  onDragStart={(e) => handleDragStart(e, item.name)}
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={(e) => handleDrop(e, item.name)}
-                  className={`grid-item drop-target ${matched.includes(item.name) ? "matched" : ""}`}
+                  className={`grid-item drop-target 
+                    ${matched.includes(item.name) ? "correct" : ""} 
+                    ${wrongDropTarget === item.name ? "wrong" : ""}
+                  `}
                 >
                   <video
-                    src={item.sample_video}
+                    src={item.sample_video ?? item.video ?? item.sampleVideo}
                     muted
                     loop
                     autoPlay
@@ -147,6 +179,7 @@ const ColumnMatch = () => {
               ))}
             </div>
           </div>
+
         </div>
       </div>
     </div>

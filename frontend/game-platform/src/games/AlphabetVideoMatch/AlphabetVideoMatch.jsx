@@ -1,3 +1,4 @@
+// AlphabetVideoMatch.jsx
 import React, { useState, useEffect } from "react";
 import "./AlphabetVideoMatch.css";
 
@@ -20,6 +21,9 @@ const AlphabetVideoMatch = () => {
   const [endTime, setEndTime] = useState(null);
   const [gameState, setGameState] = useState("start"); // start, playing, quiz, result
   const [mode, setMode] = useState(null); // match or quiz
+
+  // temporary state to highlight wrong drop target
+  const [wrongDropTarget, setWrongDropTarget] = useState(null);
 
   // Quiz state
   const [quizAlphabets, setQuizAlphabets] = useState([]);
@@ -45,6 +49,7 @@ const AlphabetVideoMatch = () => {
       setMatched([]);
       setStartTime(Date.now());
       setEndTime(null);
+      setWrongDropTarget(null);
     }
   }, [difficulty, gameState, mode]);
 
@@ -91,20 +96,31 @@ const AlphabetVideoMatch = () => {
     }
   }, [currentQues, quizAlphabets, mode]);
 
+  // Match drop handling (updated to support wrong/correct UI)
   const handleDrop = (e, targetName) => {
+    e.preventDefault();
     const draggedName = e.dataTransfer.getData("name");
+
+    // correct match
     if (draggedName === targetName && !matched.includes(draggedName)) {
       const newMatched = [...matched, draggedName];
       setMatched(newMatched);
+
       if (newMatched.length === alphabets.length) {
         setEndTime(Date.now());
         setGameState("result");
       }
+      return;
     }
+
+    // wrong match -> flash the target
+    setWrongDropTarget(targetName);
+    setTimeout(() => setWrongDropTarget(null), 700);
   };
 
   const handleDragStart = (e, name) => {
     e.dataTransfer.setData("name", name);
+    // (optional) could set a drag image here if needed
   };
 
   const formatTime = (ms) => `${Math.floor(ms / 1000)}s`;
@@ -166,6 +182,7 @@ const AlphabetVideoMatch = () => {
     setQuizTimer(QUIZ_TIME);
     setShownAlphabet("");
     setLastAnswerCorrect(null);
+    setWrongDropTarget(null);
   };
 
   // ---------------- Start Screen ----------------
@@ -289,7 +306,9 @@ const AlphabetVideoMatch = () => {
                   key={item.name}
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={(e) => handleDrop(e, item.name)}
-                  className={`grid-item drop-target ${matched.includes(item.name) ? "matched" : ""}`}
+                  className={`grid-item drop-target ${
+                    matched.includes(item.name) ? "correct" : ""
+                  } ${wrongDropTarget === item.name ? "wrong" : ""}`}
                 >
                   <video src={item.video} muted loop autoPlay playsInline />
                 </div>

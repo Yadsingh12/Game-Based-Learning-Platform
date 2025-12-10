@@ -26,6 +26,7 @@
   flex-direction: row; 
   gap: 1rem;
   height: 100%;
+  padding: 1rem;;
 }
 
 .column-match .section {
@@ -83,10 +84,9 @@
   justify-content: center;
 }
 
-.column-match .matched {
+.column-match .correct {
   opacity: 0.4;
   pointer-events: none;
-  border-color: green;
 }
 
 .column-match .result {
@@ -123,4 +123,47 @@
   text-align: center;
   font-size: 0.95rem;
   color: #444;
+}
+
+.grid-item.matched {
+  border-color: #054a22 !important;
+  border-style: solid;
+  border-width: 5px;
+  background-color: #e6ffe6;
+  opacity: 0.5;
+  pointer-events: none;
+  box-shadow: 0 0 15px #28a745;
+  transition: all 0.3s ease;
+}
+
+/* Permanent green border for correct match */
+.drop-target.correct {
+  border-color: #054a22 !important;
+  border-style: solid;
+  border-width: 5px;
+  background-color: #e6ffe6;
+}
+
+/* Flash red border on wrong drop */
+.drop-target.wrong {
+  border-color: red !important;
+  border-style: solid;
+  border-width: 5px;
+  animation: shake 0.4s ease, redGlow 0.4s ease;
+  background-color: #ffe6e6;
+}
+
+/* Shake animation (optional but looks great) */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes redGlow {
+  0% { box-shadow: 0 0 0px red; }
+  50% { box-shadow: 0 0 18px red; }
+  100% { box-shadow: 0 0 0px red; }
 }

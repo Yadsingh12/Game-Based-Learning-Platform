@@ -149,10 +149,27 @@
 
 .alphabet-match .answer-feedback.correct {
   color: #28a745;
+  animation: correctGlow 0.6s ease-in-out;
 }
 
 .alphabet-match .answer-feedback.wrong {
   color: #dc3545;
+  animation: wrongShake 0.6s ease-in-out;
+}
+
+@keyframes correctGlow {
+  0% { transform: scale(1); text-shadow: 0 0 0px #28a745; }
+  50% { transform: scale(1.12); text-shadow: 0 0 12px #28a745; }
+  100% { transform: scale(1); text-shadow: 0 0 0px #28a745; }
+}
+
+@keyframes wrongShake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+  100% { transform: translateX(0); }
 }
 
 /* Buttons */
@@ -262,6 +279,7 @@
   transform: scale(1.05);
 }
 
+/* video base styles */
 .alphabet-match video {
   width: 100%;
   aspect-ratio: 16/9;
@@ -269,21 +287,51 @@
   border-radius: 0.5rem;
   border: 2px solid transparent;
   pointer-events: none;
+  transition: opacity 0.25s ease;
 }
 
+/* drop target base (no dashed border) */
 .alphabet-match .drop-target {
   width: 100%;
   aspect-ratio: 16/9;
-  border: 2px dashed #ccc;
+  border: 2px solid transparent;
   border-radius: 0.5rem;
   background-color: #fafafa;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
 }
 
+/* matched letter opacity */
 .alphabet-match .matched {
   opacity: 0.4;
   pointer-events: none;
-  border-color: green;
+}
+
+/* correct -> permanent green border + make video opaque */
+.alphabet-match .drop-target.correct {
+  border-color: #00c853 !important;
+  border-width: 5px;
+  background-color: #e6ffe6;
+}
+
+.alphabet-match .drop-target.correct video {
+  opacity: 0.4;
+}
+
+/* wrong -> temporary red border + shake */
+.alphabet-match .drop-target.wrong {
+  border-color: #dc3545 !important;
+  border-width: 5px;
+  background-color: #ffe6e6;
+  animation: shake 0.35s ease;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-6px); }
+  100% { transform: translateX(0); }
 }
