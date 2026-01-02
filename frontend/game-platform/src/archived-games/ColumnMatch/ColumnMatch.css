@@ -1,0 +1,431 @@
+/* ------------------- Base & Reset ------------------- */
+* {
+  box-sizing: border-box;
+}
+
+.column-match {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+/* ------------------- Start & Result Screens ------------------- */
+.column-match.start-screen,
+.column-match.end-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  min-height: 80vh;
+  padding: 2rem;
+}
+
+.column-match.start-screen h1,
+.column-match.end-screen h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0;
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  text-align: center;
+}
+
+.column-match.start-screen p,
+.column-match.end-screen p {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: #4b5563;
+  margin: 0;
+  text-align: center;
+}
+
+/* ------------------- Instructions ------------------- */
+.column-match .instructions {
+  max-width: 700px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
+}
+
+.column-match .instructions h3 {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: #ea580c;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+  text-align: center;
+}
+
+.column-match .instructions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.column-match .instructions li {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: #78350f;
+  margin-bottom: 0.75rem;
+  padding-left: 1.75rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.column-match .instructions li::before {
+  content: "🎯";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* ------------------- Difficulty Buttons ------------------- */
+.column-match .difficulty-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+.column-match .difficulty-buttons button {
+  padding: 0.875rem 1.75rem;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 600;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.column-match .difficulty-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.5s ease;
+}
+
+.column-match .difficulty-buttons button:hover::before {
+  left: 100%;
+}
+
+.column-match .difficulty-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+}
+
+.column-match .difficulty-buttons button:active {
+  transform: translateY(0);
+}
+
+/* ------------------- Back Button ------------------- */
+.back-to-difficulty-btn {
+  position: fixed;
+  top: clamp(60px, 10vh, 80px);
+  left: clamp(10px, 2vw, 20px);
+  padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 20px);
+  font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+  font-weight: 600;
+  color: #1f2937;
+  background-color: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.back-to-difficulty-btn:hover {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+  transform: translateX(-2px);
+}
+
+/* ------------------- Game Area ------------------- */
+.column-match .game-area {
+  width: 100%;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border-radius: 16px;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 180px);
+  max-height: calc(100vh - 180px);
+  overflow: hidden;
+}
+
+.column-match > h2 {
+  text-align: center;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  margin: 0.5rem 0 1rem 0;
+  color: #212529;
+  font-weight: 700;
+}
+
+.column-match .sections {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.column-match .section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: white;
+  border-radius: 12px;
+  padding: clamp(0.75rem, 1.5vw, 1rem);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.1);
+}
+
+.column-match .section h2 {
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  text-align: center;
+  color: #ea580c;
+  font-weight: 700;
+  word-wrap: break-word;
+  flex-shrink: 0;
+}
+
+.column-match .grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(140px, 20vw, 200px), 1fr));
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+  padding: clamp(0.5rem, 1vw, 0.75rem);
+  justify-items: center;
+  align-content: start;
+  overflow-y: visible;
+}
+
+/* ------------------- Images & Videos ------------------- */
+.column-match img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 3px solid transparent;
+  cursor: grab;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+}
+
+.column-match img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.3);
+}
+
+.column-match img:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+}
+
+.column-match video {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 3px solid transparent;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  background-color: #000;
+}
+
+.column-match .drop-target {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16/9;
+  border: 3px dashed #fdba74;
+  border-radius: 12px;
+  background-color: #fff7ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.1);
+}
+
+.column-match .drop-target:hover {
+  border-color: #f97316;
+  background-color: #ffedd5;
+}
+
+/* ------------------- Matched States ------------------- */
+.column-match .grid-item.matched {
+  opacity: 0.35;
+  pointer-events: none;
+  filter: grayscale(0.5);
+  border-color: #15803d !important;
+  border-style: solid;
+  border-width: 4px;
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.3);
+}
+
+.column-match .drop-target.correct {
+  border-color: #15803d !important;
+  border-width: 4px;
+  border-style: solid;
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.3);
+}
+
+.column-match .drop-target.correct video {
+  opacity: 0.5;
+  filter: brightness(0.8);
+}
+
+.column-match .drop-target.wrong {
+  border-color: #dc2626 !important;
+  border-width: 4px;
+  border-style: solid;
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  animation: shake 0.4s ease;
+  box-shadow: 0 4px 16px rgba(220, 38, 38, 0.4);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  50% { transform: translateX(8px); }
+  75% { transform: translateX(-8px); }
+}
+
+/* ------------------- Mobile Responsiveness ------------------- */
+@media (max-width: 1024px) {
+  .column-match .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .column-match .game-area {
+    height: calc(100vh - 160px);
+    max-height: calc(100vh - 160px);
+  }
+
+  .column-match .sections {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .column-match .section {
+    min-height: 200px;
+    max-height: 45vh;
+  }
+
+  .column-match .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  }
+
+  .back-to-difficulty-btn {
+    top: 60px;
+    left: 10px;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .column-match {
+    padding: 0.5rem;
+  }
+
+  .column-match .game-area {
+    height: calc(100vh - 140px);
+    max-height: calc(100vh - 140px);
+    padding: 0.5rem;
+  }
+
+  .column-match .difficulty-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .column-match .difficulty-buttons button {
+    width: 100%;
+  }
+
+  .column-match .section {
+    min-height: 180px;
+    max-height: 40vh;
+    padding: 0.5rem;
+  }
+
+  .column-match .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .column-match .instructions {
+    padding: 1rem;
+  }
+
+  .column-match .instructions li {
+    font-size: 0.9rem;
+  }
+
+  .column-match > h2 {
+    font-size: 1.2rem;
+    margin: 0.25rem 0 0.5rem 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .column-match .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .column-match .section {
+    max-height: 35vh;
+  }
+}
+
+/* ------------------- Scrollbar Styling ------------------- */
+.column-match .section::-webkit-scrollbar {
+  width: 8px;
+}
+
+.column-match .section::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.column-match .section::-webkit-scrollbar-thumb {
+  background: #f97316;
+  border-radius: 10px;
+}
+
+.column-match .section::-webkit-scrollbar-thumb:hover {
+  background: #ea580c;
+}

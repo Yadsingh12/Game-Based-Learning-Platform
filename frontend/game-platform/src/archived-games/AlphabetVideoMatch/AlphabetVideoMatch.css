@@ -1,0 +1,1140 @@
+/* ------------------- Base & Reset ------------------- */
+* {
+  box-sizing: border-box;
+}
+
+.alphabet-match {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+/* ------------------- Start & Result Screens ------------------- */
+.alphabet-match.start-screen,
+.alphabet-match.end-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  min-height: 80vh;
+  padding: 2rem;
+}
+
+.alphabet-match.start-screen h1,
+.alphabet-match.end-screen h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  text-align: center;
+}
+
+.alphabet-match.start-screen p,
+.alphabet-match.end-screen p {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: #4b5563;
+  margin: 0;
+  text-align: center;
+}
+
+/* ------------------- Info Button ------------------- */
+.alphabet-match .menu-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.alphabet-match .info-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: 600;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.alphabet-match .info-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.5s ease;
+}
+
+.alphabet-match .info-btn:hover::before {
+  left: 100%;
+}
+
+.alphabet-match .info-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+}
+
+.alphabet-match .scores-btn {
+  background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.alphabet-match .scores-btn:hover {
+  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+}
+
+/* ------------------- Info Modal ------------------- */
+.alphabet-match.info-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.alphabet-match .info-modal {
+  background: white;
+  border-radius: 20px;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+}
+
+.alphabet-match .scores-modal {
+  max-width: 900px;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alphabet-match .close-info-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #f1f3f5;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: #495057;
+}
+
+.alphabet-match .close-info-btn:hover {
+  background: #e9ecef;
+  transform: rotate(90deg);
+}
+
+.alphabet-match .info-modal h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: #007bff;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+.alphabet-match .info-section {
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  border-left: 4px solid #007bff;
+}
+
+.alphabet-match .info-section h3 {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  color: #212529;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+
+.alphabet-match .info-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.alphabet-match .info-section li {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: #495057;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.alphabet-match .info-section li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #007bff;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.alphabet-match .info-section li strong {
+  color: #212529;
+  font-weight: 600;
+}
+
+.alphabet-match .attempts-info {
+  display: inline-block;
+  background: #fff3cd;
+  color: #856404;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.9em;
+  margin-left: 0.25rem;
+  font-weight: 600;
+}
+
+.alphabet-match .info-close-btn {
+  width: 100%;
+  padding: 0.875rem 1.75rem;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  font-weight: 600;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  margin-top: 1rem;
+}
+
+.alphabet-match .info-close-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+/* ------------------- Score Display ------------------- */
+.alphabet-match .score-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  max-width: 400px;
+}
+
+.alphabet-match .score-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.alphabet-match .score-label {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: #495057;
+  font-weight: 600;
+}
+
+.alphabet-match .score-value {
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  color: #007bff;
+  font-weight: 700;
+}
+
+/* ------------------- High Scores Modal ------------------- */
+.alphabet-match .scores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.alphabet-match .score-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  padding: 1.25rem;
+  border-left: 4px solid #007bff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.alphabet-match .score-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.alphabet-match .score-card h3 {
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  color: #212529;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+
+.alphabet-match .score-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.alphabet-match .score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 0.85rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.alphabet-match .score-row span:first-child {
+  font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+  color: #495057;
+  font-weight: 600;
+}
+
+.alphabet-match .score-row span:last-child {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: #6c757d;
+  font-weight: 600;
+}
+
+.alphabet-match .score-highlight {
+  color: #007bff !important;
+  font-weight: 700 !important;
+  font-size: clamp(1rem, 2.2vw, 1.15rem) !important;
+}
+
+.alphabet-match .no-score {
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+  font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+  margin: 0.5rem 0;
+}
+
+/* ------------------- Difficulty Buttons ------------------- */
+.alphabet-match .difficulty-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+.alphabet-match .difficulty-buttons button {
+  padding: 0.875rem 1.75rem;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 600;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.alphabet-match .difficulty-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.5s ease;
+}
+
+.alphabet-match .difficulty-buttons button:hover::before {
+  left: 100%;
+}
+
+.alphabet-match .difficulty-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+.alphabet-match .difficulty-buttons button:active {
+  transform: translateY(0);
+}
+
+/* ------------------- Back Button ------------------- */
+.back-to-difficulty-btn {
+  position: fixed;
+  top: clamp(60px, 10vh, 80px);
+  left: clamp(10px, 2vw, 20px);
+  padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 20px);
+  font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+  font-weight: 600;
+  color: #1f2937;
+  background-color: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.back-to-difficulty-btn:hover {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+  transform: translateX(-2px);
+}
+
+/* ------------------- Quiz Screen ------------------- */
+.alphabet-match.quiz-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.5rem, 2vw, 1.5rem);
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+.alphabet-match .quiz-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  gap: clamp(0.75rem, 2vh, 1.25rem);
+  margin-top: clamp(50px, 10vh, 80px);
+}
+
+.alphabet-match .quiz-instruction {
+  font-size: clamp(0.85rem, 2vw, 1.15rem);
+  font-weight: 500;
+  text-align: center;
+  background: linear-gradient(135deg, #e0f0ff 0%, #cce5ff 100%);
+  color: #0056b3;
+  padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1.25rem);
+  border-radius: 12px;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.15);
+  margin: 0;
+}
+
+.alphabet-match .quiz-info {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  font-size: clamp(0.8rem, 1.8vw, 1.05rem);
+  font-weight: 600;
+  padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  gap: clamp(0.5rem, 2vw, 1rem);
+  flex-wrap: wrap;
+}
+
+.alphabet-match .quiz-info span {
+  color: #374151;
+  white-space: nowrap;
+}
+
+.alphabet-match .quiz-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  width: 100%;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: clamp(1rem, 2.5vw, 2rem);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.alphabet-match .quiz-video-wrapper,
+.alphabet-match .quiz-letter-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.alphabet-match .quiz-video-wrapper {
+  background-color: #000;
+  border: 3px solid #007bff;
+}
+
+.alphabet-match .quiz-video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: none;
+  border-radius: 0;
+}
+
+.alphabet-match .quiz-letter-wrapper {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 3px solid #007bff;
+}
+
+.alphabet-match .quiz-letter-wrapper h1 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.alphabet-match .quiz-feedback-wrapper {
+  width: 100%;
+  min-height: clamp(2.5rem, 5vh, 3.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alphabet-match .answer-feedback {
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  text-align: center;
+  font-weight: 800;
+  margin: 0;
+}
+
+.alphabet-match .answer-feedback.correct {
+  color: #28a745;
+  animation: correctGlow 0.6s ease-in-out;
+}
+
+.alphabet-match .answer-feedback.wrong {
+  color: #dc3545;
+  animation: wrongShake 0.6s ease-in-out;
+}
+
+@keyframes correctGlow {
+  0% { transform: scale(1); text-shadow: 0 0 0px #28a745; }
+  50% { transform: scale(1.12); text-shadow: 0 0 16px #28a745; }
+  100% { transform: scale(1); text-shadow: 0 0 0px #28a745; }
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-10px); }
+  40%, 80% { transform: translateX(10px); }
+}
+
+.alphabet-match .quiz-buttons {
+  display: flex;
+  gap: clamp(1rem, 3vw, 2rem);
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.alphabet-match .quiz-buttons button {
+  padding: clamp(0.7rem, 1.8vw, 1rem) clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: clamp(130px, 25vw, 160px);
+}
+
+.alphabet-match .quiz-buttons button:first-child {
+  background: linear-gradient(135deg, #28a745 0%, #20893a 100%);
+  color: white;
+}
+
+.alphabet-match .quiz-buttons button:last-child {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+}
+
+.alphabet-match .quiz-buttons button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.alphabet-match .quiz-buttons button:active {
+  transform: translateY(-1px);
+}
+
+/* ------------------- Alphabet Match Game ------------------- */
+.alphabet-match .game-area {
+  width: 100%;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 16px;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 180px);
+  max-height: calc(100vh - 180px);
+  overflow: hidden;
+}
+
+.alphabet-match .difficulty-label {
+  text-align: center;
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+
+.alphabet-match .sections {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.alphabet-match .section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: white;
+  border-radius: 12px;
+  padding: clamp(0.75rem, 1.5vw, 1rem);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.alphabet-match .section h2 {
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  text-align: center;
+  color: #212529;
+  font-weight: 700;
+  word-wrap: break-word;
+  flex-shrink: 0;
+}
+
+.alphabet-match .grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(140px, 20vw, 200px), 1fr));
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+  padding: clamp(0.5rem, 1vw, 0.75rem);
+  justify-items: center;
+  align-content: start;
+  overflow-y: visible;
+}
+
+.alphabet-match .letter {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border-radius: 12px;
+  border: 3px solid transparent;
+  cursor: grab;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.alphabet-match .letter:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+.alphabet-match .letter:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+}
+
+.alphabet-match video {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 3px solid transparent;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  background-color: #000;
+}
+
+.alphabet-match .drop-target {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16/9;
+  border: 3px dashed #ced4da;
+  border-radius: 12px;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.alphabet-match .drop-target:hover {
+  border-color: #007bff;
+  background-color: #e7f3ff;
+}
+
+.alphabet-match .matched {
+  opacity: 0.35;
+  pointer-events: none;
+  filter: grayscale(0.5);
+}
+
+.alphabet-match .drop-target.correct {
+  border-color: #28a745 !important;
+  border-width: 4px;
+  border-style: solid;
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  box-shadow: 0 4px 16px rgba(40, 167, 69, 0.3);
+}
+
+.alphabet-match .drop-target.correct video {
+  opacity: 0.5;
+  filter: brightness(0.8);
+}
+
+.alphabet-match .drop-target.wrong {
+  border-color: #dc3545 !important;
+  border-width: 4px;
+  border-style: solid;
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  animation: shake 0.4s ease;
+  box-shadow: 0 4px 16px rgba(220, 53, 69, 0.3);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  50% { transform: translateX(8px); }
+  75% { transform: translateX(-8px); }
+}
+
+/* ------------------- Mobile Responsiveness ------------------- */
+@media (max-width: 1024px) {
+  .alphabet-match .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .alphabet-match .game-area {
+    height: calc(100vh - 160px);
+    max-height: calc(100vh - 160px);
+  }
+
+  .alphabet-match .menu-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    gap: 0.75rem;
+  }
+
+  .alphabet-match .info-btn {
+    width: 100%;
+  }
+
+  .alphabet-match .info-modal {
+    padding: 1.5rem;
+    max-height: 85vh;
+  }
+
+  .alphabet-match .scores-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .alphabet-match .score-card {
+    padding: 1rem;
+  }
+
+  .alphabet-match .info-section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .alphabet-match .info-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .alphabet-match .info-section li {
+    font-size: 0.9rem;
+  }
+
+  .alphabet-match .quiz-container {
+    margin-top: 60px;
+    gap: clamp(0.6rem, 1.5vh, 1rem);
+  }
+
+  .alphabet-match .quiz-instruction {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .alphabet-match .quiz-info {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .alphabet-match .quiz-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .alphabet-match .quiz-video-wrapper,
+  .alphabet-match .quiz-letter-wrapper {
+    aspect-ratio: 16/9;
+  }
+
+  .alphabet-match .quiz-letter-wrapper h1 {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .alphabet-match .quiz-feedback-wrapper {
+    min-height: 2.5rem;
+  }
+
+  .alphabet-match .answer-feedback {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+  }
+
+  .alphabet-match .quiz-buttons {
+    gap: 1rem;
+  }
+
+  .alphabet-match .quiz-buttons button {
+    padding: 0.7rem 1.75rem;
+    font-size: 1.15rem;
+    min-width: 120px;
+  }
+
+  .alphabet-match .sections {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .alphabet-match .section {
+    min-height: 200px;
+    max-height: 45vh;
+  }
+
+  .alphabet-match .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  }
+
+  .back-to-difficulty-btn {
+    top: 60px;
+    left: 10px;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .alphabet-match {
+    padding: 0.5rem;
+  }
+
+  .alphabet-match .game-area {
+    height: calc(100vh - 140px);
+    max-height: calc(100vh - 140px);
+    padding: 0.5rem;
+  }
+
+  .alphabet-match .info-modal {
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+
+  .alphabet-match .info-modal h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .alphabet-match .close-info-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1.3rem;
+  }
+
+  .alphabet-match .info-section {
+    padding: 0.85rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .alphabet-match .info-section h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .alphabet-match .info-section li {
+    font-size: 0.85rem;
+    padding-left: 1.25rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .alphabet-match .attempts-info {
+    display: block;
+    margin-top: 0.25rem;
+    margin-left: 0;
+  }
+
+  .alphabet-match .score-card {
+    padding: 0.85rem;
+  }
+
+  .alphabet-match .score-card h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .alphabet-match .score-row {
+    padding: 0.55rem 0.7rem;
+  }
+
+  .alphabet-match .score-row span:first-child {
+    font-size: 0.8rem;
+  }
+
+  .alphabet-match .score-row span:last-child {
+    font-size: 0.85rem;
+  }
+
+  .alphabet-match .score-highlight {
+    font-size: 0.95rem !important;
+  }
+
+  .alphabet-match .quiz-container {
+    margin-top: 50px;
+    gap: 0.5rem;
+    padding: 0 0.25rem;
+  }
+
+  .alphabet-match .quiz-instruction {
+    font-size: 0.8rem;
+    padding: 0.45rem 0.6rem;
+  }
+
+  .alphabet-match .quiz-info {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.5rem;
+    gap: 0.4rem;
+  }
+
+  .alphabet-match .quiz-content {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .alphabet-match .quiz-video-wrapper,
+  .alphabet-match .quiz-letter-wrapper {
+    aspect-ratio: 16/9;
+  }
+
+  .alphabet-match .quiz-letter-wrapper h1 {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+
+  .alphabet-match .quiz-feedback-wrapper {
+    min-height: 2rem;
+  }
+
+  .alphabet-match .answer-feedback {
+    font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+  }
+
+  .alphabet-match .quiz-buttons {
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .alphabet-match .quiz-buttons button {
+    flex: 1;
+    padding: 0.65rem 1.25rem;
+    font-size: 1.05rem;
+    min-width: 110px;
+  }
+
+  .alphabet-match .difficulty-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .alphabet-match .difficulty-buttons button {
+    width: 100%;
+  }
+
+  .alphabet-match .section {
+    min-height: 180px;
+    max-height: 40vh;
+    padding: 0.5rem;
+  }
+
+  .alphabet-match .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .alphabet-match > h2 {
+    font-size: 1.2rem;
+    margin: 0.25rem 0 0.5rem 0;
+  }
+
+  .alphabet-match .difficulty-label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .alphabet-match .info-modal {
+    padding: 1rem;
+  }
+
+  .alphabet-match .info-modal h2 {
+    font-size: 1.25rem;
+  }
+
+  .alphabet-match .info-section {
+    padding: 0.75rem;
+  }
+
+  .alphabet-match .info-section h3 {
+    font-size: 0.95rem;
+  }
+
+  .alphabet-match .info-section li {
+    font-size: 0.8rem;
+    padding-left: 1rem;
+  }
+
+  .alphabet-match .scores-grid {
+    gap: 0.75rem;
+  }
+
+  .alphabet-match .quiz-container {
+    margin-top: 45px;
+    gap: 0.4rem;
+  }
+
+  .alphabet-match .quiz-instruction {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .alphabet-match .quiz-info {
+    font-size: 0.65rem;
+    padding: 0.35rem 0.4rem;
+  }
+
+  .alphabet-match .quiz-content {
+    gap: 0.6rem;
+    padding: 0.6rem;
+  }
+
+  .alphabet-match .quiz-letter-wrapper h1 {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+
+  .alphabet-match .quiz-feedback-wrapper {
+    min-height: 1.8rem;
+  }
+
+  .alphabet-match .answer-feedback {
+    font-size: 1rem;
+  }
+
+  .alphabet-match .quiz-buttons button {
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    min-width: 100px;
+  }
+
+  .alphabet-match .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .alphabet-match .section {
+    max-height: 35vh;
+  }
+}
+
+/* ------------------- Scrollbar Styling ------------------- */
+.alphabet-match .section::-webkit-scrollbar {
+  width: 8px;
+}
+
+.alphabet-match .section::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.alphabet-match .section::-webkit-scrollbar-thumb {
+  background: #007bff;
+  border-radius: 10px;
+}
+
+.alphabet-match .section::-webkit-scrollbar-thumb:hover {
+  background: #0056b3;
+}

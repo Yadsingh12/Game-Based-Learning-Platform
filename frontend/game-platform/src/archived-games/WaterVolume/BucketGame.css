@@ -1,0 +1,77 @@
+#bucket-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+  width: 100vw;
+  height: 100vh;
+  padding: 2vh 2vw;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#bucket-game .isl-video {
+  width: 40vw;       /* scales with screen width */
+  max-width: 400px;  /* optional cap */
+  height: auto;
+  border-radius: 1vw;
+  margin-bottom: 2vh;
+  box-shadow: 0 0 1vw rgba(0, 0, 0, 0.2);
+}
+
+#bucket-game .bucket {
+  width: 20vw;       /* scales with screen width */
+  max-width: 220px;  /* optional cap */
+  height: 40vh;      /* scales with screen height */
+  max-height: 400px; /* optional cap */
+  border: 0.5vw solid #555;
+  border-radius: 0 0 2vw 2vw;
+  overflow: hidden;
+  position: relative;
+  margin: 3vh 0;
+  background-color: #e0e0e0;
+}
+
+#bucket-game .water {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(to top, #00bfff, #87cefa);
+  transition: height 0.3s ease-in-out;
+}
+
+#bucket-game .slider {
+  width: 50vw;      /* scales with screen width */
+  max-width: 500px;
+  margin: 2vh 0;
+}
+
+#bucket-game .confirm-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 1vw;
+  padding: 1vh 2vw;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#bucket-game .confirm-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+#bucket-game .confirm-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#bucket-game .message {
+  font-weight: bold;
+  font-size: 2vw;
+  margin-top: 2vh;
+  text-align: center;
+}
+
+#bucket-game .message:empty {
+  margin-top: 0;
+}

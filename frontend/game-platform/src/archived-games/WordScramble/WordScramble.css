@@ -1,0 +1,51 @@
+#word-scramble-game {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#word-scramble-game video {
+  margin: 20px 0;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+#word-scramble-game .letters {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+#word-scramble-game .letter {
+  padding: 10px 15px;
+  border: 2px solid #333;
+  border-radius: 6px;
+  background: #f0f0f0;
+  cursor: grab;
+  user-select: none;
+}
+
+#word-scramble-game button {
+  margin: 5px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+#word-scramble-game button:hover {
+  background: #0056b3;
+}
+
+#word-scramble-game .hint {
+  margin-top: 10px;
+  font-style: italic;
+  color: #555;
+}
+
+#word-scramble-game .end-screen {
+  margin-top: 30px;
+}
