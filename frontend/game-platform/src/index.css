@@ -1,133 +1,189 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+/* src/index.css */
 
-/*----------------------*/
-/* Theme Variables */
-/*----------------------*/
-.light-theme {
-  --color-background: #f4edc8;
-  --color-text: #333333;
-  --color-heading: #ff7f50;
-  --color-heading2: #ec961e;
-  --color-link: #ff7f50;
-  --color-link-hover: #ff4500;
+@reference "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  --color-button-bg: #ffb347;
-  --color-button-border: #ff7f50;
-  --color-button-text: #ffffff;
-  --color-button-hover: #ff9e5b;
-
-  --color-card-bg: #ffffff;
-  --color-card-border: #ffb347;
-  --color-card-hover-bg: #ffe4b5;
-  --color-card-title: #2c3e50;
-
-  --color-navbar-bg: #ffb347;
-  --color-navbar-text: #ffffff;
-}
-
-.dark-theme {
-  --color-background: #2c3e50;
-  --color-text: #ffffff;
-  --color-heading: #ffa07a;
-  --color-heading2: #ff6b6b;
-  --color-link: #ffa07a;
-  --color-link-hover: #ff6b6b;
-
-  --color-button-bg: #9b59b6;
-  --color-button-border: #ff6b6b;
-  --color-button-text: #ffffff;
-  --color-button-hover: #d46bff;
-
-  --color-card-bg: #34495e;
-  --color-card-border: #9b59b6;
-  --color-card-hover-bg: #703c70;
-  --color-card-title: #ffffff;
-
-  --color-navbar-bg: #9b59b6;
-  --color-navbar-text: #ffffff;
-}
-
-/*----------------------*/
-/* Global Settings */
-/*----------------------*/
+/* Color Scheme Variables for Categories */
 :root {
-  --font-primary: "Dancing Script", cursive, sans-serif;
-  --font-secondary: "Comic Sans MS", cursive, sans-serif;
+  /* Alphabets - Purple/Blue Theme */
+  --alphabets-primary: #7c3aed;
+  --alphabets-secondary: #3b82f6;
+  --alphabets-light: #c4b5fd;
+  --alphabets-dark: #5b21b6;
+  --alphabets-gradient-from: #7c3aed;
+  --alphabets-gradient-to: #3b82f6;
 
-  font-family: var(--font-primary);
-  line-height: 1.5;
-  font-weight: 400;
-  font-size: 20px;
+  /* Numerals - Green/Teal Theme */
+  --numerals-primary: #10b981;
+  --numerals-secondary: #14b8a6;
+  --numerals-light: #6ee7b7;
+  --numerals-dark: #047857;
+  --numerals-gradient-from: #10b981;
+  --numerals-gradient-to: #14b8a6;
 
-  color: var(--color-text);
-  background-color: var(--color-background);
+  /* Words - Orange/Pink Theme */
+  --words-primary: #f97316;
+  --words-secondary: #ec4899;
+  --words-light: #fdba74;
+  --words-dark: #c2410c;
+  --words-gradient-from: #f97316;
+  --words-gradient-to: #ec4899;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Phrases - Indigo/Purple Theme */
+  --phrases-primary: #6366f1;
+  --phrases-secondary: #8b5cf6;
+  --phrases-light: #a5b4fc;
+  --phrases-dark: #4338ca;
+  --phrases-gradient-from: #6366f1;
+  --phrases-gradient-to: #8b5cf6;
+
+  /* Common colors */
+  --success: #22c55e;
+  --error: #ef4444;
+  --warning: #f59e0b;
+  --info: #3b82f6;
 }
 
-*,
-*::before,
-*::after {
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  min-width: 320px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
   min-height: 100vh;
-  background-color: var(--color-background);
 }
 
-a {
-  font-weight: 600;
-  color: var(--color-link);
-  transition: color 0.3s;
-}
+/* Custom Component Styles */
+@layer components {
+  /* Card Components */
+  .card {
+    @apply bg-white rounded-xl shadow-lg transition-all duration-300 p-6;
+  }
 
-a:hover {
-  color: var(--color-link-hover);
-}
+  .card:hover {
+    @apply shadow-2xl transform scale-105;
+  }
 
-/*----------------------*/
-/* Headings */
-/*----------------------*/
-h1 {
-  font-size: clamp(2rem, 5vw, 3em);
-  color: var(--color-heading);
-  margin-bottom: 0.5em;
-}
+  .card-interactive {
+    @apply cursor-pointer;
+  }
 
-h2 {
-  font-size: clamp(1.5rem, 4vw, 2em);
-  color: var(--color-heading2);
-  margin-bottom: 0.5em;
-}
+  .card-disabled {
+    @apply opacity-60 cursor-not-allowed;
+  }
 
-/*----------------------*/
-/* Buttons */
-/*----------------------*/
-.button-style {
-  border-radius: 8px;
-  border: 2px solid var(--color-button-border);
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 600;
-  font-family: inherit;
-  background-color: var(--color-button-bg);
-  color: var(--color-button-text);
-  cursor: pointer;
-  transition: background-color 0.25s, color 0.25s, transform 0.2s;
-}
+  /* Buttons */
+  .btn {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200;
+  }
 
-.button-style:hover {
-  background-color: var(--color-button-hover);
-  transform: scale(1.05);
-}
+  .btn-primary {
+    @apply bg-purple-600 text-white hover:bg-purple-700;
+  }
 
-.button-style:focus,
-.button-style:focus-visible {
-  outline: 4px auto var(--color-button-border);
+  .btn-secondary {
+    @apply bg-gray-300 text-gray-800 hover:bg-gray-400;
+  }
+
+  .btn-success {
+    @apply bg-green-600 text-white hover:bg-green-700;
+  }
+
+  .btn-disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  /* Game Container */
+  .game-container {
+    @apply min-h-screen p-6;
+  }
+
+  .game-card {
+    @apply max-w-4xl mx-auto bg-white rounded-xl p-8;
+  }
+
+  .game-header {
+    @apply flex justify-between items-center mb-6;
+  }
+
+  /* Loading Spinner */
+  .spinner {
+    @apply w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin;
+  }
+
+  /* Progress Bar */
+  .progress-bar {
+    @apply w-full h-2 bg-gray-200 rounded-full overflow-hidden;
+  }
+
+  .progress-fill {
+    @apply h-full bg-green-500 transition-all duration-300;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold;
+  }
+
+  .badge-success {
+    @apply bg-green-100 text-green-700;
+  }
+
+  .badge-warning {
+    @apply bg-yellow-100 text-yellow-700;
+  }
+
+  .badge-info {
+    @apply bg-blue-100 text-blue-700;
+  }
+
+  /* Answer Options */
+  .answer-option {
+    @apply p-6 rounded-lg font-semibold text-lg transition-all duration-200;
+  }
+
+  .answer-option-default {
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-800;
+  }
+
+  .answer-option-correct {
+    @apply bg-green-500 text-white;
+  }
+
+  .answer-option-incorrect {
+    @apply bg-red-500 text-white;
+  }
+
+  .answer-option-disabled {
+    @apply bg-gray-200 text-gray-500 cursor-not-allowed;
+  }
+
+  /* Match Cards */
+  .match-card {
+    @apply aspect-square rounded-lg flex items-center justify-center cursor-pointer transition-all duration-200;
+  }
+
+  .match-card-default {
+    @apply bg-gray-200 hover:bg-gray-300 transform hover:scale-105;
+  }
+
+  .match-card-selected {
+    @apply bg-blue-300;
+  }
+
+  .match-card-matched {
+    @apply bg-green-200 cursor-not-allowed;
+  }
 }

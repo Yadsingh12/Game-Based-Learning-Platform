@@ -1,0 +1,215 @@
+{
+  "packId": "alphabets-1",
+  "categoryId": "alphabets",
+  "name": "Alphabets Pack 1",
+  "signs": [
+    {
+      "id": "A",
+      "name": "A",
+      "videoUrl": "/videos/Alphabets/A.mp4",
+      "visual": {
+        "type": "style",
+        "value": "A"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/apple.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "B",
+      "name": "B",
+      "videoUrl": "/videos/Alphabets/B.mp4",
+      "visual": {
+        "type": "style",
+        "value": "B"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/ball.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "C",
+      "name": "C",
+      "videoUrl": "/videos/Alphabets/C.mp4",
+      "visual": {
+        "type": "style",
+        "value": "C"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/cat.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "D",
+      "name": "D",
+      "videoUrl": "/videos/Alphabets/D.mp4",
+      "visual": {
+        "type": "style",
+        "value": "D"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/dog.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "E",
+      "name": "E",
+      "videoUrl": "/videos/Alphabets/E.mp4",
+      "visual": {
+        "type": "style",
+        "value": "E"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/elephant.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "F",
+      "name": "F",
+      "videoUrl": "/videos/Alphabets/F.mp4",
+      "visual": {
+        "type": "style",
+        "value": "F"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/fish.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "G",
+      "name": "G",
+      "videoUrl": "/videos/Alphabets/G.mp4",
+      "visual": {
+        "type": "style",
+        "value": "G"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/goat.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "H",
+      "name": "H",
+      "videoUrl": "/videos/Alphabets/H.mp4",
+      "visual": {
+        "type": "style",
+        "value": "H"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/hat.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "I",
+      "name": "I",
+      "videoUrl": "/videos/Alphabets/I.mp4",
+      "visual": {
+        "type": "style",
+        "value": "I"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/icecream.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "J",
+      "name": "J",
+      "videoUrl": "/videos/Alphabets/J.mp4",
+      "visual": {
+        "type": "style",
+        "value": "J"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/jug.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "K",
+      "name": "K",
+      "videoUrl": "/videos/Alphabets/K.mp4",
+      "visual": {
+        "type": "style",
+        "value": "K"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/kite.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "L",
+      "name": "L",
+      "videoUrl": "/videos/Alphabets/L.mp4",
+      "visual": {
+        "type": "style",
+        "value": "L"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/lion.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "M",
+      "name": "M",
+      "videoUrl": "/videos/Alphabets/M.mp4",
+      "visual": {
+        "type": "style",
+        "value": "M"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/monkey.png"
+          ]
+        }
+      }
+    }
+  ]
+}

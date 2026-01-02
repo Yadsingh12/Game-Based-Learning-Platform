@@ -1,0 +1,149 @@
+{
+  "categories": [
+    {
+      "id": "alphabets",
+      "name": "Alphabets",
+      "icon": "🔤",
+      "colorScheme": {
+        "primary": "#7c3aed",
+        "secondary": "#3b82f6",
+        "light": "#c4b5fd",
+        "dark": "#5b21b6",
+        "gradient": "from-purple-600 to-blue-600"
+      },
+      "supportedGames": ["learn", "quiz", "match"],
+      "packs": [
+        { 
+          "id": "alphabets-1", 
+          "name": "Alphabets Pack 1", 
+          "range": "A-M", 
+          "signCount": 13,
+          "dataFile": "alphabets-1.json"
+        },
+        { 
+          "id": "alphabets-2", 
+          "name": "Alphabets Pack 2", 
+          "range": "N-Z", 
+          "signCount": 13,
+          "dataFile": "alphabets-2.json"
+        }
+      ]
+    },
+    {
+      "id": "numerals",
+      "name": "Numerals",
+      "icon": "🔢",
+      "colorScheme": {
+        "primary": "#10b981",
+        "secondary": "#14b8a6",
+        "light": "#6ee7b7",
+        "dark": "#047857",
+        "gradient": "from-green-600 to-teal-600"
+      },
+      "supportedGames": ["learn", "quiz", "match", "sequence"],
+      "packs": [
+        { 
+          "id": "numerals-1", 
+          "name": "Numbers Pack 1", 
+          "range": "0-10", 
+          "signCount": 11,
+          "dataFile": "numerals-1.json"
+        }
+      ]
+    },
+    {
+      "id": "colors",
+      "name": "Colors",
+      "icon": "🌈",
+      "colorScheme": {
+        "primary": "#7c3aed",
+        "secondary": "#3b82f6",
+        "light": "#c4b5fd",
+        "dark": "#5b21b6",
+        "gradient": "from-purple-600 to-blue-600"
+      },
+      "supportedGames": ["learn", "quiz", "match"],
+      "packs": [
+        { 
+          "id": "colors-1", 
+          "name": "Colors Pack 1", 
+          "range": "Yellow, Blue...", 
+          "signCount": 13,
+          "dataFile": "colors-1.json"
+        }
+      ]
+    },
+    {
+      "id": "fruits",
+      "name": "Fruits",
+      "icon": "🍎",
+      "colorScheme": {
+        "primary": "#7c3aed",
+        "secondary": "#3b82f6",
+        "light": "#c4b5fd",
+        "dark": "#5b21b6",
+        "gradient": "from-purple-600 to-blue-600"
+      },
+      "supportedGames": ["learn", "quiz", "match"],
+      "packs": [
+        { 
+          "id": "fruits-1", 
+          "name": "Fruits Pack 1", 
+          "range": "Apple, Banana...", 
+          "signCount": 13,
+          "dataFile": "fruits-1.json"
+        }
+      ]
+    },
+    {
+      "id": "everyday-objects",
+      "name": "Everyday Objects",
+      "icon": "🧸",
+      "colorScheme": {
+        "primary": "#7c3aed",
+        "secondary": "#3b82f6",
+        "light": "#c4b5fd",
+        "dark": "#5b21b6",
+        "gradient": "from-purple-600 to-blue-600"
+      },
+      "supportedGames": ["learn", "quiz", "match"],
+      "packs": [
+        { 
+          "id": "everyday-objects-1", 
+          "name": "Everyday Objects Pack 1", 
+          "range": "Person-Dog...", 
+          "signCount": 14,
+          "dataFile": "everyday-objects-1.json"
+        },
+        { 
+          "id": "everyday-objects-2", 
+          "name": "Everyday Objects Pack 2", 
+          "range": "Horse-Sportsball...", 
+          "signCount": 14,
+          "dataFile": "everyday-objects-2.json"
+        },
+        { 
+          "id": "everyday-objects-3", 
+          "name": "Everyday Objects Pack 3", 
+          "range": "Kite-Orange...", 
+          "signCount": 14,
+          "dataFile": "everyday-objects-3.json"
+        },
+        { 
+          "id": "everyday-objects-4", 
+          "name": "Everyday Objects Pack 4", 
+          "range": "Broccoli-Mouse...", 
+          "signCount": 14,
+          "dataFile": "everyday-objects-4.json"
+        },
+        {
+          "id": "everyday-objects-5", 
+          "name": "Everyday Objects Pack 5", 
+          "range": "Remote-Toothbrush...", 
+          "signCount": 15,
+          "dataFile": "everyday-objects-5.json"
+        }
+      ]
+    }
+  ]
+}

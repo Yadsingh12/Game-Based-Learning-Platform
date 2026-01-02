@@ -1,0 +1,175 @@
+{
+  "packId": "everyday-objects-4",
+  "categoryId": "everyday-objects",
+  "name": "Everyday Objects Pack 4",
+  "signs": [
+    {
+      "id": "broccoli",
+      "name": "Broccoli",
+      "description": "A green vegetable with a tree-like structure.",
+      "videoUrl": "/videos/everyday-objects/broccoli.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/broccoli.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/broccoli.jpg"]
+        }
+      }
+    },
+    {
+      "id": "carrot",
+      "name": "Carrot",
+      "description": "An orange root vegetable often used in salads.",
+      "videoUrl": "/videos/everyday-objects/carrot.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/carrot.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/carrot.jpg"]
+        }
+      }
+    },
+    {
+      "id": "pizza",
+      "name": "Pizza",
+      "description": "A baked dish with toppings on a dough base.",
+      "videoUrl": "/videos/everyday-objects/pizza.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/pizza.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/pizza.jpg"]
+        }
+      }
+    },
+    {
+      "id": "donut",
+      "name": "Donut",
+      "description": "A fried dough confection, typically ring-shaped.",
+      "videoUrl": "/videos/everyday-objects/donut.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/donut.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/donut.jpg"]
+        }
+      }
+    },
+    {
+      "id": "cake",
+      "name": "Cake",
+      "description": "A sweet baked dessert, often with frosting.",
+      "videoUrl": "/videos/everyday-objects/cake.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/cake.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/cake.jpg"]
+        }
+      }
+    },
+    {
+      "id": "chair",
+      "name": "Chair",
+      "description": "A piece of furniture for sitting, typically with a back.",
+      "videoUrl": "/videos/everyday-objects/chair.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/chair.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/chair.jpg"]
+        }
+      }
+    },
+    {
+      "id": "couch",
+      "name": "Couch",
+      "description": "A long upholstered seat with a back and arms.",
+      "videoUrl": "/videos/everyday-objects/couch.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/couch.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/couch.jpg"]
+        }
+      }
+    },
+    {
+      "id": "potted-plant",
+      "name": "Potted Plant",
+      "description": "A plant grown in a container, usually for decoration.",
+      "videoUrl": "/videos/everyday-objects/potted_plant.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/potted_plant.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/potted_plant.jpg"]
+        }
+      }
+    },
+    {
+      "id": "bed",
+      "name": "Bed",
+      "description": "Furniture for sleeping, usually a mattress on a frame.",
+      "videoUrl": "/videos/everyday-objects/bed.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/bed.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/bed.jpg"] } }
+    },
+    {
+      "id": "dining-table",
+      "name": "Dining Table",
+      "description": "A table used for serving and eating meals.",
+      "videoUrl": "/videos/everyday-objects/dining_table.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/dining_table.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/dining_table.jpg"] } }
+    },
+    {
+      "id": "toilet",
+      "name": "Toilet",
+      "description": "A plumbing fixture for human waste disposal.",
+      "videoUrl": "/videos/everyday-objects/toilet.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/toilet.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/toilet.jpg"] } }
+    },
+    {
+      "id": "tv",
+      "name": "TV",
+      "description": "An electronic device for viewing video content.",
+      "videoUrl": "/videos/everyday-objects/tv.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/tv.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/tv.jpg"] } }
+    },
+    {
+      "id": "laptop",
+      "name": "Laptop",
+      "description": "A portable personal computer.",
+      "videoUrl": "/videos/everyday-objects/laptop.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/laptop.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/laptop.jpg"] } }
+    },
+    {
+      "id": "mouse",
+      "name": "Mouse",
+      "description": "A pointing device used with computers.",
+      "videoUrl": "/videos/everyday-objects/mouse.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/mouse.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/mouse.jpg"] } }
+    }
+  ]
+}

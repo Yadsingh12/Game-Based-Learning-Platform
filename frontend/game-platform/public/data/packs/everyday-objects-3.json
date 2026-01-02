@@ -1,0 +1,217 @@
+{
+  "packId": "everyday-objects-3",
+  "categoryId": "everyday-objects",
+  "name": "Everyday Objects Pack 3",
+  "signs": [
+    {
+      "id": "kite",
+      "name": "Kite",
+      "description": "A lightweight frame covered with material flown in the wind.",
+      "videoUrl": "/videos/everyday-objects/kite.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/kite.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/kite.jpg"]
+        }
+      }
+    },
+    {
+      "id": "baseball-bat",
+      "name": "Baseball Bat",
+      "description": "A wooden or metal bat used to hit a baseball.",
+      "videoUrl": "/videos/everyday-objects/baseball_bat.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/baseball_bat.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/baseball_bat.jpg"]
+        }
+      }
+    },
+    {
+      "id": "baseball-glove",
+      "name": "Baseball Glove",
+      "description": "A padded leather glove used for catching baseballs.",
+      "videoUrl": "/videos/everyday-objects/baseball_glove.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/baseball_glove.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/baseball_glove.jpg"]
+        }
+      }
+    },
+    {
+      "id": "skateboard",
+      "name": "Skateboard",
+      "description": "A board mounted on wheels used for skating.",
+      "videoUrl": "/videos/everyday-objects/skateboard.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/skateboard.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/skateboard.jpg"]
+        }
+      }
+    },
+    {
+      "id": "tennis-racket",
+      "name": "Tennis Racket",
+      "description": "A racket used to hit a tennis ball.",
+      "videoUrl": "/videos/everyday-objects/tennis_racket.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/tennis_racket.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/tennis_racket.jpg"]
+        }
+      }
+    },
+    {
+      "id": "bottle",
+      "name": "Bottle",
+      "description": "A container for holding liquids.",
+      "videoUrl": "/videos/everyday-objects/bottle.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/bottle.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/bottle.jpg"]
+        }
+      }
+    },
+    {
+      "id": "cup",
+      "name": "Cup",
+      "description": "A small open container for drinking liquids.",
+      "videoUrl": "/videos/everyday-objects/cup.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/cup.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/cup.jpg"]
+        }
+      }
+    },
+    {
+      "id": "fork",
+      "name": "Fork",
+      "description": "A utensil with prongs for eating food.",
+      "videoUrl": "/videos/everyday-objects/fork.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/fork.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/fork.jpg"]
+        }
+      }
+    },
+    {
+      "id": "knife",
+      "name": "Knife",
+      "description": "A tool with a blade used for cutting.",
+      "videoUrl": "/videos/everyday-objects/knife.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/knife.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/knife.jpg"]
+        }
+      }
+    },
+    {
+      "id": "spoon",
+      "name": "Spoon",
+      "description": "A utensil with a round bowl for scooping food.",
+      "videoUrl": "/videos/everyday-objects/spoon.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/spoon.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/spoon.jpg"]
+        }
+      }
+    },
+    {
+      "id": "bowl",
+      "name": "Bowl",
+      "description": "A round deep dish used for holding food or liquid.",
+      "videoUrl": "/videos/everyday-objects/bowl.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/bowl.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/bowl.jpg"]
+        }
+      }
+    },
+    {
+      "id": "banana",
+      "name": "Banana",
+      "description": "A long curved fruit with a yellow peel.",
+      "videoUrl": "/videos/everyday-objects/banana.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/banana.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/banana.jpg"]
+        }
+      }
+    },
+    {
+      "id": "apple",
+      "name": "Apple",
+      "description": "A round fruit with red, green, or yellow skin.",
+      "videoUrl": "/videos/everyday-objects/apple.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/apple.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/apple.jpg"]
+        }
+      }
+    },
+    {
+      "id": "orange",
+      "name": "Orange",
+      "description": "A citrus fruit with a tough bright orange skin.",
+      "videoUrl": "/videos/everyday-objects/orange.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/orange.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/orange.jpg"]
+        }
+      }
+    }
+  ]
+}

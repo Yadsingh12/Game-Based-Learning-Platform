@@ -1,0 +1,67 @@
+{
+  "games": [
+    {
+      "id": "learn",
+      "name": "Learn",
+      "icon": "Book",
+      "description": "Watch and learn signs",
+      "unlockRequirement": null,
+      "applicableCategories": ["alphabets", "numerals", "words", "phrases"]
+    },
+    {
+      "id": "quiz",
+      "name": "Quiz",
+      "icon": "Brain",
+      "description": "Test your knowledge",
+      "unlockRequirement": { 
+        "game": "learn", 
+        "minScore": 50 
+      },
+      "applicableCategories": ["alphabets", "numerals", "words"]
+    },
+    {
+      "id": "match",
+      "name": "Match",
+      "icon": "Gamepad2",
+      "description": "Match signs with meanings",
+      "unlockRequirement": { 
+        "game": "quiz", 
+        "minScore": 70 
+      },
+      "applicableCategories": ["alphabets", "numerals"]
+    },
+    {
+      "id": "sequence",
+      "name": "Sequence",
+      "icon": "Zap",
+      "description": "Arrange numbers in order",
+      "unlockRequirement": { 
+        "game": "quiz", 
+        "minScore": 60 
+      },
+      "applicableCategories": ["numerals"]
+    },
+    {
+      "id": "sentence",
+      "name": "Sentence Builder",
+      "icon": "MessageSquare",
+      "description": "Build sentences with words",
+      "unlockRequirement": { 
+        "game": "quiz", 
+        "minScore": 75 
+      },
+      "applicableCategories": ["words"]
+    },
+    {
+      "id": "practice",
+      "name": "Practice",
+      "icon": "Repeat",
+      "description": "Practice signing phrases",
+      "unlockRequirement": { 
+        "game": "learn", 
+        "minScore": 80 
+      },
+      "applicableCategories": ["phrases"]
+    }
+  ]
+}

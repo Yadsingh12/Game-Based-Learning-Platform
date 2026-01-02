@@ -1,0 +1,145 @@
+{
+  "packId": "alphabets-2",
+  "categoryId": "alphabets",
+  "name": "Alphabets Pack 2",
+  "signs": [
+    {
+      "id": "N",
+      "name": "N",
+      "videoUrl": "/videos/Alphabets/N.mp4",
+      "visual": {
+        "type": "style",
+        "value": "N"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/net.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "O",
+      "name": "O",
+      "videoUrl": "/videos/Alphabets/O.mp4",
+      "visual": {
+        "type": "style",
+        "value": "O"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/orange.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P",
+      "name": "P",
+      "videoUrl": "/videos/Alphabets/P.mp4",
+      "visual": {
+        "type": "style",
+        "value": "P"
+      },
+      "assets": {
+        "match": {
+          "images": [
+            "/images/objects/parrot.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q",
+      "name": "Q",
+      "videoUrl": "/videos/Alphabets/Q.mp4",
+      "visual": {
+        "type": "style",
+        "value": "Q"
+      }
+    },
+    {
+      "id": "R",
+      "name": "R",
+      "videoUrl": "/videos/Alphabets/R.mp4",
+      "visual": {
+        "type": "style",
+        "value": "R"
+      }
+    },
+    {
+      "id": "S",
+      "name": "S",
+      "videoUrl": "/videos/Alphabets/S.mp4",
+      "visual": {
+        "type": "style",
+        "value": "S"
+      }
+    },
+    {
+      "id": "T",
+      "name": "T",
+      "videoUrl": "/videos/Alphabets/T.mp4",
+      "visual": {
+        "type": "style",
+        "value": "T"
+      }
+    },
+    {
+      "id": "U",
+      "name": "U",
+      "videoUrl": "/videos/Alphabets/U.mp4",
+      "visual": {
+        "type": "style",
+        "value": "U"
+      }
+    },
+    {
+      "id": "V",
+      "name": "V",
+      "videoUrl": "/videos/Alphabets/V.mp4",
+      "visual": {
+        "type": "style",
+        "value": "V"
+      }
+    },
+    {
+      "id": "W",
+      "name": "W",
+      "videoUrl": "/videos/Alphabets/W.mp4",
+      "visual": {
+        "type": "style",
+        "value": "W"
+      }
+    },
+    {
+      "id": "X",
+      "name": "X",
+      "videoUrl": "/videos/Alphabets/X.mp4",
+      "visual": {
+        "type": "style",
+        "value": "X"
+      }
+    },
+    {
+      "id": "Y",
+      "name": "Y",
+      "videoUrl": "/videos/Alphabets/Y.mp4",
+      "visual": {
+        "type": "style",
+        "value": "Y"
+      }
+    },
+    {
+      "id": "Z",
+      "name": "Z",
+      "videoUrl": "/videos/Alphabets/Z.mp4",
+      "visual": {
+        "type": "style",
+        "value": "Z"
+      }
+    }
+  ]
+}

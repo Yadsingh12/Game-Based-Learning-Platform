@@ -1,0 +1,127 @@
+{
+  "packId": "everyday-objects-5",
+  "categoryId": "everyday-objects",
+  "name": "Everyday Objects Pack 5",
+  "signs": [
+    {
+      "id": "remote",
+      "name": "Remote",
+      "description": "A handheld device for controlling electronics wirelessly.",
+      "videoUrl": "/videos/everyday-objects/remote.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/remote.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/remote.jpg"] } }
+    },
+    {
+      "id": "keyboard",
+      "name": "Keyboard",
+      "description": "A panel of keys used to input text and commands.",
+      "videoUrl": "/videos/everyday-objects/keyboard.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/keyboard.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/keyboard.jpg"] } }
+    },
+    {
+      "id": "cell-phone",
+      "name": "Cell Phone",
+      "description": "A portable telephone that connects via cellular network.",
+      "videoUrl": "/videos/everyday-objects/cell_phone.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/cell_phone.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/cell_phone.jpg"] } }
+    },
+    {
+      "id": "microwave",
+      "name": "Microwave",
+      "description": "An appliance that heats food using microwave radiation.",
+      "videoUrl": "/videos/everyday-objects/microwave.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/microwave.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/microwave.jpg"] } }
+    },
+    {
+      "id": "oven",
+      "name": "Oven",
+      "description": "An appliance used for baking or roasting food.",
+      "videoUrl": "/videos/everyday-objects/oven.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/oven.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/oven.jpg"] } }
+    },
+    {
+      "id": "toaster",
+      "name": "Toaster",
+      "description": "An appliance that browns slices of bread.",
+      "videoUrl": "/videos/everyday-objects/toaster.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/toaster.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/toaster.jpg"] } }
+    },
+    {
+      "id": "sink",
+      "name": "Sink",
+      "description": "A bowl with a faucet for washing hands or dishes.",
+      "videoUrl": "/videos/everyday-objects/sink.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/sink.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/sink.jpg"] } }
+    },
+    {
+      "id": "refrigerator",
+      "name": "Refrigerator",
+      "description": "An appliance that keeps food and drinks cold.",
+      "videoUrl": "/videos/everyday-objects/refrigerator.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/refrigerator.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/refrigerator.jpg"] } }
+    },
+    {
+      "id": "book",
+      "name": "Book",
+      "description": "A set of printed pages bound together containing information.",
+      "videoUrl": "/videos/everyday-objects/book.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/book.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/book.jpg"] } }
+    },
+    {
+      "id": "clock",
+      "name": "Clock",
+      "description": "A device for measuring and displaying time.",
+      "videoUrl": "/videos/everyday-objects/clock.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/clock.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/clock.jpg"] } }
+    },
+    {
+      "id": "vase",
+      "name": "Vase",
+      "description": "A container used for holding flowers or decoration.",
+      "videoUrl": "/videos/everyday-objects/vase.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/vase.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/vase.jpg"] } }
+    },
+    {
+      "id": "scissors",
+      "name": "Scissors",
+      "description": "A cutting instrument with two blades joined together.",
+      "videoUrl": "/videos/everyday-objects/scissors.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/scissors.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/scissors.jpg"] } }
+    },
+    {
+      "id": "teddy-bear",
+      "name": "Teddy Bear",
+      "description": "A soft stuffed toy bear often used as a comforting companion for children.",
+      "videoUrl": "/videos/everyday-objects/teddy_bear.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/teddy_bear.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/teddy_bear.jpg"] } }
+    },
+    {
+      "id": "hair-drier",
+      "name": "Hair Drier",
+      "description": "An electric device that blows hot air to dry and style hair after washing.",
+      "videoUrl": "/videos/everyday-objects/hair_drier.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/hair_drier.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/hair_drier.jpg"] } }
+    },
+    {
+      "id": "toothbrush",
+      "name": "Toothbrush",
+      "description": "A small brush with a handle, used for cleaning teeth and maintaining oral hygiene.",
+      "videoUrl": "/videos/everyday-objects/toothbrush.mp4",
+      "visual": { "type": "image", "value": "/images/everyday-objects/toothbrush.jpg" },
+      "assets": { "match": { "images": ["/images/everyday-objects/toothbrush.jpg"] } }
+    }
+  ]
+}
