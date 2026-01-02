@@ -16,9 +16,8 @@ const ColumnMatch = () => {
   const [difficulty, setDifficulty] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
-  const [gameState, setGameState] = useState("start"); // start, playing, end
-
-  const [wrongDropTarget, setWrongDropTarget] = useState(null); // ❌ wrong drop highlight
+  const [gameState, setGameState] = useState("start");
+  const [wrongDropTarget, setWrongDropTarget] = useState(null);
 
   const shuffleArray = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
@@ -32,17 +31,17 @@ const ColumnMatch = () => {
         const selected = shuffleArray(filtered).slice(0, difficulties[difficulty]);
 
         setItems(selected);
-        setImages(shuffleArray([...selected])); // draggable images
-        setVideos(shuffleArray([...selected])); // drop targets videos
+        setImages(shuffleArray([...selected]));
+        setVideos(shuffleArray([...selected]));
         setMatched([]);
         setStartTime(Date.now());
         setEndTime(null);
+        setWrongDropTarget(null);
       };
       fetchData();
     }
   }, [difficulty, gameState]);
 
-  // 🔥 Force consistent drag ghost image
   const handleDragStart = (e, name, imgSrc) => {
     e.dataTransfer.setData("name", name);
 
@@ -62,7 +61,6 @@ const ColumnMatch = () => {
     e.preventDefault();
     const draggedName = e.dataTransfer.getData("name");
 
-    // ✅ Correct match
     if (draggedName === targetName && !matched.includes(draggedName)) {
       const newMatched = [...matched, draggedName];
       setMatched(newMatched);
@@ -74,16 +72,23 @@ const ColumnMatch = () => {
       return;
     }
 
-    // ❌ Wrong match → Flash red border
     setWrongDropTarget(targetName);
     setTimeout(() => setWrongDropTarget(null), 700);
   };
 
-  const formatTime = (ms) => `${Math.floor(ms / 1000)}s`;
+  const formatTime = (ms) => {
+    const seconds = Math.floor(ms / 1000);
+    return seconds < 60 ? `${seconds}s` : `${Math.floor(seconds / 60)}m ${seconds % 60}s`;
+  };
 
   const startGame = (level) => {
     setDifficulty(level);
     setGameState("playing");
+  };
+
+  const restartGame = () => {
+    setGameState("start");
+    setDifficulty(null);
   };
 
   const DifficultyButtons = () => (
@@ -96,6 +101,7 @@ const ColumnMatch = () => {
     </div>
   );
 
+  // Start Screen
   if (gameState === "start") {
     return (
       <div className="column-match start-screen">
@@ -116,26 +122,44 @@ const ColumnMatch = () => {
     );
   }
 
+  // Result Screen
   if (gameState === "end") {
+    const timeTaken = endTime - startTime;
+    const seconds = Math.floor(timeTaken / 1000);
+    
     return (
       <div className="column-match end-screen">
-        <h1>🎉 Game Over!</h1>
-        <p>Difficulty: {difficulty}</p>
-        <p>Time taken: {formatTime(endTime - startTime)}</p>
-        <p>Want to play again? Choose a new difficulty:</p>
+        <h1>🎉 Congratulations!</h1>
+        <p style={{ fontSize: "1.3rem", color: "#495057" }}>
+          <strong>Difficulty:</strong> {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+        </p>
+        <p style={{ fontSize: "1.5rem", fontWeight: "bold", color: "#f97316" }}>
+          Time taken: {formatTime(timeTaken)}
+        </p>
+        <p style={{ color: "#6c757d" }}>
+          {seconds < 30 ? "Lightning fast! ⚡" : seconds < 60 ? "Great job! 👍" : "Well done! 🌟"}
+        </p>
+        <p style={{ marginTop: "1rem" }}>Want to play again? Choose a new difficulty:</p>
 
         <DifficultyButtons />
       </div>
     );
   }
 
+  // Game Screen
   return (
     <div className="column-match">
+      <button 
+        className="back-to-difficulty-btn"
+        onClick={restartGame}
+      >
+        ↩ Back to Menu
+      </button>
+
       <h2>Match the Videos and Images</h2>
 
       <div className="game-area">
         <div className="sections">
-
           {/* IMAGES */}
           <div className="section">
             <h2>Images</h2>
@@ -156,7 +180,6 @@ const ColumnMatch = () => {
           {/* VIDEOS */}
           <div className="section">
             <h2>Videos</h2>
-
             <div className="grid-container">
               {videos.map((item) => (
                 <div
@@ -179,7 +202,6 @@ const ColumnMatch = () => {
               ))}
             </div>
           </div>
-
         </div>
       </div>
     </div>

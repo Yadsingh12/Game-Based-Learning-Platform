@@ -1,313 +1,469 @@
-/* ===========================
-   GLOBAL CONTAINER
-=========================== */
+/* 🌿 Forest Green Theme - Fresh Green, namespaced */
 #findshapegame {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
-  margin: 0;
-  padding: 20px;
-
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  padding: 15px;
+  background-color: #f1f8e9;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  min-height: 100vh;          /* allow smooth mobile height */
+  overflow: hidden;
   box-sizing: border-box;
 }
 
-/* ===========================
-   TITLES
-=========================== */
 #findshapegame .main-title {
-  text-align: center;
-  color: #2c3e50;
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 800;
-  margin-bottom: 0.25rem;
+  font-size: 1.8rem;
+  margin: 0 0 5px 0;
+  color: #1b5e20;
+  flex-shrink: 0;
 }
 
 #findshapegame .subtitle {
-  text-align: center;
-  color: #555;
-  font-size: clamp(0.9rem, 2vw, 1.125rem);
+  color: #558b2f;
+  margin: 0 0 15px 0;
+  font-size: 0.95rem;
+  flex-shrink: 0;
 }
 
-/* ===========================
-   SCORE BOX
-=========================== */
 #findshapegame .score-box {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;        /* responsive on small screens */
   gap: 10px;
-
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
-  font-weight: bold;
-  margin-bottom: 1.5rem;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2e7d32;
+  flex-shrink: 0;
 }
 
 #findshapegame .score-item {
-  background: #f4f4f4;
   padding: 6px 12px;
+  background-color: #c5e1a5;
   border-radius: 8px;
+  border: 2px solid #4caf50;
 }
 
 #findshapegame .separator {
-  font-size: clamp(1rem, 3vw, 1.25rem);
-  font-weight: bold;
-  opacity: 0.6;
+  font-size: 1.2rem;
+  color: #4caf50;
 }
 
-/* ===========================
-   BUTTONS
-=========================== */
 #findshapegame .button-container {
   display: flex;
-  flex-wrap: wrap;          /* responsive */
   justify-content: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  gap: 12px;
+  margin-bottom: 15px;
+  flex-shrink: 0;
 }
 
-#findshapegame button {
-  padding: 10px 22px;
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  font-weight: bold;
-
+#findshapegame .button-container button {
+  padding: 8px 18px;
+  font-size: 0.95rem;
   border: none;
-  border-radius: 9999px;
-  cursor: pointer;
-
-  background-color: #4CAF50;
+  background-color: #66bb6a;
   color: white;
-
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  white-space: nowrap;      /* keep button text tidy */
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  font-weight: bold;
 }
 
-#findshapegame button:disabled {
-  background-color: #2e7d32;
+#findshapegame .button-container button:hover:not(:disabled) {
+  background-color: #388e3c;
   transform: scale(1.05);
-  cursor: default;
 }
 
-#findshapegame button:hover:not(:disabled) {
-  background-color: #43a047;
-  transform: translateY(-2px);
+#findshapegame .button-container button:disabled {
+  background-color: #388e3c;
+  cursor: not-allowed;
 }
 
-/* ===========================
-   TEST MESSAGE
-=========================== */
 #findshapegame .test-video {
+  margin-bottom: 12px;
+  width: 100%;
+  max-width: 600px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* ===========================
-   GRID CONTAINERS
-=========================== */
+#findshapegame .test-video video {
+  max-width: 320px;
+  max-height: 180px;
+  width: 100%;
+  border-radius: 12px;
+  border: 2px solid #4caf50;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+#findshapegame .test-instruction {
+  margin: 2px 0;
+  color: #1b5e20;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
 
 #findshapegame .grid-container {
-  width: 100%;
-  max-width: 1000px;
-
   display: grid;
-  gap: 1.2rem;
-
-  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-  align-content: start;
-
-  overflow-y: auto;     /* responsive scroll */
-  padding-bottom: 1rem;
+  gap: 15px;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  flex: 1;
+  align-content: center;
+  overflow: hidden;
+  min-height: 0;
 }
 
-/* Learn Mode Grid */
 #findshapegame .grid-container.learn {
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  max-width: 1100px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-auto-rows: minmax(0, 1fr);
 }
 
-/* Test Mode Grid */
 #findshapegame .grid-container.test {
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  max-width: 950px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  max-width: 500px;
+  max-height: 100%;
+  gap: 10px;
 }
 
-/* ===========================
-   GRID ITEMS
-=========================== */
 #findshapegame .grid-item {
-  background-color: #fff;
-  border-radius: 1rem;
-  padding: 0.5rem;
-
+  background-color: #c5e1a5;
+  border: 3px solid #4caf50;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  max-width: 180px;
+  max-height: 180px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-
+  align-items: center;
+  text-align: center;
+  padding: 8px;
   cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Desktop learn mode - larger items */
+@media (min-width: 769px) {
+  #findshapegame .grid-container.learn {
+    gap: 20px;
+  }
+  
+  #findshapegame .grid-container.learn .grid-item {
+    max-width: 200px;
+    max-height: 200px;
+    padding: 10px;
+  }
 }
 
 #findshapegame .grid-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  background-color: #aed581;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-#findshapegame .grid-item svg,
-#findshapegame .grid-item img {
-  width: clamp(60px, 12vw, 90px);
-  height: auto;
+#findshapegame .grid-item svg {
+  width: 80%;
+  height: 80%;
+  max-width: 90px;
+  max-height: 90px;
 }
 
 #findshapegame .shape-name {
-  margin-top: 0.25rem;
-  font-size: clamp(0.7rem, 1.8vw, 1rem);
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(27, 94, 32, 0.5);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: #444;
+  pointer-events: none;
   text-transform: capitalize;
-
-  transition: color 0.2s ease;
 }
 
-#findshapegame .grid-item:hover .shape-name {
-  color: #3b82f6;
-}
-
-/* ===========================
-   MODAL
-=========================== */
+/* 🎬 Modal styling */
 #findshapegame .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.6);
-
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-
-  z-index: 1000;
+  z-index: 999;
 }
 
 #findshapegame .modal-content {
-  background-color: #fff;
-  border-radius: 1rem;
-  padding: 1.5rem;
-
-  width: 100%;
-  max-width: 500px;
-
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
   text-align: center;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  max-width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 #findshapegame .modal-message {
-  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #1b5e20;
   font-weight: bold;
-  margin-bottom: 1rem;
-  color: #2c3e50;
 }
 
 #findshapegame .modal-content video {
-  width: 100%;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  max-width: 100%;
 }
 
-#findshapegame .modal-content .confirm-buttons {
+#findshapegame .confirm-buttons {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
 
 #findshapegame .modal-close-btn {
-  padding: 0.7rem 1.5rem;
-  font-size: clamp(0.9rem, 2vw, 1rem);
-
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-
-  background-color: #3b82f6;
+  background: #4caf50;
   color: white;
-
-  transition: background-color 0.3s ease;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 #findshapegame .modal-close-btn:hover {
-  background-color: #2563eb;
+  background: #388e3c;
+  transform: scale(1.05);
 }
 
-/* ===========================
-   MOBILE RESPONSIVE FIX
-   Ensures VIDEO + OPTIONS fit on screen
-=========================== */
-@media (max-width: 800px) {
-
-  /* Reduce page padding */
+/* Mobile responsiveness */
+@media (max-width: 768px) {
   #findshapegame {
     padding: 10px;
   }
 
-  /* Make video smaller */
-  #findshapegame .test-video video,
-  #findshapegame video {
-    width: 85vw;
-    max-height: 200px;
-    object-fit: contain;
+  #findshapegame .main-title {
+    font-size: 1.4rem;
+    margin-bottom: 3px;
   }
 
-  /* Less margin in test message */
-  #findshapegame .test-message {
-    margin-bottom: 0.5rem;
-  }
-
-  /* Compact grid */
-  #findshapegame .grid-container.test {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
-    gap: 0.8rem;
-  }
-
-  /* Smaller grid item box */
-  #findshapegame .grid-item {
-    padding: 0.4rem;
-  }
-
-  /* Smaller icons */
-  #findshapegame .grid-item svg,
-  #findshapegame .grid-item img {
-    width: 55px;
-    height: 55px;
-  }
-
-  /* Smaller text under shapes */
-  #findshapegame .shape-name {
-    font-size: 0.75rem;
-  }
-
-  /* Reduce button size */
-  #findshapegame button {
-    padding: 8px 18px;
+  #findshapegame .subtitle {
     font-size: 0.85rem;
+    margin-bottom: 10px;
   }
 
-  /* Score box tighter */
   #findshapegame .score-box {
-    margin-bottom: 1rem;
-    gap: 6px;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
   }
 
   #findshapegame .score-item {
-    padding: 4px 8px;
+    padding: 5px 10px;
+  }
+
+  #findshapegame .button-container {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  #findshapegame .button-container button {
+    padding: 7px 15px;
+    font-size: 0.85rem;
+  }
+
+  #findshapegame .test-video {
+    margin-bottom: 10px;
+  }
+
+  #findshapegame .test-video video {
+    max-height: 150px;
+  }
+
+  #findshapegame .test-instruction {
+    font-size: 0.8rem;
+  }
+
+  #findshapegame .grid-container.learn {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  #findshapegame .grid-container.test {
+    max-width: 100%;
+    gap: 12px;
+  }
+
+  #findshapegame .grid-item {
+    max-width: none;
+    padding: 6px;
+  }
+
+  #findshapegame .shape-name {
+    font-size: 0.85rem;
+    padding: 3px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  #findshapegame {
+    padding: 8px;
+  }
+
+  #findshapegame .main-title {
+    font-size: 1.2rem;
+  }
+
+  #findshapegame .subtitle {
+    font-size: 0.8rem;
+  }
+
+  #findshapegame .score-box {
+    font-size: 0.75rem;
+  }
+
+  #findshapegame .test-video video {
+    max-height: 120px;
+  }
+
+  #findshapegame .grid-container {
+    gap: 8px;
+  }
+
+  #findshapegame .grid-container.test {
+    gap: 10px;
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 600px) {
+  #findshapegame .main-title {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+  }
+
+  #findshapegame .subtitle {
+    font-size: 0.75rem;
+    margin-bottom: 5px;
+  }
+
+  #findshapegame .score-box {
+    margin-bottom: 5px;
+    font-size: 0.75rem;
+  }
+
+  #findshapegame .button-container {
+    margin-bottom: 5px;
+  }
+
+  #findshapegame .button-container button {
+    padding: 5px 12px;
+    font-size: 0.8rem;
+  }
+
+  #findshapegame .test-video {
+    margin-bottom: 5px;
+  }
+
+  #findshapegame .test-video video {
+    max-height: 100px;
+  }
+
+  #findshapegame .test-instruction {
+    font-size: 0.75rem;
+    margin: 1px 0;
+  }
+
+  #findshapegame .grid-container {
+    gap: 6px;
+  }
+
+  #findshapegame .grid-item {
+    padding: 4px;
+  }
+}
+
+/* Very short screens (landscape phones) */
+@media (max-height: 500px) {
+  #findshapegame {
+    padding: 4px;
+  }
+
+  #findshapegame .main-title {
+    font-size: 0.9rem;
+    margin-bottom: 1px;
+  }
+
+  #findshapegame .subtitle {
+    font-size: 0.6rem;
+    margin-bottom: 3px;
+  }
+
+  #findshapegame .score-box {
+    font-size: 0.6rem;
+    gap: 4px;
+    margin-bottom: 3px;
+  }
+
+  #findshapegame .score-item {
+    padding: 2px 5px;
+  }
+
+  #findshapegame .button-container {
+    margin-bottom: 3px;
+    gap: 5px;
+  }
+
+  #findshapegame .button-container button {
+    padding: 3px 8px;
+    font-size: 0.65rem;
+  }
+
+  #findshapegame .test-video {
+    margin-bottom: 3px;
+  }
+
+  #findshapegame .test-video video {
+    max-height: 70px;
+  }
+
+  #findshapegame .test-instruction {
+    font-size: 0.6rem;
+    margin: 0;
+  }
+
+  #findshapegame .grid-container {
+    gap: 4px;
+  }
+
+  #findshapegame .grid-container.test {
+    gap: 4px;
+  }
+
+  #findshapegame .grid-item {
+    padding: 2px;
+    border: 2px solid #4caf50;
+  }
+
+  #findshapegame .shape-name {
+    font-size: 0.65rem;
+    padding: 1px 4px;
   }
 }

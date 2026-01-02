@@ -17,7 +17,7 @@ import BreakoutGame from "./BreakoutGame/Breakout.jsx";
 
 import RecognizeQuiz from "./RecognizeSign/RecognizeQuiz.jsx";
 
-import VideoOptionQuiz from "./RecognizeImage/VideoOptionQuiz.jsx";
+import EverydayObjectsVideoOptions from "./RecognizeImage/EverydayObjectsVideoOptions.jsx";
 
 import ColumnMatch from "./ColumnMatch/ColumnMatch.jsx";
 
@@ -44,6 +44,8 @@ import FindShape from "./FindShapes/FindShapes.jsx";
 import BucketGame from "./WaterVolume/BucketGame.jsx";
 
 import DaysOfWeekGame from "./DaysOfTheWeek/DaysOfWeekGame.jsx";
+
+import MatchingGame from "./MatchingGames/MatchingGame.jsx";
 
 export const gamesMap = {
   "number-kingdom": {
@@ -154,12 +156,12 @@ export const gamesMap = {
     alt: "Game Logo",
     category: "Quiz Games"
   },
-  "video-option-quiz": {
-    name: "Video Option Quiz",
+  "EverydayObjectsVideoOptions": {
+    name: "EverydayObjects 1",
     type: "react", 
     orientation: "portrait",
-    component: VideoOptionQuiz, 
-    logoPath: "/assets/images/video-option-quiz-logo.png",
+    component: EverydayObjectsVideoOptions, 
+    logoPath: "/assets/images/everyday-objects-video-options-logo.png",
     alt: "Game Logo",
     category: "Quiz Games"
   },
@@ -225,5 +227,14 @@ export const gamesMap = {
     logoPath: "/assets/images/find-fruit-logo.png",
     alt: "Find the Fruit Logo",
     category: "Searching Games"
+  },
+  "matching-games": {
+    name: "Matching Games Hub",
+    type: "react",
+    orientation: "landscape",
+    component: MatchingGame,
+    logoPath: "/assets/images/matching-games-hub-logo.png",
+    alt: "Matching Games Hub Logo",
+    category: "Matching Games"
   }
 };

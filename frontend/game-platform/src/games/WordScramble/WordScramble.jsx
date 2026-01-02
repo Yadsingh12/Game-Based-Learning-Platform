@@ -89,7 +89,7 @@ export default function WordScrambleGame() {
           <video
             width="320"
             height="240"
-            controls
+            muted
             autoPlay
             loop
             src={currentQuestion.sample_video}

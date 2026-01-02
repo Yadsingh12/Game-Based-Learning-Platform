@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./VideoOptionQuizColors.css";
+import "./EverydayObjectsVideoOptions.css";
 
 // Feedback Modal
 const MessageModal = ({ message, onClose, video }) => (
@@ -29,11 +29,11 @@ const ConfirmModal = ({ message, onConfirm, onCancel }) => (
   </div>
 );
 
-export default function VideoOptionQuizColors() {
+export default function EverydayObjectsVideoOptions() {
   const [mode, setMode] = useState("learn");
   
   // Data
-  const [allColors, setAllColors] = useState({});
+  const [allObjects, setAllObjects] = useState([]);
   const [questions, setQuestions] = useState([]);
   
   // Test state
@@ -43,8 +43,8 @@ export default function VideoOptionQuizColors() {
   
   // Scores
   const [score, setScore] = useState(0);
-  const [bestScore, setBestScore] = useState(() => Number(localStorage.getItem("best_colors_score") || 0));
-  const [previousScore, setPreviousScore] = useState(() => Number(localStorage.getItem("previous_colors_score") || 0));
+  const [bestScore, setBestScore] = useState(() => Number(localStorage.getItem("best_objects_score") || 0));
+  const [previousScore, setPreviousScore] = useState(() => Number(localStorage.getItem("previous_objects_score") || 0));
   
   // Feedback modal
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -61,28 +61,14 @@ export default function VideoOptionQuizColors() {
 
   // Fetch data on mount
   useEffect(() => {
-    fetch("/Colors.json")
+    fetch("/labels.json")
       .then((res) => res.json())
       .then((data) => {
-        setAllColors(data);
+        const enabled = data.filter((item) => item.enabled);
+        setAllObjects(enabled);
         
-        // Flatten into individual questions
-        const qList = [];
-        Object.keys(data).forEach((color) => {
-          const colorObj = data[color];
-          if (colorObj?.images?.length) {
-            colorObj.images.forEach((img) => {
-              qList.push({
-                questionText: img.question,
-                image: img.image,
-                answerColor: color,
-                answerVideo: colorObj.video,
-              });
-            });
-          }
-        });
-        
-        setQuestions(qList);
+        // Use objects as questions (each object becomes a question)
+        setQuestions(enabled);
       });
   }, []);
 
@@ -104,12 +90,12 @@ export default function VideoOptionQuizColors() {
     
     // Pick 3 wrong answers
     const others = shuffle(
-      Object.keys(allColors).filter((c) => c !== currentQ.answerColor)
+      allObjects.filter((obj) => obj.name !== currentQ.name)
     ).slice(0, 3);
 
     const mixedOptions = shuffle([
-      ...others.map((c) => ({ color: c, video: allColors[c].video })),
-      { color: currentQ.answerColor, video: currentQ.answerVideo },
+      ...others.map((o) => ({ name: o.name, video: o.sample_video })),
+      { name: currentQ.name, video: currentQ.sample_video },
     ]);
 
     setCurrentQuestion(currentQ);
@@ -117,11 +103,11 @@ export default function VideoOptionQuizColors() {
   };
 
   const endTest = (finalScore) => {
-    localStorage.setItem("previous_colors_score", finalScore);
+    localStorage.setItem("previous_objects_score", finalScore);
     setPreviousScore(finalScore);
 
     if (finalScore > bestScore) {
-      localStorage.setItem("best_colors_score", finalScore);
+      localStorage.setItem("best_objects_score", finalScore);
       setBestScore(finalScore);
     }
 
@@ -136,14 +122,14 @@ export default function VideoOptionQuizColors() {
   const handleClick = (selected) => {
     if (mode === "learn") {
       setVideoSrc(selected.video);
-      setMessage(`This is ${selected.color}.`);
+      setMessage(`This is ${selected.name}.`);
       setIsModalVisible(true);
       setLastAnswerCorrect(null);
       return;
     }
 
     if (mode === "test") {
-      if (selected.color === currentQuestion.answerColor) {
+      if (selected.name === currentQuestion.name) {
         setScore(score + 1);
         setMessage("Correct! 🎉");
         setVideoSrc(selected.video);
@@ -221,19 +207,19 @@ export default function VideoOptionQuizColors() {
     return "";
   };
 
-  if (Object.keys(allColors).length === 0) {
-    return <div id="colorquizgame">Loading...</div>;
+  if (allObjects.length === 0) {
+    return <div id="objectsquizgame">Loading...</div>;
   }
 
-  // Convert colors object to array for learn mode
-  const colorsArray = Object.keys(allColors).map(color => ({
-    color,
-    video: allColors[color].video
+  // Convert objects to format for learn mode
+  const objectsArray = allObjects.map(obj => ({
+    name: obj.name,
+    video: obj.sample_video
   }));
 
   return (
-    <div id="colorquizgame">
-      <h1 className="main-title">Color Recognition Game</h1>
+    <div id="objectsquizgame">
+      <h1 className="main-title">Everyday Objects Game</h1>
       <p className="subtitle">Learn with sign videos or test your knowledge!</p>
 
       <div className="score-box">
@@ -253,7 +239,7 @@ export default function VideoOptionQuizColors() {
 
       {mode === "test" && currentQuestion && (
         <div className="test-section">
-          <h2 className="test-question">{currentQuestion.questionText}</h2>
+          <h2 className="test-question">What video represents this image?</h2>
           <div className="question-image-wrapper">
             <img src={currentQuestion.image} alt="question" className="question-image" />
           </div>
@@ -267,9 +253,9 @@ export default function VideoOptionQuizColors() {
       )}
 
       <div className={`grid-container ${mode}`}>
-        {(mode === "learn" ? colorsArray : options).map((item) => (
+        {(mode === "learn" ? objectsArray : options).map((item) => (
           <div 
-            key={item.color} 
+            key={item.name} 
             className="grid-item" 
             onClick={() => handleClick(item)}
           >
@@ -281,7 +267,7 @@ export default function VideoOptionQuizColors() {
               playsInline
               className="option-video"
             />
-            {mode === "learn" && <span className="item-label">{item.color}</span>}
+            {mode === "learn" && <span className="item-label">{item.name}</span>}
           </div>
         ))}
       </div>

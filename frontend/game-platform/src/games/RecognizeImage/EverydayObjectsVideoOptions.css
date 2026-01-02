@@ -1,9 +1,9 @@
-/* 💜 Purple Dream Theme - Rich Purple, namespaced */
-#colorquizgame {
+/* 🌸 Rose Pink Theme - Soft Pink, namespaced */
+#objectsquizgame {
   text-align: center;
   font-family: "Poppins", sans-serif;
   padding: 15px;
-  background-color: #f3e5f5;
+  background-color: #fce4ec;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -12,21 +12,21 @@
   box-sizing: border-box;
 }
 
-#colorquizgame .main-title {
+#objectsquizgame .main-title {
   font-size: 1.8rem;
   margin: 0 0 5px 0;
-  color: #4a148c;
+  color: #880e4f;
   flex-shrink: 0;
 }
 
-#colorquizgame .subtitle {
-  color: #6a1b9a;
+#objectsquizgame .subtitle {
+  color: #ad1457;
   margin: 0 0 15px 0;
   font-size: 0.95rem;
   flex-shrink: 0;
 }
 
-#colorquizgame .score-box {
+#objectsquizgame .score-box {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,23 +34,23 @@
   margin-bottom: 15px;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #6a1b9a;
+  color: #c2185b;
   flex-shrink: 0;
 }
 
-#colorquizgame .score-item {
+#objectsquizgame .score-item {
   padding: 6px 12px;
-  background-color: #e1bee7;
+  background-color: #f8bbd0;
   border-radius: 8px;
-  border: 2px solid #9c27b0;
+  border: 2px solid #e91e63;
 }
 
-#colorquizgame .separator {
+#objectsquizgame .separator {
   font-size: 1.2rem;
-  color: #9c27b0;
+  color: #e91e63;
 }
 
-#colorquizgame .button-container {
+#objectsquizgame .button-container {
   display: flex;
   justify-content: center;
   gap: 12px;
@@ -58,11 +58,11 @@
   flex-shrink: 0;
 }
 
-#colorquizgame .button-container button {
+#objectsquizgame .button-container button {
   padding: 8px 18px;
   font-size: 0.95rem;
   border: none;
-  background-color: #ab47bc;
+  background-color: #ec407a;
   color: white;
   border-radius: 10px;
   cursor: pointer;
@@ -70,56 +70,56 @@
   font-weight: bold;
 }
 
-#colorquizgame .button-container button:hover:not(:disabled) {
-  background-color: #8e24aa;
+#objectsquizgame .button-container button:hover:not(:disabled) {
+  background-color: #d81b60;
   transform: scale(1.05);
 }
 
-#colorquizgame .button-container button:disabled {
-  background-color: #8e24aa;
+#objectsquizgame .button-container button:disabled {
+  background-color: #d81b60;
   cursor: not-allowed;
 }
 
-#colorquizgame .test-section {
+#objectsquizgame .test-section {
   margin-bottom: 12px;
   width: 100%;
   max-width: 600px;
   flex-shrink: 0;
 }
 
-#colorquizgame .test-question {
+#objectsquizgame .test-question {
   font-size: 1.1rem;
-  color: #4a148c;
+  color: #880e4f;
   margin: 0 0 8px 0;
   font-weight: 600;
 }
 
-#colorquizgame .question-image-wrapper {
+#objectsquizgame .question-image-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-bottom: 8px;
 }
 
-#colorquizgame .question-image {
+#objectsquizgame .question-image {
   width: 100%;
   max-width: 350px;
   max-height: 150px;
   object-fit: contain;
-  border: 2px solid #9c27b0;
+  border: 2px solid #e91e63;
   border-radius: 12px;
   background: #ffffff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-#colorquizgame .test-instruction {
+#objectsquizgame .test-instruction {
   margin: 2px 0;
-  color: #4a148c;
+  color: #880e4f;
   font-weight: 500;
   font-size: 0.9rem;
 }
 
-#colorquizgame .grid-container {
+#objectsquizgame .grid-container {
   display: grid;
   gap: 15px;
   justify-items: center;
@@ -132,12 +132,12 @@
   min-height: 0;
 }
 
-#colorquizgame .grid-container.learn {
+#objectsquizgame .grid-container.learn {
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   grid-auto-rows: minmax(0, 1fr);
 }
 
-#colorquizgame .grid-container.test {
+#objectsquizgame .grid-container.test {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   max-width: 500px;
@@ -145,9 +145,9 @@
   gap: 10px;
 }
 
-#colorquizgame .grid-item {
-  background-color: #e1bee7;
-  border: 3px solid #9c27b0;
+#objectsquizgame .grid-item {
+  background-color: #f8bbd0;
+  border: 3px solid #e91e63;
   border-radius: 12px;
   width: 100%;
   height: 100%;
@@ -168,24 +168,24 @@
 
 /* Desktop learn mode - larger items */
 @media (min-width: 769px) {
-  #colorquizgame .grid-container.learn {
+  #objectsquizgame .grid-container.learn {
     gap: 20px;
   }
   
-  #colorquizgame .grid-container.learn .grid-item {
+  #objectsquizgame .grid-container.learn .grid-item {
     max-width: 200px;
     max-height: 200px;
     padding: 10px;
   }
 }
 
-#colorquizgame .grid-item:hover {
-  background-color: #ce93d8;
+#objectsquizgame .grid-item:hover {
+  background-color: #f48fb1;
   transform: scale(1.05);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-#colorquizgame .option-video {
+#objectsquizgame .option-video {
   width: 100%;
   height: 100%;
   border-radius: 8px;
@@ -193,12 +193,12 @@
   pointer-events: none;
 }
 
-#colorquizgame .item-label {
+#objectsquizgame .item-label {
   position: absolute;
   bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(74, 20, 140, 0.9);
+  background-color: rgba(136, 14, 79, 0.9);
   color: white;
   padding: 4px 10px;
   border-radius: 6px;
@@ -209,7 +209,7 @@
 }
 
 /* 🎬 Modal styling */
-#colorquizgame .modal-overlay {
+#objectsquizgame .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -222,7 +222,7 @@
   z-index: 999;
 }
 
-#colorquizgame .modal-content {
+#objectsquizgame .modal-content {
   background: white;
   padding: 25px;
   border-radius: 15px;
@@ -231,28 +231,28 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
-#colorquizgame .modal-message {
+#objectsquizgame .modal-message {
   font-size: 1.2rem;
   margin-bottom: 15px;
-  color: #4a148c;
+  color: #880e4f;
   font-weight: bold;
 }
 
-#colorquizgame .modal-content video {
+#objectsquizgame .modal-content video {
   border-radius: 10px;
   margin-bottom: 15px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   max-width: 100%;
 }
 
-#colorquizgame .confirm-buttons {
+#objectsquizgame .confirm-buttons {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
 
-#colorquizgame .modal-close-btn {
-  background: #9c27b0;
+#objectsquizgame .modal-close-btn {
+  background: #e91e63;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -262,241 +262,241 @@
   transition: background-color 0.3s, transform 0.2s;
 }
 
-#colorquizgame .modal-close-btn:hover {
-  background: #7b1fa2;
+#objectsquizgame .modal-close-btn:hover {
+  background: #c2185b;
   transform: scale(1.05);
 }
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
-  #colorquizgame {
+  #objectsquizgame {
     padding: 10px;
   }
 
-  #colorquizgame .main-title {
+  #objectsquizgame .main-title {
     font-size: 1.4rem;
     margin-bottom: 3px;
   }
 
-  #colorquizgame .subtitle {
+  #objectsquizgame .subtitle {
     font-size: 0.85rem;
     margin-bottom: 10px;
   }
 
-  #colorquizgame .score-box {
+  #objectsquizgame .score-box {
     gap: 8px;
     margin-bottom: 10px;
     font-size: 0.8rem;
   }
 
-  #colorquizgame .score-item {
+  #objectsquizgame .score-item {
     padding: 5px 10px;
   }
 
-  #colorquizgame .button-container {
+  #objectsquizgame .button-container {
     gap: 10px;
     margin-bottom: 10px;
   }
 
-  #colorquizgame .button-container button {
+  #objectsquizgame .button-container button {
     padding: 7px 15px;
     font-size: 0.85rem;
   }
 
-  #colorquizgame .test-section {
+  #objectsquizgame .test-section {
     margin-bottom: 10px;
   }
 
-  #colorquizgame .test-question {
+  #objectsquizgame .test-question {
     font-size: 1rem;
     margin-bottom: 6px;
   }
 
-  #colorquizgame .question-image {
+  #objectsquizgame .question-image {
     max-width: 100%;
     max-height: 120px;
   }
 
-  #colorquizgame .test-instruction {
+  #objectsquizgame .test-instruction {
     font-size: 0.8rem;
   }
 
-  #colorquizgame .grid-container.learn {
+  #objectsquizgame .grid-container.learn {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
 
-  #colorquizgame .grid-container.test {
+  #objectsquizgame .grid-container.test {
     max-width: 100%;
     gap: 12px;
   }
 
-  #colorquizgame .grid-item {
+  #objectsquizgame .grid-item {
     max-width: none;
     padding: 6px;
   }
 
-  #colorquizgame .item-label {
+  #objectsquizgame .item-label {
     font-size: 0.85rem;
     padding: 3px 8px;
   }
 }
 
 @media (max-width: 480px) {
-  #colorquizgame {
+  #objectsquizgame {
     padding: 8px;
   }
 
-  #colorquizgame .main-title {
+  #objectsquizgame .main-title {
     font-size: 1.2rem;
   }
 
-  #colorquizgame .subtitle {
+  #objectsquizgame .subtitle {
     font-size: 0.8rem;
   }
 
-  #colorquizgame .score-box {
+  #objectsquizgame .score-box {
     font-size: 0.75rem;
   }
 
-  #colorquizgame .question-image {
+  #objectsquizgame .question-image {
     max-height: 100px;
   }
 
-  #colorquizgame .test-question {
+  #objectsquizgame .test-question {
     font-size: 0.9rem;
   }
 
-  #colorquizgame .grid-container {
+  #objectsquizgame .grid-container {
     gap: 8px;
   }
 
-  #colorquizgame .grid-container.test {
+  #objectsquizgame .grid-container.test {
     gap: 10px;
   }
 }
 
 /* Landscape mobile */
 @media (max-height: 600px) {
-  #colorquizgame .main-title {
+  #objectsquizgame .main-title {
     font-size: 1.2rem;
     margin-bottom: 2px;
   }
 
-  #colorquizgame .subtitle {
+  #objectsquizgame .subtitle {
     font-size: 0.75rem;
     margin-bottom: 5px;
   }
 
-  #colorquizgame .score-box {
+  #objectsquizgame .score-box {
     margin-bottom: 5px;
     font-size: 0.75rem;
   }
 
-  #colorquizgame .button-container {
+  #objectsquizgame .button-container {
     margin-bottom: 5px;
   }
 
-  #colorquizgame .button-container button {
+  #objectsquizgame .button-container button {
     padding: 5px 12px;
     font-size: 0.8rem;
   }
 
-  #colorquizgame .test-section {
+  #objectsquizgame .test-section {
     margin-bottom: 5px;
   }
 
-  #colorquizgame .test-question {
+  #objectsquizgame .test-question {
     font-size: 0.85rem;
     margin-bottom: 3px;
   }
 
-  #colorquizgame .question-image {
+  #objectsquizgame .question-image {
     max-height: 80px;
   }
 
-  #colorquizgame .test-instruction {
+  #objectsquizgame .test-instruction {
     font-size: 0.75rem;
     margin: 1px 0;
   }
 
-  #colorquizgame .grid-container {
+  #objectsquizgame .grid-container {
     gap: 6px;
   }
 
-  #colorquizgame .grid-item {
+  #objectsquizgame .grid-item {
     padding: 4px;
   }
 }
 
 /* Very short screens (landscape phones) */
 @media (max-height: 500px) {
-  #colorquizgame {
+  #objectsquizgame {
     padding: 4px;
   }
 
-  #colorquizgame .main-title {
+  #objectsquizgame .main-title {
     font-size: 0.9rem;
     margin-bottom: 1px;
   }
 
-  #colorquizgame .subtitle {
+  #objectsquizgame .subtitle {
     font-size: 0.6rem;
     margin-bottom: 3px;
   }
 
-  #colorquizgame .score-box {
+  #objectsquizgame .score-box {
     font-size: 0.6rem;
     gap: 4px;
     margin-bottom: 3px;
   }
 
-  #colorquizgame .score-item {
+  #objectsquizgame .score-item {
     padding: 2px 5px;
   }
 
-  #colorquizgame .button-container {
+  #objectsquizgame .button-container {
     margin-bottom: 3px;
     gap: 5px;
   }
 
-  #colorquizgame .button-container button {
+  #objectsquizgame .button-container button {
     padding: 3px 8px;
     font-size: 0.65rem;
   }
 
-  #colorquizgame .test-section {
+  #objectsquizgame .test-section {
     margin-bottom: 3px;
   }
 
-  #colorquizgame .test-question {
+  #objectsquizgame .test-question {
     font-size: 0.75rem;
     margin-bottom: 2px;
   }
 
-  #colorquizgame .question-image {
+  #objectsquizgame .question-image {
     max-height: 50px;
   }
 
-  #colorquizgame .test-instruction {
+  #objectsquizgame .test-instruction {
     font-size: 0.6rem;
     margin: 0;
   }
 
-  #colorquizgame .grid-container {
+  #objectsquizgame .grid-container {
     gap: 4px;
   }
 
-  #colorquizgame .grid-container.test {
+  #objectsquizgame .grid-container.test {
     gap: 4px;
   }
 
-  #colorquizgame .grid-item {
+  #objectsquizgame .grid-item {
     padding: 2px;
-    border: 2px solid #9c27b0;
+    border: 2px solid #e91e63;
   }
 
-  #colorquizgame .item-label {
+  #objectsquizgame .item-label {
     font-size: 0.65rem;
     padding: 1px 4px;
   }
