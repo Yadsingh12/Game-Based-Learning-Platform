@@ -1,0 +1,135 @@
+{
+  "packId": "shapes-1",
+  "categoryId": "shapes",
+  "name": "Shapes Pack 1",
+  "signs": [
+    {
+      "id": "circle",
+      "name": "Circle",
+      "videoUrl": "/videos/Shapes/circle.mp4",
+      "visual": {
+        "type": "svg-inline",
+        "data": {
+          "type": "circle",
+          "cx": 50,
+          "cy": 50,
+          "r": 50
+        }
+      }
+    },
+    {
+      "id": "square",
+      "name": "Square",
+      "videoUrl": "/videos/Shapes/square.mp4",
+      "visual": {
+        "type": "svg-inline",
+        "data": {
+          "type": "polygon",
+          "points": "0,0 100,0 100,100 0,100"
+        }
+      }
+    },
+    {
+      "id": "triangle",
+      "name": "Triangle",
+      "videoUrl": "/videos/Shapes/triangle.mp4",
+      "visual": {
+        "type": "svg-inline",
+        "data": {
+          "type": "polygon",
+          "points": "50,0 100,100 0,100"
+        }
+      }
+    },
+    {
+      "id": "heart",
+      "name": "Heart",
+      "videoUrl": "/videos/Shapes/heart.mp4",
+      "visual": {
+        "type": "svg-inline",
+        "data": {
+          "type": "path",
+          "d": "M50 90 L90 50 A20 20 0 0 0 50 10 A20 20 0 0 0 10 50 Z"
+        }
+      }
+    },
+    {
+      "id": "hexagon",
+      "name": "Hexagon",
+      "videoUrl": "/videos/Shapes/hexagon.mp4",
+      "visual": {
+        "type": "svg-inline",
+        "data": {
+          "type": "polygon",
+          "points": "25,0 75,0 100,50 75,100 25,100 0,50"
+        }
+      }
+    },
+    {
+      "id": "oval",
+      "name": "Oval",
+      "videoUrl": "/videos/Shapes/oval.mp4",
+      "visual": {
+        "type": "svg-inline",
+        "data": {
+          "type": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 50,
+          "ry": 30
+        }
+      }
+    },
+    {
+      "id": "cube",
+      "name": "Cube",
+      "videoUrl": "/videos/Shapes/cube.mp4",
+      "visual": {
+        "type": "svg-inline",
+        "data": {
+          "type": "g",
+          "d": "<polygon points=\"50,10 80,25 50,40 20,25\" fill=\"#5E8C5F\" stroke=\"#333\" stroke-width=\"2\" /><polygon points=\"20,25 50,40 50,90 20,75\" fill=\"#4CAF50\" stroke=\"#333\" stroke-width=\"2\" /><polygon points=\"50,40 80,25 80,75 50,90\" fill=\"#428148\" stroke=\"#333\" stroke-width=\"2\" />"
+        }
+      }
+    },
+    {
+      "id": "cylinder",
+      "name": "Cylinder",
+      "videoUrl": "/videos/Shapes/cylinder.mp4",
+      "visual": {
+        "type": "svg-inline",
+        "data": {
+          "type": "g",
+          "d": "<path d=\"M20,40 L20,80 A30,15 0 1,0 80,80 L80,40 A30,15 0 1,1 20,40 Z\" fill=\"#4CAF50\" stroke=\"#333\" stroke-width=\"2\" /><ellipse cx=\"50\" cy=\"40\" rx=\"30\" ry=\"15\" fill=\"#6CC072\" stroke=\"#333\" stroke-width=\"2\" />"
+        }
+      }
+    },
+    {
+      "id": "cone",
+      "name": "Cone",
+      "videoUrl": "/videos/Shapes/cone.mp4",
+      "visual": {
+        "type": "svg-inline",
+        "data": {
+          "type": "path",
+          "d": "M50 0 L10 70 A40 20 0 1 0 90 70 Z",
+          "fill": "#4CAF50"
+        }
+      }
+    },
+    {
+      "id": "moon",
+      "name": "Moon",
+      "videoUrl": "/videos/Shapes/moon.mp4",
+      "visual": {
+        "type": "svg-inline",
+        "data": {
+          "type": "path",
+          "d": "M40,0 A40,40 0 1,1 40,100 A10,30 0 1,0 40,0",
+          "fill": "#4CAF50",
+          "fillRule": "evenodd"
+        }
+      }
+    }
+  ]
+}

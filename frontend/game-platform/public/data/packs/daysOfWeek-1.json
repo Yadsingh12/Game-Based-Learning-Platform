@@ -1,0 +1,105 @@
+{
+  "packId": "days-1",
+  "categoryId": "days",
+  "name": "Days of the Week Pack 1",
+  "signs": [
+    {
+      "id": "monday",
+      "name": "Monday",
+      "videoUrl": "/videos/Days/monday.mp4",
+      "visual": {
+        "type": "style",
+        "value": "Mon"
+      },
+      "metadata": {
+        "fullName": "Monday",
+        "dayNumber": 1,
+        "shortForm": "Mon"
+      }
+    },
+    {
+      "id": "tuesday",
+      "name": "Tuesday",
+      "videoUrl": "/videos/Days/tuesday.mp4",
+      "visual": {
+        "type": "style",
+        "value": "Tue"
+      },
+      "metadata": {
+        "fullName": "Tuesday",
+        "dayNumber": 2,
+        "shortForm": "Tue"
+      }
+    },
+    {
+      "id": "wednesday",
+      "name": "Wednesday",
+      "videoUrl": "/videos/Days/wednesday.mp4",
+      "visual": {
+        "type": "style",
+        "value": "Wed"
+      },
+      "metadata": {
+        "fullName": "Wednesday",
+        "dayNumber": 3,
+        "shortForm": "Wed"
+      }
+    },
+    {
+      "id": "thursday",
+      "name": "Thursday",
+      "videoUrl": "/videos/Days/thursday.mp4",
+      "visual": {
+        "type": "style",
+        "value": "Thu"
+      },
+      "metadata": {
+        "fullName": "Thursday",
+        "dayNumber": 4,
+        "shortForm": "Thu"
+      }
+    },
+    {
+      "id": "friday",
+      "name": "Friday",
+      "videoUrl": "/videos/Days/friday.mp4",
+      "visual": {
+        "type": "style",
+        "value": "Fri"
+      },
+      "metadata": {
+        "fullName": "Friday",
+        "dayNumber": 5,
+        "shortForm": "Fri"
+      }
+    },
+    {
+      "id": "saturday",
+      "name": "Saturday",
+      "videoUrl": "/videos/Days/saturday.mp4",
+      "visual": {
+        "type": "style",
+        "value": "Sat"
+      },
+      "metadata": {
+        "fullName": "Saturday",
+        "dayNumber": 6,
+        "shortForm": "Sat"
+      }
+    },
+    {
+      "id": "sunday",
+      "name": "Sunday",
+      "videoUrl": "/videos/Days/sunday.mp4",
+      "visual": {
+        "type": "style",
+        "value": "Sun"
+      },
+      "metadata": {
+        "fullName": "Sunday",
+        "dayNumber": 0,
+        "shortForm": "Sun"
+      }
+    }
+  ]
+}
