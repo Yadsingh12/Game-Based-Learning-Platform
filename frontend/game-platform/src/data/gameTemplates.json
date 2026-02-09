@@ -6,16 +6,29 @@
       "icon": "Book",
       "description": "Watch and learn signs",
       "unlockRequirement": null,
-      "applicableCategories": ["alphabets", "numerals", "words", "phrases", "time", "colors", "fruits", "everydayObjects", "shapes", "statesOfIndia", "union-territories", "daysOfWeek"]
+      "applicableCategories": [
+        "alphabets",
+        "numerals",
+        "words",
+        "phrases",
+        "time",
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "union-territories",
+        "daysOfWeek"
+      ]
     },
     {
       "id": "quiz",
       "name": "Quiz",
       "icon": "Brain",
       "description": "Test your knowledge",
-      "unlockRequirement": { 
-        "game": "learn", 
-        "minScore": 50 
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 50
       },
       "applicableCategories": ["alphabets", "numerals", "words"]
     },
@@ -24,9 +37,9 @@
       "name": "Match",
       "icon": "Gamepad2",
       "description": "Match signs with meanings",
-      "unlockRequirement": { 
-        "game": "quiz", 
-        "minScore": 70 
+      "unlockRequirement": {
+        "game": "quiz",
+        "minScore": 70
       },
       "applicableCategories": ["alphabets", "numerals"]
     },
@@ -35,9 +48,9 @@
       "name": "Sequence",
       "icon": "Zap",
       "description": "Arrange numbers in order",
-      "unlockRequirement": { 
-        "game": "quiz", 
-        "minScore": 60 
+      "unlockRequirement": {
+        "game": "quiz",
+        "minScore": 60
       },
       "applicableCategories": ["numerals"]
     },
@@ -46,9 +59,9 @@
       "name": "Sentence Builder",
       "icon": "MessageSquare",
       "description": "Build sentences with words",
-      "unlockRequirement": { 
-        "game": "quiz", 
-        "minScore": 75 
+      "unlockRequirement": {
+        "game": "quiz",
+        "minScore": 75
       },
       "applicableCategories": ["words"]
     },
@@ -57,9 +70,9 @@
       "name": "Practice",
       "icon": "Repeat",
       "description": "Practice signing phrases",
-      "unlockRequirement": { 
-        "game": "learn", 
-        "minScore": 80 
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 80
       },
       "applicableCategories": ["phrases"]
     },
@@ -68,11 +81,33 @@
       "name": "Interactive Clock",
       "icon": "Clock",
       "description": "Learn to tell time with an interactive clock",
-      "unlockRequirement": { 
-        "game": "learn", 
-        "minScore": 85 
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 85
       },
       "applicableCategories": ["time"]
+    },
+    {
+      "id": "bucket",
+      "name": "Bucket Game",
+      "icon": "Droplet",
+      "description": "Fill the bucket to match numbers",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 60
+      },
+      "applicableCategories": ["numerals"]
+    },
+    {
+      "id": "breakout",
+      "name": "Breakout",
+      "icon": "Gamepad",
+      "description": "Break bricks and catch numbers",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 70
+      },
+      "applicableCategories": ["numerals", "colors", "alphabets"]
     }
   ]
 }

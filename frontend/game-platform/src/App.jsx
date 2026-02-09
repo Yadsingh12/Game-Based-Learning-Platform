@@ -10,6 +10,7 @@ import QuizGame from './games/QuizGame';
 import MatchGame from './games/MatchGame';
 import InteractiveClockGame from './games/InteractiveClockGame';
 import BucketGame from './games/BucketGame';
+import BreakoutGame from './games/BreakoutGame';
 
 import { saveProgress, getProgress } from './utils/storage';
 import GameErrorBoundary from './components/GameErrorBoundary';
@@ -154,6 +155,13 @@ export default function App() {
           return (
             <GameErrorBoundary onRecover={handleGameCrash}>
               <BucketGame {...gameProps} />
+            </GameErrorBoundary>
+          );
+
+        case 'breakout':
+          return (
+            <GameErrorBoundary onRecover={handleGameCrash}>
+              <BreakoutGame {...gameProps} />
             </GameErrorBoundary>
           );
 
