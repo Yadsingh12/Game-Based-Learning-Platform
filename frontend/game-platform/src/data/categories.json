@@ -11,7 +11,6 @@
         "dark": "#5b21b6",
         "gradient": "from-purple-600 to-blue-600"
       },
-      "supportedGames": ["learn", "quiz", "match"],
       "packs": [
         { 
           "id": "alphabets-1", 
@@ -40,7 +39,6 @@
         "dark": "#047857",
         "gradient": "from-green-600 to-teal-600"
       },
-      "supportedGames": ["learn", "quiz", "match", "sequence"],
       "packs": [
         { 
           "id": "numerals-1", 
@@ -62,7 +60,6 @@
         "dark": "#5b21b6",
         "gradient": "from-purple-600 to-blue-600"
       },
-      "supportedGames": ["learn", "quiz", "match"],
       "packs": [
         { 
           "id": "colors-1", 
@@ -84,7 +81,6 @@
         "dark": "#5b21b6",
         "gradient": "from-purple-600 to-blue-600"
       },
-      "supportedGames": ["learn", "quiz", "match"],
       "packs": [
         { 
           "id": "fruits-1", 
@@ -106,7 +102,6 @@
         "dark": "#5b21b6",
         "gradient": "from-purple-600 to-blue-600"
       },
-      "supportedGames": ["learn", "quiz", "match"],
       "packs": [
         { 
           "id": "everydayObjects-1", 
@@ -156,7 +151,6 @@
         "dark": "#5b21b6",
         "gradient": "from-purple-600 to-blue-600"
       },
-      "supportedGames": ["learn", "quiz", "match"],
       "packs": [
         { 
           "id": "shapes-1", 
@@ -178,7 +172,6 @@
         "dark": "#5b21b6",
         "gradient": "from-purple-600 to-blue-600"
       },
-      "supportedGames": ["learn", "quiz", "match"],
       "packs": [
         { 
           "id": "statesOfIndia-1", 
@@ -186,6 +179,27 @@
           "range": "Andhra Pradesh, Arunachal Pradesh...", 
           "signCount": 36,
           "dataFile": "statesOfIndia-1.json"
+        }
+      ]
+    },
+    {
+      "id": "time",
+      "name": "Time",
+      "icon": "🕒",
+      "colorScheme": {
+        "primary": "#7c3aed",
+        "secondary": "#3b82f6",
+        "light": "#c4b5fd",
+        "dark": "#5b21b6",
+        "gradient": "from-purple-600 to-blue-600"
+      },
+      "packs": [
+        { 
+          "id": "time-1", 
+          "name": "Time Pack 1", 
+          "range": "3:20, 5:40...", 
+          "signCount": 36,
+          "dataFile": "time-1.json"
         }
       ]
     }

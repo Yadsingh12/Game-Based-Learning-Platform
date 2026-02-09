@@ -6,7 +6,7 @@
       "icon": "Book",
       "description": "Watch and learn signs",
       "unlockRequirement": null,
-      "applicableCategories": ["alphabets", "numerals", "words", "phrases"]
+      "applicableCategories": ["alphabets", "numerals", "words", "phrases", "time", "colors", "fruits", "everydayObjects", "shapes", "statesOfIndia", "union-territories", "daysOfWeek"]
     },
     {
       "id": "quiz",
@@ -62,6 +62,17 @@
         "minScore": 80 
       },
       "applicableCategories": ["phrases"]
+    },
+    {
+      "id": "interactiveClock",
+      "name": "Interactive Clock",
+      "icon": "Clock",
+      "description": "Learn to tell time with an interactive clock",
+      "unlockRequirement": { 
+        "game": "learn", 
+        "minScore": 85 
+      },
+      "applicableCategories": ["time"]
     }
   ]
 }
