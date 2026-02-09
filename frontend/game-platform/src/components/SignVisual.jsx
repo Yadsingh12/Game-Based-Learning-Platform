@@ -60,6 +60,109 @@ const renderSVGShape = (shapeData, color = "#4CAF50") => {
   }
 };
 
+// Helper to render clock face
+const ClockVisual = ({ hour, minute, period, className = "" }) => {
+  const CLOCK_RADIUS = 100;
+  const CENTER = { x: CLOCK_RADIUS, y: CLOCK_RADIUS };
+  const HOUR_HAND_LENGTH = 50;
+  const MINUTE_HAND_LENGTH = 70;
+
+  // Convert time to angles
+  const timeToAngle = ({ hour, minute }) => ({
+    minute: (minute % 60) * 6,
+    hour: ((hour % 12) + minute / 60) * 30,
+  });
+
+  // Convert angle to SVG coordinates
+  const angleToCoords = (angleDeg, length) => {
+    const rad = (angleDeg - 90) * (Math.PI / 180);
+    return {
+      x: CENTER.x + length * Math.cos(rad),
+      y: CENTER.y + length * Math.sin(rad),
+    };
+  };
+
+  const angles = timeToAngle({ hour, minute });
+  const hourHand = angleToCoords(angles.hour, HOUR_HAND_LENGTH);
+  const minuteHand = angleToCoords(angles.minute, MINUTE_HAND_LENGTH);
+
+  return (
+    <div className={`relative w-full h-full flex flex-col items-center justify-center ${className}`}>
+      <svg
+        width={2 * CLOCK_RADIUS}
+        height={2 * CLOCK_RADIUS}
+        viewBox={`0 0 ${2 * CLOCK_RADIUS} ${2 * CLOCK_RADIUS}`}
+        className="w-full h-full"
+        style={{ maxWidth: '200px', maxHeight: '200px' }}
+      >
+        {/* Clock face */}
+        <circle
+          cx={CENTER.x}
+          cy={CENTER.y}
+          r={CLOCK_RADIUS}
+          fill="#fff"
+          stroke="#000"
+          strokeWidth="2"
+        />
+
+        {/* Hour ticks */}
+        {[...Array(12)].map((_, i) => {
+          const angle = (i * 30 - 90) * (Math.PI / 180);
+          const x1 = CENTER.x + Math.cos(angle) * 80;
+          const y1 = CENTER.y + Math.sin(angle) * 80;
+          const x2 = CENTER.x + Math.cos(angle) * 90;
+          const y2 = CENTER.y + Math.sin(angle) * 90;
+          return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#000" strokeWidth="2" />;
+        })}
+
+        {/* Hour numbers */}
+        {[...Array(12)].map((_, i) => {
+          const angle = ((i * 30 - 60) * Math.PI) / 180;
+          const x = CENTER.x + Math.cos(angle) * 65;
+          const y = CENTER.y + Math.sin(angle) * 65 + 5;
+          return (
+            <text key={i + 1} x={x} y={y} textAnchor="middle" fontSize="14" fontWeight="600" fill="#111">
+              {i + 1}
+            </text>
+          );
+        })}
+
+        {/* Hour hand */}
+        <line
+          x1={CENTER.x}
+          y1={CENTER.y}
+          x2={hourHand.x}
+          y2={hourHand.y}
+          stroke="#111"
+          strokeWidth="6"
+          strokeLinecap="round"
+        />
+
+        {/* Minute hand */}
+        <line
+          x1={CENTER.x}
+          y1={CENTER.y}
+          x2={minuteHand.x}
+          y2={minuteHand.y}
+          stroke="#2563eb"
+          strokeWidth="4"
+          strokeLinecap="round"
+        />
+
+        {/* Center cap */}
+        <circle cx={CENTER.x} cy={CENTER.y} r="4" fill="#000" />
+      </svg>
+      
+      {/* Display time below clock */}
+      <div className="mt-2 text-center">
+        <span className="text-lg font-bold">
+          {hour}:{minute.toString().padStart(2, '0')} {period}
+        </span>
+      </div>
+    </div>
+  );
+};
+
 export default function SignVisual({ visual, assets, className = "" }) {
   const [svgPathData, setSvgPathData] = useState(null);
 
@@ -212,6 +315,17 @@ export default function SignVisual({ visual, assets, className = "" }) {
         </div>
       );
     }
+
+    // NEW: Handle clock visuals
+    case "clock":
+      return (
+        <ClockVisual 
+          hour={visual.hour} 
+          minute={visual.minute} 
+          period={visual.period}
+          className={className}
+        />
+      );
 
     default:
       return null;
