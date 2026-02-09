@@ -96,7 +96,7 @@
       ]
     },
     {
-      "id": "everyday-objects",
+      "id": "everydayObjects",
       "name": "Everyday Objects",
       "icon": "🧸",
       "colorScheme": {
@@ -109,39 +109,83 @@
       "supportedGames": ["learn", "quiz", "match"],
       "packs": [
         { 
-          "id": "everyday-objects-1", 
+          "id": "everydayObjects-1", 
           "name": "Everyday Objects Pack 1", 
           "range": "Person-Dog...", 
           "signCount": 14,
-          "dataFile": "everyday-objects-1.json"
+          "dataFile": "everydayObjects-1.json"
         },
         { 
-          "id": "everyday-objects-2", 
+          "id": "everydayObjects-2", 
           "name": "Everyday Objects Pack 2", 
           "range": "Horse-Sportsball...", 
           "signCount": 14,
-          "dataFile": "everyday-objects-2.json"
+          "dataFile": "everydayObjects-2.json"
         },
         { 
-          "id": "everyday-objects-3", 
+          "id": "everydayObjects-3", 
           "name": "Everyday Objects Pack 3", 
           "range": "Kite-Orange...", 
           "signCount": 14,
-          "dataFile": "everyday-objects-3.json"
+          "dataFile": "everydayObjects-3.json"
         },
         { 
-          "id": "everyday-objects-4", 
+          "id": "everydayObjects-4", 
           "name": "Everyday Objects Pack 4", 
           "range": "Broccoli-Mouse...", 
           "signCount": 14,
-          "dataFile": "everyday-objects-4.json"
+          "dataFile": "everydayObjects-4.json"
         },
         {
-          "id": "everyday-objects-5", 
+          "id": "everydayObjects-5", 
           "name": "Everyday Objects Pack 5", 
           "range": "Remote-Toothbrush...", 
           "signCount": 15,
-          "dataFile": "everyday-objects-5.json"
+          "dataFile": "everydayObjects-5.json"
+        }
+      ]
+    },
+    {
+      "id": "shapes",
+      "name": "Shapes",
+      "icon": "🔺",
+      "colorScheme": {
+        "primary": "#7c3aed",
+        "secondary": "#3b82f6",
+        "light": "#c4b5fd",
+        "dark": "#5b21b6",
+        "gradient": "from-purple-600 to-blue-600"
+      },
+      "supportedGames": ["learn", "quiz", "match"],
+      "packs": [
+        { 
+          "id": "shapes-1", 
+          "name": "Shapes Pack 1", 
+          "range": "Circle, Square...", 
+          "signCount": 10,
+          "dataFile": "shapes-1.json"
+        }
+      ]
+    },
+    {
+      "id": "statesOfIndia",
+      "name": "States Of India",
+      "icon": "🗺️",
+      "colorScheme": {
+        "primary": "#7c3aed",
+        "secondary": "#3b82f6",
+        "light": "#c4b5fd",
+        "dark": "#5b21b6",
+        "gradient": "from-purple-600 to-blue-600"
+      },
+      "supportedGames": ["learn", "quiz", "match"],
+      "packs": [
+        { 
+          "id": "statesOfIndia-1", 
+          "name": "Indian States Pack 1", 
+          "range": "Andhra Pradesh, Arunachal Pradesh...", 
+          "signCount": 36,
+          "dataFile": "statesOfIndia-1.json"
         }
       ]
     }
