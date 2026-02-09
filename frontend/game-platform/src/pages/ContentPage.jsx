@@ -1,9 +1,9 @@
 //content page component displaying games within a selected pack
 
 import React from 'react';
-import { Lock, Star, CheckCircle, Book, Brain, Gamepad2, Zap, MessageSquare, Repeat } from 'lucide-react';
+import { Lock, Star, CheckCircle, Book, Brain, Gamepad2, Zap, MessageSquare, Repeat, Clock } from 'lucide-react';
 import gameTemplatesData from '../data/gameTemplates.json';
-import { getProgress, isGameUnlocked, getAvailableGames } from '../utils/storage';
+import { getProgress, isGameUnlocked } from '../utils/storage';
 
 const iconMap = {
   Book: Book,
@@ -11,11 +11,23 @@ const iconMap = {
   Gamepad2: Gamepad2,
   Zap: Zap,
   MessageSquare: MessageSquare,
-  Repeat: Repeat
+  Repeat: Repeat,
+  Clock: Clock
+};
+
+// Filter games based on category
+const getAvailableGamesForCategory = (categoryId, allGames) => {
+  return allGames.filter(game => 
+    game.applicableCategories.includes(categoryId)
+  );
 };
 
 export default function ContentPage({ category, pack, packData, onSelectGame, onBack }) {
-  const availableGames = getAvailableGames(pack, gameTemplatesData.games);
+  // Get only games applicable to this category
+  const availableGames = getAvailableGamesForCategory(
+    category.id, 
+    gameTemplatesData.games
+  );
 
   return (
     <div className={`min-h-screen bg-gradient-to-br ${category.colorScheme.gradient} p-6`}>
