@@ -8,6 +8,7 @@ import ContentPage from './pages/ContentPage';
 import LearnGame from './games/LearnGame';
 import QuizGame from './games/QuizGame';
 import MatchGame from './games/MatchGame';
+import InteractiveClockGame from './games/InteractiveClockGame';
 
 import { saveProgress, getProgress } from './utils/storage';
 import GameErrorBoundary from './components/GameErrorBoundary';
@@ -138,6 +139,13 @@ export default function App() {
           return (
             <GameErrorBoundary onRecover={handleGameCrash}>
               <SequenceGame {...gameProps} />
+            </GameErrorBoundary>
+          );
+
+        case 'interactiveClock':
+          return (
+            <GameErrorBoundary onRecover={handleGameCrash}>
+              <InteractiveClockGame {...gameProps} />
             </GameErrorBoundary>
           );
 
