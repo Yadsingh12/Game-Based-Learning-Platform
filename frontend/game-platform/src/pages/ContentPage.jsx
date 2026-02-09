@@ -1,7 +1,7 @@
 //content page component displaying games within a selected pack
 
 import React from 'react';
-import { Lock, Star, CheckCircle, Book, Brain, Gamepad2, Zap, MessageSquare, Repeat, Clock, Droplet, Gamepad } from 'lucide-react';
+import { Lock, Star, CheckCircle, Book, Brain, Gamepad2, Zap, MessageSquare, Repeat, Clock, Droplet, Gamepad, Search } from 'lucide-react';
 import gameTemplatesData from '../data/gameTemplates.json';
 import { getProgress, isGameUnlocked } from '../utils/storage';
 
@@ -15,6 +15,7 @@ const iconMap = {
   Clock: Clock,
   Droplet: Droplet,
   Gamepad: Gamepad,
+  Search: Search,
 };
 
 // Filter games based on category

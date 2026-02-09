@@ -12,17 +12,17 @@
         "gradient": "from-purple-600 to-blue-600"
       },
       "packs": [
-        { 
-          "id": "alphabets-1", 
-          "name": "Alphabets Pack 1", 
-          "range": "A-M", 
+        {
+          "id": "alphabets-1",
+          "name": "Alphabets Pack 1",
+          "range": "A-M",
           "signCount": 13,
           "dataFile": "alphabets-1.json"
         },
-        { 
-          "id": "alphabets-2", 
-          "name": "Alphabets Pack 2", 
-          "range": "N-Z", 
+        {
+          "id": "alphabets-2",
+          "name": "Alphabets Pack 2",
+          "range": "N-Z",
           "signCount": 13,
           "dataFile": "alphabets-2.json"
         }
@@ -40,10 +40,10 @@
         "gradient": "from-green-600 to-teal-600"
       },
       "packs": [
-        { 
-          "id": "numerals-1", 
-          "name": "Numbers Pack 1", 
-          "range": "0-10", 
+        {
+          "id": "numerals-1",
+          "name": "Numbers Pack 1",
+          "range": "0-10",
           "signCount": 11,
           "dataFile": "numerals-1.json"
         }
@@ -61,10 +61,10 @@
         "gradient": "from-purple-600 to-blue-600"
       },
       "packs": [
-        { 
-          "id": "colors-1", 
-          "name": "Colors Pack 1", 
-          "range": "Yellow, Blue...", 
+        {
+          "id": "colors-1",
+          "name": "Colors Pack 1",
+          "range": "Yellow, Blue...",
           "signCount": 13,
           "dataFile": "colors-1.json"
         }
@@ -81,11 +81,17 @@
         "dark": "#5b21b6",
         "gradient": "from-purple-600 to-blue-600"
       },
+      "gameAssets": {
+        "findInImage": {
+          "svgPath": "/images/Fruits/fruitBasket.svg",
+          "imagePath": "/images/Fruits/fruitBasket.png"
+        }
+      },
       "packs": [
-        { 
-          "id": "fruits-1", 
-          "name": "Fruits Pack 1", 
-          "range": "Apple, Banana...", 
+        {
+          "id": "fruits-1",
+          "name": "Fruits Pack 1",
+          "range": "Apple, Banana...",
           "signCount": 13,
           "dataFile": "fruits-1.json"
         }
@@ -103,38 +109,38 @@
         "gradient": "from-purple-600 to-blue-600"
       },
       "packs": [
-        { 
-          "id": "everydayObjects-1", 
-          "name": "Everyday Objects Pack 1", 
-          "range": "Person-Dog...", 
+        {
+          "id": "everydayObjects-1",
+          "name": "Everyday Objects Pack 1",
+          "range": "Person-Dog...",
           "signCount": 14,
           "dataFile": "everydayObjects-1.json"
         },
-        { 
-          "id": "everydayObjects-2", 
-          "name": "Everyday Objects Pack 2", 
-          "range": "Horse-Sportsball...", 
+        {
+          "id": "everydayObjects-2",
+          "name": "Everyday Objects Pack 2",
+          "range": "Horse-Sportsball...",
           "signCount": 14,
           "dataFile": "everydayObjects-2.json"
         },
-        { 
-          "id": "everydayObjects-3", 
-          "name": "Everyday Objects Pack 3", 
-          "range": "Kite-Orange...", 
+        {
+          "id": "everydayObjects-3",
+          "name": "Everyday Objects Pack 3",
+          "range": "Kite-Orange...",
           "signCount": 14,
           "dataFile": "everydayObjects-3.json"
         },
-        { 
-          "id": "everydayObjects-4", 
-          "name": "Everyday Objects Pack 4", 
-          "range": "Broccoli-Mouse...", 
+        {
+          "id": "everydayObjects-4",
+          "name": "Everyday Objects Pack 4",
+          "range": "Broccoli-Mouse...",
           "signCount": 14,
           "dataFile": "everydayObjects-4.json"
         },
         {
-          "id": "everydayObjects-5", 
-          "name": "Everyday Objects Pack 5", 
-          "range": "Remote-Toothbrush...", 
+          "id": "everydayObjects-5",
+          "name": "Everyday Objects Pack 5",
+          "range": "Remote-Toothbrush...",
           "signCount": 15,
           "dataFile": "everydayObjects-5.json"
         }
@@ -152,10 +158,10 @@
         "gradient": "from-purple-600 to-blue-600"
       },
       "packs": [
-        { 
-          "id": "shapes-1", 
-          "name": "Shapes Pack 1", 
-          "range": "Circle, Square...", 
+        {
+          "id": "shapes-1",
+          "name": "Shapes Pack 1",
+          "range": "Circle, Square...",
           "signCount": 10,
           "dataFile": "shapes-1.json"
         }
@@ -173,10 +179,10 @@
         "gradient": "from-purple-600 to-blue-600"
       },
       "packs": [
-        { 
-          "id": "statesOfIndia-1", 
-          "name": "Indian States Pack 1", 
-          "range": "Andhra Pradesh, Arunachal Pradesh...", 
+        {
+          "id": "statesOfIndia-1",
+          "name": "Indian States Pack 1",
+          "range": "Andhra Pradesh, Arunachal Pradesh...",
           "signCount": 36,
           "dataFile": "statesOfIndia-1.json"
         }
@@ -194,10 +200,10 @@
         "gradient": "from-purple-600 to-blue-600"
       },
       "packs": [
-        { 
-          "id": "time-1", 
-          "name": "Time Pack 1", 
-          "range": "3:20, 5:40...", 
+        {
+          "id": "time-1",
+          "name": "Time Pack 1",
+          "range": "3:20, 5:40...",
           "signCount": 36,
           "dataFile": "time-1.json"
         }

@@ -108,6 +108,17 @@
         "minScore": 70
       },
       "applicableCategories": ["numerals", "colors", "alphabets"]
+    },
+    {
+      "id": "findInImage",
+      "name": "Find In Image",
+      "icon": "Search",
+      "description": "Find items in a picture",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 60
+      },
+      "applicableCategories": ["fruits"]
     }
   ]
 }
