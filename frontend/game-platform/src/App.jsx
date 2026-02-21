@@ -24,7 +24,7 @@ import InteractiveClockGame      from './games/InteractiveClockGame';
 import BucketGame                from './games/BucketGame';
 import BreakoutGame              from './games/BreakoutGame';
 import FindInImageGame           from './games/FindInImageGame';
-import CrossWordGame             from './games/CrossWordGame';
+import CrossWordGame             from './games/CrosswordGame';
 import WordScrambleGame          from './games/WordScramble';
 import WordSearchGame            from './games/WordSearchGame';
 import IndiaMapGame              from './games/IndiaMapGame';
