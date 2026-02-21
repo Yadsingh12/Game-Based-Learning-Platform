@@ -9,7 +9,7 @@ const MAX_TRIES = 3;
 const MAX_WORD_LENGTH = 8;
 const TOTAL_ROUNDS = 5;
 
-export default function CrosswordGame(props) {
+export default function CrossWordGame(props) {
   // Extract data from props - flexible to handle different formats
   const signs = props.signs || props.data?.signs || props.data || [];
   const onComplete = props.onComplete || props.onExit;
