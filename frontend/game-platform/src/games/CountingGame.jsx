@@ -11,6 +11,7 @@ export default function CountingGame(props) {
   const signs = props.signs || props.data?.signs || props.data || [];
   const onComplete = props.onComplete || props.onExit;
   const category = props.category || {};
+  const assets = props.assets || {};
   
   // Extract color scheme from category or use defaults
   const colors = category.colorScheme || {
@@ -333,7 +334,7 @@ export default function CountingGame(props) {
                     {/* Image */}
                     <div className="w-32 h-32 sm:w-40 sm:h-40">
                       <img 
-                        src={currentImage ? (props.assets?.images?.[currentImage] ?? currentImage) : null}
+                        src={currentImage ? (assets?.images?.[currentImage] ?? currentImage) : null}
                         alt={`${imageLabel}`}
                         className="w-full h-full object-contain rounded-lg shadow-md"
                       />

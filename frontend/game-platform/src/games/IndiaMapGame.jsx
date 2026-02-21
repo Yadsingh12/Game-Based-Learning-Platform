@@ -28,6 +28,7 @@ const MapState = ({ id, d, onClick, fill, onHover, isDisabled }) => (
 export default function IndiaMapGame(props) {
   const Viewer = useRef(null);
   const mapContainerRef = useRef(null);
+  const assets = props.assets || {};
 
   // Extract props
   const onComplete = props.onComplete || props.onExit;
