@@ -24,7 +24,7 @@ export default function Navbar({ title }) {
     const isActive = (path) => location.pathname === path;
 
     return (
-        <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-purple-100 shadow-sm shadow-purple-100/50">
+        <nav className="top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-purple-100 shadow-sm shadow-purple-100/50">
 
             {/* Gradient accent line at top */}
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-600 via-blue-500 to-violet-600" />
@@ -49,7 +49,7 @@ export default function Navbar({ title }) {
                     onClick={() => navigate("/")}
                     className="
     flex items-center gap-3 mr-auto group
-    px-3 py-2
+    px-3 py-1
     rounded-2xl
     hover:bg-gray-100/70
     active:scale-[0.98]

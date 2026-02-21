@@ -228,7 +228,7 @@ export default function SignVisual({ visual, assets, className = "" }) {
       if (!imgAsset) return null;
       return (
         <img
-          src={imgAsset.src}
+          src={imgAsset}
           alt="sign"
           className={`rounded-xl object-contain ${className}`}
         />

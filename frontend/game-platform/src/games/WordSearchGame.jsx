@@ -256,7 +256,7 @@ export default function WordSearchGame(props) {
   }
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 overflow-hidden">
+    <div className="h-full flex flex-col bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 overflow-hidden">
       {/* Header */}
       <div className="flex-shrink-0 w-full px-4 sm:px-6 pt-4 pb-3">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
@@ -274,16 +274,6 @@ export default function WordSearchGame(props) {
             >
               <HelpCircle size={22} strokeWidth={2.5} />
             </button>
-
-            {onComplete && (
-              <button
-                onClick={handleExit}
-                className="p-2 rounded-full hover:bg-white/50 transition-all duration-200 backdrop-blur-sm"
-                style={{ color: colors.primary }}
-              >
-                <Home size={22} strokeWidth={2.5} />
-              </button>
-            )}
           </div>
         </div>
 

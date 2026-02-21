@@ -51,7 +51,7 @@ export default function WordScrambleGame(props) {
       (sign) =>
         sign.name &&
         sign.name.replace(/\s+/g, "").length >= 3 &&
-        sign.name.length <= 20
+        sign.name.length <= 20,
     );
   };
 
@@ -59,7 +59,7 @@ export default function WordScrambleGame(props) {
   const pickRandomWord = (items) => {
     const valid = getValidWords(items);
     const available = valid.filter(
-      (sign) => !usedWords.has(sign.name.toUpperCase())
+      (sign) => !usedWords.has(sign.name.toUpperCase()),
     );
 
     if (available.length === 0) {
@@ -163,7 +163,10 @@ export default function WordScrambleGame(props) {
   const handleDrop = (index) => {
     if (roundOver || gameCompletelyOver || dragIndex === null) return;
     const newChars = [...letterChars];
-    [newChars[dragIndex], newChars[index]] = [newChars[index], newChars[dragIndex]];
+    [newChars[dragIndex], newChars[index]] = [
+      newChars[index],
+      newChars[dragIndex],
+    ];
     setLetterChars(newChars);
     setDragIndex(null);
   };
@@ -188,7 +191,10 @@ export default function WordScrambleGame(props) {
       return;
     }
     const newChars = [...letterChars];
-    [newChars[dragIndex], newChars[index]] = [newChars[index], newChars[dragIndex]];
+    [newChars[dragIndex], newChars[index]] = [
+      newChars[index],
+      newChars[dragIndex],
+    ];
     setLetterChars(newChars);
     setDragIndex(null);
   };
@@ -214,13 +220,13 @@ export default function WordScrambleGame(props) {
     if (currentRound >= TOTAL_ROUNDS) {
       setGameCompletelyOver(true);
       setMessage(
-        `${correct ? "🎉 " : ""}Game Complete! You got ${correct ? newScore : score} out of ${TOTAL_ROUNDS} words!`
+        `${correct ? "🎉 " : ""}Game Complete! You got ${correct ? newScore : score} out of ${TOTAL_ROUNDS} words!`,
       );
     } else {
       setMessage(
         correct
           ? `🎉 Correct! Round ${currentRound}/${TOTAL_ROUNDS}`
-          : `The word was "${currentQuestion.upperName}". Round ${currentRound}/${TOTAL_ROUNDS}`
+          : `The word was "${currentQuestion.upperName}". Round ${currentRound}/${TOTAL_ROUNDS}`,
       );
     }
   };
@@ -266,10 +272,26 @@ export default function WordScrambleGame(props) {
     );
   }
 
-  // Render the letter tiles row(s), inserting visual space gaps
+  // Add this helper above renderLetterTiles (or inside the component)
+  const getTileSize = (letterCount) => {
+    if (letterCount <= 6)
+      return { tile: "w-12 h-12 sm:w-14 sm:h-14", text: "text-xl sm:text-2xl" };
+    if (letterCount <= 9)
+      return { tile: "w-10 h-10 sm:w-12 sm:h-12", text: "text-lg sm:text-xl" };
+    if (letterCount <= 12)
+      return { tile: "w-8 h-8 sm:w-10 sm:h-10", text: "text-base sm:text-lg" };
+    if (letterCount <= 16)
+      return { tile: "w-7 h-7 sm:w-8 sm:h-8", text: "text-sm sm:text-base" };
+    return { tile: "w-6 h-6 sm:w-7 sm:h-7", text: "text-xs sm:text-sm" };
+  };
+
+  // Render letter tiles
   const renderLetterTiles = () => {
+    const { tile: tileClass, text: textClass } = getTileSize(
+      letterChars.length,
+    );
     let letterIdx = 0;
-    const groups = []; // array of arrays — each inner array is one "word" group
+    const groups = [];
     let currentGroup = [];
 
     for (const slot of slots) {
@@ -286,19 +308,18 @@ export default function WordScrambleGame(props) {
       <div className="flex flex-wrap gap-x-3 gap-y-2 justify-center max-w-lg">
         {groups.map((group, gi) => (
           <React.Fragment key={gi}>
-            {/* Word group */}
-            <div className="flex gap-1.5 sm:gap-2">
+            <div className="flex gap-1 sm:gap-1.5">
               {group.map(({ letterIdx: li }) => (
                 <div
                   key={li}
                   className={`
-                    w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14
-                    flex justify-center items-center
-                    rounded-xl font-black uppercase text-lg sm:text-xl md:text-2xl
-                    cursor-grab active:cursor-grabbing
-                    transition-all duration-200
-                    ${dragIndex === li ? "scale-110 rotate-6 shadow-2xl" : "shadow-lg hover:scale-105"}
-                  `}
+                  ${tileClass}
+                  flex justify-center items-center
+                  rounded-xl font-black uppercase ${textClass}
+                  cursor-grab active:cursor-grabbing
+                  transition-all duration-200
+                  ${dragIndex === li ? "scale-110 rotate-6 shadow-2xl" : "shadow-lg hover:scale-105"}
+                `}
                   style={{
                     background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})`,
                     color: "white",
@@ -316,12 +337,10 @@ export default function WordScrambleGame(props) {
               ))}
             </div>
 
-            {/* Space gap — shown between word groups, not after the last */}
             {gi < groups.length - 1 && (
               <div className="flex items-center px-1">
                 <div
-                  className="w-6 h-10 sm:h-12 md:h-14 flex items-center justify-center"
-                  title="Space"
+                  className={`w-6 ${tileClass.match(/h-\S+/)?.[0] ?? "h-10"} flex items-center justify-center`}
                 >
                   <div
                     className="w-1 h-6 rounded-full opacity-40"
@@ -337,7 +356,7 @@ export default function WordScrambleGame(props) {
   };
 
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-start bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 overflow-hidden">
+    <div className="h-full flex flex-col items-center justify-start bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 overflow-hidden">
       {/* Header */}
       <div className="flex-shrink-0 w-full px-4 pt-3 sm:pt-4 pb-2 sm:pb-3">
         <div className="flex justify-center items-center gap-3">
@@ -359,7 +378,10 @@ export default function WordScrambleGame(props) {
         <div className="text-center mt-2">
           <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-sm shadow-sm border border-white/40">
             <div className="flex items-center gap-1.5 sm:gap-2">
-              <span className="text-xs sm:text-sm font-bold" style={{ color: colors.dark }}>
+              <span
+                className="text-xs sm:text-sm font-bold"
+                style={{ color: colors.dark }}
+              >
                 Round:
               </span>
               <span className="text-base sm:text-lg font-extrabold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
@@ -368,7 +390,10 @@ export default function WordScrambleGame(props) {
             </div>
             <div className="w-px h-4 bg-gray-300"></div>
             <div className="flex items-center gap-1.5 sm:gap-2">
-              <span className="text-xs sm:text-sm font-bold" style={{ color: colors.dark }}>
+              <span
+                className="text-xs sm:text-sm font-bold"
+                style={{ color: colors.dark }}
+              >
                 Score:
               </span>
               <span className="text-base sm:text-lg font-extrabold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
@@ -390,7 +415,9 @@ export default function WordScrambleGame(props) {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-start mb-3">
-              <p className="font-semibold text-gray-700 text-base">How to Play</p>
+              <p className="font-semibold text-gray-700 text-base">
+                How to Play
+              </p>
               <button
                 onClick={() => setShowInstructions(false)}
                 className="text-gray-500 hover:text-gray-700 font-bold text-xl leading-none -mt-1 -mr-1 p-1"
@@ -399,7 +426,8 @@ export default function WordScrambleGame(props) {
               </button>
             </div>
             <p className="mb-2 text-gray-600">
-              Unscramble the word by dragging letters to their correct positions!
+              Unscramble the word by dragging letters to their correct
+              positions!
             </p>
             <ul className="text-xs sm:text-sm text-gray-600 space-y-1.5 list-disc list-inside">
               <li>Drag and drop letters to rearrange them</li>
@@ -438,7 +466,9 @@ export default function WordScrambleGame(props) {
                 <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-white/70 backdrop-blur-sm shadow-lg border border-white/60">
                   <Timer
                     size={18}
-                    style={{ color: timeLeft <= 10 ? "#ef4444" : colors.primary }}
+                    style={{
+                      color: timeLeft <= 10 ? "#ef4444" : colors.primary,
+                    }}
                   />
                   <span
                     className={`text-lg sm:text-xl font-black ${timeLeft <= 10 ? "text-red-500 animate-pulse" : ""}`}
@@ -503,8 +533,8 @@ export default function WordScrambleGame(props) {
                   {isCorrect
                     ? "Correct!"
                     : timeLeft === 0
-                    ? "Time's Up!"
-                    : "Wrong Answer!"}
+                      ? "Time's Up!"
+                      : "Wrong Answer!"}
                 </p>
                 <p className="text-base sm:text-lg font-bold mb-1 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                   {message}
