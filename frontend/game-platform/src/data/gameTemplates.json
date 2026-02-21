@@ -63,7 +63,7 @@
       "applicableCategories": ["fruits"]
     },
     {
-      "id": "crossword",
+      "id": "crossWord",
       "name": "Crossword Game",
       "icon": "Grid",
       "description": "Guess the word in 3 tries - like Wordle!",

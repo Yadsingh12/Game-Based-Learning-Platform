@@ -24,7 +24,7 @@ import InteractiveClockGame      from './games/InteractiveClockGame';
 import BucketGame                from './games/BucketGame';
 import BreakoutGame              from './games/BreakoutGame';
 import FindInImageGame           from './games/FindInImageGame';
-import CrosswordGame             from './games/CrossWordGame';
+import CrossWordGame             from './games/CrossWordGame';
 import WordScrambleGame          from './games/WordScramble';
 import WordSearchGame            from './games/WordSearchGame';
 import IndiaMapGame              from './games/IndiaMapGame';
@@ -77,7 +77,7 @@ const GAME_REGISTRY = {
   bucket:                BucketGame,
   breakout:              BreakoutGame,
   findInImage:           FindInImageGame,
-  crossword:             CrosswordGame,
+  crossWord:             CrossWordGame,
   wordScramble:          WordScrambleGame,
   wordSearch:            WordSearchGame,
   indiaMap:              IndiaMapGame,
