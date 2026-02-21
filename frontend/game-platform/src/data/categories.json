@@ -15,16 +15,9 @@
         {
           "id": "alphabets-1",
           "name": "Alphabets Pack 1",
-          "range": "A-M",
-          "signCount": 13,
+          "range": "A-Z",
+          "signCount": 26,
           "dataFile": "alphabets-1.json"
-        },
-        {
-          "id": "alphabets-2",
-          "name": "Alphabets Pack 2",
-          "range": "N-Z",
-          "signCount": 13,
-          "dataFile": "alphabets-2.json"
         }
       ]
     },
