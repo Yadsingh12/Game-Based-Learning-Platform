@@ -37,7 +37,7 @@
         "secondary": "#14b8a6",
         "light": "#6ee7b7",
         "dark": "#047857",
-        "gradient": "from-green-600 to-teal-600"
+        "gradient": "from-emerald-500 to-teal-500"
       },
       "packs": [
         {
@@ -54,11 +54,11 @@
       "name": "Colors",
       "icon": "🌈",
       "colorScheme": {
-        "primary": "#7c3aed",
-        "secondary": "#3b82f6",
-        "light": "#c4b5fd",
-        "dark": "#5b21b6",
-        "gradient": "from-purple-600 to-blue-600"
+        "primary": "#ec4899",
+        "secondary": "#f97316",
+        "light": "#fbcfe8",
+        "dark": "#be185d",
+        "gradient": "from-pink-500 to-orange-500"
       },
       "packs": [
         {
@@ -75,11 +75,11 @@
       "name": "Fruits",
       "icon": "🍎",
       "colorScheme": {
-        "primary": "#7c3aed",
-        "secondary": "#3b82f6",
-        "light": "#c4b5fd",
-        "dark": "#5b21b6",
-        "gradient": "from-purple-600 to-blue-600"
+        "primary": "#ef4444",
+        "secondary": "#f59e0b",
+        "light": "#fca5a5",
+        "dark": "#b91c1c",
+        "gradient": "from-red-500 to-amber-400"
       },
       "gameAssets": {
         "findInImage": {
@@ -102,11 +102,11 @@
       "name": "Everyday Objects",
       "icon": "🧸",
       "colorScheme": {
-        "primary": "#7c3aed",
-        "secondary": "#3b82f6",
-        "light": "#c4b5fd",
-        "dark": "#5b21b6",
-        "gradient": "from-purple-600 to-blue-600"
+        "primary": "#f59e0b",
+        "secondary": "#84cc16",
+        "light": "#fde68a",
+        "dark": "#b45309",
+        "gradient": "from-amber-500 to-lime-500"
       },
       "packs": [
         {
@@ -151,11 +151,11 @@
       "name": "Shapes",
       "icon": "🔺",
       "colorScheme": {
-        "primary": "#7c3aed",
-        "secondary": "#3b82f6",
-        "light": "#c4b5fd",
-        "dark": "#5b21b6",
-        "gradient": "from-purple-600 to-blue-600"
+        "primary": "#06b6d4",
+        "secondary": "#6366f1",
+        "light": "#a5f3fc",
+        "dark": "#0e7490",
+        "gradient": "from-cyan-500 to-indigo-500"
       },
       "packs": [
         {
@@ -172,11 +172,11 @@
       "name": "States Of India",
       "icon": "🗺️",
       "colorScheme": {
-        "primary": "#7c3aed",
-        "secondary": "#3b82f6",
-        "light": "#c4b5fd",
-        "dark": "#5b21b6",
-        "gradient": "from-purple-600 to-blue-600"
+        "primary": "#f97316",
+        "secondary": "#16a34a",
+        "light": "#fed7aa",
+        "dark": "#c2410c",
+        "gradient": "from-orange-500 to-green-600"
       },
       "packs": [
         {
@@ -193,11 +193,11 @@
       "name": "Time",
       "icon": "🕒",
       "colorScheme": {
-        "primary": "#7c3aed",
-        "secondary": "#3b82f6",
-        "light": "#c4b5fd",
-        "dark": "#5b21b6",
-        "gradient": "from-purple-600 to-blue-600"
+        "primary": "#64748b",
+        "secondary": "#0ea5e9",
+        "light": "#cbd5e1",
+        "dark": "#334155",
+        "gradient": "from-slate-600 to-sky-500"
       },
       "packs": [
         {
@@ -214,11 +214,11 @@
       "name": "Days Of Week",
       "icon": "📅",
       "colorScheme": {
-        "primary": "#7c3aed",
-        "secondary": "#3b82f6",
-        "light": "#c4b5fd",
-        "dark": "#5b21b6",
-        "gradient": "from-purple-600 to-blue-600"
+        "primary": "#8b5cf6",
+        "secondary": "#ec4899",
+        "light": "#ddd6fe",
+        "dark": "#6d28d9",
+        "gradient": "from-violet-500 to-pink-500"
       },
       "packs": [
         {
