@@ -13,9 +13,7 @@
       },
       "assets": {
         "match": {
-          "images": [
-            "/images/objects/apple.png"
-          ]
+          "images": ["/images/objects/apple.png"]
         }
       }
     },
@@ -29,9 +27,7 @@
       },
       "assets": {
         "match": {
-          "images": [
-            "/images/objects/ball.png"
-          ]
+          "images": ["/images/objects/ball.png"]
         }
       }
     },
@@ -45,9 +41,7 @@
       },
       "assets": {
         "match": {
-          "images": [
-            "/images/objects/cat.png"
-          ]
+          "images": ["/images/objects/cat.png"]
         }
       }
     },
@@ -61,9 +55,7 @@
       },
       "assets": {
         "match": {
-          "images": [
-            "/images/objects/dog.png"
-          ]
+          "images": ["/images/objects/dog.png"]
         }
       }
     },
@@ -77,9 +69,7 @@
       },
       "assets": {
         "match": {
-          "images": [
-            "/images/objects/elephant.png"
-          ]
+          "images": ["/images/objects/elephant.png"]
         }
       }
     },
@@ -93,9 +83,7 @@
       },
       "assets": {
         "match": {
-          "images": [
-            "/images/objects/fish.png"
-          ]
+          "images": ["/images/objects/fish.png"]
         }
       }
     },
@@ -109,9 +97,7 @@
       },
       "assets": {
         "match": {
-          "images": [
-            "/images/objects/goat.png"
-          ]
+          "images": ["/images/objects/goat.png"]
         }
       }
     },
@@ -125,9 +111,7 @@
       },
       "assets": {
         "match": {
-          "images": [
-            "/images/objects/hat.png"
-          ]
+          "images": ["/images/objects/hat.png"]
         }
       }
     },
@@ -141,9 +125,7 @@
       },
       "assets": {
         "match": {
-          "images": [
-            "/images/objects/icecream.png"
-          ]
+          "images": ["/images/objects/icecream.png"]
         }
       }
     },
@@ -157,9 +139,7 @@
       },
       "assets": {
         "match": {
-          "images": [
-            "/images/objects/jug.png"
-          ]
+          "images": ["/images/objects/jug.png"]
         }
       }
     },
@@ -173,9 +153,7 @@
       },
       "assets": {
         "match": {
-          "images": [
-            "/images/objects/kite.png"
-          ]
+          "images": ["/images/objects/kite.png"]
         }
       }
     },
@@ -189,9 +167,7 @@
       },
       "assets": {
         "match": {
-          "images": [
-            "/images/objects/lion.png"
-          ]
+          "images": ["/images/objects/lion.png"]
         }
       }
     },
@@ -205,10 +181,140 @@
       },
       "assets": {
         "match": {
-          "images": [
-            "/images/objects/monkey.png"
-          ]
+          "images": ["/images/objects/monkey.png"]
         }
+      }
+    },
+    {
+      "id": "N",
+      "name": "N",
+      "videoUrl": "/videos/Alphabets/N.mp4",
+      "visual": {
+        "type": "style",
+        "value": "N"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/objects/net.png"]
+        }
+      }
+    },
+    {
+      "id": "O",
+      "name": "O",
+      "videoUrl": "/videos/Alphabets/O.mp4",
+      "visual": {
+        "type": "style",
+        "value": "O"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/objects/orange.png"]
+        }
+      }
+    },
+    {
+      "id": "P",
+      "name": "P",
+      "videoUrl": "/videos/Alphabets/P.mp4",
+      "visual": {
+        "type": "style",
+        "value": "P"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/objects/parrot.png"]
+        }
+      }
+    },
+    {
+      "id": "Q",
+      "name": "Q",
+      "videoUrl": "/videos/Alphabets/Q.mp4",
+      "visual": {
+        "type": "style",
+        "value": "Q"
+      }
+    },
+    {
+      "id": "R",
+      "name": "R",
+      "videoUrl": "/videos/Alphabets/R.mp4",
+      "visual": {
+        "type": "style",
+        "value": "R"
+      }
+    },
+    {
+      "id": "S",
+      "name": "S",
+      "videoUrl": "/videos/Alphabets/S.mp4",
+      "visual": {
+        "type": "style",
+        "value": "S"
+      }
+    },
+    {
+      "id": "T",
+      "name": "T",
+      "videoUrl": "/videos/Alphabets/T.mp4",
+      "visual": {
+        "type": "style",
+        "value": "T"
+      }
+    },
+    {
+      "id": "U",
+      "name": "U",
+      "videoUrl": "/videos/Alphabets/U.mp4",
+      "visual": {
+        "type": "style",
+        "value": "U"
+      }
+    },
+    {
+      "id": "V",
+      "name": "V",
+      "videoUrl": "/videos/Alphabets/V.mp4",
+      "visual": {
+        "type": "style",
+        "value": "V"
+      }
+    },
+    {
+      "id": "W",
+      "name": "W",
+      "videoUrl": "/videos/Alphabets/W.mp4",
+      "visual": {
+        "type": "style",
+        "value": "W"
+      }
+    },
+    {
+      "id": "X",
+      "name": "X",
+      "videoUrl": "/videos/Alphabets/X.mp4",
+      "visual": {
+        "type": "style",
+        "value": "X"
+      }
+    },
+    {
+      "id": "Y",
+      "name": "Y",
+      "videoUrl": "/videos/Alphabets/Y.mp4",
+      "visual": {
+        "type": "style",
+        "value": "Y"
+      }
+    },
+    {
+      "id": "Z",
+      "name": "Z",
+      "videoUrl": "/videos/Alphabets/Z.mp4",
+      "visual": {
+        "type": "style",
+        "value": "Z"
       }
     }
   ]
