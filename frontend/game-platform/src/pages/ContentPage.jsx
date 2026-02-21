@@ -1,7 +1,7 @@
 //content page component displaying games within a selected pack
 
 import React from 'react';
-import { Lock, Star, CheckCircle, Book, Brain, Gamepad2, Zap, MessageSquare, Repeat, Clock, Droplet, Gamepad, Search } from 'lucide-react';
+import { Lock, Star, CheckCircle, Book, Brain, Gamepad2, Zap, MessageSquare, Repeat, Clock, Droplet, Gamepad, Search, Grid, Shuffle, Grid3x3, MapPin,CheckSquare, Video, Hash, Palette, Move } from 'lucide-react';
 import gameTemplatesData from '../data/gameTemplates.json';
 import { getProgress, isGameUnlocked } from '../utils/storage';
 
@@ -16,11 +16,20 @@ const iconMap = {
   Droplet: Droplet,
   Gamepad: Gamepad,
   Search: Search,
+  Grid: Grid,
+  Shuffle: Shuffle,
+  Grid3x3: Grid3x3,
+  MapPin: MapPin,
+  CheckSquare: CheckSquare,
+  Video: Video,
+  Hash: Hash,
+  Palette: Palette,
+  Move: Move
 };
 
 // Filter games based on category
 const getAvailableGamesForCategory = (categoryId, allGames) => {
-  return allGames.filter(game => 
+  return allGames.filter(game =>
     game.applicableCategories.includes(categoryId)
   );
 };
@@ -28,7 +37,7 @@ const getAvailableGamesForCategory = (categoryId, allGames) => {
 export default function ContentPage({ category, pack, packData, onSelectGame, onBack }) {
   // Get only games applicable to this category
   const availableGames = getAvailableGamesForCategory(
-    category.id, 
+    category.id,
     gameTemplatesData.games
   );
 
@@ -48,7 +57,7 @@ export default function ContentPage({ category, pack, packData, onSelectGame, on
         <p className="text-white/90 mb-6">
           {packData.length} signs loaded from {category.name}
         </p>
-        
+
         {availableGames.length === 0 ? (
           <div className="bg-white/20 rounded-xl p-8 text-center">
             <p className="text-white text-lg">No games available for this pack yet.</p>
@@ -67,9 +76,9 @@ export default function ContentPage({ category, pack, packData, onSelectGame, on
                   className={`card ${unlocked ? 'card-interactive' : 'card-disabled'}`}
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <Icon 
+                    <Icon
                       style={{ color: unlocked ? category.colorScheme.primary : '#9ca3af' }}
-                      size={32} 
+                      size={32}
                     />
                     {unlocked ? (
                       progress.completed ? (

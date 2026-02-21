@@ -6,7 +6,7 @@
     {
       "id": "monday",
       "name": "Monday",
-      "videoUrl": "/videos/Days/monday.mp4",
+      "videoUrl": "/videos/DaysOfTheWeek/Monday.mp4",
       "visual": {
         "type": "style",
         "value": "Mon"
@@ -20,7 +20,7 @@
     {
       "id": "tuesday",
       "name": "Tuesday",
-      "videoUrl": "/videos/Days/tuesday.mp4",
+      "videoUrl": "/videos/DaysOfTheWeek/Tuesday.mp4",
       "visual": {
         "type": "style",
         "value": "Tue"
@@ -34,7 +34,7 @@
     {
       "id": "wednesday",
       "name": "Wednesday",
-      "videoUrl": "/videos/Days/wednesday.mp4",
+      "videoUrl": "/videos/DaysOfTheWeek/Wednesday.mp4",
       "visual": {
         "type": "style",
         "value": "Wed"
@@ -48,7 +48,7 @@
     {
       "id": "thursday",
       "name": "Thursday",
-      "videoUrl": "/videos/Days/thursday.mp4",
+      "videoUrl": "/videos/DaysOfTheWeek/Thursday.mp4",
       "visual": {
         "type": "style",
         "value": "Thu"
@@ -62,7 +62,7 @@
     {
       "id": "friday",
       "name": "Friday",
-      "videoUrl": "/videos/Days/friday.mp4",
+      "videoUrl": "/videos/DaysOfTheWeek/Friday.mp4",
       "visual": {
         "type": "style",
         "value": "Fri"
@@ -76,7 +76,7 @@
     {
       "id": "saturday",
       "name": "Saturday",
-      "videoUrl": "/videos/Days/saturday.mp4",
+      "videoUrl": "/videos/DaysOfTheWeek/Saturday.mp4",
       "visual": {
         "type": "style",
         "value": "Sat"
@@ -90,7 +90,7 @@
     {
       "id": "sunday",
       "name": "Sunday",
-      "videoUrl": "/videos/Days/sunday.mp4",
+      "videoUrl": "/videos/DaysOfTheWeek/Sunday.mp4",
       "visual": {
         "type": "style",
         "value": "Sun"

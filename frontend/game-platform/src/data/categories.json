@@ -208,6 +208,27 @@
           "dataFile": "time-1.json"
         }
       ]
+    },
+    {
+      "id": "daysOfWeek",
+      "name": "Days Of Week",
+      "icon": "📅",
+      "colorScheme": {
+        "primary": "#7c3aed",
+        "secondary": "#3b82f6",
+        "light": "#c4b5fd",
+        "dark": "#5b21b6",
+        "gradient": "from-purple-600 to-blue-600"
+      },
+      "packs": [
+        {
+          "id": "daysOfWeek-1",
+          "name": "Days Of Week Pack 1",
+          "range": "Monday, Tuesday...",
+          "signCount": 7,
+          "dataFile": "daysOfWeek-1.json"
+        }
+      ]
     }
   ]
 }

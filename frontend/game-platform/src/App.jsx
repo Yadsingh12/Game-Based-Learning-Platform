@@ -12,6 +12,15 @@ import InteractiveClockGame from './games/InteractiveClockGame';
 import BucketGame from './games/BucketGame';
 import BreakoutGame from './games/BreakoutGame';
 import FindInImageGame from './games/FindInImageGame';
+import CrosswordGame from './games/CrossWordGame';
+import WordScrambleGame from './games/WordScramble';
+import WordSearchGame from './games/WordSearchGame';
+import IndiaMapGame from './games/IndiaMapGame';
+import MultipleChoiceGame from './games/MultipleChoiceGame';
+import ReverseMultipleChoiceGame from './games/ReverseMultipleChoiceGame';
+import CountingGame from './games/CountingGame';
+import ColorMatchGame from './games/ColorMatchGame';
+import DragDropMatchGame from './games/DragAndDropMatchGame';
 
 import { saveProgress, getProgress } from './utils/storage';
 import GameErrorBoundary from './components/GameErrorBoundary';
@@ -170,6 +179,69 @@ export default function App() {
           return (
             <GameErrorBoundary onRecover={handleGameCrash}>
               <FindInImageGame {...gameProps} />
+            </GameErrorBoundary>
+          );
+
+        case 'crossword':
+          return (
+            <GameErrorBoundary onRecover={handleGameCrash}>
+              <CrosswordGame {...gameProps} />
+            </GameErrorBoundary>
+          );
+
+        case 'wordScramble':
+          return (
+            <GameErrorBoundary onRecover={handleGameCrash}>
+              <WordScrambleGame {...gameProps} />
+            </GameErrorBoundary>
+          );
+
+        case 'wordSearch':
+          return (
+            <GameErrorBoundary onRecover={handleGameCrash}>
+              <WordSearchGame {...gameProps} />
+            </GameErrorBoundary>
+          );
+
+        case 'indiaMap':
+          return (
+            <GameErrorBoundary onRecover={handleGameCrash}>
+              <IndiaMapGame {...gameProps} />
+            </GameErrorBoundary>
+          );
+
+        case 'multipleChoice':
+          return (
+            <GameErrorBoundary onRecover={handleGameCrash}>
+              <MultipleChoiceGame {...gameProps} />
+            </GameErrorBoundary>
+          );
+
+        case 'reverseMultipleChoice':
+          return (
+            <GameErrorBoundary onRecover={handleGameCrash}>
+              <ReverseMultipleChoiceGame {...gameProps} />
+            </GameErrorBoundary>
+          );
+
+        case 'countingGame':
+          return (
+            <GameErrorBoundary onRecover={handleGameCrash}>
+              <CountingGame {...gameProps} />
+            </GameErrorBoundary>
+          );
+
+        case 'colorMatch':
+          return (
+            <GameErrorBoundary onRecover={handleGameCrash}>
+              <ColorMatchGame {...gameProps} />
+            </GameErrorBoundary>
+          );
+
+        case 'dragDropMatch':
+          return (
+            <GameErrorBoundary onRecover={handleGameCrash}>
+              <DragDropMatchGame {...gameProps} />
             </GameErrorBoundary>
           );
 

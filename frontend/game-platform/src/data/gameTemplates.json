@@ -9,72 +9,14 @@
       "applicableCategories": [
         "alphabets",
         "numerals",
-        "words",
-        "phrases",
         "time",
         "colors",
         "fruits",
         "everydayObjects",
         "shapes",
         "statesOfIndia",
-        "union-territories",
         "daysOfWeek"
       ]
-    },
-    {
-      "id": "quiz",
-      "name": "Quiz",
-      "icon": "Brain",
-      "description": "Test your knowledge",
-      "unlockRequirement": {
-        "game": "learn",
-        "minScore": 50
-      },
-      "applicableCategories": ["alphabets", "numerals", "words"]
-    },
-    {
-      "id": "match",
-      "name": "Match",
-      "icon": "Gamepad2",
-      "description": "Match signs with meanings",
-      "unlockRequirement": {
-        "game": "quiz",
-        "minScore": 70
-      },
-      "applicableCategories": ["alphabets", "numerals"]
-    },
-    {
-      "id": "sequence",
-      "name": "Sequence",
-      "icon": "Zap",
-      "description": "Arrange numbers in order",
-      "unlockRequirement": {
-        "game": "quiz",
-        "minScore": 60
-      },
-      "applicableCategories": ["numerals"]
-    },
-    {
-      "id": "sentence",
-      "name": "Sentence Builder",
-      "icon": "MessageSquare",
-      "description": "Build sentences with words",
-      "unlockRequirement": {
-        "game": "quiz",
-        "minScore": 75
-      },
-      "applicableCategories": ["words"]
-    },
-    {
-      "id": "practice",
-      "name": "Practice",
-      "icon": "Repeat",
-      "description": "Practice signing phrases",
-      "unlockRequirement": {
-        "game": "learn",
-        "minScore": 80
-      },
-      "applicableCategories": ["phrases"]
     },
     {
       "id": "interactiveClock",
@@ -119,6 +61,144 @@
         "minScore": 60
       },
       "applicableCategories": ["fruits"]
+    },
+    {
+      "id": "crossword",
+      "name": "Crossword Game",
+      "icon": "Grid",
+      "description": "Guess the word in 3 tries - like Wordle!",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 90
+      },
+      "applicableCategories": [
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "daysOfWeek"
+      ]
+    },
+    {
+      "id": "wordScramble",
+      "name": "Word Scramble",
+      "icon": "Shuffle",
+      "description": "Unscramble the letters to form a word",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 80
+      },
+      "applicableCategories": [
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "daysOfWeek"
+      ]
+    },
+    {
+      "id": "wordSearch",
+      "name": "Word Search",
+      "icon": "Grid3x3",
+      "description": "Find hidden words in the grid",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 75
+      },
+      "applicableCategories": [
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "daysOfWeek"
+      ]
+    },
+    {
+      "id": "indiaMap",
+      "name": "India Map Game",
+      "icon": "MapPin",
+      "description": "Identify states on the map of India",
+      "unlockRequirement": { "game": "learn", "minScore": 85 },
+      "applicableCategories": ["statesOfIndia"]
+    },
+    {
+      "id": "multipleChoice",
+      "name": "Multiple Choice",
+      "icon": "CheckSquare",
+      "description": "Watch video and pick the correct answer",
+      "unlockRequirement": { "game": "learn", "minScore": 70 },
+      "applicableCategories": [
+        "alphabets",
+        "numerals",
+        "time",
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "daysOfWeek"
+      ]
+    },
+    {
+      "id": "reverseMultipleChoice",
+      "name": "Video Match",
+      "icon": "Video",
+      "description": "See image and find the matching video",
+      "unlockRequirement": { "game": "learn", "minScore": 60 },
+      "applicableCategories": [
+        "alphabets",
+        "numerals",
+        "time",
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "daysOfWeek"
+      ]
+    },
+    {
+      "id": "countingGame",
+      "name": "Counting Game",
+      "icon": "Hash",
+      "description": "Count the objects and select the correct number",
+      "unlockRequirement": { "game": "learn", "minScore": 70 },
+      "applicableCategories": ["numerals"]
+    },
+    {
+      "id": "colorMatch",
+      "name": "Color Match",
+      "icon": "Palette",
+      "description": "Identify colors in images and match them to signs",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 60
+      },
+      "applicableCategories": ["colors"]
+    },
+    {
+      "id": "dragDropMatch",
+      "name": "Match & Drop",
+      "icon": "Move",
+      "description": "Drag and drop to match images with sign videos",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 70
+      },
+      "applicableCategories": [
+        "alphabets",
+        "numerals",
+        "time",
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "daysOfWeek"
+      ]
     }
   ]
 }
