@@ -422,7 +422,7 @@ export default function WordScrambleGame(props) {
                 <div className="flex justify-center items-center mb-3 sm:mb-4 w-full">
                   <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/50 bg-white/30 backdrop-blur-sm">
                     <video
-                      src={currentQuestion.videoUrl ? (props.assets?.videos?.[currentQuestion.videoUrl] ?? currentQuestion.videoUrl) : null}
+                      src={currentQuestion.videoUrl}
                       muted
                       loop
                       autoPlay
