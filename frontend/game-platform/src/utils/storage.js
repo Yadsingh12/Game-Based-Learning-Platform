@@ -1,10 +1,17 @@
 // src/utils/storage.js
 
-import { preloadPackMedia } from './mediaCache';
+import { fetchPackData, preloadPackMedia } from './mediaCache';
 
-// ------------------------
+// ---------------------------------------------------------------------------
 // Progress utilities
-// ------------------------
+// ---------------------------------------------------------------------------
+// NOTE — future DB sync point:
+// When adding a backend, replace localStorage calls here with API calls.
+// Suggested pattern: write to localStorage immediately (optimistic),
+// then sync to DB in the background. On load, prefer DB data over localStorage
+// if the user is authenticated, falling back to localStorage when offline.
+// ---------------------------------------------------------------------------
+
 export const getProgress = (packId, gameId) => {
   const key = `progress_${packId}_${gameId}`;
   const stored = localStorage.getItem(key);
@@ -16,6 +23,9 @@ export const getProgress = (packId, gameId) => {
 export const saveProgress = (packId, gameId, progress) => {
   const key = `progress_${packId}_${gameId}`;
   localStorage.setItem(key, JSON.stringify(progress));
+
+  // TODO: sync to DB
+  // syncProgressToDb(packId, gameId, progress).catch(console.warn);
 };
 
 export const isGameUnlocked = (packId, gameTemplate) => {
@@ -34,18 +44,19 @@ export const getAvailableGames = (pack, allGames) => {
   return allGames.filter(game => isGameSupported(pack, game.id));
 };
 
-// ------------------------
-// Load and preload a pack
-// ------------------------
+// ---------------------------------------------------------------------------
+// Pack loading
+// Both calls are cache-first — work offline once a pack has been loaded once.
+// ---------------------------------------------------------------------------
+
 export const loadPack = async (dataFile, onProgress) => {
   try {
-    const response = await fetch(`/data/packs/${dataFile}`);
-    if (!response.ok) throw new Error(`Failed to fetch pack: ${response.status}`);
-
-    const packData = await response.json();
     const packId = dataFile.replace('.json', '');
 
-    // Videos are fetched as blob URLs — zero network lag on playback
+    // fetchPackData: network on first call, dataCache on repeat (incl. offline)
+    const packData = await fetchPackData(packId, dataFile);
+
+    // preloadPackMedia: fetches blobs on first call, mediaCache on repeat
     const assets = await preloadPackMedia(packId, packData, onProgress);
 
     return { data: packData, assets };
