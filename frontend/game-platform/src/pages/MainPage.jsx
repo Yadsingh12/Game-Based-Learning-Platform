@@ -34,7 +34,7 @@ export default function MainPage() {
                 {category.name}
               </h3>
               <p className="text-gray-600 text-center">
-                {category.packs.length} packs available
+                {category.packs.length} {category.packs.length === 1 ? "pack" : "packs"} available
               </p>
             </div>
           ))}

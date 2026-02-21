@@ -1,5 +1,7 @@
 /* src/index.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&display=swap');
+
 @reference "tailwindcss";
 @tailwind base;
 @tailwind components;
@@ -7,46 +9,32 @@
 
 /* Color Scheme Variables for Categories */
 :root {
-  /* Alphabets - Purple/Blue Theme */
   --alphabets-primary: #7c3aed;
   --alphabets-secondary: #3b82f6;
   --alphabets-light: #c4b5fd;
   --alphabets-dark: #5b21b6;
-  --alphabets-gradient-from: #7c3aed;
-  --alphabets-gradient-to: #3b82f6;
 
-  /* Numerals - Green/Teal Theme */
   --numerals-primary: #10b981;
   --numerals-secondary: #14b8a6;
   --numerals-light: #6ee7b7;
   --numerals-dark: #047857;
-  --numerals-gradient-from: #10b981;
-  --numerals-gradient-to: #14b8a6;
 
-  /* Words - Orange/Pink Theme */
   --words-primary: #f97316;
   --words-secondary: #ec4899;
   --words-light: #fdba74;
   --words-dark: #c2410c;
-  --words-gradient-from: #f97316;
-  --words-gradient-to: #ec4899;
 
-  /* Phrases - Indigo/Purple Theme */
   --phrases-primary: #6366f1;
   --phrases-secondary: #8b5cf6;
   --phrases-light: #a5b4fc;
   --phrases-dark: #4338ca;
-  --phrases-gradient-from: #6366f1;
-  --phrases-gradient-to: #8b5cf6;
 
-  /* Common colors */
   --success: #22c55e;
   --error: #ef4444;
   --warning: #f59e0b;
   --info: #3b82f6;
 }
 
-/* Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -65,125 +53,65 @@ body {
   min-height: 100vh;
 }
 
-/* Custom Component Styles */
 @layer components {
-  /* Card Components */
+
   .card {
     @apply bg-white rounded-xl shadow-lg transition-all duration-300 p-6;
   }
-
   .card:hover {
     @apply shadow-2xl transform scale-105;
   }
+  .card-interactive { @apply cursor-pointer; }
+  .card-disabled    { @apply opacity-60 cursor-not-allowed; }
 
-  .card-interactive {
-    @apply cursor-pointer;
+  .btn              { @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200; }
+  .btn-primary      { @apply bg-purple-600 text-white hover:bg-purple-700; }
+  .btn-secondary    { @apply bg-gray-300 text-gray-800 hover:bg-gray-400; }
+  .btn-success      { @apply bg-green-600 text-white hover:bg-green-700; }
+  .btn-disabled     { @apply opacity-50 cursor-not-allowed; }
+
+  .game-container   { @apply min-h-screen p-6; }
+  .game-card        { @apply max-w-4xl mx-auto bg-white rounded-xl p-8; }
+  .game-header      { @apply flex justify-between items-center mb-6; }
+
+  .spinner          { @apply w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin; }
+
+  .progress-bar     { @apply w-full h-2 bg-gray-200 rounded-full overflow-hidden; }
+  .progress-fill    { @apply h-full bg-green-500 transition-all duration-300; }
+
+  .badge            { @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold; }
+  .badge-success    { @apply bg-green-100 text-green-700; }
+  .badge-warning    { @apply bg-yellow-100 text-yellow-700; }
+  .badge-info       { @apply bg-blue-100 text-blue-700; }
+
+  .answer-option          { @apply p-6 rounded-lg font-semibold text-lg transition-all duration-200; }
+  .answer-option-default  { @apply bg-gray-200 hover:bg-gray-300 text-gray-800; }
+  .answer-option-correct  { @apply bg-green-500 text-white; }
+  .answer-option-incorrect { @apply bg-red-500 text-white; }
+  .answer-option-disabled { @apply bg-gray-200 text-gray-500 cursor-not-allowed; }
+
+  .match-card         { @apply aspect-square rounded-lg flex items-center justify-center cursor-pointer transition-all duration-200; }
+  .match-card-default { @apply bg-gray-200 hover:bg-gray-300 transform hover:scale-105; }
+  .match-card-selected { @apply bg-blue-300; }
+  .match-card-matched { @apply bg-green-200 cursor-not-allowed; }
+}
+
+@layer utilities {
+  /* Loading bar animation for AppLayout */
+  @keyframes loading {
+    0%   { width: 0%;  margin-left: 0%; }
+    50%  { width: 60%; margin-left: 20%; }
+    100% { width: 0%;  margin-left: 100%; }
+  }
+  .animate-loading-bar {
+    animation: loading 1.4s ease-in-out infinite;
   }
 
-  .card-disabled {
-    @apply opacity-60 cursor-not-allowed;
-  }
-
-  /* Buttons */
-  .btn {
-    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200;
-  }
-
-  .btn-primary {
-    @apply bg-purple-600 text-white hover:bg-purple-700;
-  }
-
-  .btn-secondary {
-    @apply bg-gray-300 text-gray-800 hover:bg-gray-400;
-  }
-
-  .btn-success {
-    @apply bg-green-600 text-white hover:bg-green-700;
-  }
-
-  .btn-disabled {
-    @apply opacity-50 cursor-not-allowed;
-  }
-
-  /* Game Container */
-  .game-container {
-    @apply min-h-screen p-6;
-  }
-
-  .game-card {
-    @apply max-w-4xl mx-auto bg-white rounded-xl p-8;
-  }
-
-  .game-header {
-    @apply flex justify-between items-center mb-6;
-  }
-
-  /* Loading Spinner */
-  .spinner {
-    @apply w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin;
-  }
-
-  /* Progress Bar */
-  .progress-bar {
-    @apply w-full h-2 bg-gray-200 rounded-full overflow-hidden;
-  }
-
-  .progress-fill {
-    @apply h-full bg-green-500 transition-all duration-300;
-  }
-
-  /* Badge */
-  .badge {
-    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold;
-  }
-
-  .badge-success {
-    @apply bg-green-100 text-green-700;
-  }
-
-  .badge-warning {
-    @apply bg-yellow-100 text-yellow-700;
-  }
-
-  .badge-info {
-    @apply bg-blue-100 text-blue-700;
-  }
-
-  /* Answer Options */
-  .answer-option {
-    @apply p-6 rounded-lg font-semibold text-lg transition-all duration-200;
-  }
-
-  .answer-option-default {
-    @apply bg-gray-200 hover:bg-gray-300 text-gray-800;
-  }
-
-  .answer-option-correct {
-    @apply bg-green-500 text-white;
-  }
-
-  .answer-option-incorrect {
-    @apply bg-red-500 text-white;
-  }
-
-  .answer-option-disabled {
-    @apply bg-gray-200 text-gray-500 cursor-not-allowed;
-  }
-
-  /* Match Cards */
-  .match-card {
-    @apply aspect-square rounded-lg flex items-center justify-center cursor-pointer transition-all duration-200;
-  }
-
-  .match-card-default {
-    @apply bg-gray-200 hover:bg-gray-300 transform hover:scale-105;
-  }
-
-  .match-card-selected {
-    @apply bg-blue-300;
-  }
-
-  .match-card-matched {
-    @apply bg-green-200 cursor-not-allowed;
+  /* Gradient text utility */
+  .text-gradient {
+    background: linear-gradient(135deg, #7c3aed, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }

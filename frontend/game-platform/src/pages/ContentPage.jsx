@@ -32,13 +32,6 @@ export default function ContentPage() {
   return (
     <div className={`min-h-screen bg-gradient-to-br ${category.colorScheme.gradient} p-6`}>
       <div className="max-w-6xl mx-auto">
-        <button
-          onClick={() => navigate(`/${category.id}`)}
-          className="mb-4 px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition"
-        >
-          ← Back
-        </button>
-
         <h2 className="text-3xl font-bold text-white mb-2">
           {pack.name}
         </h2>

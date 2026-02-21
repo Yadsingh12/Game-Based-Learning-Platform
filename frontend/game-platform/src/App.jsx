@@ -10,37 +10,37 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-import MainPage from './pages/MainPage';
+import AppLayout    from './AppLayout';
+import ErrorPage    from './pages/ErrorPage';
+import MainPage     from './pages/MainPage';
 import SignTypePage from './pages/SignTypePage';
-import ContentPage from './pages/ContentPage';
+import ContentPage  from './pages/ContentPage';
+import AboutPage    from './pages/AboutPage';
 
-import LearnGame from './games/LearnGame';
-import QuizGame from './games/QuizGame';
-import MatchGame from './games/MatchGame';
-import InteractiveClockGame from './games/InteractiveClockGame';
-import BucketGame from './games/BucketGame';
-import BreakoutGame from './games/BreakoutGame';
-import FindInImageGame from './games/FindInImageGame';
-import CrosswordGame from './games/CrossWordGame';
-import WordScrambleGame from './games/WordScramble';
-import WordSearchGame from './games/WordSearchGame';
-import IndiaMapGame from './games/IndiaMapGame';
-import MultipleChoiceGame from './games/MultipleChoiceGame';
+import LearnGame                 from './games/LearnGame';
+import QuizGame                  from './games/QuizGame';
+import MatchGame                 from './games/MatchGame';
+import InteractiveClockGame      from './games/InteractiveClockGame';
+import BucketGame                from './games/BucketGame';
+import BreakoutGame              from './games/BreakoutGame';
+import FindInImageGame           from './games/FindInImageGame';
+import CrosswordGame             from './games/CrossWordGame';
+import WordScrambleGame          from './games/WordScramble';
+import WordSearchGame            from './games/WordSearchGame';
+import IndiaMapGame              from './games/IndiaMapGame';
+import MultipleChoiceGame        from './games/MultipleChoiceGame';
 import ReverseMultipleChoiceGame from './games/ReverseMultipleChoiceGame';
-import CountingGame from './games/CountingGame';
-import ColorMatchGame from './games/ColorMatchGame';
-import DragDropMatchGame from './games/DragAndDropMatchGame';
+import CountingGame              from './games/CountingGame';
+import ColorMatchGame            from './games/ColorMatchGame';
+import DragDropMatchGame         from './games/DragAndDropMatchGame';
 
 import GameErrorBoundary from './components/GameErrorBoundary';
 import { saveProgress, getProgress } from './utils/storage';
-import { getCachedAssets } from './utils/mediaCache';
+import { fetchPackData, preloadPackMedia } from './utils/mediaCache';
 import categoriesData from './data/categories.json';
 
 // ---------------------------------------------------------------------------
-// Pack loader
-// By the time the router calls this, SignTypePage has already fetched the JSON
-// and preloaded all media into mediaCache. This loader just reads from cache
-// and re-fetches JSON only as a fallback (e.g. direct URL navigation).
+// Pack loader — fully cache-first, works offline after first load
 // ---------------------------------------------------------------------------
 async function packLoader({ params }) {
   const { category: categoryId, packId } = params;
@@ -51,23 +51,10 @@ async function packLoader({ params }) {
   const packMeta = category.packs.find(p => p.id === packId);
   if (!packMeta) throw new Response('Pack not found', { status: 404 });
 
-  // Fast path — SignTypePage already loaded and cached everything
-  const cachedAssets = getCachedAssets(packId);
-  if (cachedAssets) {
-    // JSON is cheap, re-fetch it to get data (no media cost)
-    const res = await fetch(`/data/packs/${packMeta.dataFile}`);
-    if (!res.ok) throw new Response('Failed to load pack', { status: res.status });
-    const data = await res.json();
-    return { category, pack: { ...packMeta, id: packId }, data, assets: cachedAssets, gameAssets: category.gameAssets ?? null };
-  }
+  // Cache-first — reads from dataCache if already fetched, no network when offline
+  const data = await fetchPackData(packId, packMeta.dataFile);
 
-  // Fallback path — user navigated directly to a URL without going through SignTypePage.
-  // Load JSON + preload media now (no progress UI, but works correctly).
-  const res = await fetch(`/data/packs/${packMeta.dataFile}`);
-  if (!res.ok) throw new Response(`Failed to load pack: ${packMeta.dataFile}`, { status: res.status });
-  const data = await res.json();
-
-  const { preloadPackMedia } = await import('./utils/mediaCache');
+  // Cache-first — reads from mediaCache if already preloaded, no network when offline
   const assets = await preloadPackMedia(packId, data);
 
   return {
@@ -83,22 +70,22 @@ async function packLoader({ params }) {
 // Game registry
 // ---------------------------------------------------------------------------
 const GAME_REGISTRY = {
-  learn: LearnGame,
-  quiz: QuizGame,
-  match: MatchGame,
-  interactiveClock: InteractiveClockGame,
-  bucket: BucketGame,
-  breakout: BreakoutGame,
-  findInImage: FindInImageGame,
-  crossword: CrosswordGame,
-  wordScramble: WordScrambleGame,
-  wordSearch: WordSearchGame,
-  indiaMap: IndiaMapGame,
-  multipleChoice: MultipleChoiceGame,
+  learn:                 LearnGame,
+  quiz:                  QuizGame,
+  match:                 MatchGame,
+  interactiveClock:      InteractiveClockGame,
+  bucket:                BucketGame,
+  breakout:              BreakoutGame,
+  findInImage:           FindInImageGame,
+  crossword:             CrosswordGame,
+  wordScramble:          WordScrambleGame,
+  wordSearch:            WordSearchGame,
+  indiaMap:              IndiaMapGame,
+  multipleChoice:        MultipleChoiceGame,
   reverseMultipleChoice: ReverseMultipleChoiceGame,
-  countingGame: CountingGame,
-  colorMatch: ColorMatchGame,
-  dragDropMatch: DragDropMatchGame,
+  countingGame:          CountingGame,
+  colorMatch:            ColorMatchGame,
+  dragDropMatch:         DragDropMatchGame,
 };
 
 // ---------------------------------------------------------------------------
@@ -152,27 +139,49 @@ function GamePage() {
 // ---------------------------------------------------------------------------
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <MainPage />,
-  },
-  {
-    path: '/:category',
-    element: <SignTypePage />,
-  },
-  {
-    path: '/:category/:packId',
-    loader: packLoader,
-    element: <ContentPage />,
-  },
-  {
-    path: '/:category/:packId/game/:gameId',
-    loader: packLoader,
-    element: <GamePage />,
-  },
-  {
-    path: '*',
-    loader: () => redirect('/'),
-    element: null,
+    element: <AppLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        id: 'main',
+        path: '/',
+        element: <MainPage />,
+        handle: { title: 'Sign Language Learning' },
+      },
+      {
+        id: 'about',
+        path: '/about',
+        element: <AboutPage />,
+        handle: { title: 'About' },
+      },
+      {
+        id: 'signType',
+        path: '/:category',
+        element: <SignTypePage />,
+        handle: { title: 'Select Pack' },
+      },
+      {
+        id: 'content',
+        path: '/:category/:packId',
+        loader: packLoader,
+        element: <ContentPage />,
+        errorElement: <ErrorPage />,
+        handle: { title: 'Select Game' },
+      },
+      {
+        id: 'game',
+        path: '/:category/:packId/game/:gameId',
+        loader: packLoader,
+        element: <GamePage />,
+        errorElement: <ErrorPage />,
+        handle: { title: 'Playing' },
+      },
+      {
+        path: '*',
+        loader: () => redirect('/'),
+        element: null,
+      },
+    ],
   },
 ]);
 
