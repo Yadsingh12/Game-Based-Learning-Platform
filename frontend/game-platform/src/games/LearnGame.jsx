@@ -3,7 +3,8 @@ import SignVisual from '../components/SignVisual';
 
 export default function LearnGame({ data, pack, category, assets, onExit }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const currentSign = data?.signs?.[currentIndex];
+  const signs = data?.signs ?? [];
+  const currentSign = signs[currentIndex];
 
   if (!currentSign) {
     return (
@@ -13,27 +14,21 @@ export default function LearnGame({ data, pack, category, assets, onExit }) {
     );
   }
 
-  const total = data.signs.length;
+  const total = signs.length;
   const isLast = currentIndex === total - 1;
 
   return (
     <div className={`min-h-screen bg-gradient-to-br ${category.colorScheme.gradient} px-4 py-6`}>
       <div className="max-w-5xl mx-auto bg-white/90 backdrop-blur rounded-3xl shadow-2xl p-5 sm:p-8">
 
-        {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <div>
             <h2 className="text-2xl font-bold text-gray-800">Learn</h2>
-            <p className="text-sm text-gray-600">
-              {category.name} · {pack.name}
-            </p>
+            <p className="text-sm text-gray-600">{category.name} · {pack.name}</p>
           </div>
-          <span className="text-sm text-gray-500">
-            {currentIndex + 1} / {total}
-          </span>
+          <span className="text-sm text-gray-500">{currentIndex + 1} / {total}</span>
         </div>
 
-        {/* Progress */}
         <div className="w-full h-2 bg-gray-200 rounded-full mb-6 overflow-hidden">
           <div
             className="h-full transition-all duration-300"
@@ -47,17 +42,25 @@ export default function LearnGame({ data, pack, category, assets, onExit }) {
         {/* CONTENT */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
 
-          {/* VIDEO (Primary) */}
           <div className="aspect-video rounded-2xl overflow-hidden bg-black shadow-lg">
-            {currentSign.videoUrl && assets?.videos?.[currentSign.videoUrl] && (
+            {currentSign.videoUrl ? (
               <video
-                src={assets.videos[currentSign.videoUrl].src}
+                key={currentSign.videoUrl
+                  ? (assets?.videos?.[currentSign.videoUrl] ?? currentSign.videoUrl)
+                  : null}        // remount when sign changes so autoPlay fires
+                src={currentSign.videoUrl
+                  ? (assets?.videos?.[currentSign.videoUrl] ?? currentSign.videoUrl)
+                  : null}        // blob URL — served from RAM, zero network
                 autoPlay
                 loop
                 muted
                 playsInline
                 className="w-full h-full object-cover"
               />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-white/40 text-sm">
+                No video available
+              </div>
             )}
           </div>
 
@@ -98,7 +101,6 @@ export default function LearnGame({ data, pack, category, assets, onExit }) {
                 </div>
               )}
             </div>
-
           </div>
         </div>
 
@@ -111,7 +113,6 @@ export default function LearnGame({ data, pack, category, assets, onExit }) {
           >
             Previous
           </button>
-
           {isLast ? (
             <button
               onClick={() => onExit(100)}

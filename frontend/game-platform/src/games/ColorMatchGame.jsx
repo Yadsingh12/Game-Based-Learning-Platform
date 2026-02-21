@@ -257,7 +257,7 @@ export default function ColorMatchGame(props) {
               <div className="mb-4 sm:mb-6 w-full flex flex-col items-center">
                 <div className="bg-white/80 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-2xl border-4 border-white/50 p-3 sm:p-4 max-w-lg w-full">
                   <img 
-                    src={currentImage}
+                    src={currentImage ? (assets?.images?.[currentImage] ?? currentImage) : null}
                     alt={questionText}
                     className="w-full h-auto rounded-lg shadow-lg"
                     style={{ maxHeight: '300px', objectFit: 'contain' }}
@@ -282,7 +282,7 @@ export default function ColorMatchGame(props) {
                       {/* Video */}
                       {option.videoUrl && (
                         <video
-                          src={option.videoUrl}
+                          src={option.videoUrl ? (assets?.videos?.[option.videoUrl] ?? option.videoUrl) : null}
                           muted
                           loop
                           autoPlay
@@ -324,7 +324,7 @@ export default function ColorMatchGame(props) {
                     {/* Image */}
                     <div className="w-32 h-32 sm:w-40 sm:h-40">
                       <img 
-                        src={currentImage}
+                        src={currentImage ? (assets?.images?.[currentImage] ?? currentImage) : null}
                         alt={questionText}
                         className="w-full h-full object-contain rounded-lg shadow-md"
                       />
@@ -336,7 +336,7 @@ export default function ColorMatchGame(props) {
                     <div className="w-32 h-32 sm:w-40 sm:h-40">
                       {currentQuestion.videoUrl && (
                         <video
-                          src={currentQuestion.videoUrl}
+                          src={currentQuestion.videoUrl ? (assets?.videos?.[currentQuestion.videoUrl] ?? currentQuestion.videoUrl) : null}
                           controls
                           autoPlay
                           className="w-full h-full object-contain rounded-lg shadow-md"

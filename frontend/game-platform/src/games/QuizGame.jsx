@@ -78,7 +78,7 @@ export default function QuizGame({ data, pack, category, onExit }) {
         <div className="bg-gray-100 rounded-lg p-8 mb-6 text-center">
           <div className="w-48 h-48 mx-auto bg-gray-300 rounded-lg flex items-center justify-center mb-4">
             <img 
-              src={currentQ.correct.thumbnailUrl} 
+              src={currentQ.correct.thumbnailUrl ? (props.assets?.images?.[currentQ.correct.thumbnailUrl] ?? currentQ.correct.thumbnailUrl) : null}
               alt="Sign"
               className="w-full h-full object-cover rounded-lg"
               onError={(e) => {

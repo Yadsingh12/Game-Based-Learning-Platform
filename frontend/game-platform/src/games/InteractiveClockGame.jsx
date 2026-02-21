@@ -92,7 +92,7 @@ const InteractiveClockGame = (props) => {
 
         {/* Video */}
         <video
-          src={currentSign.videoUrl}
+          src={currentSign.videoUrl ? (props.assets?.videos?.[currentSign.videoUrl] ?? currentSign.videoUrl) : null}
           muted
           loop
           autoPlay

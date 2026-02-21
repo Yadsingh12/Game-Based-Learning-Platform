@@ -1,9 +1,13 @@
-//main page component displaying categories of sign language topics
+// src/pages/MainPage.jsx
+// Displays categories of sign language topics
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import categoriesData from '../data/categories.json';
 
-export default function MainPage({ onSelectCategory }) {
+export default function MainPage() {
+  const navigate = useNavigate(); // ✅ called at top level, not inside JSX
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 p-6">
       <div className="max-w-6xl mx-auto">
@@ -20,7 +24,7 @@ export default function MainPage({ onSelectCategory }) {
           {categoriesData.categories.map(category => (
             <div
               key={category.id}
-              onClick={() => onSelectCategory(category)}
+              onClick={() => navigate(`/${category.id}`)} // ✅ navigate used as a function
               className="bg-white rounded-xl p-8 cursor-pointer hover:shadow-2xl hover:scale-105 transition transform"
             >
               <div className="text-6xl mb-4 text-center">

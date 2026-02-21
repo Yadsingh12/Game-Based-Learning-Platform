@@ -294,7 +294,7 @@ export default function CrosswordGame(props) {
             <div className="flex justify-center items-center mb-4 w-full">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/50 bg-white/30 backdrop-blur-sm">
                 <video
-                  src={targetSign.videoUrl}
+                  src={targetSign.videoUrl ? (props.assets?.videos?.[targetSign.videoUrl] ?? targetSign.videoUrl) : null}
                   muted
                   loop
                   autoPlay

@@ -323,7 +323,7 @@ export default function DragDropMatchGame(props) {
                           w-full md:w-44 lg:w-52 h-20 sm:h-24 md:h-auto
                           ${isMatched ? 'opacity-50 border-green-400 cursor-not-allowed' : hasWrongFlash ? 'border-red-500 border-4 animate-pulse' : 'border-white cursor-grab active:cursor-grabbing hover:shadow-lg hover:scale-105'}`}
                       >
-                        <video src={item.videoUrl} muted loop autoPlay playsInline className="w-full h-full object-contain rounded bg-gray-50" />
+                        <video src={item.videoUrl ? (assets?.videos?.[item.videoUrl] ?? item.videoUrl) : null} muted loop autoPlay playsInline className="w-full h-full object-contain rounded bg-gray-50" />
                         {isMatched && (
                           <div className="absolute inset-0 flex items-center justify-center bg-green-500/30 rounded-lg backdrop-blur-sm">
                             <div className="bg-green-500 rounded-full p-1 sm:p-2">

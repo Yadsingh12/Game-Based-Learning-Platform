@@ -527,7 +527,7 @@ export default function WordSearchGame(props) {
                     style={{ borderColor: colors.light }}
                   >
                     <video
-                      src={word.videoUrl}
+                      src={word.videoUrl ? (props.assets?.videos?.[word.videoUrl] ?? word.videoUrl) : null}
                       muted
                       loop
                       autoPlay

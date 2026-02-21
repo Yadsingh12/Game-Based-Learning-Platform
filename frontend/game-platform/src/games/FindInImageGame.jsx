@@ -196,7 +196,7 @@ const FindInImageGame = ({ data, pack, category, assets, onExit }) => {
             <div className="w-full lg:w-96 p-4 bg-black/10 flex items-center justify-center">
               <div className="w-full h-full max-w-md max-h-96 bg-white/90 backdrop-blur rounded-xl shadow-xl p-4">
                 <video
-                  src={currentQuestion.videoUrl}
+                  src={currentQuestion.videoUrl ? (assets?.videos?.[currentQuestion.videoUrl] ?? currentQuestion.videoUrl) : null}
                   autoPlay
                   loop
                   muted

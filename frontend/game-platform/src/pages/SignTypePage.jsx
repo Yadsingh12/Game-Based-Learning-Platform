@@ -1,28 +1,58 @@
-// frontend/game-platform/src/components/SignTypePage.jsx
-// this component displays available sign packs for a selected category
+// src/pages/SignTypePage.jsx
+// Displays available sign packs for a selected category.
+// Handles JSON fetch + media preload with progress UI here,
+// caches result in mediaCache so packLoader never re-fetches.
 
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Play } from 'lucide-react';
-import LoadingScreen from '../pages/LoadingScreen';
-import { loadPack } from '../utils/storage';
+import LoadingScreen from './LoadingScreen';
+import { preloadPackMedia } from '../utils/mediaCache';
+import categoriesData from '../data/categories.json';
 
-export default function SignTypePage({ category, onSelectPack, onBack }) {
+export default function SignTypePage() {
+  const { category: categoryId } = useParams();
+  const navigate = useNavigate();
+
+  const category = categoriesData.categories.find(c => c.id === categoryId);
+
   const [loadingPack, setLoadingPack] = useState(null);
   const [progress, setProgress] = useState({ loaded: 0, total: 0 });
+
+  if (!category) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="text-center">
+          <p className="text-gray-600 text-lg mb-4">Category not found.</p>
+          <button onClick={() => navigate('/')} className="px-4 py-2 bg-blue-500 text-white rounded-lg">
+            Go Home
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const handlePackClick = async (pack) => {
     setLoadingPack(pack.name);
     setProgress({ loaded: 0, total: 0 });
 
-    const { data, assets } = await loadPack(pack.dataFile, (loaded, total) => {
+    // 1. Fetch pack JSON
+    const res = await fetch(`/data/packs/${pack.dataFile}`);
+    if (!res.ok) {
+      console.error('Failed to fetch pack:', pack.dataFile);
+      setLoadingPack(null);
+      return;
+    }
+    const packJson = await res.json();
+
+    // 2. Preload all media with progress — result is cached in mediaCache.
+    //    packLoader will find it in cache and skip re-fetching entirely.
+    await preloadPackMedia(pack.id, packJson, (loaded, total) => {
       setProgress({ loaded, total });
     });
 
-    if (data) {
-      onSelectPack({ ...pack, data, assets });
-    }
-
     setLoadingPack(null);
+    navigate(`/${categoryId}/${pack.id}`);
   };
 
   if (loadingPack) {
@@ -39,7 +69,7 @@ export default function SignTypePage({ category, onSelectPack, onBack }) {
     <div className={`min-h-screen bg-gradient-to-br ${category.colorScheme.gradient} p-6`}>
       <div className="max-w-6xl mx-auto">
         <button
-          onClick={onBack}
+          onClick={() => navigate('/')}
           className="mb-4 px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition"
         >
           ← Back

@@ -88,7 +88,7 @@ const BucketGame = ({ data, pack, category, assets, onExit }) => {
         <div className="flex justify-center mb-3 sm:mb-4 flex-shrink-0">
           <video
             key={currentSign.id}
-            src={currentSign.videoUrl}
+            src={currentSign.videoUrl ? (assets?.videos?.[currentSign.videoUrl] ?? currentSign.videoUrl) : null}
             autoPlay
             loop
             muted

@@ -428,7 +428,7 @@ export default function IndiaMapGame(props) {
               {(mode === "learn" && selectedState) && (
                 <video
                   key={selectedState.name}
-                  src={selectedState.video_path}
+                  src={selectedState.video_path ? (assets?.videos?.[selectedState.video_path] ?? selectedState.video_path) : null}
                   controls
                   autoPlay
                   className="max-w-full max-h-full rounded-2xl shadow-2xl border-4 border-white"
@@ -437,7 +437,7 @@ export default function IndiaMapGame(props) {
               {(mode === "test" && questions[currentIndex]) && (
                 <video
                   key={questions[currentIndex].name}
-                  src={questions[currentIndex].video_path}
+                  src={questions[currentIndex].video_path ? (assets?.videos?.[questions[currentIndex].video_path] ?? questions[currentIndex].video_path) : null}
                   controls
                   autoPlay
                   className="max-w-full max-h-full rounded-2xl shadow-2xl border-4 border-white"

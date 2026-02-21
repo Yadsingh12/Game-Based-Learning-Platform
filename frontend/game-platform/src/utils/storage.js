@@ -1,4 +1,6 @@
-import { preloadPack } from './preloadPack';
+// src/utils/storage.js
+
+import { preloadPackMedia } from './mediaCache';
 
 // ------------------------
 // Progress utilities
@@ -18,7 +20,6 @@ export const saveProgress = (packId, gameId, progress) => {
 
 export const isGameUnlocked = (packId, gameTemplate) => {
   if (!gameTemplate.unlockRequirement) return true;
-
   const { game, minScore } = gameTemplate.unlockRequirement;
   const progress = getProgress(packId, game);
   return progress.score >= minScore;
@@ -42,9 +43,10 @@ export const loadPack = async (dataFile, onProgress) => {
     if (!response.ok) throw new Error(`Failed to fetch pack: ${response.status}`);
 
     const packData = await response.json();
+    const packId = dataFile.replace('.json', '');
 
-    // preload assets and pass progress callback
-    const assets = await preloadPack(packData, onProgress);
+    // Videos are fetched as blob URLs — zero network lag on playback
+    const assets = await preloadPackMedia(packId, packData, onProgress);
 
     return { data: packData, assets };
   } catch (err) {

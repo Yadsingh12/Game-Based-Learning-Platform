@@ -1,6 +1,15 @@
-// src/App.jsx - Main Router Component
+// src/App.jsx - React Router v6
 
-import React, { useState } from 'react';
+import React from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  redirect,
+  useLoaderData,
+  useParams,
+  useNavigate,
+} from 'react-router-dom';
+
 import MainPage from './pages/MainPage';
 import SignTypePage from './pages/SignTypePage';
 import ContentPage from './pages/ContentPage';
@@ -22,234 +31,151 @@ import CountingGame from './games/CountingGame';
 import ColorMatchGame from './games/ColorMatchGame';
 import DragDropMatchGame from './games/DragAndDropMatchGame';
 
-import { saveProgress, getProgress } from './utils/storage';
 import GameErrorBoundary from './components/GameErrorBoundary';
+import { saveProgress, getProgress } from './utils/storage';
+import { getCachedAssets } from './utils/mediaCache';
+import categoriesData from './data/categories.json';
 
+// ---------------------------------------------------------------------------
+// Pack loader
+// By the time the router calls this, SignTypePage has already fetched the JSON
+// and preloaded all media into mediaCache. This loader just reads from cache
+// and re-fetches JSON only as a fallback (e.g. direct URL navigation).
+// ---------------------------------------------------------------------------
+async function packLoader({ params }) {
+  const { category: categoryId, packId } = params;
 
-export default function App() {
-  const [screen, setScreen] = useState('main');
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedPack, setSelectedPack] = useState(null);
-  const [selectedGame, setSelectedGame] = useState(null);
-  const [packData, setPackData] = useState(null);
-  const [packAssets, setPackAssets] = useState(null);
+  const category = categoriesData.categories.find(c => c.id === categoryId);
+  if (!category) throw new Response('Category not found', { status: 404 });
 
-  // Navigate to sign type page when category is selected
-  const handleCategorySelect = (category) => {
-    setSelectedCategory(category);
-    setScreen('signType');
+  const packMeta = category.packs.find(p => p.id === packId);
+  if (!packMeta) throw new Response('Pack not found', { status: 404 });
+
+  // Fast path — SignTypePage already loaded and cached everything
+  const cachedAssets = getCachedAssets(packId);
+  if (cachedAssets) {
+    // JSON is cheap, re-fetch it to get data (no media cost)
+    const res = await fetch(`/data/packs/${packMeta.dataFile}`);
+    if (!res.ok) throw new Response('Failed to load pack', { status: res.status });
+    const data = await res.json();
+    return { category, pack: { ...packMeta, id: packId }, data, assets: cachedAssets, gameAssets: category.gameAssets ?? null };
+  }
+
+  // Fallback path — user navigated directly to a URL without going through SignTypePage.
+  // Load JSON + preload media now (no progress UI, but works correctly).
+  const res = await fetch(`/data/packs/${packMeta.dataFile}`);
+  if (!res.ok) throw new Response(`Failed to load pack: ${packMeta.dataFile}`, { status: res.status });
+  const data = await res.json();
+
+  const { preloadPackMedia } = await import('./utils/mediaCache');
+  const assets = await preloadPackMedia(packId, data);
+
+  return {
+    category,
+    pack: { ...packMeta, id: packId },
+    data,
+    assets,
+    gameAssets: category.gameAssets ?? null,
   };
+}
 
-  // Receive fully loaded pack from SignTypePage
-  const handlePackSelect = ({ data, assets, ...pack }) => {
-    setSelectedPack(pack);
-    setPackData(data);
-    setPackAssets(assets); // optional: store preloaded assets
-    setScreen('content');
-  };
+// ---------------------------------------------------------------------------
+// Game registry
+// ---------------------------------------------------------------------------
+const GAME_REGISTRY = {
+  learn: LearnGame,
+  quiz: QuizGame,
+  match: MatchGame,
+  interactiveClock: InteractiveClockGame,
+  bucket: BucketGame,
+  breakout: BreakoutGame,
+  findInImage: FindInImageGame,
+  crossword: CrosswordGame,
+  wordScramble: WordScrambleGame,
+  wordSearch: WordSearchGame,
+  indiaMap: IndiaMapGame,
+  multipleChoice: MultipleChoiceGame,
+  reverseMultipleChoice: ReverseMultipleChoiceGame,
+  countingGame: CountingGame,
+  colorMatch: ColorMatchGame,
+  dragDropMatch: DragDropMatchGame,
+};
 
-  // Navigate to game screen
-  const handleGameSelect = (game) => {
-    setSelectedGame(game);
-    setScreen('playing');
-  };
+// ---------------------------------------------------------------------------
+// GamePage
+// ---------------------------------------------------------------------------
+function GamePage() {
+  const { category: categoryId, packId, gameId } = useParams();
+  const { category, pack, data, assets, gameAssets } = useLoaderData();
+  const navigate = useNavigate();
 
-  const handleGameCrash = () => {
-    console.warn("Game crashed. Returning to content screen.");
-    setSelectedGame(null);
-    setScreen('content');
-  };
+  const GameComponent = GAME_REGISTRY[gameId];
 
-  // Handle game exit and save progress
-  const handleGameExit = (score) => {
+  const handleExit = (score) => {
     if (score !== undefined) {
-      const currentProgress = getProgress(selectedPack.id, selectedGame.id);
-      saveProgress(selectedPack.id, selectedGame.id, {
+      const current = getProgress(packId, gameId);
+      saveProgress(packId, gameId, {
         completed: true,
-        score: Math.max(score, currentProgress.score),
-        attempts: currentProgress.attempts + 1,
+        score: Math.max(score, current.score ?? 0),
+        attempts: (current.attempts ?? 0) + 1,
       });
     }
-    setSelectedGame(null);
-    setScreen('content');
+    navigate(`/${categoryId}/${packId}`);
   };
 
-  // Back navigation handlers
-  const handleBackToSignType = () => {
-    setSelectedPack(null);
-    setPackData(null);
-    setPackAssets(null);
-    setScreen('signType');
+  const handleCrash = () => {
+    console.warn('Game crashed. Returning to content screen.');
+    navigate(`/${categoryId}/${packId}`);
   };
 
-  const handleBackToMain = () => {
-    setSelectedCategory(null);
-    setScreen('main');
-  };
-
-  // Route to appropriate screen
-  switch (screen) {
-    case 'main':
-      return <MainPage onSelectCategory={handleCategorySelect} />;
-
-    case 'signType':
-      return (
-        <SignTypePage
-          category={selectedCategory}
-          onSelectPack={handlePackSelect}
-          onBack={handleBackToMain}
-        />
-      );
-
-    case 'content':
-      return (
-        <ContentPage
-          category={selectedCategory}
-          pack={selectedPack}
-          packData={packData}
-          packAssets={packAssets} // optional
-          onSelectGame={handleGameSelect}
-          onBack={handleBackToSignType}
-        />
-      );
-
-    case 'playing':
-      if (!selectedGame) return null;
-
-      const gameProps = {
-        data: packData,
-        pack: selectedPack,
-        category: selectedCategory,
-        assets: packAssets,
-        onExit: handleGameExit,
-      };
-      console.log("Rendering game:", selectedGame.id, gameProps);
-
-      switch (selectedGame.id) {
-        case 'learn':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <LearnGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'quiz':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <QuizGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'match':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <MatchGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'sequence':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <SequenceGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'interactiveClock':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <InteractiveClockGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'bucket':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <BucketGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'breakout':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <BreakoutGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'findInImage':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <FindInImageGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'crossword':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <CrosswordGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'wordScramble':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <WordScrambleGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'wordSearch':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <WordSearchGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'indiaMap':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <IndiaMapGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'multipleChoice':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <MultipleChoiceGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'reverseMultipleChoice':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <ReverseMultipleChoiceGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'countingGame':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <CountingGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'colorMatch':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <ColorMatchGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        case 'dragDropMatch':
-          return (
-            <GameErrorBoundary onRecover={handleGameCrash}>
-              <DragDropMatchGame {...gameProps} />
-            </GameErrorBoundary>
-          );
-
-        default:
-          return null;
-      }
-
-    default:
-      return null;
+  if (!GameComponent) {
+    navigate(`/${categoryId}/${packId}`, { replace: true });
+    return null;
   }
+
+  return (
+    <GameErrorBoundary onRecover={handleCrash}>
+      <GameComponent
+        data={data}
+        pack={pack}
+        category={category}
+        assets={assets}
+        gameAssets={gameAssets}
+        onExit={handleExit}
+      />
+    </GameErrorBoundary>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Router
+// ---------------------------------------------------------------------------
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <MainPage />,
+  },
+  {
+    path: '/:category',
+    element: <SignTypePage />,
+  },
+  {
+    path: '/:category/:packId',
+    loader: packLoader,
+    element: <ContentPage />,
+  },
+  {
+    path: '/:category/:packId/game/:gameId',
+    loader: packLoader,
+    element: <GamePage />,
+  },
+  {
+    path: '*',
+    loader: () => redirect('/'),
+    element: null,
+  },
+]);
+
+export default function App() {
+  return <RouterProvider router={router} />;
 }

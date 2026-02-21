@@ -332,7 +332,7 @@ const BreakoutGame = ({ data, pack, category, assets, onExit }) => {
           {targetSign && (
             <video
               key={targetSign.id}
-              src={targetSign.videoUrl}
+              src={targetSign.videoUrl ? (assets?.videos?.[targetSign.videoUrl] ?? targetSign.videoUrl) : null}
               autoPlay
               loop
               muted

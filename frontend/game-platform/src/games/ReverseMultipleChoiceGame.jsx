@@ -258,7 +258,7 @@ export default function ReverseMultipleChoiceGame(props) {
                       {/* Video */}
                       {option.videoUrl && (
                         <video
-                          src={option.videoUrl}
+                          src={option.videoUrl ? (assets?.videos?.[option.videoUrl] ?? option.videoUrl) : null}
                           muted
                           loop
                           autoPlay
@@ -293,7 +293,7 @@ export default function ReverseMultipleChoiceGame(props) {
                   <div className="flex flex-col items-center gap-2 sm:gap-3">
                     {currentQuestion.videoUrl && (
                       <video
-                        src={currentQuestion.videoUrl}
+                        src={currentQuestion.videoUrl ? (assets?.videos?.[currentQuestion.videoUrl] ?? currentQuestion.videoUrl) : null}
                         controls
                         autoPlay
                         className="w-full max-w-xs rounded-xl shadow-lg"

@@ -87,7 +87,7 @@ export default function SequenceGame({ data, pack, category, onExit }) {
                   }`}
                 >
                   <img 
-                    src={sign.thumbnailUrl} 
+                    src={sign.thumbnailUrl ? (props.assets?.images?.[sign.thumbnailUrl] ?? sign.thumbnailUrl) : null}
                     alt={sign.name}
                     className="w-20 h-20 object-cover rounded mb-2"
                     onError={(e) => {

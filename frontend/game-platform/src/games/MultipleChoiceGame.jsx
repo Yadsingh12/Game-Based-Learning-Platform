@@ -231,7 +231,7 @@ export default function MultipleChoiceGame(props) {
                   <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border-2 sm:border-4 border-white/50 bg-white/30 backdrop-blur-sm">
                     <video
                       key={currentQuestion.name}
-                      src={currentQuestion.videoUrl}
+                      src={currentQuestion.videoUrl ? (assets?.videos?.[currentQuestion.videoUrl] ?? currentQuestion.videoUrl) : null}
                       muted
                       loop
                       autoPlay

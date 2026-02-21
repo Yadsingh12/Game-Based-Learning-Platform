@@ -1,30 +1,16 @@
-//content page component displaying games within a selected pack
+// src/pages/ContentPage.jsx
+// Displays games within a selected pack
 
 import React from 'react';
-import { Lock, Star, CheckCircle, Book, Brain, Gamepad2, Zap, MessageSquare, Repeat, Clock, Droplet, Gamepad, Search, Grid, Shuffle, Grid3x3, MapPin,CheckSquare, Video, Hash, Palette, Move } from 'lucide-react';
+import { useParams, useNavigate, useLoaderData } from 'react-router-dom';
+import { Lock, Star, CheckCircle, Book, Brain, Gamepad2, Zap, MessageSquare, Repeat, Clock, Droplet, Gamepad, Search, Grid, Shuffle, Grid3x3, MapPin, CheckSquare, Video, Hash, Palette, Move } from 'lucide-react';
 import gameTemplatesData from '../data/gameTemplates.json';
 import { getProgress, isGameUnlocked } from '../utils/storage';
 
 const iconMap = {
-  Book: Book,
-  Brain: Brain,
-  Gamepad2: Gamepad2,
-  Zap: Zap,
-  MessageSquare: MessageSquare,
-  Repeat: Repeat,
-  Clock: Clock,
-  Droplet: Droplet,
-  Gamepad: Gamepad,
-  Search: Search,
-  Grid: Grid,
-  Shuffle: Shuffle,
-  Grid3x3: Grid3x3,
-  MapPin: MapPin,
-  CheckSquare: CheckSquare,
-  Video: Video,
-  Hash: Hash,
-  Palette: Palette,
-  Move: Move
+  Book, Brain, Gamepad2, Zap, MessageSquare, Repeat, Clock, Droplet,
+  Gamepad, Search, Grid, Shuffle, Grid3x3, MapPin, CheckSquare, Video,
+  Hash, Palette, Move,
 };
 
 // Filter games based on category
@@ -34,18 +20,20 @@ const getAvailableGamesForCategory = (categoryId, allGames) => {
   );
 };
 
-export default function ContentPage({ category, pack, packData, onSelectGame, onBack }) {
-  // Get only games applicable to this category
-  const availableGames = getAvailableGamesForCategory(
-    category.id,
-    gameTemplatesData.games
-  );
+export default function ContentPage() {
+  const { packId } = useParams();
+  const navigate = useNavigate();
+
+  // category is the full object from packLoader — same shape as the old prop
+  const { category, pack, data: packData } = useLoaderData();
+
+  const availableGames = getAvailableGamesForCategory(category.id, gameTemplatesData.games);
 
   return (
     <div className={`min-h-screen bg-gradient-to-br ${category.colorScheme.gradient} p-6`}>
       <div className="max-w-6xl mx-auto">
         <button
-          onClick={onBack}
+          onClick={() => navigate(`/${category.id}`)}
           className="mb-4 px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition"
         >
           ← Back
@@ -65,14 +53,14 @@ export default function ContentPage({ category, pack, packData, onSelectGame, on
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {availableGames.map(game => {
-              const unlocked = isGameUnlocked(pack.id, game);
-              const progress = getProgress(pack.id, game.id);
+              const unlocked = isGameUnlocked(packId, game);
+              const progress = getProgress(packId, game.id);
               const Icon = iconMap[game.icon];
 
               return (
                 <div
                   key={game.id}
-                  onClick={() => unlocked && onSelectGame(game)}
+                  onClick={() => unlocked && navigate(`/${category.id}/${packId}/game/${game.id}`)}
                   className={`card ${unlocked ? 'card-interactive' : 'card-disabled'}`}
                 >
                   <div className="flex items-center justify-between mb-4">
@@ -97,9 +85,7 @@ export default function ContentPage({ category, pack, packData, onSelectGame, on
                   {progress.completed && (
                     <div className="flex items-center gap-2 text-sm">
                       <Star className="text-yellow-500" size={16} />
-                      <span className="text-gray-700">
-                        Best: {progress.score}%
-                      </span>
+                      <span className="text-gray-700">Best: {progress.score}%</span>
                     </div>
                   )}
                   {!unlocked && game.unlockRequirement && (

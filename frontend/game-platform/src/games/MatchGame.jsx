@@ -92,7 +92,7 @@ export default function MatchGame({ data, pack, category, onExit }) {
                 {card.type === 'video' ? (
                   <div className="text-center p-2">
                     <img 
-                      src={card.content.thumbnailUrl} 
+                      src={card.content.thumbnailUrl ? (props.assets?.images?.[card.content.thumbnailUrl] ?? card.content.thumbnailUrl) : null}
                       alt="Sign"
                       className="w-16 h-16 object-cover rounded mx-auto mb-1"
                       onError={(e) => {
