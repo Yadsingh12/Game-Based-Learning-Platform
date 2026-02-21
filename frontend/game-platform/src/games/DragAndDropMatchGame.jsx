@@ -139,7 +139,7 @@ export default function DragDropMatchGame(props) {
   }
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+    <div className="h-full flex flex-col bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
       {/* Header */}
       <div className="flex-shrink-0 w-full px-2 sm:px-4 pt-2 pb-2 bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm border-b border-white/60 shadow-sm">
         <div className="flex justify-between items-center max-w-7xl mx-auto">

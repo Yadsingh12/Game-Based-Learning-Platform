@@ -227,7 +227,7 @@ export default function CrossWordGame(props) {
   }
 
   return (
-    <div className="fixed inset-0 flex flex-col items-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+    <div className="h-full flex flex-col items-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
       {/* Header - Fixed height */}
       <div className="flex-shrink-0 w-full px-4 pt-4 pb-3">
         <div className="flex justify-center items-center gap-3">
@@ -460,7 +460,7 @@ export default function CrossWordGame(props) {
               onClick={handleEnter}
               className="relative group p-2 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-xl font-bold text-xs sm:text-sm hover:scale-105 active:scale-95 transition-all shadow-lg hover:shadow-xl min-h-[38px] sm:min-h-[44px] overflow-hidden"
             >
-              <span className="relative z-10">ENTER</span>
+              <span className="relative z-10">↩</span>
               <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
             </button>
           </div>
