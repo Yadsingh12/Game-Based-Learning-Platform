@@ -1,0 +1,217 @@
+{
+  "packId": "everyday-objects-2",
+  "categoryId": "everyday-objects",
+  "name": "Everyday Objects Pack 2",
+  "signs": [
+    {
+      "id": "horse",
+      "name": "Horse",
+      "description": "A large domesticated animal used for riding and work.",
+      "videoUrl": "/videos/everyday-objects/horse.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/horse.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/horse.jpg"]
+        }
+      }
+    },
+    {
+      "id": "sheep",
+      "name": "Sheep",
+      "description": "A domesticated ruminant animal known for its woolly coat.",
+      "videoUrl": "/videos/everyday-objects/sheep.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/sheep.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/sheep.jpg"]
+        }
+      }
+    },
+    {
+      "id": "cow",
+      "name": "Cow",
+      "description": "A large domesticated animal raised for milk and meat.",
+      "videoUrl": "/videos/everyday-objects/cow.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/cow.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/cow.jpg"]
+        }
+      }
+    },
+    {
+      "id": "elephant",
+      "name": "Elephant",
+      "description": "A large land mammal with a trunk, native to Africa and Asia.",
+      "videoUrl": "/videos/everyday-objects/elephant.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/elephant.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/elephant.jpg"]
+        }
+      }
+    },
+    {
+      "id": "bear",
+      "name": "Bear",
+      "description": "A large, heavy mammal with thick fur, found in forests and mountains.",
+      "videoUrl": "/videos/everyday-objects/bear.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/bear.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/bear.jpg"]
+        }
+      }
+    },
+    {
+      "id": "zebra",
+      "name": "Zebra",
+      "description": "An African wild horse with distinctive black-and-white stripes.",
+      "videoUrl": "/videos/everyday-objects/zebra.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/zebra.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/zebra.jpg"]
+        }
+      }
+    },
+    {
+      "id": "giraffe",
+      "name": "Giraffe",
+      "description": "A tall African mammal with a very long neck and spotted coat.",
+      "videoUrl": "/videos/everyday-objects/giraffe.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/giraffe.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/giraffe.jpg"]
+        }
+      }
+    },
+    {
+      "id": "backpack",
+      "name": "Backpack",
+      "description": "A bag worn on the back to carry items.",
+      "videoUrl": "/videos/everyday-objects/backpack.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/backpack.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/backpack.jpg"]
+        }
+      }
+    },
+    {
+      "id": "umbrella",
+      "name": "Umbrella",
+      "description": "A device used to protect against rain or sun.",
+      "videoUrl": "/videos/everyday-objects/umbrella.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/umbrella.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/umbrella.jpg"]
+        }
+      }
+    },
+    {
+      "id": "handbag",
+      "name": "Handbag",
+      "description": "A small bag carried by hand for personal items.",
+      "videoUrl": "/videos/everyday-objects/handbag.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/handbag.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/handbag.jpg"]
+        }
+      }
+    },
+    {
+      "id": "suitcase",
+      "name": "Suitcase",
+      "description": "A portable container for carrying clothes and personal items.",
+      "videoUrl": "/videos/everyday-objects/suitcase.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/suitcase.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/suitcase.jpg"]
+        }
+      }
+    },
+    {
+      "id": "frisbee",
+      "name": "Frisbee",
+      "description": "A lightweight disc thrown and caught in a game.",
+      "videoUrl": "/videos/everyday-objects/frisbee.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/frisbee.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/frisbee.jpg"]
+        }
+      }
+    },
+    {
+      "id": "skis",
+      "name": "Skis",
+      "description": "Narrow strips attached to boots for gliding over snow.",
+      "videoUrl": "/videos/everyday-objects/skis.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/skis.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/skis.jpg"]
+        }
+      }
+    },
+    {
+      "id": "sports-ball",
+      "name": "Sports Ball",
+      "description": "A spherical object used in various sports.",
+      "videoUrl": "/videos/everyday-objects/sports_ball.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/sports_ball.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/sports_ball.jpg"]
+        }
+      }
+    }
+  ]
+}

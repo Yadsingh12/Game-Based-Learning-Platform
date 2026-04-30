@@ -1,0 +1,227 @@
+{
+  "categories": [
+    {
+      "id": "alphabets",
+      "name": "Alphabets",
+      "icon": "🔤",
+      "colorScheme": {
+        "primary": "#7c3aed",
+        "secondary": "#3b82f6",
+        "light": "#c4b5fd",
+        "dark": "#5b21b6",
+        "gradient": "from-purple-600 to-blue-600"
+      },
+      "packs": [
+        {
+          "id": "alphabets-1",
+          "name": "Alphabets Pack 1",
+          "range": "A-Z",
+          "signCount": 26,
+          "dataFile": "alphabets-1.json"
+        }
+      ]
+    },
+    {
+      "id": "numerals",
+      "name": "Numerals",
+      "icon": "🔢",
+      "colorScheme": {
+        "primary": "#10b981",
+        "secondary": "#14b8a6",
+        "light": "#6ee7b7",
+        "dark": "#047857",
+        "gradient": "from-emerald-500 to-teal-500"
+      },
+      "packs": [
+        {
+          "id": "numerals-1",
+          "name": "Numbers Pack 1",
+          "range": "0-10",
+          "signCount": 11,
+          "dataFile": "numerals-1.json"
+        }
+      ]
+    },
+    {
+      "id": "colors",
+      "name": "Colors",
+      "icon": "🌈",
+      "colorScheme": {
+        "primary": "#ec4899",
+        "secondary": "#f97316",
+        "light": "#fbcfe8",
+        "dark": "#be185d",
+        "gradient": "from-pink-500 to-orange-500"
+      },
+      "packs": [
+        {
+          "id": "colors-1",
+          "name": "Colors Pack 1",
+          "range": "Yellow, Blue...",
+          "signCount": 13,
+          "dataFile": "colors-1.json"
+        }
+      ]
+    },
+    {
+      "id": "fruits",
+      "name": "Fruits",
+      "icon": "🍎",
+      "colorScheme": {
+        "primary": "#ef4444",
+        "secondary": "#f59e0b",
+        "light": "#fca5a5",
+        "dark": "#b91c1c",
+        "gradient": "from-red-500 to-amber-400"
+      },
+      "gameAssets": {
+        "findInImage": {
+          "svgPath": "/images/Fruits/fruitBasket.svg",
+          "imagePath": "/images/Fruits/fruitBasket.png"
+        }
+      },
+      "packs": [
+        {
+          "id": "fruits-1",
+          "name": "Fruits Pack 1",
+          "range": "Apple, Banana...",
+          "signCount": 13,
+          "dataFile": "fruits-1.json"
+        }
+      ]
+    },
+    {
+      "id": "everydayObjects",
+      "name": "Everyday Objects",
+      "icon": "🧸",
+      "colorScheme": {
+        "primary": "#f59e0b",
+        "secondary": "#84cc16",
+        "light": "#fde68a",
+        "dark": "#b45309",
+        "gradient": "from-amber-500 to-lime-500"
+      },
+      "packs": [
+        {
+          "id": "everydayObjects-1",
+          "name": "Everyday Objects Pack 1",
+          "range": "Person-Dog...",
+          "signCount": 14,
+          "dataFile": "everydayObjects-1.json"
+        },
+        {
+          "id": "everydayObjects-2",
+          "name": "Everyday Objects Pack 2",
+          "range": "Horse-Sportsball...",
+          "signCount": 14,
+          "dataFile": "everydayObjects-2.json"
+        },
+        {
+          "id": "everydayObjects-3",
+          "name": "Everyday Objects Pack 3",
+          "range": "Kite-Orange...",
+          "signCount": 14,
+          "dataFile": "everydayObjects-3.json"
+        },
+        {
+          "id": "everydayObjects-4",
+          "name": "Everyday Objects Pack 4",
+          "range": "Broccoli-Mouse...",
+          "signCount": 14,
+          "dataFile": "everydayObjects-4.json"
+        },
+        {
+          "id": "everydayObjects-5",
+          "name": "Everyday Objects Pack 5",
+          "range": "Remote-Toothbrush...",
+          "signCount": 15,
+          "dataFile": "everydayObjects-5.json"
+        }
+      ]
+    },
+    {
+      "id": "shapes",
+      "name": "Shapes",
+      "icon": "🔺",
+      "colorScheme": {
+        "primary": "#06b6d4",
+        "secondary": "#6366f1",
+        "light": "#a5f3fc",
+        "dark": "#0e7490",
+        "gradient": "from-cyan-500 to-indigo-500"
+      },
+      "packs": [
+        {
+          "id": "shapes-1",
+          "name": "Shapes Pack 1",
+          "range": "Circle, Square...",
+          "signCount": 10,
+          "dataFile": "shapes-1.json"
+        }
+      ]
+    },
+    {
+      "id": "statesOfIndia",
+      "name": "States Of India",
+      "icon": "🗺️",
+      "colorScheme": {
+        "primary": "#f97316",
+        "secondary": "#16a34a",
+        "light": "#fed7aa",
+        "dark": "#c2410c",
+        "gradient": "from-orange-500 to-green-600"
+      },
+      "packs": [
+        {
+          "id": "statesOfIndia-1",
+          "name": "Indian States Pack 1",
+          "range": "Andhra Pradesh, Arunachal Pradesh...",
+          "signCount": 36,
+          "dataFile": "statesOfIndia-1.json"
+        }
+      ]
+    },
+    {
+      "id": "time",
+      "name": "Time",
+      "icon": "🕒",
+      "colorScheme": {
+        "primary": "#64748b",
+        "secondary": "#0ea5e9",
+        "light": "#cbd5e1",
+        "dark": "#334155",
+        "gradient": "from-slate-600 to-sky-500"
+      },
+      "packs": [
+        {
+          "id": "time-1",
+          "name": "Time Pack 1",
+          "range": "3:20, 5:40...",
+          "signCount": 36,
+          "dataFile": "time-1.json"
+        }
+      ]
+    },
+    {
+      "id": "daysOfWeek",
+      "name": "Days Of Week",
+      "icon": "📅",
+      "colorScheme": {
+        "primary": "#8b5cf6",
+        "secondary": "#ec4899",
+        "light": "#ddd6fe",
+        "dark": "#6d28d9",
+        "gradient": "from-violet-500 to-pink-500"
+      },
+      "packs": [
+        {
+          "id": "daysOfWeek-1",
+          "name": "Days Of Week Pack 1",
+          "range": "Monday, Tuesday...",
+          "signCount": 7,
+          "dataFile": "daysOfWeek-1.json"
+        }
+      ]
+    }
+  ]
+}

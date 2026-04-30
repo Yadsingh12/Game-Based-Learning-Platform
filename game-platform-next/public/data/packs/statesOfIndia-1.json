@@ -1,0 +1,595 @@
+{
+  "packId": "states-1",
+  "categoryId": "states",
+  "name": "Indian States Pack 1",
+  "signs": [
+    {
+      "id": "IN-AP",
+      "name": "Andhra Pradesh",
+      "videoUrl": "/videos/States/andhra_pradesh.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-AP",
+        "color": "#cfcfc4"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state is home to the city of Amaravati, the legislative capital?",
+          "Which state lies to the south of Odisha and east of Telangana?",
+          "Which Indian state is famous for the Kuchipudi dance form?"
+        ],
+        "capital": "Amaravati",
+        "capitalVideo": "/videos/Capitals/amaravati.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-AR",
+      "name": "Arunachal Pradesh",
+      "videoUrl": "/videos/States/arunachal_pradesh.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-AR",
+        "color": "#a2d2ff"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which northeastern state shares a border with China?",
+          "Which state is known as the 'Land of the Rising Sun' in India?",
+          "Which state has Itanagar as its capital?"
+        ],
+        "capital": "Itanagar",
+        "capitalVideo": "/videos/Capitals/itanagar.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-AS",
+      "name": "Assam",
+      "videoUrl": "/videos/States/assam.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-AS",
+        "color": "#fdffb6"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state is famous for its tea gardens and Kaziranga National Park?",
+          "Which state in northeast India has Dispur as its capital?",
+          "Which state is home to the one-horned rhinoceros?"
+        ],
+        "capital": "Dispur",
+        "capitalVideo": "/videos/Capitals/dispur.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-BR",
+      "name": "Bihar",
+      "videoUrl": "/videos/States/bihar.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-BR",
+        "color": "#03c03c"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which Indian state is associated with the ancient university of Nalanda?",
+          "Which state is the birthplace of Lord Mahavira and Guru Gobind Singh?",
+          "Which state lies to the west of West Bengal and north of Jharkhand?"
+        ],
+        "capital": "Patna",
+        "capitalVideo": "/videos/Capitals/patna.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-CT",
+      "name": "Chhattisgarh",
+      "videoUrl": "/videos/States/chhattisgarh.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-CT",
+        "color": "#ffb3ba"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state was carved out of Madhya Pradesh in 2000?",
+          "Which state has Raipur as its capital and is rich in coal and iron?",
+          "Which state is home to the Bastar tribal region?"
+        ],
+        "capital": "Raipur",
+        "capitalVideo": "/videos/Capitals/raipur.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-GA",
+      "name": "Goa",
+      "videoUrl": "/videos/States/goa.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-GA",
+        "color": "#de824d"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state is known for its Portuguese heritage and beaches?",
+          "Which is the smallest state by area in India?",
+          "Which state has Panaji as its capital and celebrates Carnival?"
+        ],
+        "capital": "Panaji",
+        "capitalVideo": "/videos/Capitals/panaji.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-GJ",
+      "name": "Gujarat",
+      "videoUrl": "/videos/States/gujarat.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-GJ",
+        "color": "#77dd77"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state is the birthplace of Mahatma Gandhi?",
+          "Which state is home to the Gir National Park and Asiatic lions?",
+          "Which western state has Gandhinagar as its capital?"
+        ],
+        "capital": "Gandhinagar",
+        "capitalVideo": "/videos/Capitals/gandhinagar.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-HR",
+      "name": "Haryana",
+      "videoUrl": "/videos/States/haryana.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-HR",
+        "color": "#ffcc99"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state surrounds the national capital Delhi on three sides?",
+          "Which state has Chandigarh as its shared capital with Punjab?",
+          "Which state is known for the city of Kurukshetra, where the Mahabharata was said to be fought?"
+        ],
+        "capital": "Chandigarh",
+        "capitalVideo": "/videos/Capitals/chandigarh.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-HP",
+      "name": "Himachal Pradesh",
+      "videoUrl": "/videos/States/himachal_pradesh.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-HP",
+        "color": "#bae1ff"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state has Shimla and Manali as popular tourist destinations?",
+          "Which state lies in the western Himalayas and has Dharamshala?",
+          "Which hill state is known as the 'Land of Gods'?"
+        ],
+        "capital": "Shimla",
+        "capitalVideo": "/videos/Capitals/shimla.mp4",
+        "capitalEnabled": true
+      }
+    },
+    {
+      "id": "IN-JH",
+      "name": "Jharkhand",
+      "videoUrl": "/videos/States/jharkhand.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-JH",
+        "color": "#baffc9"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state was carved out of Bihar in 2000?",
+          "Which state is known for its mineral wealth and forests?",
+          "Which state has Ranchi as its capital?"
+        ],
+        "capital": "Ranchi",
+        "capitalVideo": "/videos/Capitals/ranchi.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-KA",
+      "name": "Karnataka",
+      "videoUrl": "/videos/States/karnataka.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-KA",
+        "color": "#cbaacb"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state has Bengaluru as its capital, the 'Silicon Valley of India'?",
+          "Which state is home to the ancient ruins of Hampi?",
+          "Which state is known for the classical dance form Bharatanatyam and Carnatic music?"
+        ],
+        "capital": "Bengaluru",
+        "capitalVideo": "/videos/Capitals/bengaluru.mp4",
+        "capitalEnabled": true
+      }
+    },
+    {
+      "id": "IN-KL",
+      "name": "Kerala",
+      "videoUrl": "/videos/States/kerala.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-KL",
+        "color": "#779ecb"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state is known for backwaters and Kathakali dance?",
+          "Which state lies along the southwestern coast and has Thiruvananthapuram as capital?",
+          "Which state is one of the most literate states in India?"
+        ],
+        "capital": "Thiruvananthapuram",
+        "capitalVideo": "/videos/Capitals/thiruvananthapuram.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-MP",
+      "name": "Madhya Pradesh",
+      "videoUrl": "/videos/States/madhya_pradesh.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-MP",
+        "color": "#fdfd96"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state is located at the center of India?",
+          "Which state is home to the Khajuraho temples and Kanha National Park?",
+          "Which state has Bhopal as its capital?"
+        ],
+        "capital": "Bhopal",
+        "capitalVideo": "/videos/Capitals/bhopal.mp4",
+        "capitalEnabled": true
+      }
+    },
+    {
+      "id": "IN-MH",
+      "name": "Maharashtra",
+      "videoUrl": "/videos/States/maharashtra.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-MH",
+        "color": "#ffb347"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state has Mumbai as its capital, the financial capital of India?",
+          "Which state is the second-most populous in India?",
+          "Which state is famous for Ajanta and Ellora caves?"
+        ],
+        "capital": "Mumbai",
+        "capitalVideo": "/videos/Capitals/mumbai.mp4",
+        "capitalEnabled": true
+      }
+    },
+    {
+      "id": "IN-MN",
+      "name": "Manipur",
+      "videoUrl": "/videos/States/manipur.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-MN",
+        "color": "#e6e6fa"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which northeastern state has Imphal as its capital?",
+          "Which state is known for the classical dance 'Ras Lila'?",
+          "Which state shares its border with Myanmar?"
+        ],
+        "capital": "Imphal",
+        "capitalVideo": "/videos/Capitals/imphal.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-ML",
+      "name": "Meghalaya",
+      "videoUrl": "/videos/States/meghalaya.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-ML",
+        "color": "#f6e8b1"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state is called the 'Abode of Clouds'?",
+          "Which northeastern state has Shillong as its capital?",
+          "Which state is home to Cherrapunji, one of the wettest places on Earth?"
+        ],
+        "capital": "Shillong",
+        "capitalVideo": "/videos/Capitals/shillong.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-MZ",
+      "name": "Mizoram",
+      "videoUrl": "/videos/States/mizoram.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-MZ",
+        "color": "#b0e0e6"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state has Aizawl as its capital and is covered mostly by forests?",
+          "Which state borders both Myanmar and Bangladesh?",
+          "Which state is known for its vibrant tribal culture and bamboo dance?"
+        ],
+        "capital": "Aizawl",
+        "capitalVideo": "/videos/Capitals/aizawl.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-NL",
+      "name": "Nagaland",
+      "videoUrl": "/videos/States/nagaland.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-NL",
+        "color": "#e0ffff"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state has Kohima as its capital and is famous for the Hornbill Festival?",
+          "Which state is home to many indigenous tribes and colorful attire?",
+          "Which state lies to the east of Assam?"
+        ],
+        "capital": "Kohima",
+        "capitalVideo": "/videos/Capitals/kohima.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-OR",
+      "name": "Odisha",
+      "videoUrl": "/videos/States/odisha.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-OR",
+        "color": "#f08080"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state is home to the Jagannath temple in Puri?",
+          "Which state has Bhubaneswar as its capital and is known for the Konark Sun Temple?",
+          "Which state lies on the eastern coast and is prone to cyclones?"
+        ],
+        "capital": "Bhubaneswar",
+        "capitalVideo": "/videos/Capitals/bhubaneswar.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-PB",
+      "name": "Punjab",
+      "videoUrl": "/videos/States/punjab.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-PB",
+        "color": "#d26af5"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state is famous for the Golden Temple and Bhangra dance?",
+          "Which state lies in the northwest of India and shares a border with Pakistan?",
+          "Which state has Chandigarh as its shared capital with Haryana?"
+        ],
+        "capital": "Chandigarh",
+        "capitalVideo": "/videos/Capitals/chandigarh.mp4",
+        "capitalEnabled": true
+      }
+    },
+    {
+      "id": "IN-RJ",
+      "name": "Rajasthan",
+      "videoUrl": "/videos/States/rajasthan.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-RJ",
+        "color": "#ff6961"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state is famous for the Thar Desert and forts like Jaipur and Udaipur?",
+          "Which is the largest state in India by area?",
+          "Which state has Jaipur as its capital?"
+        ],
+        "capital": "Jaipur",
+        "capitalVideo": "/videos/Capitals/jaipur.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-SK",
+      "name": "Sikkim",
+      "videoUrl": "/videos/States/sikkim.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-SK",
+        "color": "#b39eb5"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state is the least populous in India and lies in the eastern Himalayas?",
+          "Which state has Gangtok as its capital?",
+          "Which state borders China, Bhutan, and Nepal?"
+        ],
+        "capital": "Gangtok",
+        "capitalVideo": "/videos/Capitals/gangtok.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-TN",
+      "name": "Tamil Nadu",
+      "videoUrl": "/videos/States/tamil_nadu.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-TN",
+        "color": "#aec6cf"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state is known for temples like Meenakshi and classical music?",
+          "Which southern state has Chennai as its capital?",
+          "Which state is the home of the Tamil language?"
+        ],
+        "capital": "Chennai",
+        "capitalVideo": "/videos/Capitals/chennai.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-TG",
+      "name": "Telangana",
+      "videoUrl": "/videos/States/telangana.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-TG",
+        "color": "#ffd700"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state was formed in 2014 from Andhra Pradesh?",
+          "Which state has Hyderabad as its capital?",
+          "Which southern state lies between Maharashtra and Andhra Pradesh?"
+        ],
+        "capital": "Hyderabad",
+        "capitalVideo": "/videos/Capitals/hyderabad.mp4",
+        "capitalEnabled": true
+      }
+    },
+    {
+      "id": "IN-TR",
+      "name": "Tripura",
+      "videoUrl": "/videos/States/tripura.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-TR",
+        "color": "#c6ecc6"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state has Agartala as its capital and shares border with Bangladesh?",
+          "Which state lies to the southwest of Assam?",
+          "Which northeastern state is known for its bamboo products and handicrafts?"
+        ],
+        "capital": "Agartala",
+        "capitalVideo": "/videos/Capitals/agartala.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-UP",
+      "name": "Uttar Pradesh",
+      "videoUrl": "/videos/States/uttar_pradesh.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-UP",
+        "color": "#f49ac2"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state has Lucknow as its capital and is the most populous in India?",
+          "Which state is home to the Taj Mahal?",
+          "Which state lies between Uttarakhand and Madhya Pradesh?"
+        ],
+        "capital": "Lucknow",
+        "capitalVideo": "/videos/Capitals/lucknow.mp4",
+        "capitalEnabled": false
+      }
+    },
+    {
+      "id": "IN-UK",
+      "name": "Uttarakhand",
+      "videoUrl": "/videos/States/uttarakhand.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-UK",
+        "color": "#ffdab9"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state is known for pilgrimage sites like Haridwar and Kedarnath?",
+          "Which state has Dehradun as its capital?",
+          "Which hill state was carved out of Uttar Pradesh?"
+        ],
+        "capital": "Dehradun",
+        "capitalVideo": "/videos/Capitals/dehradun.mp4",
+        "capitalEnabled": true
+      }
+    },
+    {
+      "id": "IN-WB",
+      "name": "West Bengal",
+      "videoUrl": "/videos/States/west_bengal.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-WB",
+        "color": "#ffff99"
+      },
+      "metadata": {
+        "type": "state",
+        "questions": [
+          "Which state has Kolkata as its capital and borders Bangladesh?",
+          "Which state is known for the Sunderbans mangroves and Howrah Bridge?",
+          "Which state is home to the Darjeeling tea estates?"
+        ],
+        "capital": "Kolkata",
+        "capitalVideo": "/videos/Capitals/kolkata.mp4",
+        "capitalEnabled": false
+      }
+    }
+  ]
+}

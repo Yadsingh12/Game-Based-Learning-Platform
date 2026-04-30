@@ -1,0 +1,202 @@
+{
+  "packId": "fruits-1",
+  "categoryId": "fruits",
+  "name": "Fruits Pack 1",
+  "signs": [
+    {
+      "id": "apple",
+      "name": "Apple",
+      "videoUrl": "/videos/Fruits/apple.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/apple.png"
+      },
+      "meta": {
+        "color": "red",
+        "taste": "sweet"
+      }
+    },
+    {
+      "id": "banana",
+      "name": "Banana",
+      "videoUrl": "/videos/Fruits/banana.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/banana.png"
+      },
+      "meta": {
+        "color": "yellow",
+        "taste": "sweet"
+      }
+    },
+    {
+      "id": "grapes",
+      "name": "Grapes",
+      "videoUrl": "/videos/Fruits/grapes.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/grapes.png"
+      },
+      "meta": {
+        "color": "purple",
+        "taste": "sweet"
+      }
+    },
+    {
+      "id": "guava",
+      "name": "Guava",
+      "videoUrl": "/videos/Fruits/guava.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/guava.png"
+      },
+      "meta": {
+        "color": "green",
+        "taste": "sweet"
+      }
+    },
+    {
+      "id": "lychee",
+      "name": "Lychee",
+      "videoUrl": "/videos/Fruits/lychee(litchi).mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/lychee.png"
+      },
+      "meta": {
+        "color": "white",
+        "taste": "sweet"
+      }
+    },
+    {
+      "id": "mango",
+      "name": "Mango",
+      "videoUrl": "/videos/Fruits/mango.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/mango.png"
+      },
+      "meta": {
+        "color": "yellow/orange",
+        "taste": "sweet"
+      }
+    },
+    {
+      "id": "orange",
+      "name": "Orange",
+      "videoUrl": "/videos/Fruits/orange.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/orange.png"
+      },
+      "meta": {
+        "color": "orange",
+        "taste": "citrus"
+      }
+    },
+    {
+      "id": "papaya",
+      "name": "Papaya",
+      "videoUrl": "/videos/Fruits/papaya.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/papaya.png"
+      },
+      "meta": {
+        "color": "orange",
+        "taste": "sweet"
+      }
+    },
+    {
+      "id": "pear",
+      "name": "Pear",
+      "videoUrl": "/videos/Fruits/pear.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/pear.png"
+      },
+      "meta": {
+        "color": "green",
+        "taste": "sweet"
+      }
+    },
+    {
+      "id": "pineapple",
+      "name": "Pineapple",
+      "videoUrl": "/videos/Fruits/pineapple.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/pineapple.png"
+      },
+      "meta": {
+        "color": "yellow",
+        "taste": "tart"
+      }
+    },
+    {
+      "id": "plum",
+      "name": "Plum",
+      "videoUrl": "/videos/Fruits/plum.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/plum.png"
+      },
+      "meta": {
+        "color": "purple",
+        "taste": "sweet"
+      }
+    },
+    {
+      "id": "pomegranate",
+      "name": "Pomegranate",
+      "videoUrl": "/videos/Fruits/pomegranate.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/pomegranate.png"
+      },
+      "meta": {
+        "color": "red",
+        "taste": "tart"
+      }
+    },
+    {
+      "id": "sapodilla",
+      "name": "Sapodilla",
+      "videoUrl": "/videos/Fruits/sapodilla(cheeku).mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/sapodilla.png"
+      },
+      "meta": {
+        "color": "brown",
+        "taste": "sweet"
+      }
+    },
+    {
+      "id": "strawberry",
+      "name": "Strawberry",
+      "videoUrl": "/videos/Fruits/strawberry.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/strawberry.png"
+      },
+      "meta": {
+        "color": "red",
+        "taste": "sweet"
+      }
+    },
+    {
+      "id": "watermelon",
+      "name": "Watermelon",
+      "videoUrl": "/videos/Fruits/watermelon.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/Fruits/watermelon.png"
+      },
+      "meta": {
+        "color": "green/red",
+        "taste": "sweet"
+      }
+    }
+  ]
+}

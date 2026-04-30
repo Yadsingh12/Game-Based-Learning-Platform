@@ -1,0 +1,204 @@
+{
+  "games": [
+    {
+      "id": "learn",
+      "name": "Learn",
+      "icon": "Book",
+      "description": "Watch and learn signs",
+      "unlockRequirement": null,
+      "applicableCategories": [
+        "alphabets",
+        "numerals",
+        "time",
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "daysOfWeek"
+      ]
+    },
+    {
+      "id": "interactiveClock",
+      "name": "Interactive Clock",
+      "icon": "Clock",
+      "description": "Learn to tell time with an interactive clock",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 85
+      },
+      "applicableCategories": ["time"]
+    },
+    {
+      "id": "bucket",
+      "name": "Bucket Game",
+      "icon": "Droplet",
+      "description": "Fill the bucket to match numbers",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 60
+      },
+      "applicableCategories": ["numerals"]
+    },
+    {
+      "id": "breakout",
+      "name": "Breakout",
+      "icon": "Gamepad",
+      "description": "Break bricks and catch numbers",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 70
+      },
+      "applicableCategories": ["numerals", "colors", "alphabets"]
+    },
+    {
+      "id": "findInImage",
+      "name": "Find In Image",
+      "icon": "Search",
+      "description": "Find items in a picture",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 60
+      },
+      "applicableCategories": ["fruits"]
+    },
+    {
+      "id": "crossWord",
+      "name": "Crossword Game",
+      "icon": "Grid",
+      "description": "Guess the word in 3 tries - like Wordle!",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 90
+      },
+      "applicableCategories": [
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "daysOfWeek"
+      ]
+    },
+    {
+      "id": "wordScramble",
+      "name": "Word Scramble",
+      "icon": "Shuffle",
+      "description": "Unscramble the letters to form a word",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 80
+      },
+      "applicableCategories": [
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "daysOfWeek"
+      ]
+    },
+    {
+      "id": "wordSearch",
+      "name": "Word Search",
+      "icon": "Grid3x3",
+      "description": "Find hidden words in the grid",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 75
+      },
+      "applicableCategories": [
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "daysOfWeek"
+      ]
+    },
+    {
+      "id": "indiaMap",
+      "name": "India Map Game",
+      "icon": "MapPin",
+      "description": "Identify states on the map of India",
+      "unlockRequirement": { "game": "learn", "minScore": 85 },
+      "applicableCategories": ["statesOfIndia"]
+    },
+    {
+      "id": "multipleChoice",
+      "name": "Multiple Choice",
+      "icon": "CheckSquare",
+      "description": "Watch video and pick the correct answer",
+      "unlockRequirement": { "game": "learn", "minScore": 70 },
+      "applicableCategories": [
+        "alphabets",
+        "numerals",
+        "time",
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "daysOfWeek"
+      ]
+    },
+    {
+      "id": "reverseMultipleChoice",
+      "name": "Video Match",
+      "icon": "Video",
+      "description": "See image and find the matching video",
+      "unlockRequirement": { "game": "learn", "minScore": 60 },
+      "applicableCategories": [
+        "alphabets",
+        "numerals",
+        "time",
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "daysOfWeek"
+      ]
+    },
+    {
+      "id": "countingGame",
+      "name": "Counting Game",
+      "icon": "Hash",
+      "description": "Count the objects and select the correct number",
+      "unlockRequirement": { "game": "learn", "minScore": 70 },
+      "applicableCategories": ["numerals"]
+    },
+    {
+      "id": "colorMatch",
+      "name": "Color Match",
+      "icon": "Palette",
+      "description": "Identify colors in images and match them to signs",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 60
+      },
+      "applicableCategories": ["colors"]
+    },
+    {
+      "id": "dragDropMatch",
+      "name": "Match & Drop",
+      "icon": "Move",
+      "description": "Drag and drop to match images with sign videos",
+      "unlockRequirement": {
+        "game": "learn",
+        "minScore": 70
+      },
+      "applicableCategories": [
+        "alphabets",
+        "numerals",
+        "time",
+        "colors",
+        "fruits",
+        "everydayObjects",
+        "shapes",
+        "statesOfIndia",
+        "daysOfWeek"
+      ]
+    }
+  ]
+}

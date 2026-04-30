@@ -1,0 +1,151 @@
+{
+  "packId": "Uts-1",
+  "categoryId": "Union-territories",
+  "name": "Indian UTs Pack 1",
+  "signs": [
+    {
+      "id": "IN-AN",
+      "name": "Andaman & Nicobar",
+      "videoUrl": "/videos/UTs/andaman_nicobar.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-AN",
+        "color": "#e0bbe4"
+      },
+      "metadata": {
+        "type": "union territory",
+        "questions": [
+          "Which UT is an island group located in the Bay of Bengal?",
+          "Which UT has Port Blair as its capital?",
+          "Which UT includes Havelock and Neil Islands?"
+        ]
+      }
+    },
+    {
+      "id": "IN-CH",
+      "name": "Chandigarh",
+      "videoUrl": "/videos/UTs/chandigarh.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-CH",
+        "color": "#c2f0c2"
+      },
+      "metadata": {
+        "type": "union territory",
+        "questions": [
+          "Which UT serves as the capital for both Punjab and Haryana?",
+          "Which UT is known for its urban design by Le Corbusier?",
+          "Which UT is located in the foothills of the Shivalik range?"
+        ]
+      }
+    },
+    {
+      "id": "IN-DL",
+      "name": "Delhi",
+      "videoUrl": "/videos/UTs/delhi.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-DL",
+        "color": "#dda0dd"
+      },
+      "metadata": {
+        "type": "union territory",
+        "questions": [
+          "Which UT is the national capital of India?",
+          "Which UT includes historical sites like Red Fort and India Gate?",
+          "Which UT is home to the Parliament and Rashtrapati Bhavan?"
+        ]
+      }
+    },
+    {
+      "id": "IN-DN",
+      "name": "Dadra and Nagar Haveli and Daman and Diu",
+      "videoUrl": "/videos/UTs/dadra_nagar_haveli_daman_diu.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-DN",
+        "color": "#add8e6"
+      },
+      "metadata": {
+        "type": "union territory",
+        "questions": [
+          "Which UT lies on the western coast and was merged in 2020?",
+          "Which UT has Daman as one of its main cities?",
+          "Which UT was formerly two separate Portuguese territories?"
+        ]
+      }
+    },
+    {
+      "id": "IN-JK",
+      "name": "Jammu and Kashmir",
+      "videoUrl": "/videos/UTs/jammu_kashmir.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-JK",
+        "color": "#ffcccb"
+      },
+      "metadata": {
+        "type": "union territory",
+        "questions": [
+          "Which UT is famous for Srinagar and Dal Lake?",
+          "Which UT borders only Pakistan among India's neighbors?",
+          "Which UT was reorganized from a state in 2019 along with Ladakh?"
+        ]
+      }
+    },
+    {
+      "id": "IN-LA",
+      "name": "Ladakh",
+      "videoUrl": "/videos/UTs/ladakh.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-LA",
+        "color": "#ffb6c1"
+      },
+      "metadata": {
+        "type": "union territory",
+        "questions": [
+          "Which UT includes the districts of Leh and Kargil?",
+          "Which UT shares its borders with both Pakistan and China?",
+          "Which UT is known for Pangong Lake and Buddhist monasteries?"
+        ]
+      }
+    },
+    {
+      "id": "IN-LD",
+      "name": "Lakshadweep",
+      "videoUrl": "/videos/UTs/lakshadweep.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-LD",
+        "color": "#98fb98"
+      },
+      "metadata": {
+        "type": "union territory",
+        "questions": [
+          "Which UT is a group of coral islands in the Arabian Sea?",
+          "Which UT has Kavaratti as its capital?",
+          "Which UT is the smallest in terms of population?"
+        ]
+      }
+    },
+    {
+      "id": "IN-PY",
+      "name": "Puducherry",
+      "videoUrl": "/videos/UTs/puducherry.mp4",
+      "visual": {
+        "type": "svg-path",
+        "svgId": "IN-PY",
+        "color": "#e6e6fa"
+      },
+      "metadata": {
+        "type": "union territory",
+        "questions": [
+          "Which UT has four unconnected districts in different parts of South India?",
+          "Which UT was formerly a French colony?",
+          "Which UT has Puducherry city as its capital?"
+        ]
+      }
+    }
+  ]
+}

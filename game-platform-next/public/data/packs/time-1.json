@@ -1,0 +1,107 @@
+{
+  "packId": "time-1",
+  "categoryId": "time",
+  "name": "Time & Clock Pack 1",
+  "signs": [
+    {
+      "id": "3_20_pm",
+      "name": "3:20 PM",
+      "videoUrl": "/videos/Times/3_20 pm.mp4",
+      "visual": {
+        "type": "clock",
+        "hour": 3,
+        "minute": 20,
+        "period": "PM"
+      },
+      "metadata": {
+        "correctTime": {
+          "hour": 3,
+          "minute": 20,
+          "period": "PM"
+        },
+        "display12Hour": "3:20 PM",
+        "display24Hour": "15:20"
+      }
+    },
+    {
+      "id": "5_40_am",
+      "name": "5:40 AM",
+      "videoUrl": "/videos/Times/5_40 am.mp4",
+      "visual": {
+        "type": "clock",
+        "hour": 5,
+        "minute": 40,
+        "period": "AM"
+      },
+      "metadata": {
+        "correctTime": {
+          "hour": 5,
+          "minute": 40,
+          "period": "AM"
+        },
+        "display12Hour": "5:40 AM",
+        "display24Hour": "05:40"
+      }
+    },
+    {
+      "id": "9_45_am",
+      "name": "9:45 AM",
+      "videoUrl": "/videos/Times/9_45 am.mp4",
+      "visual": {
+        "type": "clock",
+        "hour": 9,
+        "minute": 45,
+        "period": "AM"
+      },
+      "metadata": {
+        "correctTime": {
+          "hour": 9,
+          "minute": 45,
+          "period": "AM"
+        },
+        "display12Hour": "9:45 AM",
+        "display24Hour": "09:45"
+      }
+    },
+    {
+      "id": "10_30_am",
+      "name": "10:30 AM",
+      "videoUrl": "/videos/Times/10_30 am.mp4",
+      "visual": {
+        "type": "clock",
+        "hour": 10,
+        "minute": 30,
+        "period": "AM"
+      },
+      "metadata": {
+        "correctTime": {
+          "hour": 10,
+          "minute": 30,
+          "period": "AM"
+        },
+        "display12Hour": "10:30 AM",
+        "display24Hour": "10:30"
+      }
+    },
+    {
+      "id": "12_05_pm",
+      "name": "12:05 PM",
+      "videoUrl": "/videos/Times/12_05 pm.mp4",
+      "visual": {
+        "type": "clock",
+        "hour": 12,
+        "minute": 5,
+        "period": "PM"
+      },
+      "metadata": {
+        "correctTime": {
+          "hour": 12,
+          "minute": 5,
+          "period": "PM"
+        },
+        "display12Hour": "12:05 PM",
+        "display24Hour": "12:05"
+      }
+    }
+  ]
+}

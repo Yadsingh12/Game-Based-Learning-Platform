@@ -1,0 +1,217 @@
+{
+  "packId": "everyday-objects-1",
+  "categoryId": "everyday-objects",
+  "name": "Everyday Objects Pack 1",
+  "signs": [
+    {
+      "id": "person",
+      "name": "Person",
+      "description": "A human being, regarded as an individual.",
+      "videoUrl": "/videos/everyday-objects/person.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/person.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/person.jpg"]
+        }
+      }
+    },
+    {
+      "id": "bicycle",
+      "name": "Bicycle",
+      "description": "A two-wheeled vehicle that is powered by pedaling.",
+      "videoUrl": "/videos/everyday-objects/bicycle.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/bicycle.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/bicycle.jpg"]
+        }
+      }
+    },
+    {
+      "id": "car",
+      "name": "Car",
+      "description": "A four-wheeled motor vehicle used for transportation.",
+      "videoUrl": "/videos/everyday-objects/car.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/car.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/car.jpg"]
+        }
+      }
+    },
+    {
+      "id": "motorcycle",
+      "name": "Motorcycle",
+      "description": "A two-wheeled motor vehicle that is faster than a bicycle.",
+      "videoUrl": "/videos/everyday-objects/motorcycle.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/motorcycle.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/motorcycle.jpg"]
+        }
+      }
+    },
+    {
+      "id": "airplane",
+      "name": "Airplane",
+      "description": "A powered flying vehicle with fixed wings.",
+      "videoUrl": "/videos/everyday-objects/airplane.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/airplane.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/airplane.jpg"]
+        }
+      }
+    },
+    {
+      "id": "bus",
+      "name": "Bus",
+      "description": "A large motor vehicle carrying passengers.",
+      "videoUrl": "/videos/everyday-objects/bus.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/bus.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/bus.jpg"]
+        }
+      }
+    },
+    {
+      "id": "train",
+      "name": "Train",
+      "description": "A connected series of railway cars moving on tracks.",
+      "videoUrl": "/videos/everyday-objects/train.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/train.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/train.jpg"]
+        }
+      }
+    },
+    {
+      "id": "truck",
+      "name": "Truck",
+      "description": "A large motor vehicle designed for transporting goods.",
+      "videoUrl": "/videos/everyday-objects/truck.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/truck.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/truck.jpg"]
+        }
+      }
+    },
+    {
+      "id": "boat",
+      "name": "Boat",
+      "description": "A watercraft of various sizes used for transportation on water.",
+      "videoUrl": "/videos/everyday-objects/boat.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/boat.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/boat.jpg"]
+        }
+      }
+    },
+    {
+      "id": "traffic-light",
+      "name": "Traffic Light",
+      "description": "A signaling device at road intersections controlling traffic flow.",
+      "videoUrl": "/videos/everyday-objects/traffic_light.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/traffic_light.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/traffic_light.jpg"]
+        }
+      }
+    },
+    {
+      "id": "stop-sign",
+      "name": "Stop Sign",
+      "description": "A road sign indicating vehicles must stop before proceeding.",
+      "videoUrl": "/videos/everyday-objects/stop_sign.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/stop_sign.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/stop_sign.jpg"]
+        }
+      }
+    },
+    {
+      "id": "bird",
+      "name": "Bird",
+      "description": "A warm-blooded vertebrate animal with feathers and wings.",
+      "videoUrl": "/videos/everyday-objects/bird.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/bird.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/bird.jpg"]
+        }
+      }
+    },
+    {
+      "id": "cat",
+      "name": "Cat",
+      "description": "A small domesticated carnivorous mammal with soft fur.",
+      "videoUrl": "/videos/everyday-objects/cat.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/cat.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/cat.jpg"]
+        }
+      }
+    },
+    {
+      "id": "dog",
+      "name": "Dog",
+      "description": "A domesticated carnivorous mammal known for loyalty and companionship.",
+      "videoUrl": "/videos/everyday-objects/dog.mp4",
+      "visual": {
+        "type": "image",
+        "value": "/images/everyday-objects/dog.jpg"
+      },
+      "assets": {
+        "match": {
+          "images": ["/images/everyday-objects/dog.jpg"]
+        }
+      }
+    }
+  ]
+}
