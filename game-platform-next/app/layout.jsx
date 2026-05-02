@@ -3,6 +3,7 @@ import { Syne } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import SessionProvider from '@/components/SessionProvider'
 import { auth } from '@/lib/auth'
+import NextTopLoader from 'nextjs-toploader'
 
 const syne = Syne({
   subsets: ['latin'],
@@ -20,15 +21,29 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en" className={syne.variable}>
-      <body className="h-dvh w-full flex flex-col overflow-hidden">
+      <body style={{
+        height: '100dvh',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+        fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+        WebkitFontSmoothing: 'antialiased',
+        margin: 0,
+        padding: 0,
+      }}>
+        <NextTopLoader color="#7c3aed" showSpinner={false} />
         <SessionProvider session={session}>
-          <div className="flex-none">
+
+          {/* Navbar — fixed height */}
+          <div style={{ flexShrink: 0 }}>
             <Navbar />
           </div>
-          {/* flex-1 + overflow-y-auto = scrollable content region */}
-          <main className="flex-1 overflow-y-auto overflow-x-hidden">
+
+          {/* Content — scrollable, full remaining height */}
+          <main style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden' }}>
             {children}
           </main>
+
         </SessionProvider>
       </body>
     </html>

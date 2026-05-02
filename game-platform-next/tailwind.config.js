@@ -6,12 +6,6 @@ module.exports = {
     './games/**/*.{js,jsx,ts,tsx}',
     './lib/**/*.{js,jsx,ts,tsx}',
   ],
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-      },
-    },
-  },
+  theme: { extend: {} },
   plugins: [],
 }
