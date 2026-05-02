@@ -13,6 +13,7 @@ model User {
   email     String   @unique
   name      String?
   image     String?
+  emailVerified DateTime?  
   createdAt DateTime @default(now())
 
   accounts  Account[]

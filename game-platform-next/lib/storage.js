@@ -1,29 +1,51 @@
-// lib/storage.js
-// NOTE — future DB sync point:
-// When adding a backend, replace localStorage calls here with API calls.
-// Suggested pattern: write to localStorage immediately (optimistic),
-// then sync to DB in the background. On load, prefer DB data over localStorage
-// if the user is authenticated, falling back to localStorage when offline.
-
 const isBrowser = typeof window !== 'undefined'
+
+// ── local helpers ──────────────────────────────────────────────────────────
+
+const localGet = (packId, gameId) => {
+  if (!isBrowser) return null
+  const key = `progress_${packId}_${gameId}`
+  const stored = localStorage.getItem(key)
+  return stored ? JSON.parse(stored) : null
+}
+
+const localSet = (packId, gameId, progress) => {
+  if (!isBrowser) return
+  const key = `progress_${packId}_${gameId}`
+  localStorage.setItem(key, JSON.stringify(progress))
+}
+
+// ── DB sync (fire and forget) ──────────────────────────────────────────────
+
+async function syncToDb(packId, gameId, progress) {
+  try {
+    await fetch('/api/progress', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ packId, gameId, ...progress }),
+    })
+  } catch (err) {
+    console.warn('Progress sync failed (offline?):', err)
+  }
+}
+
+// ── public API ─────────────────────────────────────────────────────────────
 
 export const getProgress = (packId, gameId) => {
   if (!isBrowser) return { completed: false, score: 0, attempts: 0 }
-  const key = `progress_${packId}_${gameId}`
-  const stored = localStorage.getItem(key)
-  return stored ? JSON.parse(stored) : { completed: false, score: 0, attempts: 0 }
+  return localGet(packId, gameId) ?? { completed: false, score: 0, attempts: 0 }
 }
 
 export const saveProgress = (packId, gameId, progress) => {
   if (!isBrowser) return
-  const key = `progress_${packId}_${gameId}`
-  localStorage.setItem(key, JSON.stringify(progress))
-  // TODO: sync to DB
-  // syncProgressToDb(packId, gameId, progress).catch(console.warn)
+  // Write locally first (instant UI update)
+  localSet(packId, gameId, progress)
+  // Sync to DB in background — won't block game exit
+  syncToDb(packId, gameId, progress)
 }
 
 export const isGameUnlocked = (packId, gameTemplate) => {
-  if (!isBrowser) return true   // show all unlocked during SSR, real check happens client-side
+  if (!isBrowser) return true
   if (!gameTemplate.unlockRequirement) return true
   const { game, minScore } = gameTemplate.unlockRequirement
   const progress = getProgress(packId, game)
@@ -39,16 +61,30 @@ export const getAvailableGames = (pack, allGames) => {
   return allGames.filter(game => isGameSupported(pack, game.id))
 }
 
-// ---------------------------------------------------------------------------
-// loadPack — client-only, only call this from client components (SignTypePage)
-// Server components use fetchPackData from @/lib/mediaCache.server directly
-// ---------------------------------------------------------------------------
+// Hydrate localStorage from DB on login — call this once after session loads
+export const hydrateProgressFromDb = async () => {
+  if (!isBrowser) return
+  try {
+    const res = await fetch('/api/progress')
+    if (!res.ok) return
+    const entries = await res.json()
+    for (const entry of entries) {
+      localSet(entry.packId, entry.gameId, {
+        completed: entry.completed,
+        score:     entry.score,
+        attempts:  entry.attempts,
+      })
+    }
+  } catch (err) {
+    console.warn('Failed to hydrate progress:', err)
+  }
+}
+
 export const loadPack = async (dataFile, onProgress) => {
   if (!isBrowser) return { data: null, assets: null }
   try {
-    // Dynamic import so this module stays server-safe at the top level
     const { fetchPackData, preloadPackMedia } = await import('@/lib/mediaCache.client')
-    const packId = dataFile.replace('.json', '')
+    const packId   = dataFile.replace('.json', '')
     const packData = await fetchPackData(packId, dataFile)
     const assets   = await preloadPackMedia(packId, packData, onProgress)
     return { data: packData, assets }
