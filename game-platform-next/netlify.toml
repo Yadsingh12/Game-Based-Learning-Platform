@@ -1,0 +1,7 @@
+[build]
+  base    = "game-platform-next"
+  command = "prisma generate && next build --webpack"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
