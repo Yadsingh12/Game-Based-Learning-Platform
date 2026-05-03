@@ -3,5 +3,8 @@
   command = "prisma generate && next build --webpack"
   publish = ".next"
 
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 [build.environment]
   NODE_VERSION = "20"
