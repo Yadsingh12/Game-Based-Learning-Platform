@@ -1,4 +1,3 @@
-// components/Navbar.tsx  — replace entire file
 'use client'
 import React, { useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
@@ -41,8 +40,7 @@ export default function Navbar() {
   const go = path => { router.push(path); setMenuOpen(false) }
 
   return (
-    <nav className="relative z-40 bg-white/80 backdrop-blur-xl border-b border-purple-100/50 shadow-sm">
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-500 via-blue-500 to-violet-500 opacity-60" />
+    <nav className="sticky top-0 z-40 bg-[#0f0a1e]/90 backdrop-blur-md border-b border-white/[0.07]">
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center gap-2">
 
@@ -51,111 +49,141 @@ export default function Navbar() {
           <button
             onClick={() => router.push(backPath)}
             aria-label="Go back"
-            className="flex items-center justify-center w-9 h-9 rounded-xl text-gray-500
-                       hover:text-violet-700 hover:bg-violet-50 active:scale-90 transition-all duration-150"
+            className="w-8 h-8 rounded-lg flex items-center justify-center
+                       text-white/35 hover:text-white/75 hover:bg-white/[0.06]
+                       active:scale-90 transition-all duration-150"
           >
-            <ArrowLeft size={18} strokeWidth={2.5} />
+            <ArrowLeft size={16} strokeWidth={2.5} />
           </button>
         )}
 
-        {/* Logo — no mr-auto so desktop links can be pushed right naturally */}
+        {/* Logo */}
         <button
           onClick={() => go('/')}
-          className="flex items-center gap-2.5 group px-2 py-1 rounded-2xl
-                     hover:bg-gray-100/70 active:scale-[0.98] transition-all duration-200"
+          className="flex items-center gap-2.5 active:scale-[0.98] transition-transform duration-150"
         >
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-600 to-blue-600
-                          flex items-center justify-center shadow-md shadow-violet-200
-                          group-hover:shadow-violet-300 group-hover:scale-105 transition-all duration-200 flex-shrink-0">
-            <svg viewBox="0 0 20 20" fill="none" className="w-[18px] h-[18px]">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-blue-600
+                          flex items-center justify-center flex-shrink-0">
+            <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
               <path d="M5 15V8M5 8L10 5L15 8M15 8V15"
                 stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              <circle cx="10" cy="12" r="2.5" fill="white" fillOpacity="0.95" />
+              <circle cx="10" cy="12" r="2.5" fill="white" />
             </svg>
           </div>
           <div className="flex flex-col leading-none">
-            <span className="font-black text-[1.05rem] tracking-tight
-                             bg-gradient-to-r from-violet-700 to-blue-600 bg-clip-text text-transparent">
+            <span className="font-black text-[15px] tracking-tight text-white">
               SignLearn
             </span>
             {title && (
-              <span className="text-[0.6rem] font-semibold tracking-widest uppercase text-gray-400 mt-0.5">
+              <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-white/25 mt-0.5">
                 {title}
               </span>
             )}
           </div>
         </button>
 
-        {/* Spacer — pushes nav links to the right */}
         <div className="flex-1" />
 
-        {/* Desktop links */}
-        <div className="hidden sm:flex items-center gap-1">
+        {/* Desktop nav links */}
+        <div className="hidden sm:flex items-center gap-0.5">
           <NavLink active={isActive('/')}       onClick={() => go('/')}>Home</NavLink>
           <NavLink active={isActive('/about')}  onClick={() => go('/about')}>About</NavLink>
           <NavLink active={isActive('/forum')}  onClick={() => go('/forum')}>Forum</NavLink>
           <NavLink active={isActive('/donate')} onClick={() => go('/donate')}>Donate</NavLink>
+        </div>
 
+        {/* Desktop auth */}
+        <div className="hidden sm:flex items-center">
           {session ? (
-            <div className="flex items-center gap-1 ml-3 pl-3 border-l border-purple-100">
-              <button onClick={() => go('/dashboard')}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-sm font-semibold
-                           text-gray-600 hover:text-violet-700 hover:bg-violet-50 transition-all">
-                {session.user?.image && (
+            <>
+              <div className="w-px h-5 bg-white/[0.08] mx-3" />
+              <button
+                onClick={() => go('/dashboard')}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg
+                           text-white/55 hover:text-white hover:bg-white/[0.06]
+                           transition-all duration-150"
+              >
+                {session.user?.image ? (
                   <img src={session.user.image} alt=""
-                    className="w-6 h-6 rounded-full ring-1 ring-violet-200" />
+                    className="w-6 h-6 rounded-full" />
+                ) : (
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-violet-600 to-blue-600
+                                  flex items-center justify-center text-[11px] font-black text-white">
+                    {session.user?.name?.[0]}
+                  </div>
                 )}
-                {session.user?.name?.split(' ')[0]}
+                <span className="text-sm font-semibold">
+                  {session.user?.name?.split(' ')[0]}
+                </span>
               </button>
-              <button onClick={() => signOut()}
-                className="px-3 py-1.5 rounded-xl text-sm font-semibold text-gray-400
-                           hover:text-red-500 hover:bg-red-50 transition-all">
+              <button
+                onClick={() => signOut()}
+                className="ml-1 px-3 py-1.5 rounded-lg text-sm font-semibold
+                           text-white/25 hover:text-red-400 hover:bg-red-500/10
+                           transition-all duration-150"
+              >
                 Sign out
               </button>
-            </div>
+            </>
           ) : (
-            <button onClick={() => signIn('google')}
-              className="ml-3 px-4 py-2 rounded-xl text-sm font-bold
-                         bg-gradient-to-r from-violet-600 to-blue-600 text-white
-                         hover:opacity-90 active:scale-95 transition-all shadow-sm shadow-violet-200">
-              Sign in
-            </button>
+            <>
+              <div className="w-px h-5 bg-white/[0.08] mx-3" />
+              <button
+                onClick={() => signIn('google')}
+                className="px-4 py-2 rounded-lg text-sm font-bold text-white
+                           bg-gradient-to-r from-violet-600 to-blue-600
+                           hover:opacity-90 active:scale-95 transition-all duration-150"
+              >
+                Sign in
+              </button>
+            </>
           )}
         </div>
 
         {/* Mobile hamburger */}
         <button
           onClick={() => setMenuOpen(o => !o)}
-          className="sm:hidden flex items-center justify-center w-9 h-9 rounded-xl
-                     text-gray-500 hover:text-violet-700 hover:bg-violet-50 active:scale-90 transition-all"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          className="sm:hidden w-8 h-8 rounded-lg flex items-center justify-center
+                     text-white/40 hover:text-white/75 hover:bg-white/[0.06]
+                     active:scale-90 transition-all duration-150"
         >
-          {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          {menuOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
       </div>
 
       {/* Mobile menu */}
-      <div className={`sm:hidden overflow-hidden transition-all duration-300 ease-in-out
+      <div className={`sm:hidden overflow-hidden transition-all duration-200 ease-in-out
                        ${menuOpen ? 'max-h-72 opacity-100' : 'max-h-0 opacity-0'}`}>
-        <div className="border-t border-purple-50 bg-white/95 px-3 py-2 flex flex-col gap-1">
+        <div className="border-t border-white/[0.07] bg-[#0d0919]/98 px-3 py-2 flex flex-col gap-0.5">
           <MobileNavLink active={isActive('/')}       onClick={() => go('/')}>Home</MobileNavLink>
           <MobileNavLink active={isActive('/about')}  onClick={() => go('/about')}>About</MobileNavLink>
           <MobileNavLink active={isActive('/forum')}  onClick={() => go('/forum')}>Forum</MobileNavLink>
           <MobileNavLink active={isActive('/donate')} onClick={() => go('/donate')}>Donate</MobileNavLink>
+
+          <div className="my-1.5 border-t border-white/[0.07]" />
+
           {session ? (
             <>
               <MobileNavLink active={isActive('/dashboard')} onClick={() => go('/dashboard')}>
                 Dashboard
               </MobileNavLink>
-              <button onClick={() => { signOut(); setMenuOpen(false) }}
-                className="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold
-                           text-red-500 hover:bg-red-50 border-l-2 border-transparent transition-all">
+              <button
+                onClick={() => { signOut(); setMenuOpen(false) }}
+                className="w-full text-left px-4 py-2.5 rounded-lg text-sm font-semibold
+                           text-red-400/70 hover:text-red-400 hover:bg-red-500/10
+                           transition-all duration-150"
+              >
                 Sign out
               </button>
             </>
           ) : (
-            <button onClick={() => { signIn('google'); setMenuOpen(false) }}
-              className="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold
-                         text-violet-700 bg-violet-50 border-l-2 border-violet-500 transition-all">
+            <button
+              onClick={() => { signIn('google'); setMenuOpen(false) }}
+              className="w-full py-2.5 rounded-lg text-sm font-bold text-white text-center
+                         bg-gradient-to-r from-violet-600 to-blue-600
+                         hover:opacity-90 active:scale-[0.98] transition-all duration-150"
+            >
               Sign in with Google
             </button>
           )}
@@ -167,25 +195,27 @@ export default function Navbar() {
 
 function NavLink({ children, active, onClick }) {
   return (
-    <button onClick={onClick}
-      className={`relative px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-150
-        ${active ? 'text-violet-700 bg-violet-50' : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100/80'}`}
+    <button
+      onClick={onClick}
+      className={`px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-150
+        ${active
+          ? 'text-white bg-white/[0.08]'
+          : 'text-white/45 hover:text-white/80 hover:bg-white/[0.05]'}`}
     >
       {children}
-      <span className={`absolute bottom-1 left-3 right-3 h-[2px] rounded-full
-                        bg-gradient-to-r from-violet-600 to-blue-500 transition-all duration-200 origin-left
-                        ${active ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`} />
     </button>
   )
 }
 
 function MobileNavLink({ children, active, onClick }) {
   return (
-    <button onClick={onClick}
-      className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold
-                  transition-all duration-150 border-l-2
-        ${active ? 'bg-violet-50 text-violet-700 border-violet-500'
-                 : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-transparent'}`}
+    <button
+      onClick={onClick}
+      className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-semibold
+                  transition-all duration-150
+        ${active
+          ? 'text-white bg-white/[0.08]'
+          : 'text-white/45 hover:text-white/75 hover:bg-white/[0.05]'}`}
     >
       {children}
     </button>
