@@ -1,38 +1,47 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useSession, signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
-function Avatar({ user, size = 8 }) {
+function Avatar({ user, size = 36 }) {
   const initials = user?.name?.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() ?? '?'
-  return user?.image ? (
+  if (user?.image) return (
     <img src={user.image} alt=""
-      className={`w-${size} h-${size} rounded-full object-cover flex-shrink-0`} />
-  ) : (
-    <div className={`w-${size} h-${size} rounded-full bg-violet-100 text-violet-700
-                     flex items-center justify-center font-bold text-xs flex-shrink-0`}>
-      {initials}
-    </div>
+      style={{ width: size, height: size, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} />
+  )
+  return (
+    <div style={{
+      width: size, height: size, borderRadius: '50%', flexShrink: 0,
+      background: 'rgba(124,58,237,0.2)', color: '#a78bfa',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      fontWeight: 700, fontSize: size * 0.35,
+    }}>{initials}</div>
   )
 }
 
 function timeAgo(date) {
   const s = Math.floor((Date.now() - new Date(date)) / 1000)
-  if (s < 60)   return 'just now'
-  if (s < 3600) return `${Math.floor(s/60)}m ago`
+  if (s < 60)    return 'just now'
+  if (s < 3600)  return `${Math.floor(s/60)}m ago`
   if (s < 86400) return `${Math.floor(s/3600)}h ago`
   return `${Math.floor(s/86400)}d ago`
 }
 
 export default function ForumPage() {
-  const { data: session } = useSession()
-  const [posts,       setPosts]       = useState([])
-  const [loading,     setLoading]     = useState(true)
-  const [showForm,    setShowForm]    = useState(false)
-  const [title,       setTitle]       = useState('')
-  const [body,        setBody]        = useState('')
-  const [submitting,  setSubmitting]  = useState(false)
-  const [error,       setError]       = useState('')
+  const { data: session, status } = useSession()
+  const router = useRouter()
+  const [posts,      setPosts]      = useState([])
+  const [loading,    setLoading]    = useState(true)
+  const [showForm,   setShowForm]   = useState(false)
+  const [title,      setTitle]      = useState('')
+  const [body,       setBody]       = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const [error,      setError]      = useState('')
+
+  useEffect(() => {
+    if (status === 'unauthenticated') router.push('/signin')
+  }, [status])
 
   const fetchPosts = async () => {
     setLoading(true)
@@ -42,7 +51,9 @@ export default function ForumPage() {
     setLoading(false)
   }
 
-  useEffect(() => { fetchPosts() }, [])
+  useEffect(() => {
+    if (status === 'authenticated') fetchPosts()
+  }, [status])
 
   const handleSubmit = async () => {
     setError('')
@@ -66,58 +77,70 @@ export default function ForumPage() {
     setPosts(p => p.filter(x => x.id !== postId))
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50">
+  if (status === 'loading' || status === 'unauthenticated') return (
+    <div className="min-h-screen bg-[#0f0a1e] flex items-center justify-center">
+      <div className="w-10 h-10 border-4 border-violet-500 border-t-transparent
+                      rounded-full animate-spin" />
+    </div>
+  )
 
-      {/* Header */}
-      <div className="bg-gradient-to-br from-violet-600 to-blue-600 px-6 py-12">
-        <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl font-black text-white mb-3">Community Forum</h1>
-          <p className="text-white/80 mb-8">
-            Ask questions, share tips, and connect with other ISL learners
-          </p>
-          {session?.user ? (
-            <button onClick={() => setShowForm(s => !s)}
-              className="px-6 py-3 bg-white text-violet-700 font-black rounded-2xl
-                         hover:bg-violet-50 active:scale-95 transition-all shadow-lg">
-              {showForm ? '✕ Cancel' : '✏️ New Post'}
-            </button>
-          ) : (
-            <button onClick={() => signIn('google')}
-              className="px-6 py-3 bg-white text-violet-700 font-black rounded-2xl
-                         hover:bg-violet-50 transition-all shadow-lg">
-              Sign in to post
-            </button>
-          )}
-        </div>
+  return (
+    <div className="min-h-screen bg-[#0f0a1e] relative overflow-hidden">
+
+      {/* Ambient blob */}
+      <div className="absolute top-0 left-0 right-0 h-64 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 to-blue-600/10
+                        blur-3xl scale-110" />
       </div>
 
-      <div className="max-w-3xl mx-auto px-6 py-8">
+      <div className="relative z-10 max-w-3xl mx-auto px-6 py-10">
+
+        {/* Header */}
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full
+                          bg-white/10 border border-white/10 mb-4">
+            <span className="text-sm">💬</span>
+            <span className="text-white/60 text-xs font-bold uppercase tracking-wider">
+              Community
+            </span>
+          </div>
+          <h1 className="text-4xl font-black text-white mb-3">Forum</h1>
+          <p className="text-white/40 mb-8">
+            Ask questions, share tips, connect with ISL learners
+          </p>
+          <button
+            onClick={() => setShowForm(s => !s)}
+            className="px-6 py-3 bg-gradient-to-r from-violet-600 to-blue-600
+                       text-white font-black rounded-2xl hover:opacity-90
+                       active:scale-95 transition-all shadow-lg shadow-violet-500/25">
+            {showForm ? '✕ Cancel' : '✏️ New Post'}
+          </button>
+        </div>
 
         {/* New post form */}
         {showForm && (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-            <h2 className="font-black text-gray-800 text-lg mb-4">Create a post</h2>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-6">
+            <h2 className="text-white font-black text-lg mb-4">Create a post</h2>
             <input
               type="text"
               placeholder="Title"
               value={title}
               onChange={e => setTitle(e.target.value)}
               maxLength={120}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl mb-3
-                         font-semibold text-gray-800 placeholder-gray-400
-                         focus:outline-none focus:border-violet-400 transition-all"
+              className="w-full px-4 py-3 bg-white/5 border-2 border-white/10 rounded-xl mb-3
+                         text-white placeholder-white/20 font-semibold
+                         focus:outline-none focus:border-violet-500/50 transition-all"
             />
             <textarea
-              placeholder="What's on your mind? Ask a question, share a tip..."
+              placeholder="What's on your mind?"
               value={body}
               onChange={e => setBody(e.target.value)}
               rows={4}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl mb-4
-                         text-gray-800 placeholder-gray-400 resize-none
-                         focus:outline-none focus:border-violet-400 transition-all"
+              className="w-full px-4 py-3 bg-white/5 border-2 border-white/10 rounded-xl mb-4
+                         text-white placeholder-white/20 resize-none
+                         focus:outline-none focus:border-violet-500/50 transition-all"
             />
-            {error && <p className="text-red-500 text-sm mb-3 font-medium">{error}</p>}
+            {error && <p className="text-red-400 text-sm mb-3 font-medium">{error}</p>}
             <div className="flex gap-3">
               <button onClick={handleSubmit} disabled={submitting}
                 className="px-6 py-2.5 bg-gradient-to-r from-violet-600 to-blue-600
@@ -126,60 +149,59 @@ export default function ForumPage() {
                 {submitting ? 'Posting...' : 'Post'}
               </button>
               <button onClick={() => { setShowForm(false); setError('') }}
-                className="px-6 py-2.5 bg-gray-100 text-gray-700 font-bold
-                           rounded-xl hover:bg-gray-200 transition-all">
+                className="px-6 py-2.5 bg-white/10 text-white/60 font-bold
+                           rounded-xl hover:bg-white/20 transition-all border border-white/10">
                 Cancel
               </button>
             </div>
           </div>
         )}
 
-        {/* Posts list */}
+        {/* Posts */}
         {loading ? (
           <div className="flex justify-center py-20">
-            <div className="w-10 h-10 border-4 border-violet-600 border-t-transparent
+            <div className="w-10 h-10 border-4 border-violet-500 border-t-transparent
                             rounded-full animate-spin" />
           </div>
         ) : posts.length === 0 ? (
           <div className="text-center py-20">
             <div className="text-6xl mb-4">💬</div>
-            <h3 className="text-xl font-black text-gray-800 mb-2">No posts yet</h3>
-            <p className="text-gray-500">Be the first to start a conversation!</p>
+            <h3 className="text-white font-black text-xl mb-2">No posts yet</h3>
+            <p className="text-white/40">Be the first to start a conversation!</p>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3">
             {posts.map(post => (
               <Link key={post.id} href={`/forum/${post.id}`}
-                className="block bg-white rounded-2xl border border-gray-100
-                           hover:border-violet-200 hover:shadow-md
-                           transition-all p-5 group">
+                className="block bg-white/5 border border-white/10 rounded-2xl p-5
+                           hover:bg-white/10 hover:border-white/20 transition-all group">
                 <div className="flex items-start gap-3">
-                  <Avatar user={post.user} size={9} />
+                  <Avatar user={post.user} size={36} />
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="font-black text-gray-800 group-hover:text-violet-700
-                                     transition-colors leading-tight">
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                      <h3 className="text-white font-black leading-tight
+                                     group-hover:text-violet-300 transition-colors">
                         {post.title}
                       </h3>
                       {session?.user?.id === post.user?.id && (
                         <button
                           onClick={e => { e.preventDefault(); handleDelete(post.id) }}
-                          className="text-gray-300 hover:text-red-400 transition-colors
-                                     flex-shrink-0 text-lg leading-none">
+                          className="text-white/20 hover:text-red-400 transition-colors
+                                     flex-shrink-0 text-xl leading-none">
                           ×
                         </button>
                       )}
                     </div>
-                    <p className="text-gray-500 text-sm mt-1 line-clamp-2">{post.body}</p>
-                    <div className="flex items-center gap-4 mt-3">
-                      <span className="text-xs text-gray-400 font-medium">
+                    <p className="text-white/40 text-sm line-clamp-2 mb-3">{post.body}</p>
+                    <div className="flex items-center gap-3">
+                      <span className="text-white/30 text-xs font-semibold">
                         {post.user?.name?.split(' ')[0]}
                       </span>
-                      <span className="text-xs text-gray-300">·</span>
-                      <span className="text-xs text-gray-400">{timeAgo(post.createdAt)}</span>
-                      <span className="text-xs text-gray-300">·</span>
-                      <span className="text-xs text-gray-400 font-medium">
-                        💬 {post._count?.comments ?? 0} comments
+                      <span className="text-white/20 text-xs">·</span>
+                      <span className="text-white/30 text-xs">{timeAgo(post.createdAt)}</span>
+                      <span className="text-white/20 text-xs">·</span>
+                      <span className="text-white/30 text-xs font-semibold">
+                        💬 {post._count?.comments ?? 0}
                       </span>
                     </div>
                   </div>

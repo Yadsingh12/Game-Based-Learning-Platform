@@ -41,8 +41,8 @@ export default function Navbar() {
   const go = path => { router.push(path); setMenuOpen(false) }
 
   return (
-    <nav className="relative z-40 bg-white/80 backdrop-blur-xl border-b border-purple-100 shadow-sm shadow-purple-100/50">
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-600 via-blue-500 to-violet-600" />
+    <nav className="relative z-40 bg-white/80 backdrop-blur-xl border-b border-purple-100/50 shadow-sm">
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-500 via-blue-500 to-violet-500 opacity-60" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center gap-2">
 
