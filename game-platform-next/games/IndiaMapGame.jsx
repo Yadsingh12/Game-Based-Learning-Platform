@@ -6,10 +6,6 @@ import { HelpCircle, Home, MapPin } from "lucide-react";
 
 const TOTAL_ROUNDS = 5;
 
-// ─────────────────────────────────────────────────────────────
-// Pure helper — pick a random unused question
-// ─────────────────────────────────────────────────────────────
-
 function pickQuestion(stateMap, usedIds) {
   const all      = Object.values(stateMap).filter(s => s.type === "state" && s.questions.length > 0);
   const eligible = all.filter(s => !usedIds.has(s.id));
@@ -17,27 +13,17 @@ function pickQuestion(stateMap, usedIds) {
   if (!pool.length) return null;
   const pick = pool[Math.floor(Math.random() * pool.length)];
   return {
-    id:       pick.id,
-    name:     pick.name,
-    color:    pick.color,
+    id: pick.id, name: pick.name, color: pick.color,
     videoUrl: pick.videoUrl,
     question: pick.questions[Math.floor(Math.random() * pick.questions.length)],
   };
 }
 
-// ─────────────────────────────────────────────────────────────
-// SVG path component
-// ─────────────────────────────────────────────────────────────
-
 function MapState({ id, d, fill, onHover, isDisabled }) {
   return (
-    <path
-      id={id}
-      d={d}
+    <path id={id} d={d}
       style={{
-        fill,
-        stroke: "#000",
-        strokeWidth: 0.5,
+        fill, stroke: "rgba(255,255,255,0.15)", strokeWidth: 0.5,
         transition: "fill 0.3s ease-in-out",
         cursor: isDisabled ? "not-allowed" : "pointer",
       }}
@@ -47,39 +33,30 @@ function MapState({ id, d, fill, onHover, isDisabled }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────
-// Main component
-// ─────────────────────────────────────────────────────────────
-
 export default function IndiaMapGame({ data, assets, category, onExit }) {
   const svgRef      = useRef(null);
   const pointerDown = useRef(null);
 
   const colors = category?.colorScheme || {
-    primary:   "#7c3aed",
-    secondary: "#3b82f6",
-    dark:      "#5b21b6",
-    gradient:  "from-purple-600 to-blue-600",
+    primary: "#7c3aed", secondary: "#3b82f6",
+    dark: "#5b21b6", gradient: "from-violet-600 to-blue-600",
   };
 
-  // ── Build state map from props ─────────────────────────────
   const stateMap = useMemo(() => {
     const map = {};
     for (const sign of data?.signs ?? []) {
       const svgId = sign.visual?.svgId ?? sign.id;
       map[svgId] = {
-        id:        svgId,
-        name:      sign.name,
-        color:     sign.visual?.color ?? "#e6e6e6",
-        videoUrl:  sign.videoUrl ?? null,
+        id: svgId, name: sign.name,
+        color: sign.visual?.color ?? "rgba(124,58,237,0.3)",
+        videoUrl: sign.videoUrl ?? null,
         questions: sign.metadata?.questions ?? [],
-        type:      sign.metadata?.type ?? "state",
+        type: sign.metadata?.type ?? "state",
       };
     }
     return map;
   }, [data]);
 
-  // ── SVG loading ────────────────────────────────────────────
   const [svgPaths,   setSvgPaths]   = useState([]);
   const [svgViewBox, setSvgViewBox] = useState("-50 -50 700 800");
 
@@ -98,84 +75,48 @@ export default function IndiaMapGame({ data, assets, category, onExit }) {
       .catch(console.error);
   }, []);
 
-  // ── Game state ─────────────────────────────────────────────
-  const [mode,          setMode]         = useState(null);
-  const [question,      setQuestion]     = useState(null);
-  const [usedIds,       setUsedIds]      = useState(new Set());
-  const [round,         setRound]        = useState(1);
-  const [score,         setScore]        = useState(0);
-  const [roundOver,     setRoundOver]    = useState(false);
-  const [gameOver,      setGameOver]     = useState(false);  // true only after last round's feedback is shown
-  const [feedback,      setFeedback]     = useState(null);   // "correct" | "wrong" | null
-  const [message,       setMessage]      = useState("");
-  const [stateColors,   setStateColors]  = useState({});
-  const [learnSelected, setLearnSelected]= useState(null);
-  const [hovered,       setHovered]      = useState(null);
-  const [tooltipPos,    setTooltipPos]   = useState({ x: 0, y: 0 });
-  const [showHelp,      setShowHelp]     = useState(false);
+  const [mode,          setMode]          = useState(null);
+  const [question,      setQuestion]      = useState(null);
+  const [usedIds,       setUsedIds]       = useState(new Set());
+  const [round,         setRound]         = useState(1);
+  const [score,         setScore]         = useState(0);
+  const [roundOver,     setRoundOver]     = useState(false);
+  const [gameOver,      setGameOver]      = useState(false);
+  const [feedback,      setFeedback]      = useState(null);
+  const [message,       setMessage]       = useState("");
+  const [stateColors,   setStateColors]   = useState({});
+  const [learnSelected, setLearnSelected] = useState(null);
+  const [hovered,       setHovered]       = useState(null);
+  const [tooltipPos,    setTooltipPos]    = useState({ x: 0, y: 0 });
+  const [showHelp,      setShowHelp]      = useState(false);
 
-  // Ref bag — always fresh, used inside callbacks to avoid stale closures
   const g = useRef({});
   g.current = { mode, question, usedIds, round, score, roundOver, gameOver, stateMap };
 
-  // ── Game control functions ─────────────────────────────────
-
   const startTest = useCallback(() => {
     const used = new Set();
-    setMode("test");
-    setQuestion(pickQuestion(stateMap, used));
-    setUsedIds(used);
-    setRound(1);
-    setScore(0);
-    setRoundOver(false);
-    setGameOver(false);
-    setFeedback(null);
-    setMessage("");
-    setStateColors({});
+    setMode("test"); setQuestion(pickQuestion(stateMap, used)); setUsedIds(used);
+    setRound(1); setScore(0); setRoundOver(false); setGameOver(false);
+    setFeedback(null); setMessage(""); setStateColors({});
   }, [stateMap]);
 
-  // Called after the user sees feedback on any round (including the last)
   const nextRound = useCallback(() => {
-    const { question: q, usedIds: used, round: r, score: s } = g.current;
-    const isLastRound = r >= TOTAL_ROUNDS;
-
-    if (isLastRound) {
-      // Show game-over screen — keep feedback visible until they see the final modal
-      setGameOver(true);
-      return;
-    }
-
+    const { question: q, usedIds: used, round: r } = g.current;
+    if (r >= TOTAL_ROUNDS) { setGameOver(true); return; }
     const newUsed = new Set([...used, q?.id]);
     const nextQ   = pickQuestion(g.current.stateMap, newUsed);
-
-    setUsedIds(newUsed);
-    setQuestion(nextQ);
-    setRound(r => r + 1);
-    setRoundOver(false);
-    setFeedback(null);
-    setMessage("");
-    setStateColors({});
+    setUsedIds(newUsed); setQuestion(nextQ); setRound(r => r + 1);
+    setRoundOver(false); setFeedback(null); setMessage(""); setStateColors({});
   }, []);
 
   const resetGame = () => {
-    setMode(null);
-    setQuestion(null);
-    setUsedIds(new Set());
-    setRound(1);
-    setScore(0);
-    setRoundOver(false);
-    setGameOver(false);
-    setFeedback(null);
-    setMessage("");
-    setStateColors({});
-    setLearnSelected(null);
+    setMode(null); setQuestion(null); setUsedIds(new Set());
+    setRound(1); setScore(0); setRoundOver(false); setGameOver(false);
+    setFeedback(null); setMessage(""); setStateColors({}); setLearnSelected(null);
   };
-
-  // ── State selection handler ────────────────────────────────
 
   const handleStateSelect = useCallback((id) => {
     const { mode, question, round, score, roundOver, gameOver, stateMap } = g.current;
-
     if (!mode || roundOver || gameOver) return;
     const s = stateMap[id];
     if (!s || s.type !== "state") return;
@@ -185,7 +126,6 @@ export default function IndiaMapGame({ data, assets, category, onExit }) {
       setStateColors(prev => ({ ...prev, [id]: s.color }));
       return;
     }
-
     if (!question) return;
 
     const correct  = id === question.id;
@@ -199,22 +139,17 @@ export default function IndiaMapGame({ data, assets, category, onExit }) {
       setFeedback("wrong");
       setStateColors(prev => ({
         ...prev,
-        [id]:          "#ff6b6b",
+        [id]: "#ef4444",
         [question.id]: question.color,
       }));
     }
-
     setRoundOver(true);
-
-    // Always set message — last round message shown in the modal after user clicks Next
     setMessage(
       correct
         ? `🎉 Correct! Round ${round} / ${TOTAL_ROUNDS}`
         : `The answer was "${question.name}". Round ${round} / ${TOTAL_ROUNDS}`
     );
   }, []);
-
-  // ── Pointer tap detection ──────────────────────────────────
 
   const onPointerDown = useCallback(e => {
     if (pointerDown.current) return;
@@ -225,11 +160,9 @@ export default function IndiaMapGame({ data, assets, category, onExit }) {
     const pd = pointerDown.current;
     if (!pd || pd.id !== e.pointerId) return;
     pointerDown.current = null;
-
     const moved   = Math.abs(e.clientX - pd.x) > 12 || Math.abs(e.clientY - pd.y) > 12;
     const tooSlow = Date.now() - pd.time > 450;
     if (moved || tooSlow) return;
-
     let el = e.target;
     while (el && el !== svgRef.current) {
       if (el.id?.startsWith("IN-")) { handleStateSelect(el.id); return; }
@@ -239,8 +172,6 @@ export default function IndiaMapGame({ data, assets, category, onExit }) {
 
   const onPointerCancel = useCallback(() => { pointerDown.current = null; }, []);
 
-  // ── Hover ──────────────────────────────────────────────────
-
   const handleHover = useCallback((id, e) => {
     if (!id) { setHovered(null); return; }
     const s = stateMap[id];
@@ -249,44 +180,42 @@ export default function IndiaMapGame({ data, assets, category, onExit }) {
     setTooltipPos({ x: e.clientX, y: e.clientY });
   }, [stateMap]);
 
-  // ── Derived display values ─────────────────────────────────
-
   const resolveVideo = url => url ? (assets?.videos?.[url] ?? url) : null;
-  const videoSrc = mode === "learn" ? learnSelected?.videoUrl : question?.videoUrl;
-  const videoKey = mode === "learn" ? learnSelected?.name     : question?.name;
+  const videoSrc  = mode === "learn" ? learnSelected?.videoUrl : question?.videoUrl;
+  const videoKey  = mode === "learn" ? learnSelected?.name     : question?.name;
   const isLastRound = round >= TOTAL_ROUNDS;
 
-  // ─────────────────────────────────────────────────────────
-  // Render
-  // ─────────────────────────────────────────────────────────
-
   return (
-    <div className="h-full flex flex-col bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 overflow-hidden">
+    <div className="h-full flex flex-col bg-[#0f0a1e] relative overflow-hidden">
+      {/* Ambient blobs */}
+      <div className="absolute top-[-20%] left-[-10%] w-96 h-96 bg-violet-600/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-80 h-80 bg-blue-600/15 rounded-full blur-[100px] pointer-events-none" />
 
       {/* ── Mode selection ── */}
       {!mode && (
-        <div className="flex-1 flex flex-col items-center justify-center gap-8 p-6">
-          <h2 className={`text-3xl sm:text-4xl font-extrabold bg-gradient-to-r ${colors.gradient} bg-clip-text text-transparent`}>
-            Choose a Mode
-          </h2>
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center gap-8 p-6">
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 mb-4">
+              <span className="text-violet-300 text-sm font-semibold tracking-wide">India Map</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Choose a Mode</h2>
+          </div>
           <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md sm:max-w-none sm:justify-center">
             <ModeCard
               onClick={() => setMode("learn")}
-              icon={<MapPin size={36} className="text-green-500" />}
+              icon={<MapPin size={32} className="text-emerald-400" />}
               title="Learn"
-              titleColor="text-green-600"
-              borderColor="border-green-400"
               description="Tap states to explore and see their videos"
-              hoverColor="bg-green-100"
+              accentColor="rgba(52,211,153,0.2)"
+              borderColor="rgba(52,211,153,0.3)"
             />
             <ModeCard
               onClick={startTest}
-              icon={<HelpCircle size={36} className="text-yellow-500" />}
+              icon={<HelpCircle size={32} className="text-amber-400" />}
               title="Test"
-              titleColor="text-yellow-600"
-              borderColor="border-yellow-400"
               description={`${TOTAL_ROUNDS} rounds — watch the video and tap the right state`}
-              hoverColor="bg-yellow-100"
+              accentColor="rgba(251,191,36,0.2)"
+              borderColor="rgba(251,191,36,0.3)"
             />
           </div>
         </div>
@@ -296,57 +225,48 @@ export default function IndiaMapGame({ data, assets, category, onExit }) {
       {(mode === "learn" || mode === "test") && (
         <>
           {/* Header */}
-          <div className="flex-none bg-white/80 backdrop-blur-sm border-b border-gray-200 px-3 py-2 space-y-2">
-
+          <div className="relative z-10 flex-none bg-white/5 border-b border-white/10 backdrop-blur-sm px-3 py-2 space-y-2">
             <div className="flex items-center justify-between">
-              <button
-                onClick={resetGame}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gray-500 text-white text-sm font-semibold hover:bg-gray-600 transition-colors"
-              >
-                <Home size={14} /> Back
+              <button onClick={resetGame}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 text-white/70 text-sm font-semibold hover:bg-white/20 transition-all">
+                <Home size={13} /> Back
               </button>
 
               {mode === "test" && (
-                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-gray-200 text-xs sm:text-sm font-semibold">
-                  <span style={{ color: colors.dark }}>Round</span>
-                  <span className="font-black" style={{ color: colors.primary }}>{round}/{TOTAL_ROUNDS}</span>
-                  <span className="text-gray-300">|</span>
-                  <span style={{ color: colors.dark }}>Score</span>
-                  <span className="font-black text-orange-500">{score}</span>
+                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm font-semibold">
+                  <span className="text-white/50">Round</span>
+                  <span className="font-black text-white">{round}/{TOTAL_ROUNDS}</span>
+                  <span className="text-white/20">|</span>
+                  <span className="text-white/50">Score</span>
+                  <span className="font-black text-violet-300">{score}</span>
                 </div>
               )}
 
-              <button
-                onClick={() => setShowHelp(v => !v)}
-                className="p-1.5 rounded-full hover:bg-white/60 transition-colors"
-                style={{ color: colors.primary }}
-              >
-                <HelpCircle size={20} />
+              <button onClick={() => setShowHelp(v => !v)}
+                className="p-1.5 rounded-full hover:bg-white/10 transition-all text-violet-400">
+                <HelpCircle size={18} />
               </button>
             </div>
 
             {showHelp && (
-              <p className="text-xs sm:text-sm bg-white/90 border border-gray-200 rounded-xl px-3 py-2 text-gray-600">
+              <p className="text-xs sm:text-sm bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-white/50">
                 {mode === "learn"
                   ? "Tap any state to see its video. Pinch to zoom, drag to pan."
                   : `Watch the video then tap the matching state. ${TOTAL_ROUNDS} rounds total.`}
               </p>
             )}
 
-            <div
-              className="bg-white/90 border-2 rounded-xl px-3 py-2 flex items-center justify-center min-h-[44px]"
-              style={{ borderColor: colors.primary }}
-            >
-              <p className="text-sm sm:text-base font-semibold text-center text-gray-800">
+            <div className="bg-white/5 border border-white/10 rounded-xl px-3 py-2 flex items-center justify-center min-h-[44px]">
+              <p className="text-sm sm:text-base font-semibold text-center text-white/70">
                 {mode === "learn" ? "Tap a state to see its video" : (question?.question ?? "Loading...")}
               </p>
             </div>
 
             {(mode === "learn" ? learnSelected : feedback) && (
-              <div className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-center ${
+              <div className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-center border ${
                 mode === "learn" || feedback === "correct"
-                  ? "bg-green-100 border border-green-300 text-green-800"
-                  : "bg-red-100 border border-red-300 text-red-800"
+                  ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
+                  : "bg-red-500/10 border-red-500/20 text-red-400"
               }`}>
                 {mode === "learn"
                   ? `Selected: ${learnSelected.name}`
@@ -358,18 +278,12 @@ export default function IndiaMapGame({ data, assets, category, onExit }) {
           </div>
 
           {/* Body */}
-          <div className="flex-1 flex flex-col lg:flex-row min-h-0 overflow-hidden">
-
+          <div className="relative z-10 flex-1 flex flex-col lg:flex-row min-h-0 overflow-hidden">
             {/* Map */}
             <div className="flex-[3] min-h-0 p-2 sm:p-3">
-              <div className="w-full h-full rounded-2xl overflow-hidden border-2 border-gray-200 shadow-lg bg-white">
-                <TransformWrapper
-                  key={mode}
-                  initialScale={1}
-                  minScale={0.4}
-                  maxScale={6}
-                  doubleClick={{ mode: "zoomIn", step: 0.7 }}
-                >
+              <div className="w-full h-full rounded-2xl overflow-hidden border border-white/10 bg-black/20">
+                <TransformWrapper key={mode} initialScale={1} minScale={0.4} maxScale={6}
+                  doubleClick={{ mode: "zoomIn", step: 0.7 }}>
                   <TransformComponent
                     wrapperStyle={{ width: "100%", height: "100%" }}
                     contentStyle={{ width: "100%", height: "100%" }}
@@ -383,9 +297,8 @@ export default function IndiaMapGame({ data, assets, category, onExit }) {
                       onPointerCancel={onPointerCancel}
                     >
                       {svgPaths.map(({ id, d }) => (
-                        <MapState
-                          key={id} id={id} d={d}
-                          fill={stateColors[id] ?? "#e6e6e6"}
+                        <MapState key={id} id={id} d={d}
+                          fill={stateColors[id] ?? "rgba(255,255,255,0.06)"}
                           onHover={handleHover}
                           isDisabled={!stateMap[id] || stateMap[id].type !== "state"}
                         />
@@ -397,17 +310,18 @@ export default function IndiaMapGame({ data, assets, category, onExit }) {
             </div>
 
             {/* Video */}
-            <div className="flex-[2] min-h-0 flex items-center justify-center p-2 sm:p-3 bg-white/40 border-t-2 lg:border-t-0 lg:border-l-2 border-gray-200">
+            <div className="flex-[2] min-h-0 flex items-center justify-center p-2 sm:p-3
+              bg-black/20 border-t border-white/10 lg:border-t-0 lg:border-l lg:border-white/10">
               {videoSrc ? (
                 <video
                   key={videoKey}
                   src={resolveVideo(videoSrc)}
                   controls autoPlay
-                  className="w-full h-full max-h-full rounded-2xl shadow-xl border-4 border-white object-contain"
+                  className="w-full h-full max-h-full rounded-2xl border border-white/10 object-contain bg-black/30"
                 />
               ) : (
-                <div className="flex flex-col items-center gap-2 text-gray-300">
-                  <MapPin size={36} />
+                <div className="flex flex-col items-center gap-2 text-white/20">
+                  <MapPin size={32} />
                   <p className="text-sm text-center">
                     {mode === "learn" ? "Tap a state to see its video" : "Loading video..."}
                   </p>
@@ -416,28 +330,24 @@ export default function IndiaMapGame({ data, assets, category, onExit }) {
             </div>
           </div>
 
-          {/* Hover tooltip — desktop only */}
+          {/* Hover tooltip */}
           {hovered && (
-            <div
-              className="fixed z-50 pointer-events-none hidden sm:block bg-white/90 border border-blue-200 text-blue-700 text-sm font-semibold px-3 py-1.5 rounded-lg shadow-lg"
-              style={{ top: tooltipPos.y + 12, left: tooltipPos.x + 12 }}
-            >
+            <div className="fixed z-50 pointer-events-none hidden sm:block bg-[#0f0a1e] border border-violet-500/30 text-violet-300 text-sm font-semibold px-3 py-1.5 rounded-lg"
+              style={{ top: tooltipPos.y + 12, left: tooltipPos.x + 12 }}>
               {hovered}
             </div>
           )}
 
-          {/* Round-over modal — shown after every answer including the last */}
+          {/* Round-over modal */}
           {roundOver && !gameOver && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-              <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl w-full max-w-sm text-center space-y-3">
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+              <div className="bg-[#0f0a1e] border border-white/15 rounded-3xl p-6 sm:p-8 w-full max-w-sm text-center space-y-3">
                 <div className="text-5xl">{feedback === "correct" ? "🎉" : "😔"}</div>
-                <p
-                  className="text-xl sm:text-2xl font-black"
-                  style={{ color: feedback === "correct" ? "#10b981" : "#ef4444" }}
-                >
+                <p className="text-xl sm:text-2xl font-black"
+                  style={{ color: feedback === "correct" ? "#34d399" : "#f87171" }}>
                   {feedback === "correct" ? "Correct!" : "Wrong!"}
                 </p>
-                <p className="text-sm sm:text-base text-gray-500 font-medium">{message}</p>
+                <p className="text-sm sm:text-base text-white/50 font-medium">{message}</p>
                 <div className="pt-2">
                   <GradientButton onClick={nextRound} colors={colors}>
                     {isLastRound ? "See Results →" : "Next Round →"}
@@ -447,26 +357,21 @@ export default function IndiaMapGame({ data, assets, category, onExit }) {
             </div>
           )}
 
-          {/* Game-over modal — shown only after user dismisses last round's feedback */}
+          {/* Game-over modal */}
           {gameOver && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-              <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl w-full max-w-sm text-center space-y-3">
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+              <div className="bg-[#0f0a1e] border border-white/15 rounded-3xl p-6 sm:p-8 w-full max-w-sm text-center space-y-3">
                 <div className="text-5xl">🏁</div>
-                <p className="text-xl sm:text-2xl font-black" style={{ color: colors.primary }}>
-                  Game Complete!
-                </p>
-                <p className="text-sm sm:text-base text-gray-500 font-medium">
-                  You got <span className="font-black text-orange-500">{score}</span> out of{" "}
-                  <span className="font-black">{TOTAL_ROUNDS}</span>
+                <p className="text-xl sm:text-2xl font-black text-white">Game Complete!</p>
+                <p className="text-sm sm:text-base text-white/50 font-medium">
+                  You got <span className="font-black text-violet-300">{score}</span> out of{" "}
+                  <span className="font-black text-white">{TOTAL_ROUNDS}</span>
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-                  <GradientButton onClick={startTest} colors={colors}>
-                    🎮 Play Again
-                  </GradientButton>
+                  <GradientButton onClick={startTest} colors={colors}>🎮 Play Again</GradientButton>
                   <button
                     onClick={() => onExit?.(Math.round((score / TOTAL_ROUNDS) * 100))}
-                    className="px-6 py-3 rounded-2xl bg-gray-600 text-white font-bold hover:bg-gray-700 transition-colors"
-                  >
+                    className="px-6 py-3 rounded-2xl bg-white/10 border border-white/10 text-white/70 font-bold hover:bg-white/20 transition-all">
                     ← Exit
                   </button>
                 </div>
@@ -479,35 +384,31 @@ export default function IndiaMapGame({ data, assets, category, onExit }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────
-// Sub-components
-// ─────────────────────────────────────────────────────────────
-
-function ModeCard({ onClick, icon, title, titleColor, borderColor, description, hoverColor }) {
+function ModeCard({ onClick, icon, title, description, accentColor, borderColor }) {
   return (
     <button
       onClick={onClick}
-      className={`group relative w-full sm:w-56 p-5 sm:p-7 bg-white/80 backdrop-blur-md rounded-2xl shadow-xl border-2 ${borderColor} hover:shadow-2xl transition-all hover:scale-105 active:scale-95 overflow-hidden text-left sm:text-center`}
+      className="group relative w-full sm:w-56 p-5 sm:p-7 bg-white/5 backdrop-blur-sm rounded-2xl border-2 transition-all hover:scale-105 active:scale-95 overflow-hidden text-left sm:text-center"
+      style={{ borderColor }}
     >
       <div className="relative z-10 flex sm:flex-col items-center gap-4 sm:gap-2">
         <div className="shrink-0 sm:flex sm:justify-center">{icon}</div>
         <div>
-          <h3 className={`text-lg sm:text-xl font-bold ${titleColor}`}>{title}</h3>
-          <p className="text-xs sm:text-sm text-gray-500 mt-0.5">{description}</p>
+          <h3 className="text-lg sm:text-xl font-bold text-white">{title}</h3>
+          <p className="text-xs sm:text-sm text-white/40 mt-0.5">{description}</p>
         </div>
       </div>
-      <div className={`absolute inset-0 ${hoverColor} opacity-0 group-hover:opacity-30 transition-opacity`} />
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"
+        style={{ background: accentColor }} />
     </button>
   );
 }
 
 function GradientButton({ onClick, colors, children }) {
   return (
-    <button
-      onClick={onClick}
-      className="px-6 py-3 rounded-2xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95"
-      style={{ background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})` }}
-    >
+    <button onClick={onClick}
+      className="px-6 py-3 rounded-2xl text-white font-bold transition-all hover:scale-105 active:scale-95 hover:opacity-90"
+      style={{ background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})` }}>
       {children}
     </button>
   );

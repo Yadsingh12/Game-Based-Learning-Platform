@@ -12,12 +12,6 @@ export default function ReverseMultipleChoiceGame(props) {
   const category   = props.category ?? {};
   const assets     = props.assets ?? {};
 
-  const colors = category.colorScheme ?? {
-    primary: "#7c3aed", secondary: "#3b82f6",
-    light: "#c4b5fd", dark: "#5b21b6",
-    gradient: "from-purple-600 to-blue-600",
-  };
-
   const [currentQuestion, setCurrentQuestion]       = useState(null);
   const [options, setOptions]                       = useState([]);
   const [selectedOption, setSelectedOption]         = useState(null);
@@ -87,160 +81,170 @@ export default function ReverseMultipleChoiceGame(props) {
   const handleExit  = () => onComplete?.(Math.round((score / TOTAL_ROUNDS) * 100));
   const resolveVideo = (url) => url ? (assets?.videos?.[url] ?? url) : null;
 
-  // ── Guards ────────────────────────────────────────────────────
+  const progress = ((currentRound - 1) / TOTAL_ROUNDS) * 100;
+
   if (!signs || signs.length < 4) return (
-    <div className="h-full flex items-center justify-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
-      <p className="text-red-600 font-semibold">Need at least 4 signs for this game.</p>
+    <div className="h-full flex items-center justify-center bg-[#0f0a1e]">
+      <p className="text-white/50 font-semibold">Need at least 4 signs for this game.</p>
     </div>
   );
   if (!currentQuestion) return (
-    <div className="h-full flex items-center justify-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
-      <p className="text-gray-600">Loading...</p>
+    <div className="h-full flex items-center justify-center bg-[#0f0a1e]">
+      <p className="text-white/40">Loading...</p>
     </div>
   );
 
   return (
-    <div className="h-full flex flex-col bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 overflow-hidden">
+    <div className="h-full flex flex-col bg-[#0f0a1e] overflow-hidden relative">
 
-      {/* ── Header ─────────────────────────────────────────── */}
-      <div className="flex-none px-4 pt-3 pb-2 bg-white/60 backdrop-blur-sm border-b border-white/50">
+      {/* Ambient blobs */}
+      <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px]
+                      bg-violet-600/15 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px]
+                      bg-blue-600/15 rounded-full blur-[100px] pointer-events-none" />
+
+      {/* ── Header ── */}
+      <div className="relative z-10 flex-none px-4 pt-4 pb-3 bg-white/5 border-b border-white/10 backdrop-blur-sm">
         <div className="max-w-5xl mx-auto flex items-center justify-between gap-3">
 
           <div className="flex items-center gap-2">
-            <h1 className={`text-lg sm:text-2xl font-extrabold bg-gradient-to-r ${colors.gradient} bg-clip-text text-transparent`}>
-              Video Match
-            </h1>
+            <h1 className="text-lg sm:text-xl font-black text-white">Video Match</h1>
             <button
               onClick={() => setShowInstructions(v => !v)}
-              className="p-1.5 rounded-full hover:bg-white/50 transition-all"
-              style={{ color: colors.primary }}
+              className="p-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/40 hover:text-white/70 transition-all"
             >
-              <HelpCircle size={18} strokeWidth={2.5} />
+              <HelpCircle size={16} strokeWidth={2.5} />
             </button>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3 px-3 py-1 rounded-full bg-white/70 backdrop-blur-sm shadow-sm border border-white/50 text-xs sm:text-sm">
-            <span className="font-bold" style={{ color: colors.dark }}>Round</span>
-            <span className="font-extrabold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-              {currentRound}/{TOTAL_ROUNDS}
+          <div className="flex items-center gap-3 text-sm">
+            <span className="text-white/40 font-semibold bg-white/5 border border-white/10 px-3 py-1 rounded-full">
+              Round <span className="text-white font-black">{currentRound}</span>/{TOTAL_ROUNDS}
             </span>
-            <div className="w-px h-3 bg-gray-300" />
-            <span className="font-bold" style={{ color: colors.dark }}>Score</span>
-            <span className="font-extrabold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
-              {score}
+            <span className="text-white/40 font-semibold bg-white/5 border border-white/10 px-3 py-1 rounded-full">
+              ⭐ <span className="text-white font-black">{score}</span>
             </span>
           </div>
         </div>
 
+        <div className="max-w-5xl mx-auto mt-3 h-1 bg-white/10 rounded-full overflow-hidden">
+          <div
+            className="h-full rounded-full transition-all duration-500"
+            style={{ width: `${progress}%`, background: 'linear-gradient(90deg, #7c3aed, #3b82f6)' }}
+          />
+        </div>
+
         {showInstructions && (
-          <div className="max-w-5xl mx-auto mt-2 text-xs sm:text-sm bg-white/80 p-3 rounded-xl border border-white/60">
+          <div className="max-w-5xl mx-auto mt-3 text-sm bg-white/5 border border-white/10 p-3 rounded-2xl text-white/60">
             Look at the image and name shown, then click the video that shows the correct sign. {TOTAL_ROUNDS} rounds total.
           </div>
         )}
       </div>
 
-      {/* ── Body ────────────────────────────────────────────── */}
-      {!roundOver ? (
-        <div className="flex-1 flex flex-col lg:flex-row gap-3 p-3 sm:p-4 min-h-0">
+      {/* ── Body ── */}
+      <div className="relative z-10 flex-1 flex flex-col min-h-0">
+        {!roundOver ? (
+          <div className="flex-1 flex flex-col lg:flex-row gap-3 p-3 sm:p-4 min-h-0">
 
-          {/* Image / visual pane */}
-          <div className="flex-1 flex flex-col items-center justify-center bg-white/50 backdrop-blur-sm rounded-2xl border border-white/60 shadow-lg p-3 sm:p-4 min-h-0">
-            <div className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-600">
-              <Eye size={16} style={{ color: colors.primary }} />
-              Which video matches this?
-            </div>
-            {/* Fixed-size box — SignVisual fills this, never escapes it */}
-            <div className="flex-1 w-full min-h-0 rounded-xl border-4 border-white shadow-xl bg-white p-1.5 overflow-hidden">
-              <SignVisual
-                visual={currentQuestion.visual}
-                assets={assets}
-                className="w-full h-full"
-              />
-            </div>
-            <p className="mt-3 text-base sm:text-lg font-bold text-gray-800 text-center">
-              {currentQuestion.name}
-            </p>
-          </div>
-
-          {/* 2×2 Video options */}
-          <div className="flex-1 grid grid-cols-2 gap-2 sm:gap-3 min-h-0">
-            {options.map((option, i) => {
-              const isSelected = selectedOption?.name === option.name;
-              return (
-                <button
-                  key={i}
-                  onClick={() => handleOptionSelect(option)}
-                  className="group relative flex flex-col items-center justify-center
-                             bg-white/80 backdrop-blur-md rounded-xl sm:rounded-2xl border-2
-                             shadow-md hover:shadow-xl transition-all hover:scale-[1.03] active:scale-95
-                             overflow-hidden p-1.5 sm:p-2 min-h-0"
-                  style={{ borderColor: isSelected ? colors.primary : 'rgba(255,255,255,0.6)' }}
-                >
-                  <video
-                    src={resolveVideo(option.videoUrl)}
-                    muted loop autoPlay playsInline
-                    className="w-full h-full object-contain rounded-lg pr-1 pl-1"
-                  />
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity"
-                    style={{ background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})` }}
-                  />
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-      ) : (
-        /* ── Round over ─────────────────────────────────────── */
-        <div className="flex-1 flex items-center justify-center p-4">
-          <div className="bg-white/85 backdrop-blur-md rounded-2xl p-6 sm:p-8 shadow-2xl border border-white/60 w-full max-w-md text-center">
-            <div className="text-5xl mb-3">{isCorrect ? '🎉' : '😔'}</div>
-            <p className="text-xl sm:text-2xl font-black mb-2"
-               style={{ color: isCorrect ? '#10b981' : '#ef4444' }}>
-              {isCorrect ? 'Correct!' : 'Wrong Answer!'}
-            </p>
-            <p className="text-sm sm:text-base font-semibold mb-4 text-gray-600">{message}</p>
-
-            {/* Correct answer video */}
-            <div className="bg-gray-50 rounded-xl p-3 mb-5">
-              <p className="text-xs text-gray-500 mb-2">Correct Sign</p>
-              <video
-                src={resolveVideo(currentQuestion.videoUrl)}
-                controls autoPlay
-                className="w-full rounded-xl shadow-lg max-h-40 object-contain"
-              />
-              <p className="mt-2 text-base font-bold text-gray-800">{currentQuestion.name}</p>
+            {/* Visual pane */}
+            <div className="flex-1 flex flex-col items-center justify-center
+                            bg-white/5 border border-white/10 rounded-2xl p-3 sm:p-4 min-h-0">
+              <div className="flex items-center gap-2 mb-3 text-sm font-semibold text-white/40">
+                <Eye size={14} className="text-violet-400" />
+                Which video matches this?
+              </div>
+              <div className="flex-1 w-full min-h-0 rounded-xl ring-1 ring-white/10 bg-white/5 p-1.5 overflow-hidden">
+                <SignVisual
+                  visual={currentQuestion.visual}
+                  assets={assets}
+                  className="w-full h-full"
+                />
+              </div>
+              <p className="mt-3 text-base sm:text-lg font-black text-white text-center">
+                {currentQuestion.name}
+              </p>
             </div>
 
-            <div className="flex gap-3 justify-center flex-wrap">
-              {!gameCompletelyOver ? (
-                <GradButton onClick={nextRound} colors={colors}>Next Round →</GradButton>
-              ) : (
-                <>
-                  <GradButton onClick={restartGame} colors={colors}>🎮 Play Again</GradButton>
+            {/* 2×2 video options */}
+            <div className="flex-1 grid grid-cols-2 gap-2 sm:gap-3 min-h-0">
+              {options.map((option, i) => {
+                const isSelected = selectedOption?.name === option.name;
+                return (
                   <button
-                    onClick={handleExit}
-                    className="px-6 py-2.5 rounded-xl bg-gray-600 text-white font-bold hover:bg-gray-700 transition-all hover:scale-105 active:scale-95"
+                    key={i}
+                    onClick={() => handleOptionSelect(option)}
+                    className={`group relative flex flex-col items-center justify-center
+                               bg-white/5 border rounded-xl sm:rounded-2xl
+                               hover:bg-white/10 hover:scale-[1.02] active:scale-[0.98]
+                               transition-all duration-200 overflow-hidden p-1.5 sm:p-2 min-h-0
+                               ${isSelected ? 'border-violet-500/60' : 'border-white/10 hover:border-white/20'}`}
                   >
-                    ← Exit
+                    <video
+                      src={resolveVideo(option.videoUrl)}
+                      muted loop autoPlay playsInline
+                      className="w-full h-full object-contain rounded-lg"
+                    />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                                    bg-gradient-to-br from-violet-600/10 to-blue-600/10 pointer-events-none" />
                   </button>
-                </>
-              )}
+                );
+              })}
             </div>
           </div>
-        </div>
-      )}
+
+        ) : (
+          <div className="flex-1 flex items-center justify-center p-4">
+            <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-3xl
+                            p-6 sm:p-8 shadow-2xl w-full max-w-md text-center">
+              <div className="text-5xl mb-3">{isCorrect ? '🎉' : '😔'}</div>
+              <p className="text-xl sm:text-2xl font-black mb-2"
+                 style={{ color: isCorrect ? '#34d399' : '#f87171' }}>
+                {isCorrect ? 'Correct!' : 'Wrong Answer!'}
+              </p>
+              <p className="text-sm font-semibold mb-5 text-white/50">{message}</p>
+
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-3 mb-5">
+                <p className="text-xs text-white/30 mb-2">Correct Sign</p>
+                <video
+                  src={resolveVideo(currentQuestion.videoUrl)}
+                  controls autoPlay
+                  className="w-full rounded-xl max-h-40 object-contain ring-1 ring-white/10"
+                />
+                <p className="mt-2 text-base font-black text-white">{currentQuestion.name}</p>
+              </div>
+
+              <div className="flex gap-3 justify-center flex-wrap">
+                {!gameCompletelyOver ? (
+                  <DarkButton onClick={nextRound}>Next Round →</DarkButton>
+                ) : (
+                  <>
+                    <DarkButton onClick={restartGame}>🎮 Play Again</DarkButton>
+                    <button
+                      onClick={handleExit}
+                      className="px-6 py-2.5 rounded-xl bg-white/10 border border-white/10
+                                 text-white/70 font-bold hover:bg-white/15 hover:text-white
+                                 transition-all hover:scale-105 active:scale-95"
+                    >
+                      ← Exit
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
-function GradButton({ onClick, colors, children }) {
+function DarkButton({ onClick, children }) {
   return (
     <button
       onClick={onClick}
-      className="px-6 py-2.5 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95"
-      style={{ background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})` }}
+      className="px-6 py-2.5 rounded-xl font-black text-white shadow-lg
+                 bg-gradient-to-r from-violet-600 to-blue-600
+                 hover:opacity-90 hover:scale-105 active:scale-95 transition-all"
     >
       {children}
     </button>
