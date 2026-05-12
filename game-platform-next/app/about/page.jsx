@@ -4,21 +4,21 @@ import Link from 'next/link'
 
 const GAMES = [
   ['📖','Learn','Watch and learn signs with video'],
-  ['🧠','Quiz','Test your knowledge'],
-  ['🃏','Match','Match signs to meanings'],
   ['🔍','Find in Image','Spot signs in scenes'],
   ['🔤','Word Search','Find signs in a grid'],
   ['🔀','Word Scramble','Unscramble sign names'],
   ['✏️','Crossword','Sign language crosswords'],
   ['🏓','Breakout','Break blocks with signs'],
-  ['🪣','Bucket Sort','Sort signs into categories'],
+  ['🪣','Bucket','Fill the bucket as per signs'],
   ['🕐','Interactive Clock','Learn time signs'],
   ['🗺️','India Map','Learn state signs'],
   ['🎨','Color Match','Match color signs'],
+  ['🔢','Counting Game','Count objects with signs'],
+  ['🧩','Drag & Drop Match','Match signs with drag & drop'],
 ]
 
 const FEATURES = [
-  { icon: '🎮', title: '16 Game Types', desc: 'From simple flashcards to arcade-style breakout games' },
+  { icon: '🎮', title: 'Different Game Types', desc: 'From simple flashcards to arcade-style breakout games' },
   { icon: '📴', title: 'Works Offline', desc: 'Play any loaded pack without internet connection' },
   { icon: '📊', title: 'Track Progress', desc: 'Scores and completion saved across all your devices' },
   { icon: '🔄', title: 'Smart Sync', desc: 'Progress syncs to cloud when you come back online' },
