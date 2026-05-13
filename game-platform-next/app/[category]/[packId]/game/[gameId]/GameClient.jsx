@@ -58,7 +58,7 @@ export default function GameClient({
     if (score !== undefined) {
       const current = getProgress(packId, gameId)
       saveProgress(packId, gameId, {
-        completed: true,
+        completed: score === 100,
         score: Math.max(score, current.score ?? 0),
         attempts: (current.attempts ?? 0) + 1,
       })
