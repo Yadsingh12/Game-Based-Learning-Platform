@@ -67,9 +67,9 @@ export default function MainPage() {
         {/* Stats bar */}
         <div className="grid grid-cols-3 gap-4 mb-16 max-w-2xl mx-auto">
           {[
-            { value: '9+',   label: 'Categories' },
-            { value: '16',   label: 'Game Types' },
-            { value: '100+', label: 'Signs' },
+            { value: '9',   label: 'Categories' },
+            { value: '14',   label: 'Game Types' },
+            { value: '200+', label: 'Signs' }, //221
           ].map(({ value, label }) => (
             <div key={label}
               className="text-center p-4 rounded-2xl bg-white/5 border border-white/10">
