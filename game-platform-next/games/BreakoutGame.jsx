@@ -33,12 +33,10 @@ const BreakoutGame = ({ data, pack, category, assets, onExit }) => {
   const gameLoopRef = useRef();
   const lastTimeRef = useRef(Date.now());
   const boardRef = useRef(null);
-  const containerRef = useRef(null);
   const wrapperRef = useRef(null);
 
   const isColorPack = signs.length > 0 && signs[0].visual?.type === 'color';
 
-  // Compute scale so the board fits available space
   useEffect(() => {
     const updateScale = () => {
       if (!wrapperRef.current) return;
@@ -54,8 +52,8 @@ const BreakoutGame = ({ data, pack, category, assets, onExit }) => {
 
   if (!signs || signs.length === 0) {
     return (
-      <div className="h-full flex items-center justify-center">
-        <p className="text-red-600">No data available</p>
+      <div className="h-full flex items-center justify-center bg-[#0f0a1e]">
+        <p className="text-red-400 font-semibold">No data available</p>
       </div>
     );
   }
@@ -143,11 +141,10 @@ const BreakoutGame = ({ data, pack, category, assets, onExit }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [status]);
 
-  // Mouse/touch: translate client coords → logical board coords via scale
   const handleMouseMove = (e) => {
     if (status !== 'playing' || !boardRef.current) return;
     const rect = boardRef.current.getBoundingClientRect();
-    const relativeX = (e.clientX - rect.left) / (rect.width);
+    const relativeX = (e.clientX - rect.left) / rect.width;
     const newX = relativeX * BOARD_WIDTH - PADDLE_WIDTH / 2;
     setPaddleX(Math.max(0, Math.min(BOARD_WIDTH - PADDLE_WIDTH, newX)));
   };
@@ -231,13 +228,13 @@ const BreakoutGame = ({ data, pack, category, assets, onExit }) => {
   const getBrickDisplay = (brick) => {
     if (isColorPack) return { backgroundColor: brick.sign.visual.value, text: '' };
     const index = gameSignIds.indexOf(brick.signId);
-    return { backgroundColor: ['#ef4444', '#3b82f6', '#22c55e'][index] || '#6b7280', text: brick.sign.visual.value };
+    return { backgroundColor: ['#7c3aed', '#3b82f6', '#06b6d4'][index] || '#6b7280', text: brick.sign.visual.value };
   };
 
   const getTargetBadgeColor = (signId) => {
     if (isColorPack) return signs.find(s => s.id === signId)?.visual?.value || '#6b7280';
     const index = gameSignIds.indexOf(signId);
-    return ['#ef4444', '#3b82f6', '#22c55e'][index] || '#6b7280';
+    return ['#7c3aed', '#3b82f6', '#06b6d4'][index] || '#6b7280';
   };
 
   const speedMultiplier = gameStartTime
@@ -245,109 +242,122 @@ const BreakoutGame = ({ data, pack, category, assets, onExit }) => {
     : 1;
 
   return (
-    <div className={`h-full overflow-hidden bg-gradient-to-br ${category.colorScheme.gradient} flex flex-col`}>
+    <div className="h-full overflow-hidden bg-[#0f0a1e] relative flex flex-col">
+      {/* Ambient blobs */}
+      <div className="absolute top-[-20%] left-[-10%] w-96 h-96 bg-violet-600/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-80 h-80 bg-blue-600/15 rounded-full blur-[100px] pointer-events-none" />
 
       {/* ── Compact header bar (mobile/tablet) ── */}
-      <div className="flex-none flex items-center justify-between gap-2 px-3 py-2 bg-white/20 backdrop-blur-sm lg:hidden">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-white font-bold text-sm">
-            🎯 {targetSign?.name}
-          </span>
-          <span className="text-white/80 text-xs">→ changes in 5s</span>
+      <div className="relative z-10 flex-none flex items-center justify-between gap-2 px-4 py-2.5 bg-white/5 border-b border-white/10 backdrop-blur-sm lg:hidden">
+        <div className="flex items-center gap-2">
+          <span className="text-violet-300 font-bold text-sm">🎯 {targetSign?.name}</span>
+          <span className="text-white/40 text-xs">· changes in 5s</span>
         </div>
-        <div className="flex items-center gap-3 text-white text-xs font-bold">
-          <span>{bricksDestroyed}/{TOTAL_BRICKS} 🧱</span>
-          <span>⚡ {speedMultiplier.toFixed(1)}x</span>
+        <div className="flex items-center gap-3 text-xs font-bold">
+          <span className="text-white/70">{bricksDestroyed}/{TOTAL_BRICKS} 🧱</span>
+          <span className="text-violet-300">⚡ {speedMultiplier.toFixed(1)}x</span>
         </div>
       </div>
 
       {/* ── Main area ── */}
-      <div className="flex-1 flex flex-col lg:flex-row gap-3 p-2 sm:p-3 min-h-0 items-center justify-center">
+      <div className="relative z-10 flex-1 flex flex-col lg:flex-row gap-3 p-3 min-h-0 items-center justify-center">
 
-        {/* Side panel — hidden on mobile/tablet, shown on lg+ */}
-        <div className="hidden lg:flex flex-col items-center gap-3 bg-white/90 backdrop-blur rounded-2xl p-4 shadow-xl w-72 flex-shrink-0 self-center">
-          <h2 className="text-lg font-bold text-gray-800">
-            🎯 Break This {isColorPack ? 'Color' : 'Number'}
+        {/* Side panel — lg+ only */}
+        <div className="hidden lg:flex flex-col items-center gap-3 bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-4 w-64 flex-shrink-0 self-center">
+          <h2 className="text-sm font-bold text-white/70 uppercase tracking-widest">
+            🎯 Break This Sign
           </h2>
           {targetSign && (
             <video
               key={targetSign.id}
               src={targetSign.videoUrl ? (assets?.videos?.[targetSign.videoUrl] ?? targetSign.videoUrl) : null}
               autoPlay loop muted playsInline
-              className="w-full aspect-video rounded-xl shadow-lg bg-black"
+              className="w-full aspect-video rounded-xl bg-black/50 border border-white/10"
             />
           )}
-          <div className="text-center space-y-1 w-full">
-            <div className="text-3xl font-bold" style={{ color: category.colorScheme.primary }}>
-              {targetSign?.name}
+          <div className="text-center space-y-2 w-full">
+            <div className="text-2xl font-black text-white">{targetSign?.name}</div>
+            <p className="text-xs text-white/40">Target changes every 5s</p>
+
+            <div className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-white/5 border border-white/10">
+              <span className="text-3xl font-black text-violet-400">{bricksDestroyed}</span>
+              <span className="text-white/40 font-bold">/</span>
+              <span className="text-xl font-bold text-white/50">{TOTAL_BRICKS}</span>
+              <span className="text-white/40 text-xs ml-1">bricks</span>
             </div>
-            <p className="text-xs text-gray-500">Target changes every 5s</p>
-            <p className="text-2xl font-bold text-gray-800">{bricksDestroyed} / {TOTAL_BRICKS}</p>
-            <p className="text-xs text-gray-500">Bricks Destroyed</p>
-            <div className="flex gap-2 justify-center mt-2 flex-wrap">
+
+            <div className="flex gap-1.5 justify-center flex-wrap mt-1">
               {gameSignIds.map(signId => {
                 const sign = signs.find(s => s.id === signId);
+                const isTarget = signId === targetSign?.id;
                 return (
-                  <div key={signId} className="px-3 py-1 rounded-full text-white font-bold text-sm"
-                    style={{ backgroundColor: getTargetBadgeColor(signId) }}>
+                  <div key={signId}
+                    className={`px-2.5 py-1 rounded-full text-white font-bold text-xs transition-all ${isTarget ? 'ring-2 ring-white/50 scale-105' : 'opacity-50'}`}
+                    style={{ backgroundColor: getTargetBadgeColor(signId) + 'cc' }}>
                     {isColorPack ? sign.name : sign.visual.value}
                   </div>
                 );
               })}
             </div>
-            <p className="text-xs text-gray-500 mt-2">Speed: {speedMultiplier.toFixed(1)}x</p>
-            <p className="text-xs text-gray-400">Arrow Keys or Mouse/Touch</p>
+
+            <div className="flex items-center justify-between text-xs px-1">
+              <span className="text-white/40">Speed</span>
+              <span className="text-violet-300 font-bold">{speedMultiplier.toFixed(1)}x</span>
+            </div>
+            <p className="text-xs text-white/25">Arrow keys or mouse/touch</p>
           </div>
         </div>
 
-        {/* Board wrapper — fills remaining space, scales board to fit */}
-        <div
-          ref={wrapperRef}
-          className="flex-1 flex items-center justify-center min-h-0 min-w-0 w-full"
-        >
-          {/* Outer scaled shell — actual rendered size matches scale */}
-          <div
-            style={{
-              width: BOARD_WIDTH * boardScale,
-              height: BOARD_HEIGHT * boardScale,
-              position: 'relative',
-            }}
-          >
-            {/* Inner board at native 500×500, scaled down via transform */}
+        {/* Board wrapper */}
+        <div ref={wrapperRef} className="flex-1 flex items-center justify-center min-h-0 min-w-0 w-full">
+          <div style={{ width: BOARD_WIDTH * boardScale, height: BOARD_HEIGHT * boardScale, position: 'relative' }}>
             <div
               ref={boardRef}
-              className="absolute top-0 left-0 border-4 rounded-xl bg-gray-800 touch-none overflow-hidden"
+              className="absolute top-0 left-0 rounded-2xl touch-none overflow-hidden"
               style={{
                 width: BOARD_WIDTH,
                 height: BOARD_HEIGHT,
                 transformOrigin: 'top left',
                 transform: `scale(${boardScale})`,
-                borderColor: category.colorScheme.primary,
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(124,58,237,0.3)',
+                boxShadow: '0 0 40px rgba(124,58,237,0.15)',
               }}
               onMouseMove={handleMouseMove}
               onTouchMove={handleTouchMove}
-              onTouchStart={(e) => e.preventDefault()}
+              onTouchStart={e => e.preventDefault()}
             >
               {/* Ball */}
-              <div className="absolute rounded-full bg-yellow-400 shadow-lg"
-                style={{ left: ballX - BALL_RADIUS, top: ballY - BALL_RADIUS, width: BALL_RADIUS * 2, height: BALL_RADIUS * 2 }} />
+              <div className="absolute rounded-full"
+                style={{
+                  left: ballX - BALL_RADIUS, top: ballY - BALL_RADIUS,
+                  width: BALL_RADIUS * 2, height: BALL_RADIUS * 2,
+                  background: 'linear-gradient(135deg, #a78bfa, #818cf8)',
+                  boxShadow: '0 0 8px rgba(167,139,250,0.8)',
+                }} />
 
               {/* Paddle */}
-              <div className="absolute bottom-0 rounded-lg shadow-lg"
-                style={{ left: paddleX, width: PADDLE_WIDTH, height: PADDLE_HEIGHT, backgroundColor: category.colorScheme.primary }} />
+              <div className="absolute bottom-0 rounded-full"
+                style={{
+                  left: paddleX, width: PADDLE_WIDTH, height: PADDLE_HEIGHT,
+                  background: 'linear-gradient(90deg, #7c3aed, #3b82f6)',
+                  boxShadow: '0 0 12px rgba(124,58,237,0.6)',
+                }} />
 
               {/* Bricks */}
               {bricks.map(brick => {
                 if (brick.status === 0) return null;
                 const display = getBrickDisplay(brick);
+                const isTarget = brick.signId === targetSign?.id;
                 return (
                   <div key={brick.id}
-                    className="absolute rounded-sm flex items-center justify-center text-white font-bold text-xs shadow"
+                    className="absolute rounded flex items-center justify-center text-white font-bold text-xs"
                     style={{
                       left: brick.x, top: brick.y,
                       width: BRICK_WIDTH, height: BRICK_HEIGHT,
                       backgroundColor: display.backgroundColor,
-                      opacity: brick.signId === targetSign?.id ? 1 : 0.55,
+                      opacity: isTarget ? 1 : 0.4,
+                      boxShadow: isTarget ? `0 0 8px ${display.backgroundColor}80` : 'none',
                     }}>
                     {display.text}
                   </div>
@@ -356,18 +366,20 @@ const BreakoutGame = ({ data, pack, category, assets, onExit }) => {
 
               {/* Overlays */}
               {status === 'game over' && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 z-10">
-                  <div className="bg-red-600 text-white text-2xl font-bold px-6 py-4 rounded-xl shadow-2xl text-center">
-                    Game Over!
-                    <div className="text-sm mt-1">Destroyed: {bricksDestroyed}/{TOTAL_BRICKS}</div>
+                <div className="absolute inset-0 flex flex-col items-center justify-center z-10"
+                  style={{ background: 'rgba(15,10,30,0.85)', backdropFilter: 'blur(8px)' }}>
+                  <div className="text-center px-8 py-6 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="text-3xl font-black text-white mb-1">Game Over</div>
+                    <div className="text-white/50 text-sm">Destroyed: {bricksDestroyed}/{TOTAL_BRICKS}</div>
                   </div>
                 </div>
               )}
               {status === 'complete' && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 z-10">
-                  <div className="bg-green-600 text-white text-2xl font-bold px-6 py-4 rounded-xl shadow-2xl text-center">
-                    🎉 Perfect!
-                    <div className="text-sm mt-1">All Bricks Destroyed!</div>
+                <div className="absolute inset-0 flex flex-col items-center justify-center z-10"
+                  style={{ background: 'rgba(15,10,30,0.85)', backdropFilter: 'blur(8px)' }}>
+                  <div className="text-center px-8 py-6 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="text-3xl font-black text-white mb-1">🎉 Perfect!</div>
+                    <div className="text-violet-300 text-sm">All Bricks Destroyed!</div>
                   </div>
                 </div>
               )}
@@ -375,26 +387,26 @@ const BreakoutGame = ({ data, pack, category, assets, onExit }) => {
           </div>
         </div>
 
-        {/* Bottom mini panel — mobile/tablet only, shows video + color badges */}
-        <div className="flex lg:hidden items-center gap-3 bg-white/90 backdrop-blur rounded-2xl px-3 py-2 shadow-xl w-full max-w-lg flex-shrink-0">
+        {/* Bottom mini panel — mobile/tablet */}
+        <div className="flex lg:hidden items-center gap-3 bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl px-3 py-2 w-full max-w-lg flex-shrink-0">
           {targetSign && (
             <video
               key={targetSign.id}
               src={targetSign.videoUrl ? (assets?.videos?.[targetSign.videoUrl] ?? targetSign.videoUrl) : null}
               autoPlay loop muted playsInline
-              className="h-16 sm:h-20 aspect-video rounded-lg bg-black flex-shrink-0 object-cover"
+              className="h-16 sm:h-20 aspect-video rounded-lg bg-black/50 flex-shrink-0 object-cover border border-white/10"
             />
           )}
           <div className="flex-1 min-w-0">
-            <p className="text-xs text-gray-500 mb-1">Break this color:</p>
+            <p className="text-xs text-white/40 mb-1">Break this sign:</p>
             <div className="flex gap-1.5 flex-wrap">
               {gameSignIds.map(signId => {
                 const sign = signs.find(s => s.id === signId);
                 const isTarget = signId === targetSign?.id;
                 return (
                   <div key={signId}
-                    className={`px-2 py-0.5 rounded-full text-white font-bold text-xs transition-all ${isTarget ? 'ring-2 ring-white scale-110' : 'opacity-60'}`}
-                    style={{ backgroundColor: getTargetBadgeColor(signId) }}>
+                    className={`px-2 py-0.5 rounded-full text-white font-bold text-xs transition-all ${isTarget ? 'ring-2 ring-white/40 scale-110' : 'opacity-40'}`}
+                    style={{ backgroundColor: getTargetBadgeColor(signId) + 'cc' }}>
                     {isColorPack ? sign.name : sign.visual.value}
                   </div>
                 );
@@ -402,8 +414,8 @@ const BreakoutGame = ({ data, pack, category, assets, onExit }) => {
             </div>
           </div>
           <div className="text-center flex-shrink-0">
-            <p className="text-lg font-black text-gray-800">{bricksDestroyed}/{TOTAL_BRICKS}</p>
-            <p className="text-xs text-gray-400">bricks</p>
+            <p className="text-lg font-black text-violet-300">{bricksDestroyed}/{TOTAL_BRICKS}</p>
+            <p className="text-xs text-white/30">bricks</p>
           </div>
         </div>
       </div>

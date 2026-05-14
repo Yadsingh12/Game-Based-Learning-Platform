@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import categoriesData from '@/data/categories.json'
-import { fetchPackData, preloadPackMedia } from '@/lib/mediaCache.server'
+import { fetchPackData } from '@/lib/mediaCache.server'
 import GameClient from './GameClient'
 
 export default async function GamePage({ params }) {
@@ -12,8 +12,8 @@ export default async function GamePage({ params }) {
   const packMeta = category.packs.find(p => p.id === packId)
   if (!packMeta) notFound()
 
-  const data   = await fetchPackData(packId, packMeta.dataFile)
-  const assets = await preloadPackMedia(packId, data)
+  const data = await fetchPackData(packId, packMeta.dataFile)
+  // Media preloading is handled client-side in GameClient (server can't create blob URLs)
 
   return (
     <GameClient
@@ -23,7 +23,6 @@ export default async function GamePage({ params }) {
       category={category}
       pack={{ ...packMeta, id: packId }}
       data={data}
-      assets={assets}
       gameAssets={category.gameAssets ?? null}
     />
   )

@@ -1,3 +1,5 @@
+// src/components/GameErrorBoundary.jsx
+
 import React from 'react';
 
 export default class GameErrorBoundary extends React.Component {
